@@ -19,9 +19,23 @@ gcc -c a.c
 
 gcc -o 실행파일명 코드 (옵션)
 
-gcc -o hello main.c -L. -lhello -static
+gcc -o hello main.o -L. -lhello -static
 
-gcc -o threading thread.c -pthread
+gcc -o threading thread.o -pthread
+```
+
+### library 
+
+```bash
+gcc -c hello.c
+ar cr libhello.a hello.o
+
+gcc -c -fPIC
+gcc -shared -fPIC -o libhello.so hello.o
+gcc -o hello main.o -L. -lhello
+export LD_LIBRARY_PATH+=:libhello.so의 경로 #명령 사용시 주의!!
+
+
 ```
 
 ## Makefile
