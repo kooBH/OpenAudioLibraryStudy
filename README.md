@@ -5,8 +5,8 @@ a few manuals for a few things
 
 1. [Makefile](#Makefile)
 2. [cmake](#cmake)
-3. c
-4. d
+3. [RtAudio](#RtAudio) 
+4. [BLAS](#BLAS)
 
 ---
 
@@ -323,4 +323,11 @@ BUILD_SHARED_LIBS
 단. global data value는 따로 처리해야한다. 
 참고 :  https://blog.kitware.com/create-dlls-on-windows-without-declspec-using-new-cmake-export-all-feature/
 
+---
+
+# RtAudio<a name="RtAudio"></a>
+
+---
+
+# BLAS<a name="BLAS"></a>
 
