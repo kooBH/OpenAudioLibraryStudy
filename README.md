@@ -115,12 +115,13 @@ CMakeLists.txt
 cmake_minimum_required(VERSION 3.5.1)
 add_execuable(hello hello.c)
 ```
+
 ```Shell Session
- mkdir build    
- cd build    
- cmake ..    
- make    
- ./hello    
+$ mkdir build    
+$ cd build    
+$ cmake ..    
+$ make    
+$ ./hello    
 hello world    
 ```
 
