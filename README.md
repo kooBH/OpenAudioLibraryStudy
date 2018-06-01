@@ -80,21 +80,39 @@ gcc -o threading threading.o -pthread
 
 ```bash
 gcc -c hello.c
-ar cr libhello.a hello.o +a  // libhello.a 가 생성된다
+ar cr libhello.a hello.o (+추가적인 코드)  // libhello.a 가 생성된다
 gcc -o hello main.o -L. -lhello (-static)
 ```
--L(.a파일 경로)
--l(.a 이름, 앞의 lib 과 확장자.a를 뺀 이름만 넣는다)
-또한 같은 이름의 .so가 있을 경우 .so를 우선적으로 빌드하기 때문에
+-L(.a파일 경로)  
+-l(.a 이름, 앞의 lib 과 확장자.a를 뺀 이름만 넣는다)  
+-static : 같은 이름의 .so가 있을 경우 .so를 우선적으로 빌드하기 때문에
 -static을 붙이면 .a를 우선적으로 빌드한다
 
 + Shared Object | Dynamic library
+
+공유 객체, 동적 라이브러리
+실행시에 링크되며, 코드를 수정해야할 경우 .so만 교체하면 되기 때문에 유지보수의 이점이 있다
+
 ```bash
-gcc -c -fPIC
-gcc -shared -fPIC -o libhello.so hello.o
-gcc -o hello main.o -L. -lhello
+gcc -c -fPIC 							//목적파일을 만들때에도 옵션을 줘야한다
+gcc -shared -fPIC -o libhello.so hello.o //libhello.so 생성
+gcc -o hello main.o -L. -lhello	//연결
 export LD_LIBRARY_PATH+=:libhello.so의 경로 #명령 사용시 주의!!
 ```
+-fPIC : Position-Indepent Code  
+
+전반적으로 .a와 용법은 같으나 실행시에 .so를 찾아야한다  
+빌드할때의 -L 의 경로는 빌드 때만의 경로이며 빌드후에는 더이상 이용되지 않는다
+실행 시에는  
+
+1. /usr/lib
+2. LD_LIBRARY_PATH
+
+에서 찾게 되는데, 컴파일한 .so를 /usr/lib에 넣어주거나    
+환경변수 LD_LIBRARY_PATH 에  
+export LD_LIBRARY_PATH+=:(.so의 경로)로 추가해주면 된다  
+환경변수는 잘 못 입력하면 골치아플 수 있으니 주의를 요구한다  
+
 
 ## Makefile
 
