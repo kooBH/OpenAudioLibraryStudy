@@ -126,7 +126,7 @@ Makefie( 확장자 없음)을 작성한 뒤에 make 를 명령하면 Makefile에
 짜여진 명령들이 실행된다
 
 
-###예제 1-1
+### 예제 1-1
 ```Makefile
 hello : main.o hello.o
 	gcc -o hello main.o hello.o 
@@ -140,7 +140,9 @@ hello.o : hello.h hello.c
 ```
 
 위의 예제와 같은 기능을 한다
-###예제 1-2
+
+### 예제 1-2
+
 ```Makefile
 
 #define customized suffixes
