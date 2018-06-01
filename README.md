@@ -72,15 +72,18 @@ cmake_minimum_required(VERSION 3.5.1)
 add_execuable(hello hello.c)
 </pre>
 
-$ mkdir build
-$ cd build
-$ cmake ..
-$ make
-$ ./hello
-hello world
+$ mkdir build    
+$ cd build    
+$ cmake ..    
+$ make    
+$ ./hello    
+hello world    
 
 ---
-	
+
+
+다른 명령들 :  
+
 	prjoect(프로젝트명)  
 		- 프로젝트의 이름을 정한다
 
@@ -106,7 +109,12 @@ hello world
 
 ---
 
-변수 :  
+
+미리 설정된 변수 :  
+
+	UNIX
+	APPLE
+	WIN32
 
 ## 예시 2-2
 
