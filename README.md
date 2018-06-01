@@ -4,9 +4,9 @@ a few manuals for a few things
 **INDEX**<a name="index"></a>
 
 ### 1.  [Makefile](#Makefile)
-	[gcc](#1_1)
-	[library](#1_2)
-	[Makefile](#1_3)
+* [gcc](#1_1)
+* [library](#1_2)
+* [Makefile](#1_3)
 ### 2. [cmake](#cmake)
 
 ### 3. [RtAudio](#RtAudio) 
