@@ -9,12 +9,10 @@ a few manuals for a few things
 * [Makefile](#1-3)
 ### 2. [cmake](#cmake)
 * [설치](#2-1)
-
 * [사용](#2-2)
-
 * [CMakeLists.txt 작성](#2-3)
-1. [예제 1](#2-3-1)
-2. [예제 2](#2-3-2)
+	1. [예제 1](#2-3-1)
+	2. [예제 2](#2-3-2)
 
 ### 3. [RtAudio](#RtAudio) 
 
