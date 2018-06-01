@@ -47,16 +47,25 @@ void hello()
 ## gcc
 
 ```bash
-gcc -c main.c					//main.c 를 main.o
-gcc -c hello.c					//hello.c 를 hello.o
+gcc -c main.c					//main.c 를 main.o 로 변환
+gcc -c hello.c					//hello.c 를 hello.o 로 변환
 gcc -o hello main.o hello.o 	//목적파일들을 엮어서 hello 빌드
 ```
+하면 된다
 
-
+gcc 의 기초적인 형태는
 ```bash
-gcc -o 실행파일명 코드 (옵션)
-gcc -o hello main.o -L. -lhello -static
-gcc -o threading thread.o -pthread
+gcc -o 실행파일명 코드(들) (옵션)
+```
+
+또한 특정라이브러를 사용할 경우 
+/usr/lib에 있는 표준라이브러리라도 
+옵션을 사용해야한다
+<pre>
+<pthread.h>를 사용할 경우
+</pre>
+```bash
+gcc -o threading threading.o -pthread
 ```
 
 ### library 
@@ -86,16 +95,16 @@ export LD_LIBRARY_PATH+=:libhello.so의 경로 #명령 사용시 주의!!
 .SUFFIXES : .c .o
 
 #Macro for objects
-OBJ = RtAudio.o main.o h1.o 
+OBJ =  main.o hello.o 
 
 #output file
-TARGET = single 
+TARGET = hello 
 
 #make method
-CC = g++
+CC = gcc
 
-#flag for g++ #use CFLAGS for gcc -I: including dictionary
-CCFLAGS = -c -Idic/
+#flag for g++ #use CFLAGS for gcc
+CCFLAGS = -c 
 
 $(TARGET) : $(OBJ)
 	$(CC) -o $(TARGET) $(OBJ)
