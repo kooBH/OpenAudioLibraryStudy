@@ -89,24 +89,90 @@ hello world
 
 	message (STATUS "메세지")
 		- cmake 도중에 메세지를 출력한다. 변수들의 값을 확인할 수 있다
-	
+		ex) messgae (STATUS "src :  ${SOURCES}")	
+
 	include_directories()
-
+		- 헤더 폴더를 추가한다
+		ex) include_directories(header_folder)
+			headder_folder애서 헤더파일을 찾는다
+		
 	find_package()
-	
-	list()
-	list(APPEND)
+		- 시스템에 있는 모듈을 찾는다
+		- cmake에 관련 값들은 cmake에서 설정해두었다
+ 		ex) find_package( Threads)는
+			현재 OS의 쓰레드 관련 라이브러리를 찾는다
+			이 명령을 통해
+			MATH_THREAD_LIBS_INIT
+			CMAKE_USE_SPROC_INIT
+			CMAKE_USE_WIN32_THREAD_INIT
+			CMAKE_USE_PTHREADS_INIT
+			같은 변수들을 사용할 수 있게된다
 
-	add_definitions
+		ex) find_package(ALSA)
+			는 
+			ALSA_FOUND
+			ALSA_LIBRARIES
+			ALSA_INCLUDE_DIRS
+			ALSA_LIBRARY
+			ALSA_VERSION_STRING
+			등을 사용할 수 있게된다			
+
+
+참고  
+[modules](https://cmake.org/cmake/help/v3.0/manual/cmake-modules.7.html)
+	- 패키지 목록
+
+[find package](https://cmake.org/cmake/help/v3.0/command/find_package.html?highlight=find_package)
+
+	list(APPEND 값들)
+		- 변수에 값을 추가한다
+		  set은 값을 덮어씌우는데
+		  list(APPEND  )를 쓰면 뒤에 이어 붙인다
+
+	add_definitions(-D변수 )
+		- 변수를 define 한다
+		  코드 내에서 define 한것과 같은 효과를 가진다
+		ex)
+src.c
+<pre>
+if(_IS_DEFINE_)
+	{do something}
+</pre>
+
+		  이라는 코드가 있을때  
+		  CMakeLists.txt에  
+		  add_definitions(-D_IS_DEFINE_)   
+		  을 하면 코드에서 define 하지 않아도  
+		  정의 된다  
 
 	if()
 	endif()
-
-	add_library(SHARED)
+		- 조건문  
+		ex) if(LINUX)  
+			...  
+			elseif(WIN32)  
+			...  
+			endif()  
+			
+			OS별로 다르게 빌드 할 수 있다
+			
 	
-	target_link_libraries()
+	add_library(라이브러리명 옵션 파일)    
+		- 라이브러리를 만든다  
+		ex)add_library(hello SHARED ${SOURCES})  
+			${SOURCES}에 있는 파일로 libhello.so 를 만든다  
 
+		   add_library(bye STATIC ${CODES})  
+			${COES}에 있는 파일로 bye.a를 만든다  
 
+	target_link_libraries(TARGET LIBS)  
+			- TARGET에 LIBS을 링크한다  
+			  동적라이브러리를 실행파일에 링크할 수 있다  
+		
+				ex)	add_executable(out ${SOURCES})  
+				add_library(hello SHARED ${LIBSRC})  
+				target)target_link_libraries(out hello)  
+			    
 ---
 
 
@@ -115,6 +181,11 @@ hello world
 	UNIX
 	APPLE
 	WIN32
+
+참고  
+ [variables](https://gitlab.kitware.com/cmake/community/wikis/doc/cmake/Useful-Variables)
+
+
 
 ## 예시 2-2
 
@@ -242,13 +313,5 @@ BUILD_SHARED_LIBS
 
 단. global data value는 따로 처리해야한다. 
 참고 :  https://blog.kitware.com/create-dlls-on-windows-without-declspec-using-new-cmake-export-all-feature/
-
-[variables](https://gitlab.kitware.com/cmake/community/wikis/doc/cmake/Useful-Variables)
-
-[modules](https://cmake.org/cmake/help/v3.0/manual/cmake-modules.7.html)
-alsa 나 thread같은 lib들을 찾아준다
-
-[find package](https://cmake.org/cmake/help/v3.0/command/find_package.html?highlight=find_package)
-모듈을 활용
 
 
