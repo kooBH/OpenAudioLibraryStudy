@@ -548,14 +548,110 @@ cmake 시에 부가적인 파일이 많이 생성되므로 _build_ 폴더를 만
 거기에 RtAudio의 기본 프로그램들이 생성된다
 
 ## 사용<a name = "RtAudio-execution"></a>
+* 장치표시 프로그램 | audioprobe
+ex) $ ./audioprobe
 
-useage: record N fs <duration> <device> <channelOffset>
-    where N = number of channels,
-    fs = the sample rate,
-    duration = optional time in seconds to record (default = 2.0),
-    device = optional device to use (default = 0),
-    and channelOffset = an optional channel offset on the device (default = 0).
+<pre>
+RtAudio Version 5.0.0
 
+Compiled APIs:
+  Linux ALSA
+
+Current API: Linux ALSA
+
+Found 6 device(s) ...
+
+Device Name = hw:HDA Intel PCH,0
+Probe Status = Successful
+Output Channels = 6
+Input Channels = 2
+Duplex Channels = 2
+This is the default output device.
+This is the default input device.
+Natively supported data formats:
+  16-bit int
+  32-bit int
+Supported sample rates = 44100 48000 96000 192000 
+
+Device Name = hw:HDA Intel PCH,1
+Probe Status = Successful
+Output Channels = 2
+Input Channels = 0
+Duplex Channels = 0
+This is NOT the default output device.
+This is NOT the default input device.
+Natively supported data formats:
+  16-bit int
+  32-bit int
+Supported sample rates = 32000 44100 48000 88200 96000 192000 
+
+Device Name = hw:HDA Intel PCH,2
+Probe Status = Successful
+Output Channels = 0
+Input Channels = 2
+Duplex Channels = 0
+This is NOT the default output device.
+This is NOT the default input device.
+Natively supported data formats:
+  16-bit int
+  32-bit int
+Supported sample rates = 44100 48000 96000 192000 
+
+Device Name = hw:HDA Intel PCH,3
+Probe Status = Successful
+Output Channels = 8
+Input Channels = 0
+Duplex Channels = 0
+This is NOT the default output device.
+This is NOT the default input device.
+Natively supported data formats:
+  16-bit int
+  32-bit int
+Supported sample rates = 32000 44100 48000 88200 96000 176400 192000 
+
+Device Name = hw:HDA Intel PCH,7
+Probe Status = Successful
+Output Channels = 8
+Input Channels = 0
+Duplex Channels = 0
+This is NOT the default output device.
+This is NOT the default input device.
+Natively supported data formats:
+  16-bit int
+  32-bit int
+Supported sample rates = 32000 44100 48000 88200 96000 176400 192000 
+
+Device Name = default
+Probe Status = Successful
+Output Channels = 32
+Input Channels = 32
+Duplex Channels = 32
+This is NOT the default output device.
+This is NOT the default input device.
+Natively supported data formats:
+  16-bit int
+  24-bit int
+  32-bit int
+  32-bit float
+Supported sample rates = 4000 5512 8000 9600 11025 16000 22050 32000 44100 48000 88200 96000 176400 192000 
+</pre>
+
+장치 번호는 위에서 부터 0번이다 
+채널 수, 지원하는 레이트 등을 보여준다  
+
+
+* 녹음 프로그램 | record
+useage: record N fs <duration> <device> <channelOffset>  
+    where N = number of channels,  
+    fs = the sample rate,  
+    duration = optional time in seconds to record (default = 2.0),  
+    device = optional device to use (default = 0),  
+    and channelOffset = an optional channel offset on the device (default = 0).  
+
+ex)
+```bash
+$ record 9 48000 60 5
+```
 
 ## 맞춤<a name = "RtAudio-custom"></a>
 
