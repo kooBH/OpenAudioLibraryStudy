@@ -3,14 +3,22 @@ a few manuals for a few things
 
 **INDEX**
 
-1. a
+1. [Makefile](#Makefile)
 2. [cmake](#cmake)
 3. c
 4. d
 
+---
+
+# Makefile<a name="Makefile"></a>
+
+## gcc
 
 
-## CMAKE<a name="cmake"></a>
+
+---
+
+# CMAKE<a name="cmake"></a>
 
 cmake 는 linux환경에서는 Makefile을 Windows환경에서는 비주얼 스튜디오 프로젝트를 만든다.
 
@@ -40,21 +48,20 @@ linux
 
 필수  :
 
-cmake_minimum_required(VERSION 내.cmake의.버전)  
++ cmake_minimum_required(VERSION 내.cmake의.버전)  
         ex) cmake_minimum_required(VERSION 3.5.1)  
 cmake 최소 버전 요구사항 설정, 버전이 다르면 설정된 값이나 명령어 사용이 다를수 있다.
-
 cmake 의 버전은  
 		$ cmake -version 으로 알 수 있다
          
 기본 명령 :   
 
-    set (변수명 들어갈값 )   
-    ex)set(SOURCES src1.c src2.c src3.c)   
-	
- 변수를 불러올 때에는 ${변수명} 으로 불러온다
+ +   set (변수명 들어갈값 )   
+    ex)set(SOURCES src1.c src2.c src3.c)   	
 
-add_executable(파일명 들어갈코드 )  
+  변수를 불러올 때에는 ${변수명} 으로 불러온다
+
++ add_executable(파일명 들어갈코드 )  
 	ex)add_executable(hello hello.c)
 			or  
 	add_executable(programm SOURCES)  
