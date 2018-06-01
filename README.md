@@ -42,22 +42,23 @@ linux
 
 cmake_minimum_required(VERSION 내.cmake의.버전)  
         ex) cmake_minimum_required(VERSION 3.5.1)  
-    - cmake 최소 버전 요구사항 설정, 버전이 다르면 설정된 값이나 명령어 사용이 다를수 있다.
+cmake 최소 버전 요구사항 설정, 버전이 다르면 설정된 값이나 명령어 사용이 다를수 있다.
 
-	- cmake 의 버전은  
+cmake 의 버전은  
 		$ cmake -version 으로 알 수 있다
          
 기본 명령 :   
-    set (변수명 들어갈값 )   
-        ex)set(SOURCES src1.c src2.c src3.c)   
-	
-		- 변수를 불러올 때에는 ${변수명} 으로 불러온다
 
-	add_executable(파일명 들어갈코드 )  
-		ex)add_executable(hello hello.c)
+    set (변수명 들어갈값 )   
+    ex)set(SOURCES src1.c src2.c src3.c)   
+	
+ 변수를 불러올 때에는 ${변수명} 으로 불러온다
+
+add_executable(파일명 들어갈코드 )  
+	ex)add_executable(hello hello.c)
 			or  
-			add_executable(programm SOURCES)  
-		- 파일명에 해당하는 실행파일을 뒤의 인자로 들어가는 코드를로 빌드하게 한다  
+	add_executable(programm SOURCES)  
+파일명에 해당하는 실행파일을 뒤의 인자로 들어가는 코드를로 빌드하게 한다  
 
 ---
 ## 예시 2-1
@@ -84,22 +85,22 @@ hello world
 
 다른 명령들 :  
 
-	prjoect(프로젝트명)  
-		- 프로젝트의 이름을 정한다
++ prjoect(프로젝트명)  
+ 프로젝트의 이름을 정한다
 
-	message (STATUS "메세지")
-		- cmake 도중에 메세지를 출력한다. 변수들의 값을 확인할 수 있다
-		ex) messgae (STATUS "src :  ${SOURCES}")	
++ message (STATUS "메세지")
+cmake 도중에 메세지를 출력한다. 변수들의 값을 확인할 수 있다
+ messgae (STATUS "src :  ${SOURCES}")	
 
-	include_directories()
-		- 헤더 폴더를 추가한다
-		ex) include_directories(header_folder)
++ include_directories()
+헤더 폴더를 추가한다
+include_directories(header_folder)
 			headder_folder애서 헤더파일을 찾는다
 		
-	find_package()
-		- 시스템에 있는 모듈을 찾는다
-		- cmake에 관련 값들은 cmake에서 설정해두었다
- 		ex) find_package( Threads)는
++ find_package()
+시스템에 있는 모듈을 찾는다
+cmake에 관련 값들은 cmake에서 설정해두었다
+ex) find_package( Threads)는
 			현재 OS의 쓰레드 관련 라이브러리를 찾는다
 			이 명령을 통해
 			MATH_THREAD_LIBS_INIT
@@ -108,7 +109,7 @@ hello world
 			CMAKE_USE_PTHREADS_INIT
 			같은 변수들을 사용할 수 있게된다
 
-		ex) find_package(ALSA)
+ex) find_package(ALSA)
 			는 
 			ALSA_FOUND
 			ALSA_LIBRARIES
@@ -124,12 +125,12 @@ hello world
 
 [find package](https://cmake.org/cmake/help/v3.0/command/find_package.html?highlight=find_package)
 
-	list(APPEND 값들)
++	list(APPEND 값들)
 		- 변수에 값을 추가한다
 		  set은 값을 덮어씌우는데
 		  list(APPEND  )를 쓰면 뒤에 이어 붙인다
 
-	add_definitions(-D변수 )
++ add_definitions(-D변수 )
 		- 변수를 define 한다
 		  코드 내에서 define 한것과 같은 효과를 가진다
 		ex)
@@ -137,13 +138,14 @@ src.c
 <pre>
 if(_IS_DEFINE_)
 	{do something}
+
 </pre>
 
-		  이라는 코드가 있을때  
-		  CMakeLists.txt에  
-		  add_definitions(-D_IS_DEFINE_)   
-		  을 하면 코드에서 define 하지 않아도  
-		  정의 된다  
+	  이라는 코드가 있을때  
+	  CMakeLists.txt에  
+	  add_definitions(-D_IS_DEFINE_)   
+	  을 하면 코드에서 define 하지 않아도  
+	  정의 된다  
 
 	if()
 	endif()
