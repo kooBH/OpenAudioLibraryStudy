@@ -66,15 +66,27 @@ gcc -o 실행파일명 코드(들) (옵션)
 ```bash
 gcc -o threading threading.o -pthread
 ```
+해야 한다
+
 
 ### library 
 
 + Archive | Static library
+
+정적 라이브러리는 object의 결합체이다
+빌드할 때 같이 빌드되기 때문에 코드를 컴파일하고 빌드하는 것과
+기능상의 차이는 없다. 하지만 여러 코드들을 하나의 .a로 컴파일하면
+되기 때문에 편의상의 이점이 있다
+
 ```bash
 gcc -c hello.c
-ar cr libhello.a hello.o
+ar cr libhello.a hello.o +a  // libhello.a 가 생성된다
+gcc -o hello main.o -L. -lhello (-static)
 ```
-
+-L(.a파일 경로)
+-l(.a 이름, 앞의 lib 과 확장자.a를 뺀 이름만 넣는다)
+또한 같은 이름의 .so가 있을 경우 .so를 우선적으로 빌드하기 때문에
+-static을 붙이면 .a를 우선적으로 빌드한다
 
 + Shared Object | Dynamic library
 ```bash
@@ -82,8 +94,6 @@ gcc -c -fPIC
 gcc -shared -fPIC -o libhello.so hello.o
 gcc -o hello main.o -L. -lhello
 export LD_LIBRARY_PATH+=:libhello.so의 경로 #명령 사용시 주의!!
-
-
 ```
 
 ## Makefile
