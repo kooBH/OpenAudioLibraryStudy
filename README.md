@@ -14,6 +14,12 @@ a few manuals for a few things
 
 ## gcc
 
+일단 심플하게
+
+gcc -o 실행파일명 코드 (옵션)
+
+## Makefile
+
 ```Makefile
 
 #define customized suffixes
@@ -109,7 +115,7 @@ CMakeLists.txt
 cmake_minimum_required(VERSION 3.5.1)
 add_execuable(hello hello.c)
 ```
-```Bash
+```Shell Session
  mkdir build    
  cd build    
  cmake ..    
