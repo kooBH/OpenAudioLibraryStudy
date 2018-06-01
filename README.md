@@ -61,9 +61,8 @@ gcc -o 실행파일명 코드(들) (옵션)
 또한 특정라이브러를 사용할 경우 
 /usr/lib에 있는 표준라이브러리라도 
 옵션을 사용해야한다
-<pre>
+
 <pthread.h>를 사용할 경우
-</pre>
 ```bash
 gcc -o threading threading.o -pthread
 ```
