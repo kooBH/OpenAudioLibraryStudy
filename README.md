@@ -3,10 +3,10 @@ a few manuals for a few things
 
 **INDEX**<a name="index"></a>
 
-#### 1.  [Makefile](#Makefile)
-#### 2. [cmake](#cmake)
-#### 3. [RtAudio](#RtAudio) 
-#### 4. [BLAS](#BLAS)
+### 1.  [Makefile](#Makefile)
+### 2. [cmake](#cmake)
+### 3. [RtAudio](#RtAudio) 
+### 4. [BLAS](#BLAS)
 
 ---
 
