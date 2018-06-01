@@ -4,8 +4,13 @@ a few manuals for a few things
 **INDEX**<a name="index"></a>
 
 ### 1.  [Makefile](#Makefile)
+--1. gcc
+--2. library
+--3. Makefile
 ### 2. [cmake](#cmake)
+
 ### 3. [RtAudio](#RtAudio) 
+
 ### 4. [BLAS](#BLAS)
 
 ---
