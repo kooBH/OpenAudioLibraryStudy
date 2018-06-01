@@ -1,7 +1,7 @@
 # manuals
 a few manuals for a few things
 
-**INDEX**
+**INDEX**<a name="index"></a>
 
 1. [Makefile](#Makefile)
 2. [cmake](#cmake)
@@ -18,7 +18,7 @@ a few manuals for a few things
 
 ---
 
-# CMAKE<a name="cmake"></a>
+# [CMAKE](#index)<a name="cmake"></a>
 
 cmake 는 linux환경에서는 Makefile을 Windows환경에서는 비주얼 스튜디오 프로젝트를 만든다.
 
