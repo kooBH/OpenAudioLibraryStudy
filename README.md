@@ -4,13 +4,13 @@ a few manuals for a few things
 **INDEX**
 
 1. a
-2. b
+2. [cmake](#cmake)
 3. c
 4. d
 
 
 
-#CMAKE
+#CMAKE<a name="cmake"></a>
 cmake 는 linux환경에서는 Makefile을 Windows환경에서는 비주얼 스튜디오 프로젝트를 만든다.
 
 
@@ -179,9 +179,9 @@ BUILD_SHARED_LIBS
 단. global data value는 따로 처리해야한다. 
 참고 :  https://blog.kitware.com/create-dlls-on-windows-without-declspec-using-new-cmake-export-all-feature/
 
-[variables][https://gitlab.kitware.com/cmake/community/wikis/doc/cmake/Useful-Variables]
+[variables](https://gitlab.kitware.com/cmake/community/wikis/doc/cmake/Useful-Variables)
 
-[modules][https://cmake.org/cmake/help/v3.0/manual/cmake-modules.7.html]
+[modules](https://cmake.org/cmake/help/v3.0/manual/cmake-modules.7.html)
 alsa 나 thread같은 lib들을 찾아준다
 
 [find package](https://cmake.org/cmake/help/v3.0/command/find_package.html?highlight=find_package)
