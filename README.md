@@ -12,11 +12,48 @@ a few manuals for a few things
 
 # Makefile<a name="Makefile"></a>
 
+아래의 코드가 있다고 하자
+
++ main.c
+```C++
+#include "hello.h"
+int main()
+{
+	hello();
+	return 0;
+}
+```
+
++ hello.h
+```C++
+#include <stdio.h>
+
+void hello();
+
+```
+
++ hello.c
+```C++
+#inclide "hello.h"
+
+void hello()
+{
+	printf("hello world\n");
+}
+
+```
+
+이 코드들을 빌드하려면
 ## gcc
 
 ```bash
-gcc -c a.c 
+gcc -c main.c					//main.c 를 main.o
+gcc -c hello.c					//hello.c 를 hello.o
+gcc -o hello main.o hello.o 	//목적파일들을 엮어서 hello 빌드
+```
 
+
+```bash
 gcc -o 실행파일명 코드 (옵션)
 
 gcc -o hello main.o -L. -lhello -static
