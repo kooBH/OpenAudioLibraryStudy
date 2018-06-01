@@ -4,11 +4,15 @@ a few manuals for a few things
 **INDEX**<a name="index"></a>
 
 ### 1.  [Makefile](#Makefile)
-* [gcc](#1_1)
-* [library](#1_2)
-* [Makefile](#1_3)
+* [gcc](#1-1)
+* [library](#1-2)
+* [Makefile](#1-3)
 ### 2. [cmake](#cmake)
-
+* [설치](#2-1)
+* [사용](#2-2)
+* [CMakeLists.txt 작성](#2-3)
+1. [예제 1](#2-3-1)
+2. [예제 2](#2-3-2)
 ### 3. [RtAudio](#RtAudio) 
 
 ### 4. [BLAS](#BLAS)
@@ -187,7 +191,7 @@ clean :
 cmake 는 linux환경에서는 Makefile을 Windows환경에서는 비주얼 스튜디오 프로젝트를 만든다.
 
 
-## 설치
+## 설치<a name="2-1"></a>
 
 + linux
 ```bash
@@ -196,7 +200,7 @@ cmake 는 linux환경에서는 Makefile을 Windows환경에서는 비주얼 스�
 +  windows 
 
 
-## 사용
+## 사용<a name="2-2"><a/>
 
 1. 빌드할 프로젝트가 있는 폴더에
  CMakeLists.txt 를 만든다.
@@ -210,7 +214,7 @@ cmake 는 linux환경에서는 Makefile을 Windows환경에서는 비주얼 스�
 
 
 
-## CMakeLists.txt 작성
+## CMakeLists.txt 작성<a name="2-3"></a>
 
 필수  :
 
@@ -241,7 +245,7 @@ add_executable(programm SOURCES)
 파일명에 해당하는 실행파일을 뒤의 인자로 들어가는 코드를로 빌드하게 한다  
 
 ---
-## 예시 2-1
+## 예시 2-1<a name="2-3-1"></a>
 
 /CMAKE
 
@@ -390,7 +394,7 @@ LIBSRC로 만든 libhello.so 라는 동적 라이브러리를
 
 
 
-## 예시 2-2
+## 예시 2-2<a name="2-3-2"></a>
 
 /RtAudio
 ```CMake
