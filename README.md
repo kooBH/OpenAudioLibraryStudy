@@ -525,6 +525,41 @@ BUILD_SHARED_LIBS
 ---
 
 # [RtAudio](#index)<a name="RtAudio"></a>
+## 설치<a name ="RtAudio-setup"></a>
+
+```bash
+sudo apt-get install libasound2-dev
+sudo apt-get install git-core
+git clone https://github.com/thestk/rtaudio.git\
+```
+libasound2-dev 는 ubuntu 의 기본사운드 API인 ALSA의 dev lib이며 빌드에 필수적이다
+그리고 git에서 RtAudio를 가져온다
+
+```bash
+mkdir _build_
+cd _build_
+cmake ..
+make
+```
+
+cmake 시에 부가적인 파일이 많이 생성되므로 _build_ 폴더를 만들라고 install.txt에 는 적혀있지만
+다른 이름을 사용해도 무방하다
+폴더를 만든 다음엔 빌드 폴더에서 cmake .. 으로 Makefile을 만들고 make를 하면 tests 폴더가 생성되고
+거기에 RtAudio의 기본 프로그램들이 생성된다
+
+## 사용<a name = "RtAudio-execution"></a>
+
+useage: record N fs <duration> <device> <channelOffset>
+    where N = number of channels,
+    fs = the sample rate,
+    duration = optional time in seconds to record (default = 2.0),
+    device = optional device to use (default = 0),
+    and channelOffset = an optional channel offset on the device (default = 0).
+
+
+## 맞춤<a name = "RtAudio-custom"></a>
+
+참고 : https://www.music.mcgill.ca/~gary/rtaudio/recording.html
 
 ---
 
