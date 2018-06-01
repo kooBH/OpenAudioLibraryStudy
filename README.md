@@ -81,11 +81,14 @@ linux
 필수  :
 
 + cmake_minimum_required(VERSION 내.cmake의.버전)  
-        ex) cmake_minimum_required(VERSION 3.5.1)  
+```CMake
+ cmake_minimum_required(VERSION 3.5.1)  
+```
 cmake 최소 버전 요구사항 설정, 버전이 다르면 설정된 값이나 명령어 사용이 다를수 있다.
 cmake 의 버전은  
-		$ cmake -version 으로 알 수 있다
-         
+```bash
+ cmake -version 으로 알 수 있다
+```  
 기본 명령 :   
 
  +   set (변수명 들어갈값 )   
@@ -135,33 +138,38 @@ hello world
 
 + message (STATUS "메세지")
 cmake 도중에 메세지를 출력한다. 변수들의 값을 확인할 수 있다
- messgae (STATUS "src :  ${SOURCES}")	
-
+```CMake
+messgae (STATUS "src :  ${SOURCES}")	
+```
 + include_directories()
 헤더 폴더를 추가한다
+```CMake
 include_directories(header_folder)
-			headder_folder애서 헤더파일을 찾는다
+```
+headder_folder애서 헤더파일을 찾는다
 		
 + find_package()
 시스템에 있는 모듈을 찾는다  
 cmake에 관련 값들은 cmake에서 설정해두었다  
-ex) find_package( Threads)는  
-			현재 OS의 쓰레드 관련 라이브러리를 찾는다  
+```CMake
+ find_package( Threads)
+```
+는	현재 OS의 쓰레드 관련 라이브러리를 찾는다  
 			이 명령을 통해  
 			MATH_THREAD_LIBS_INIT  
 			CMAKE_USE_SPROC_INIT  
 			CMAKE_USE_WIN32_THREAD_INIT  
 			CMAKE_USE_PTHREADS_INIT  
 			같은 변수들을 사용할 수 있게된다  
-
-ex) find_package(ALSA)  
-			는   
-			ALSA_FOUND  
-			ALSA_LIBRARIES  
-			ALSA_INCLUDE_DIRS  
-			ALSA_LIBRARY  
-			ALSA_VERSION_STRING   
-			등을 사용할 수 있게된다			 
+```CMake
+ find_package(ALSA)  
+```
+는		ALSA_FOUND  
+		ALSA_LIBRARIES  
+		ALSA_INCLUDE_DIRS  
+		ALSA_LIBRARY  
+		ALSA_VERSION_STRING   
+등을 사용할 수 있게된다			 
 
 
 참고  
@@ -191,19 +199,22 @@ if(_IS_DEFINE_)
 
 이라는 코드가 있을때   
 CMakeLists.txt에    
+```CMake
 add_definitions(-D_IS_DEFINE_)     
+```
 을 하면 코드에서 define 하지 않아도    
 정의 된다    
 
 	if()
 	endif()
 		- 조건문  
-		ex) if(LINUX)  
+```CMake		
+ if(LINUX)  
 			...  
 			elseif(WIN32)  
 			...  
 			endif()  
-			
+```			
 
 OS별로 다르게 빌드 할 수 있다
 			
@@ -229,9 +240,9 @@ OS별로 다르게 빌드 할 수 있다
 
 미리 설정된 변수 :  
 
-	UNIX
-	APPLE
-	WIN32
+	UNIX    : OS 가 UNIX 면 true 아니면 false
+	APPLE   : OS 가 APPLE 이면 true 아니면 false, UNIX여도 true
+	WIN32   : OS 가 WINDOWS 면 true 아니면 false,64bit이어도 true
 
 참고  
  [variables](https://gitlab.kitware.com/cmake/community/wikis/doc/cmake/Useful-Variables)
