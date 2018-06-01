@@ -236,8 +236,12 @@ OS별로 다르게 빌드 할 수 있다
 ```CMake
 add_executable(out ${SOURCES})  
 add_library(hello SHARED ${LIBSRC})  
-target)target_link_libraries(out hello)  
+target_link_libraries(out hello)  
 ```
+SOURCES로 빌드한 out에
+LIBSRC로 만든 libhello.so 라는 동적 라이브러리를
+연결시켜준다
+
 ---
 
 
