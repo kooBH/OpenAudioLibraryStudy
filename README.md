@@ -642,7 +642,7 @@ Supported sample rates = 4000 5512 8000 9600 11025 16000 22050 32000 44100 48000
 채널 수, 지원하는 레이트 등을 보여준다  
 
 
-* 녹음 프로그램 | record
+* 녹음 프로그램 | record    
 useage: record N fs <duration> <device> <channelOffset>  
     where N = number of channels,  
     fs = the sample rate,  
