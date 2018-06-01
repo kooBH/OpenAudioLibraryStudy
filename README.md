@@ -200,7 +200,7 @@ if(_IS_DEFINE_)
 ## 예시 2-2
 
 /RtAudio
-'''CMake
+```CMake
  cmake_minimum_required(VERSION 3.5.1)
  project(custom_RtAudio)
  
@@ -312,7 +312,7 @@ target_link_libraries(record rtaudio)
 
 add_executable(monitor monitor.c)
 
-'''
+```
 
 참고사항
 
