@@ -63,9 +63,11 @@ cmake 는 linux환경에서는 Makefile을 Windows환경에서는 비주얼 스�
 
 ## 설치
 
-linux
++ linux
+```bash
     $ sudo apt-get install cmake 로 설치한다       
-      2.   windows 
+```
++  windows 
 
 
 ## 사용
