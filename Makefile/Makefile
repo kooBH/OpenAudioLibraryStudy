@@ -11,14 +11,11 @@ TARGET = hello
 CC = gcc
 
 #flag for g++ #use CFLAGS for gcc -I: including dictionary
-CCFLAGS = -c -Isrc/ -Iinclude
+CCFLAGS = -c 
 
-all :
-	@echo "all"
-	$(TARGET) : $(OBJ)
-		$(CC) -o $(TARGET) $(OBJ)
+$(TARGET) : $(OBJ)
+	$(CC) -o $(TARGET) $(OBJ)
 
 #remove used object files
-clean :
-	@echo "clean"
+clean : 
 	@rm -rf $(OBJ) $(TARGET) core

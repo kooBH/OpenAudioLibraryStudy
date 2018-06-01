@@ -80,7 +80,7 @@ gcc -o threading threading.o -pthread
 
 ```bash
 gcc -c hello.c
-ar cr libhello.a hello.o (+추가적인 코드)  // libhello.a 가 생성된다
+ar cr libhello.a hello.o (+추가적인 코드)  # libhello.a 가 생성된다
 gcc -o hello main.o -L. -lhello (-static)
 ```
 -L(.a파일 경로)  
@@ -94,9 +94,9 @@ gcc -o hello main.o -L. -lhello (-static)
 실행시에 링크되며, 코드를 수정해야할 경우 .so만 교체하면 되기 때문에 유지보수의 이점이 있다
 
 ```bash
-gcc -c -fPIC 							//목적파일을 만들때에도 옵션을 줘야한다
-gcc -shared -fPIC -o libhello.so hello.o //libhello.so 생성
-gcc -o hello main.o -L. -lhello	//연결
+gcc -c -fPIC 							#목적파일을 만들때에도 옵션을 줘야한다
+gcc -shared -fPIC -o libhello.so hello.o #libhello.so 생성
+gcc -o hello main.o -L. -lhello	#연결
 export LD_LIBRARY_PATH+=:libhello.so의 경로 #명령 사용시 주의!!
 ```
 -fPIC : Position-Indepent Code  
@@ -111,11 +111,36 @@ export LD_LIBRARY_PATH+=:libhello.so의 경로 #명령 사용시 주의!!
 에서 찾게 되는데, 컴파일한 .so를 /usr/lib에 넣어주거나    
 환경변수 LD_LIBRARY_PATH 에  
 export LD_LIBRARY_PATH+=:(.so의 경로)로 추가해주면 된다  
-환경변수는 잘 못 입력하면 골치아플 수 있으니 주의를 요구한다  
+환경변수는 잘못입력하면 골치아플 수 있으니 주의를 요구한다    
+설정후
+```bash
+echo $LD_LIBRARY_PATH
+```
+로  잘 입력됐는지 확인하자
 
 
 ## Makefile
 
+Makefile은 gcc를 편리하게 이용하게 해준다
+Makefie( 확장자 없음)을 작성한 뒤에 make 를 명령하면 Makefile에
+짜여진 명령들이 실행된다
+
+
+###예제 1-1
+```Makefile
+hello : main.o hello.o
+	gcc -o hello main.o hello.o 
+
+main.o : hello.h main.c
+	gcc -c main.c
+
+hello.o : hello.h hello.c
+	gcc -c hello.c
+
+```
+
+위의 예제와 같은 기능을 한다
+###예제 1-2
 ```Makefile
 
 #define customized suffixes
@@ -142,6 +167,9 @@ clean :
 
 
 ```
+
+clean :  
+이 부분은 make clean 을 할때 실행된다
 
 ---
 
