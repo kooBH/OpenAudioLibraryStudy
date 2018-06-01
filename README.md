@@ -116,7 +116,7 @@ cmake_minimum_required(VERSION 3.5.1)
 add_execuable(hello hello.c)
 ```
 
-```Shell Session
+```shell
 $ mkdir build    
 $ cd build    
 $ cmake ..    
