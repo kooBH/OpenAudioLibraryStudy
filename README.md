@@ -148,6 +148,7 @@ if(_IS_DEFINE_)
 
 </pre>
 
+
 	  이라는 코드가 있을때  
 	  CMakeLists.txt에  
 	  add_definitions(-D_IS_DEFINE_)   
@@ -199,7 +200,7 @@ if(_IS_DEFINE_)
 ## 예시 2-2
 
 /RtAudio
-<pre>
+'''CMake
  cmake_minimum_required(VERSION 3.5.1)
  project(custom_RtAudio)
  
@@ -311,7 +312,7 @@ target_link_libraries(record rtaudio)
 
 add_executable(monitor monitor.c)
 
-</pre>
+'''
 
 참고사항
 
