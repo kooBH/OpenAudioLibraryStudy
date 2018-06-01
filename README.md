@@ -4,9 +4,9 @@ a few manuals for a few things
 **INDEX**<a name="index"></a>
 
 ### 1.  [Makefile](#Makefile)
-	1. gcc
-	2. library
-	3. Makefile
+	* gcc
+	* library
+	* Makefile
 ### 2. [cmake](#cmake)
 
 ### 3. [RtAudio](#RtAudio) 
@@ -130,6 +130,7 @@ Makefile은 gcc를 편리하게 이용하게 해준다
 Makefie( 확장자 없음)을 작성한 뒤에 make 를 명령하면 Makefile에
 짜여진 명령들이 실행된다
 
+[참고](https://wiki.kldp.org/KoreanDoc/html/GNU-Make/GNU-Make.html#toc2)
 
 ### 예제 1-1
 ```Makefile
