@@ -3,15 +3,15 @@ a few manuals for a few things
 
 **INDEX**<a name="index"></a>
 
-1.  [Makefile](#Makefile)
-	* gcc
-	* library
-	* Makefile
-2. [cmake](#cmake)
+### 1.  [Makefile](#Makefile)
+	* [gcc](#1-1)
+	* [library](#1-2)
+	* [Makefile](#1-3)
+### 2. [cmake](#cmake)
 
-3. [RtAudio](#RtAudio) 
+### 3. [RtAudio](#RtAudio) 
 
-4. [BLAS](#BLAS)
+### 4. [BLAS](#BLAS)
 
 ---
 
@@ -49,7 +49,7 @@ void hello()
 ```
 
 이 코드들을 빌드하려면
-## gcc
+## gcc<a name="1-1"></a>
 
 ```bash
 gcc -c main.c					//main.c 를 main.o 로 변환
@@ -74,7 +74,7 @@ gcc -o threading threading.o -pthread
 해야 한다
 
 
-### library 
+### library <a name="1-2"></a>
 
 + Archive | Static library
 
@@ -124,7 +124,7 @@ echo $LD_LIBRARY_PATH
 로  잘 입력됐는지 확인하자
 
 
-## Makefile
+## Makefile<a name ="1-3"></a>
 
 Makefile은 gcc를 편리하게 이용하게 해준다
 Makefie( 확장자 없음)을 작성한 뒤에 make 를 명령하면 Makefile에
