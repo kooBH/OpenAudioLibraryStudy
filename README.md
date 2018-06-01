@@ -60,38 +60,38 @@ cmake_minimum_required(VERSION 내.cmake의.버전)
 
 ## 예시 2)
 
-cmake_minimum_required(VERSION 3.5.1)
-project(custom_RtAudio)
-
-#----Release, Debug ...
+ cmake_minimum_required(VERSION 3.5.1)
+ project(custom_RtAudio)
+ 
+ #----Release, Debug ...
 set(CMAKE_BUILD_TYPE Release)
 
-#set(LIST_DIRECTORIES true)
-#set(CMAKE_INCLUDE_CURRENT_DIR ON)
+ #set(LIST_DIRECTORIES true)
+ #set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-#----directory for headers, cmake automatically sets dependency
-#include_directories(dic_header_folder)
+ #----directory for headers, cmake automatically sets dependency
+ #include_directories(dic_header_folder)
 
-#set (SOURCES src/xx.c src/yy.c) : add src in var SOURCES
+ #set (SOURCES src/xx.c src/yy.c) : add src in var SOURCES
+ 
+ #----can add multiple sources with wildcard by 'GLOB'
+ #----not recommended, can be defined multiple times
+ #file(GLOB SOURCES src/*.c)
+ 
+ #----src files
+ #set(SOURCES RtAudio.cpp record.cpp)
+ set(SOURCES record.cpp)
+ 
+ #----set LINKLIBS for libs to be linked with the executable
+ set(LINKLIBS)
 
-#----can add multiple sources with wildcard by 'GLOB'
-#----not recommended, can be defined multiple times
-#file(GLOB SOURCES src/*.c)
-
-#----src files
-#set(SOURCES RtAudio.cpp record.cpp)
-set(SOURCES record.cpp)
-
-#----set LINKLIBS for libs to be linked with the executable
-set(LINKLIBS)
-
-#----Check System OS
-#----There are Variables such as "UNIX","WIN32","APPLE",
-#----which are set by TRUE when that is target system's OS
-#----In APPLE OS, APPLE and UNIX set TRUE
-#----We set unix->alsa/windows->asio
-#----or if(CMAKE_SYSTEM MATCHES Linux)
-if(UNIX AND NOT APPLE)
+ #----Check System OS
+ #----There are Variables such as "UNIX","WIN32","APPLE",
+ #----which are set by TRUE when that is target system's OS
+ #----In APPLE OS, APPLE and UNIX set TRUE
+ #----We set unix->alsa/windows->asio
+ #----or if(CMAKE_SYSTEM MATCHES Linux)
+ if(UNIX AND NOT APPLE)
     message (STATUS "Target System is UNIX")
 
     #----find_package(package) : find moudle and define following vars
