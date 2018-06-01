@@ -51,13 +51,18 @@ cmake_minimum_required(VERSION 내.cmake의.버전)
     set (변수명 들어갈값 )   
         ex)set(SOURCES src1.c src2.c src3.c)   
 	
+		- 변수를 불러올 때에는 ${변수명} 으로 불러온다
+
 	add_executable(파일명 들어갈코드 )  
 		ex)add_executable(hello hello.c)
 			or  
 			add_executable(programm SOURCES)  
 		- 파일명에 해당하는 실행파일을 뒤의 인자로 들어가는 코드를로 빌드하게 한다  
 
-## 예시 1)
+---
+## 예시 2-1
+
+/CMAKE
 
 hello world 를 출력하는 hello.c가 있으면
 
@@ -67,10 +72,45 @@ cmake_minimum_required(VERSION 3.5.1)
 add_execuable(hello hello.c)
 </pre>
 
-cmake 하고 나오는 Makefile로 make하면
-바로 hello 가 튀어나온다
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make
+$ ./hello
+hello world
 
-## 예시 2)
+---
+	
+	prjoect(프로젝트명)  
+		- 프로젝트의 이름을 정한다
+
+	message (STATUS "메세지")
+		- cmake 도중에 메세지를 출력한다. 변수들의 값을 확인할 수 있다
+	
+	include_directories()
+
+	find_package()
+	
+	list()
+	list(APPEND)
+
+	add_definitions
+
+	if()
+	endif()
+
+	add_library(SHARED)
+	
+	target_link_libraries()
+
+
+---
+
+변수 :  
+
+## 예시 2-2
+
+/RtAudio
 <pre>
  cmake_minimum_required(VERSION 3.5.1)
  project(custom_RtAudio)

@@ -1,0 +1,5 @@
+/home/ffe/custom_rtaudio/rtaudio/build/CMakeFiles/edit_cache.dir
+/home/ffe/custom_rtaudio/rtaudio/build/CMakeFiles/audioprobe.dir
+/home/ffe/custom_rtaudio/rtaudio/build/CMakeFiles/monitor.dir
+/home/ffe/custom_rtaudio/rtaudio/build/CMakeFiles/record.dir
+/home/ffe/custom_rtaudio/rtaudio/build/CMakeFiles/rebuild_cache.dir
