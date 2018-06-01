@@ -59,7 +59,7 @@ cmake_minimum_required(VERSION 내.cmake의.버전)
 
 
 ## 예시 2)
-
+<pre>
  cmake_minimum_required(VERSION 3.5.1)
  project(custom_RtAudio)
  
@@ -76,8 +76,7 @@ set(CMAKE_BUILD_TYPE Release)
  
  #----can add multiple sources with wildcard by 'GLOB'
  #----not recommended, can be defined multiple times
- #file(GLOB SOURCES src/*.c)
- 
+ #file(GLOB SOURCES src\*.c) 
  #----src files
  #set(SOURCES RtAudio.cpp record.cpp)
  set(SOURCES record.cpp)
@@ -172,6 +171,7 @@ target_link_libraries(record rtaudio)
 
 add_executable(monitor monitor.c)
 
+</pre>
 
 참고사항
 
