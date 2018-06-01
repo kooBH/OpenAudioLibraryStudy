@@ -65,7 +65,7 @@ cmake 는 linux환경에서는 Makefile을 Windows환경에서는 비주얼 스�
 
 + linux
 ```bash
-    $ sudo apt-get install cmake 로 설치한다       
+    $ sudo apt-get install cmake       
 ```
 +  windows 
 
@@ -393,9 +393,9 @@ BUILD_SHARED_LIBS
 
 ---
 
-# RtAudio<a name="RtAudio"></a>
+# [RtAudio](#index)<a name="RtAudio"></a>
 
 ---
 
-# BLAS<a name="BLAS"></a>
+# [BLAS](index)<a name="BLAS"></a>
 
