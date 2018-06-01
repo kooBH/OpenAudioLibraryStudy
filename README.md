@@ -14,9 +14,15 @@ a few manuals for a few things
 
 ## gcc
 
-일단 심플하게
+```bash
+gcc -c a.c 
 
 gcc -o 실행파일명 코드 (옵션)
+
+gcc -o hello main.c -L. -lhello -static
+
+gcc -o threading thread.c -pthread
+```
 
 ## Makefile
 
