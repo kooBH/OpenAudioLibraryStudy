@@ -57,14 +57,18 @@ cmake 의 버전은
 기본 명령 :   
 
  +   set (변수명 들어갈값 )   
-    ex)set(SOURCES src1.c src2.c src3.c)   	
-
+```CMake
+set(SOURCES src1.c src2.c src3.c)   	
+```
   변수를 불러올 때에는 ${변수명} 으로 불러온다
 
 + add_executable(파일명 들어갈코드 )  
-	ex)add_executable(hello hello.c)
-			or  
+```CMake
+add_executable(hello hello.c)
+#			or  
 	add_executable(programm SOURCES)  
+```
+
 파일명에 해당하는 실행파일을 뒤의 인자로 들어가는 코드를로 빌드하게 한다  
 
 ---
@@ -75,17 +79,18 @@ cmake 의 버전은
 hello world 를 출력하는 hello.c가 있으면
 
 CMakeLists.txt
-<pre>
+```CMake
 cmake_minimum_required(VERSION 3.5.1)
 add_execuable(hello hello.c)
-</pre>
-
-$ mkdir build    
-$ cd build    
-$ cmake ..    
-$ make    
-$ ./hello    
+```
+```Bash
+ mkdir build    
+ cd build    
+ cmake ..    
+ make    
+ ./hello    
 hello world    
+```
 
 ---
 
@@ -142,11 +147,13 @@ ex) find_package(ALSA)
 		  코드 내에서 define 한것과 같은 효과를 가진다
 		ex)
 src.c
-<pre>
+```C
 if(_IS_DEFINE_)
-	{do something}
+	{
+	 //do something
+	}
 
-</pre>
+```
 
 
 	  이라는 코드가 있을때  
@@ -178,11 +185,11 @@ if(_IS_DEFINE_)
 	target_link_libraries(TARGET LIBS)  
 			- TARGET에 LIBS을 링크한다  
 			  동적라이브러리를 실행파일에 링크할 수 있다  
-		
-				ex)	add_executable(out ${SOURCES})  
+		```CMake
+				add_executable(out ${SOURCES})  
 				add_library(hello SHARED ${LIBSRC})  
 				target)target_link_libraries(out hello)  
-			    
+			    ```
 ---
 
 
