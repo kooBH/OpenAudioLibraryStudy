@@ -397,5 +397,5 @@ BUILD_SHARED_LIBS
 
 ---
 
-# [BLAS](index)<a name="BLAS"></a>
+# [BLAS](#index)<a name="BLAS"></a>
 
