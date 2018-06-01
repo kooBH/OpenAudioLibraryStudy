@@ -10,19 +10,19 @@ a few manuals for a few things
 
 
 
-# CMAKE<a name="cmake"></a>
+## CMAKE<a name="cmake"></a>
 
 cmake 는 linux환경에서는 Makefile을 Windows환경에서는 비주얼 스튜디오 프로젝트를 만든다.
 
 
-# 설치
+## 설치
 
 linux
     $ sudo apt-get install cmake 로 설치한다       
       2.   windows 
 
 
-# 사용
+## 사용
 
 1. 빌드할 프로젝트가 있는 폴더에
  CMakeLists.txt 를 만든다.
@@ -30,33 +30,45 @@ linux
 2.    CmakeLists.txt 를 작성한뒤
 3.    $ cmake 를 해주면 Makefile 이 생성된다.
 
- ※builld 폴더 같은 걸 따로 만들어준 다음
+ ※builld 폴더 같은 걸 따로 만들어준 다음  
  $ cmake .. 으로 결과물을 따로 보관하는 것이 좋다.
              Makefile 을 작성해주는 것이아니라 Makefile 이 추가적으로 cmake가 만든 파일들을 이용하게 하는 것에 가깝디.
 
 
 
-# CMakeList.txt 작성
+## CMakeLists.txt 작성
 
 필수  :
 
-cmake_minimum_required(VERSION 내.cmake의.버전)
-        ex) cmake_minimum_required(VERSION 3.5.1)
+cmake_minimum_required(VERSION 내.cmake의.버전)  
+        ex) cmake_minimum_required(VERSION 3.5.1)  
     - cmake 최소 버전 요구사항 설정, 버전이 다르면 설정된 값이나 명령어 사용이 다를수 있다.
+
+	- cmake 의 버전은  
+		$ cmake -version 으로 알 수 있다
          
-기본 명령 :
-    set (변수명 들어갈값 )
-        ex)set(SOURCES src1.c src2.c src3.c)
-
-
-
-
-
-
+기본 명령 :   
+    set (변수명 들어갈값 )   
+        ex)set(SOURCES src1.c src2.c src3.c)   
+	
+	add_executable(파일명 들어갈코드 )  
+		ex)add_executable(hello hello.c)
+			or  
+			add_executable(programm SOURCES)  
+		- 파일명에 해당하는 실행파일을 뒤의 인자로 들어가는 코드를로 빌드하게 한다  
 
 ## 예시 1)
 
+hello world 를 출력하는 hello.c가 있으면
 
+CMakeLists.txt
+<pre>
+cmake_minimum_required(VERSION 3.5.1)
+add_execuable(hello hello.c)
+</pre>
+
+cmake 하고 나오는 Makefile로 make하면
+바로 hello 가 튀어나온다
 
 ## 예시 2)
 <pre>
