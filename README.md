@@ -110,8 +110,8 @@ include_directories(header_folder)
 			headder_folder애서 헤더파일을 찾는다
 		
 + find_package()
-시스템에 있는 모듈을 찾는다
-cmake에 관련 값들은 cmake에서 설정해두었다
+시스템에 있는 모듈을 찾는다  
+cmake에 관련 값들은 cmake에서 설정해두었다  
 ex) find_package( Threads)는  
 			현재 OS의 쓰레드 관련 라이브러리를 찾는다  
 			이 명령을 통해  
@@ -322,14 +322,14 @@ add_executable(monitor monitor.c)
 
 ```
 
-참고사항
++ 참고사항
 
 
-윈도우에서 DLL 사용시 아래의 ENTRY를 추가(bool,true)
-CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS
-BUILD_SHARED_LIBS
+윈도우에서 DLL 사용시 아래의 ENTRY를 추가(bool,true)  
+CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS  
+BUILD_SHARED_LIBS  
 
-단. global data value는 따로 처리해야한다. 
+단. global data value는 따로 처리해야한다.   
 참고 :  https://blog.kitware.com/create-dlls-on-windows-without-declspec-using-new-cmake-export-all-feature/
 
 ---
