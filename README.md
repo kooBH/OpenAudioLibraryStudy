@@ -4,18 +4,20 @@ a few manuals for a few things
 **INDEX**<a name="index"></a>
 
 ### 1.  [Makefile](#Makefile)
-* [gcc](#1-1)
-* [library](#1-2)
-* [Makefile](#1-3)
+* [gcc](#Makefile-gcc)
+* [library](#Makefile-library)
+* [Makefile](#Makefile-Makefile)
 ### 2. [cmake](#cmake)
-* [설치](#2-1)
-* [사용](#2-2)
-* [CMakeLists.txt 작성](#2-3)
-	1. [예제 1](#2-3-1)
-	2. [예제 2](#2-3-2)
+* [설치](#cmake-setup)
+* [사용](#cmake-execution)
+* [CMakeLists.txt 작성](#cmake-cmakelists)
+	1. [예제 1](#cmake-ex1)
+	2. [예제 2](#cmake-ex2)
 
 ### 3. [RtAudio](#RtAudio) 
-
+* [설치](#RtAudio-setup)
+* [사용](#RtAudio-execution)
+* [커스텀](#RtAudio-custom)
 ### 4. [BLAS](#BLAS)
 
 ---
@@ -54,7 +56,7 @@ void hello()
 ```
 
 이 코드들을 빌드하려면
-## gcc<a name="1-1"></a>
+## gcc<a name="Makefile-gcc"></a>
 
 ```bash
 gcc -c main.c					//main.c 를 main.o 로 변환
@@ -79,7 +81,7 @@ gcc -o threading threading.o -pthread
 해야 한다
 
 
-### library <a name="1-2"></a>
+### library <a name="Makefile-library"></a>
 
 + Archive | Static library
 
@@ -129,7 +131,7 @@ echo $LD_LIBRARY_PATH
 로  잘 입력됐는지 확인하자
 
 
-## Makefile<a name ="1-3"></a>
+## Makefile<a name ="Makefile-Makefile"></a>
 
 Makefile은 gcc를 편리하게 이용하게 해준다
 Makefie( 확장자 없음)을 작성한 뒤에 make 를 명령하면 Makefile에
@@ -192,7 +194,7 @@ clean :
 cmake 는 linux환경에서는 Makefile을 Windows환경에서는 비주얼 스튜디오 프로젝트를 만든다.
 
 
-## 설치<a name="2-1"></a>
+## 설치<a name="cmake-setup"></a>
 
 + linux
 ```bash
@@ -201,7 +203,7 @@ cmake 는 linux환경에서는 Makefile을 Windows환경에서는 비주얼 스�
 +  windows 
 
 
-## 사용<a name="2-2"><a/>
+## 사용<a name="cmake-execution"><a/>
 
 1. 빌드할 프로젝트가 있는 폴더에
  CMakeLists.txt 를 만든다.
@@ -215,7 +217,7 @@ cmake 는 linux환경에서는 Makefile을 Windows환경에서는 비주얼 스�
 
 
 
-## CMakeLists.txt 작성<a name="2-3"></a>
+## CMakeLists.txt 작성<a name="cmake-cmakelists"></a>
 
 필수  :
 
@@ -246,7 +248,7 @@ add_executable(programm SOURCES)
 파일명에 해당하는 실행파일을 뒤의 인자로 들어가는 코드를로 빌드하게 한다  
 
 ---
-## 예시 2-1<a name="2-3-1"></a>
+## 예시 2-1<a name="cmake-ex1"></a>
 
 /CMAKE
 
@@ -395,7 +397,7 @@ LIBSRC로 만든 libhello.so 라는 동적 라이브러리를
 
 
 
-## 예시 2-2<a name="2-3-2"></a>
+## 예시 2-2<a name="cmake-ex2"></a>
 
 /RtAudio
 ```CMake
@@ -548,7 +550,7 @@ cmake 시에 부가적인 파일이 많이 생성되므로 _build_ 폴더를 만
 거기에 RtAudio의 기본 프로그램들이 생성된다
 
 ## 사용<a name = "RtAudio-execution"></a>
-* 장치표시 프로그램 | audioprobe
+* 장치표시 프로그램 | audioprobe    
 ex) $ ./audioprobe
 
 <pre>
@@ -652,10 +654,22 @@ ex)
 ```bash
 $ record 9 48000 60 5
 ```
+실행 폴더에 record.raw로 저장된다
 
-## 맞춤<a name = "RtAudio-custom"></a>
+## 커스텀<a name = "RtAudio-custom"></a>
 
-참고 : https://www.music.mcgill.ca/~gary/rtaudio/recording.html
+RtAudio는 대부분의 환경에서 동작하는 라이브러리를 지향하기 때문에, 특정 환경에서만 사용할 경우  
+쓰지 않는 요소들이 많다. 하지만
+[The RtAudio Home Page](https://www.music.mcgill.ca/~gary/rtaudio/)
+에 따르면 RtAudio.h RtAudio.cpp 만 있으면 되기 때문에 개별적으로 사용하기 
+용이하다. 사이트에 rtaudio/tests에 있는 파일들을 활용하는 방법이 설명되어있기 때문에
+둘러보는 것을 추천한다
+
+이 gitbub 에 있는 RtAudio는
+ubuntu 16.04 환경하의 record와 audioprobe만 build하며  
+[CMakeLists.txt](#cmake-ex2)  
+record는 녹음을 무한히 하도록 되어있다.
+
 
 ---
 
