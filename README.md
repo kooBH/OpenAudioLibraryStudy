@@ -55,18 +55,21 @@ gcc -o hello main.o hello.o 	//목적파일들을 엮어서 hello 빌드
 
 ```bash
 gcc -o 실행파일명 코드 (옵션)
-
 gcc -o hello main.o -L. -lhello -static
-
 gcc -o threading thread.o -pthread
 ```
 
 ### library 
 
++ Archive | Static library
 ```bash
 gcc -c hello.c
 ar cr libhello.a hello.o
+```
 
+
++ Shared Object | Dynamic library
+```bash
 gcc -c -fPIC
 gcc -shared -fPIC -o libhello.so hello.o
 gcc -o hello main.o -L. -lhello
