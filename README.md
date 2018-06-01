@@ -10,19 +10,19 @@ a few manuals for a few things
 
 
 
-#CMAKE<a name="cmake"></a>
+# CMAKE<a name="cmake"></a>
 
 cmake 는 linux환경에서는 Makefile을 Windows환경에서는 비주얼 스튜디오 프로젝트를 만든다.
 
 
-#설치
+# 설치
 
 linux
     $ sudo apt-get install cmake 로 설치한다       
       2.   windows 
 
 
-#사용
+# 사용
 
 1. 빌드할 프로젝트가 있는 폴더에
  CMakeLists.txt 를 만든다.
@@ -36,7 +36,7 @@ linux
 
 
 
-#CMakeList.txt 작성
+# CMakeList.txt 작성
 
 필수  :
 
@@ -54,11 +54,11 @@ cmake_minimum_required(VERSION 내.cmake의.버전)
 
 
 
-##예시 1)
+## 예시 1)
 
 
 
-##예시 2)
+## 예시 2)
 
 cmake_minimum_required(VERSION 3.5.1)
 project(custom_RtAudio)
