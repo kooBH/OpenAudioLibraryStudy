@@ -679,12 +679,29 @@ https://software.seek.intel.com/performance-libraries
 Sudo tar -xzvf 파일명  
 하면 나오는 install.sh 를 실행
 	1. 적용 단계 #1 : 환경 변수
-	(설치폴더)/compilers_and_libraries_2018/linux/mkl/bin/mklvars.sh
-	는 환경 변수를 설정해주는 스크립트
-	$ source (mkvars경로)/mklvars.sh (arch)
+		(설치폴더)/compilers_and_libraries_2018/linux/mkl/bin/mklvars.sh
+		는 환경 변수를 설정해주는 스크립트	
+		$ source (mkvars경로)/mklvars.sh (arch) 
+		로 적용
+		(arch) 는 32bit 면 ia32 64bit면 intel64  		
+	2.적용 단계 #2 : 첫 MKL 프로그램
+		   [예제 파일](http://software.intel.com/sites/default/files/article/171460/mkl-lab-solution.c)    
+		   [컴파일 옵션 알아보기](https://software.intel.com/en-us/articles/intel-mkl-link-line-advisor/)  
+		     컴파일 옵션 알아보는 사이트에서 자신의 조건에 맞는 컴파일 옵션을 찾는다
+		     예 )
+		     + link line
+		        -Wl,--start-group ${MKLROOT}/lib/intel64/libmkl_intel_ilp64.a ${MKLROOT}/lib/intel64/libmkl_sequential.a ${MKLROOT}/lib/intel64/libmkl_core.a -Wl,--end-group -lpthread -lm -ldl
+			 + compile option
+			 -DMKL_ILP64 -m64 -I${MKLROOT}/include
+			 + 실제 명령  
+			   
+			   ```bash
+			 gcc  -DMKL_ILP64 -m64 -I${MKLROOT}/include  mkl-lab-solution.o  -Wl,--start-    group ${MKLROOT}/lib/intel64/libmkl_intel_ilp64.a ${MKLROOT}/lib/intel64/lib    mkl_sequential.a ${MKLROOT}/lib/intel64/libmkl_core.a -Wl,--end-group -lpthr    ead -lm -ldl  -lm
+			 ```  
+			 
+			 옵션의 순서가 중요하다. 순서가 다르면 빌드 되지 않을 수도 있다
+
 	
-	(arch) 는 32bit 면 ia32 64bit면 intel64  
-	2.적용 단계 #2 : 첫 MKL 프로그램  
 	
 
 
