@@ -18,7 +18,7 @@ a few manuals for a few things
 * [설치](#RtAudio-setup)
 * [사용](#RtAudio-execution)
 * [커스텀](#RtAudio-custom)
-### 4. [BLAS](#BLAS)
+### 4. [MKL](#MKL)
 
 ---
 
@@ -671,5 +671,25 @@ record는 경로를 받아서 그 경로에 .wav 형식의 파일을 무한히 �
 
 ---
 
-# [BLAS](#index)<a name="BLAS"></a>
+# [BLAS](#index)<a name="MKL"></a>
+
+1. 설치  
+https://software.seek.intel.com/performance-libraries
+에서 Submit 하고 파일 받아서
+Sudo tar -xzvf 파일명  
+하면 나오는 install.sh 를 실행
+	1. 적용 단계 #1 : 환경 변수
+	(설치폴더)/compilers_and_libraries_2018/linux/mkl/bin/mklvars.sh
+	는 환경 변수를 설정해주는 스크립트
+	$ source (mkvars경로)/mklvars.sh (arch)
+	
+	(arch) 는 32bit 면 ia32 64bit면 intel64  
+	2.적용 단계 #2 : 첫 MKL 프로그램  
+	
+
+
+
+[Guide](https://software.intel.com/en-us/articles/intel-math-kernel-library-intel-mkl-2018-getting-started)
+
+
 
