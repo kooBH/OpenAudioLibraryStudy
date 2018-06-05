@@ -24,31 +24,4 @@
 2. record
 3. audioprobe
 
-Double under line
-=================
-
-Single under line
------------------
-
-#H1
-##H2
-###H3
-####H4
-#####H5
-######H6
-#######H7
-
-* * *
-
-> one block
-> >  two blocks
-> > > three blocks
-
-> > two blocks
-
-> one block
-
----
-
-***********
 
