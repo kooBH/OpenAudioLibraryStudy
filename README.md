@@ -1,5 +1,5 @@
 # manuals
-a few manuals for a few things
+a little manual for a few things
 
 **INDEX**<a name="index"></a>
 
@@ -893,11 +893,11 @@ cblas_dgemm(CblasRowMajor,CblasTrans,CblasNoTrans,m2,n2,k2,alpha2,a2,lda2,b2,ldb
 	int ldc3=1;
 /*ex4
  * a3 | 1-1i |  ->CblasTransA | 1-1i  2-2i  3-3i |
- *   | 2-2i |
- *   | 3-3i |
+ *    | 2-2i |
+ *    | 3-3i |
  *
  *b3 |1+1i 2+2i 3+3i|    ->CblasTransB |  1+1i   4+4i |
- * 	 |4+4i 5+5i 6+6i|                  |  2+2i   5+5i |
+ *   |4+4i 5+5i 6+6i|                  |  2+2i   5+5i |
  *                                     |  3+3i   6+6i |
  *
  *c3 | 28+28i  64+64i| 
@@ -905,8 +905,7 @@ cblas_dgemm(CblasRowMajor,CblasTrans,CblasNoTrans,m2,n2,k2,alpha2,a2,lda2,b2,ldb
 cblas_cgemm(CblasColMajor,CblasNoTrans,CblasNoTrans,m3,n3,k3,&alpha3,a3,lda3,b3,ldb3,&beta3,c3,ldc3);
 
 	for(i=0;i< m3; i++)
-	{
-		for(j=0;j<n3; j++)
+	{	for(j=0;j<n3; j++)
 			printf("%4.2f %+4.2fi ",c3[i*n3 + j].r,c3[i*n3+j].i);
 		printf("\n");
 	}	printf("\n");
@@ -927,14 +926,10 @@ cblas_cgemm(CblasColMajor,CblasNoTrans,CblasNoTrans,m3,n3,k3,&alpha3,a3,lda3,b3,
 	int ldc4 = 1;
 cblas_zgemm(CblasColMajor,CblasTrans,CblasTrans,m4,n4,k4,&alpha4,a4,lda4,b4,ldb4,&beta4,c4,ldc4);
 	for(i=0;i< m4; i++)
-	{
-		for(j=0;j<(n4*2); j+=2)
+	{	for(j=0;j<(n4*2); j+=2)
 			printf("%2.2lf %+2.2lfi ",c4[i*n4 + j],c4[i*n4 + j+1]);
 		printf("\n");
-	}
-	printf("\n");
-
-
+	}	printf("\n");
 	return 0;
 }
 ```
