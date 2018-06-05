@@ -1010,9 +1010,11 @@ hello
   + 
 
 
-2. OpenBLAS
-	make USE_OPENMP=1
+2. OpenBLAS    
+사용시 문제가 생긴다면  
+make 옵션으로 USE_OPENMP=1 을 주면된다
 
 
-3. Intel MKL
- 컴파일 옵션 알아보기에 옵션 존재
+3. Intel MKL  
+ 컴파일 옵션 알아보기에 옵션 존재  
+ 
