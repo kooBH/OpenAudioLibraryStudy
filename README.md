@@ -23,6 +23,7 @@ a little manual for a few things
 * [MKL](#MKL)
 * [예시](#cblas_ex)
 
+### 5. [OpenMP](#OpenMP)
 ---
 
 # Makefile<a name="Makefile"></a>
@@ -937,3 +938,38 @@ cblas_zgemm(CblasColMajor,CblasTrans,CblasTrans,m4,n4,k4,&alpha4,a4,lda4,b4,ldb4
 	return 0;
 }
 ```
+
+# [OpenMP](#index)<a name="OpenMP"></a>
++ 사용하기
+OpenMP는 컴파일러에 포함 
+gcc 컴파일 옵션으로 -fopenmp
+
++ 예제 1
+  hello.c
+```c++
+#include <stdio.h>
+int main(){
+	#pragma omp parallel
+	{
+	printf("hello\n");
+	}
+return 0;}
+```
+```bash
+$ gcc -c hello.c -fopenmp
+$ gcc -o hello hello.o -fopenmp
+$ ./hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+```
+
++ OpenBLAS
+
++ Intel MKL
+
