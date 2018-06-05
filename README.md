@@ -164,7 +164,7 @@ hello.o : hello.h hello.c
 이 경우 처음에는 main.o 와 hello.o 가 없기에 hello를 위한 명령은 나중에 수행된다  
 끝까지 종속성이 충족되지 않은 경우에는 수행되지 않는다
 
-위의 예제와 같은 기능을 한다
+위의 예제와 같은 기능을 하는 예제
 
 ### 예제 1-2
 
@@ -688,7 +688,7 @@ record는 경로를 받아서 그 경로에 .wav 형식의 파일을 무한히 �
 
 # [CBLAS](#index)<a name="CBLAS"></a>
 + OpenBLAS<a name="OpenBLAS"></a>  
-	  1. 설치
+	1. 설치
 	```bash
 	$ sudo apt-get install openblas-base 
 	#/usr/lib/openblas-base/에 .a와 .so만 받는다 
@@ -703,14 +703,18 @@ record는 경로를 받아서 그 경로에 .wav 형식의 파일을 무한히 �
 	   지원하는 CPU는 TargetList.txt에 있다  
 	  	
 	 2. 컴파일
-	   + packge를 받았을 경우   
+	   + package를 받았을 경우   
 	   -lopenblas  
 	   만 해도 링크가 된다  
 	   + 프로젝트를 받았을 경우
-	    make 했을 때, libopenblas_CPU이름-r0.3.0.dev  .a 나 .so 가 생성된다  
+	    make 했을 때, libopenblas_CPU이름-r0.3.0.dev  .a 와 .so 가 생성된다  
 	    -lopenblas_CPU이름-r0.3.0.dev 해주거나 라이브러리 파일의 이름을 바꿔줘서 옵션으로 받아주면 된다  
-	    같은 이름의 라이브러리가 2개 나오기 때문에 -static 이나 -share로 명시를 해주면 된다
+	    같은 이름의 라이브러리가 2개 나오기 때문에 -static 이나 -shared 로 명시를 해줘야 한다  
 	 
+	 3. 사용 
+	   #include "cbals.h"
+	   
+	   
 + <a name="MKL">Intel MKL</a>
 	 1. 설치
 	https://software.seek.intel.com/performance-libraries
@@ -747,6 +751,186 @@ record는 경로를 받아서 그 경로에 .wav 형식의 파일을 무한히 �
 
 		 옵션의 순서가 중요하다. 순서가 다르면 빌드 되지 않는다  
 		[Guide](https://software.intel.com/en-us/articles/intel-math-kernel-library-intel-mkl-2018-getting-started)
+	4. 사용  
+	  #include "mkl.h"
 
+```C++
+#include "cblas.h"
+#include <stdio.h>
 
+int main()
+{
 
+/*
+ *  cblas_?gemm(layout,transA,transB,m,n,k,alpha,A,lda,B,ldb,beta,C,ldc)
+ *
+ *    layout :   i) --->CblasRowMajor
+ *    			   [0][1]  =  {0,1,2,3}
+ *                 [2][3]
+ *
+ *             ii)  |  [0][2] = {0,1,2,3}
+ *                  |  [1][3]
+ *                 \_/ CblasColMajor
+ *
+ *   
+ *   C := alpha * op(A)*op(B) + beta*C
+ *
+ *     op(X) =    i) X      when transX = CblasNoTrans
+ *
+ *     		 	 ii) X**T     ''        = CblasTrans
+ *
+ *     			iii) X**H     ''        = CblasConjTrans
+ *
+ *      m 
+ *
+ * */
+
+	int i,j;
+	
+/*
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ * */	
+	
+	
+	float a1[]={1,1,1,1};
+	float b1[]={1,2,3,4,5,6};
+	float c1[6];
+
+	int m1 = 2;
+	int k1 = 2;
+	int n1 = 3; 
+
+	int lda1=k1;
+	int ldb1=n1;
+	int ldc1=n1;
+
+	int alpha1 = 1;
+	int beta1 = 0;
+
+	cblas_sgemm(CblasRowMajor,CblasNoTrans,CblasNoTrans,m1,n1,k1,alpha1,a1,k1,b1,n1,beta1,c1,n1);
+
+	for(i=0;i< m1; i++)
+	{
+		for(j=0;j<n1; j++)
+			printf("%4.2f ",c1[i*n1 + j]);
+		printf("\n");
+	}
+	printf("\n");
+
+/*
+ * ---->--->--->RowMajor
+ *a2 | 0.1 0.4 |
+ *	 | 0.2 0.3 |  lda = 2 -> CblasTrans->  | 0.1 0.2 0.3 0.4 |  m = 2
+ *   | 0.3 0.2 |                           | 0.4 0.3 0.2 0.1 |  k = 4      
+ *   | 0.4 0.1 |
+ *
+ *
+ *b2 | 10 |   k=4
+ *   | 10 |   n=1
+ *   | 10 |   ldb = 1
+ *   | 10 |
+ *
+ *c2 | -110 |  m=2
+ *   |   90 |  n=1
+ *             ldc=1
+ * */
+
+	double a2[8]={0.1, 0.4, 0.2, 0.3, 0.3, 0.2, 0.4, 0.1};
+	double b2[4]={10,10,10,10};
+	double c2[2]={-100,100};
+	
+	int m2 = 2;
+	int k2 = 4;
+	int n2 = 1;
+
+	int alpha2 = -1;
+	int beta2 = 1;
+
+cblas_dgemm(CblasRowMajor,CblasTrans,CblasNoTrans,m2,n2,k2,alpha2,a2,m2,b2,n2,beta2,c2,n2);
+
+	for(i=0;i< m2; i++)
+	{
+		for(j=0;j<n2; j++)
+			printf("%4.2f ",c2[i*n2 + j]);
+		printf("\n");
+	}
+	printf("\n");
+
+/*
+ *a3
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ * */
+
+	typedef struct fx{float r;float l;}fx;
+
+	fx a3[3]={};
+	fx b3[6]={};
+	fx c3[2]={};
+	
+	int m3   ;
+	int k3   ;
+	int n3   ;
+
+	fx alpha3 ={} ;
+	fx beta3 = {} ;
+
+cblas_cgemm(CblasColMajor,CblasNoTrans,CblasNoTrans,m3,n3,k3,&alpha3,a3,k3,b3,n3,&beta3,c3,n3);
+
+	for(i=0;i< m3; i++)
+	{
+		for(j=0;j<n3; j++)
+			printf("%4.2f ",c2[i*n3 + j]);
+		printf("\n");
+	}
+	printf("\n");
+/*	
+	double a4[] = {};
+	double b4[] = {};
+	double c4[] = {};
+
+	int m4;
+	int k4;
+	int n4;
+
+	double alpha4[] = {};
+	double beta4[] = {};
+
+cblas_zgemm(CblasRowMajor,CblasNoTrans,CblasNoTrans,m4,n4,k4,&alpha4,a4,k4,b4,n4,&beta4,c4,n4);
+
+	for(i=0;i< m4; i++)
+	{
+		for(j=0;j<n4; j++)
+			printf("%2.2f ",c4[i*n4 + j]);
+		printf("\n");
+	}
+	printf("\n");
+*/
+	return 0;
+}
+```
