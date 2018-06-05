@@ -975,26 +975,55 @@ hello
 	+ 예제 2
 ```c++
 #include <omp.h>
- #define N 1000
- #define CHUNKSIZE 100
+#include <stdio.h>
+#include <stdlib.h>
 
- main(int argc, char *argv[]) {
- int i, chunk;
- float a[N], b[N], c[N];
- 
- /* Some initializations */
- for (i=0; i < N; i++)
-   a[i] = b[i] = i * 1.0;
- chunk = CHUNKSIZE;
- 
- #pragma omp parallel shared(a,b,c,chunk) private(i)
-   {
-   #pragma omp for schedule(dynamic,chunk) nowait
-   for (i=0; i < N; i++)
-     c[i] = a[i] + b[i];
-   }   /* end of parallel region */
- }	  
+#define N 20000000
+#define CHUNKSIZE 20000
+
+int main()
+{
+double start,end,gap;		
+float *a,*b,*c ;
+long  i,chunk;
+
+a=(float*)malloc(sizeof(float)*N);
+b=(float*)malloc(sizeof(float)*N);
+c=(float*)malloc(sizeof(float)*N);
+
+for(i=0;i<N ; i++)
+	a[i]=b[i] = i*1.0;
+chunk = CHUNKSIZE;
+	
+start=omp_get_wtime();
+#pragma omp parallel shared(a,b,c,chunk) private(i,tid)
+	{	#pragma omp for schedule (dynamic,chunk) nowait
+		for (i=0;i<N;i++)
+			c[i] = a[i] + b[i];
+	}
+
+end=omp_get_wtime();
+gap = end-start;
+printf("gap 1 : %lf\n",gap);
+	
+start=omp_get_wtime();
+for (i=0;i<N;i++)
+	c[i] = a[i] + b[i];
+end=omp_get_wtime();
+gap = end-start;
+printf("gap 2 : %lf\n",gap);
+free(a);free(b);free(c);
+return 0;
+} 
 ```
+```bash
+$ make TARGET=a1
+$ ./a1
+gap 1 : 0.027515
+gat 2 : 0.049899
+```
+
+
 1. directive-name  
   + parallel 
     여러 쓰레드를 통해 수행되는 구역, 쓰레드 team을 만든다 openMP사용에 기반이되는 구조
@@ -1009,6 +1038,7 @@ hello
     각 쓰레드가 개인적으로 가질 변수 지정
   + 
 
++ 
 
 2. OpenBLAS    
 사용시 문제가 생긴다면  
