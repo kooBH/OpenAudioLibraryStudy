@@ -8,6 +8,5 @@ gemm : gemm.o
 gemm.o : gemm.c
 	$(CC) -c $^
 
-
 clean : 
 	rm -f *.o
