@@ -941,8 +941,8 @@ cblas_zgemm(CblasColMajor,CblasTrans,CblasTrans,m4,n4,k4,&alpha4,a4,lda4,b4,ldb4
 ```
 
 # [OpenMP](#index)<a name="OpenMP"></a>
-1. OpenMP
-+. 사용하기
+1. OpenMP  
++ 사용하기
 OpenMP는 컴파일러에 포함 
 gcc 컴파일 옵션으로 -fopenmp
 
@@ -1011,6 +1011,8 @@ hello
 
 
 2. OpenBLAS
+	make USE_OPENMP=1
+
 
 3. Intel MKL
-
+ 컴파일 옵션 알아보기에 옵션 존재
