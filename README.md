@@ -4,19 +4,23 @@ a few manuals for a few things
 **INDEX**<a name="index"></a>
 
 ### 1.  [Makefile](#Makefile)
-* [gcc](#1-1)
-* [library](#1-2)
-* [Makefile](#1-3)
+* [gcc](#Makefile-gcc)
+* [library](#Makefile-library)
+* [Makefile](#Makefile-Makefile)
 ### 2. [cmake](#cmake)
-* [설치](#2-1)
-* [사용](#2-2)
-* [CMakeLists.txt 작성](#2-3)
-	1. [예제 1](#2-3-1)
-	2. [예제 2](#2-3-2)
+* [설치](#cmake-setup)
+* [사용](#cmake-execution)
+* [CMakeLists.txt 작성](#cmake-cmakelists)
+	1. [예제 1](#cmake-ex1)
+	2. [예제 2](#cmake-ex2)
 
 ### 3. [RtAudio](#RtAudio) 
-
-### 4. [BLAS](#BLAS)
+* [설치](#RtAudio-setup)
+* [사용](#RtAudio-execution)
+* [커스텀](#RtAudio-custom)
+### 4. [CBLAS](#CBLAS)
+* [OpenBLAS](#OpenBLAS)
+* [MKL](#MKL)
 
 ---
 
@@ -54,7 +58,7 @@ void hello()
 ```
 
 이 코드들을 빌드하려면
-## gcc<a name="1-1"></a>
+## gcc<a name="Makefile-gcc"></a>
 
 ```bash
 gcc -c main.c					//main.c 를 main.o 로 변환
@@ -79,7 +83,7 @@ gcc -o threading threading.o -pthread
 해야 한다
 
 
-### library <a name="1-2"></a>
+### library <a name="Makefile-library"></a>
 
 + Archive | Static library
 
@@ -129,13 +133,20 @@ echo $LD_LIBRARY_PATH
 로  잘 입력됐는지 확인하자
 
 
-## Makefile<a name ="1-3"></a>
+## Makefile<a name ="Makefile-Makefile"></a>
 
 Makefile은 gcc를 편리하게 이용하게 해준다
 Makefie( 확장자 없음)을 작성한 뒤에 make 를 명령하면 Makefile에
 짜여진 명령들이 실행된다
 
 [참고](https://wiki.kldp.org/KoreanDoc/html/GNU-Make/GNU-Make.html#toc2)
+
+기본적인 구성은
+
+목표 : 종속성
+(반드시 TAB)명령어
+
+종속성이 충족되면(되는지 확인하고) 목표를 위한 명령어를 수행한다
 
 ### 예제 1-1
 ```Makefile
@@ -150,7 +161,10 @@ hello.o : hello.h hello.c
 
 ```
 
-위의 예제와 같은 기능을 한다
+이 경우 처음에는 main.o 와 hello.o 가 없기에 hello를 위한 명령은 나중에 수행된다  
+끝까지 종속성이 충족되지 않은 경우에는 수행되지 않는다
+
+위의 예제와 같은 기능을 하는 예제
 
 ### 예제 1-2
 
@@ -181,6 +195,9 @@ clean :
 
 ```
 
+주석은 # 을 사용한다  
+Makefile 의 앞 부분에는 매크로를 지정해 줄 수 가 있다. 이는 Makefile 작성을 용이 하게 해준다
+
 clean :  
 이 부분은 make clean 을 할때 실행된다
 
@@ -192,7 +209,7 @@ clean :
 cmake 는 linux환경에서는 Makefile을 Windows환경에서는 비주얼 스튜디오 프로젝트를 만든다.
 
 
-## 설치<a name="2-1"></a>
+## 설치<a name="cmake-setup"></a>
 
 + linux
 ```bash
@@ -201,7 +218,7 @@ cmake 는 linux환경에서는 Makefile을 Windows환경에서는 비주얼 스�
 +  windows 
 
 
-## 사용<a name="2-2"><a/>
+## 사용<a name="cmake-execution"><a/>
 
 1. 빌드할 프로젝트가 있는 폴더에
  CMakeLists.txt 를 만든다.
@@ -215,7 +232,7 @@ cmake 는 linux환경에서는 Makefile을 Windows환경에서는 비주얼 스�
 
 
 
-## CMakeLists.txt 작성<a name="2-3"></a>
+## CMakeLists.txt 작성<a name="cmake-cmakelists"></a>
 
 필수  :
 
@@ -246,7 +263,7 @@ add_executable(programm SOURCES)
 파일명에 해당하는 실행파일을 뒤의 인자로 들어가는 코드를로 빌드하게 한다  
 
 ---
-## 예시 2-1<a name="2-3-1"></a>
+## 예시 2-1<a name="cmake-ex1"></a>
 
 /CMAKE
 
@@ -395,7 +412,7 @@ LIBSRC로 만든 libhello.so 라는 동적 라이브러리를
 
 
 
-## 예시 2-2<a name="2-3-2"></a>
+## 예시 2-2<a name="cmake-ex2"></a>
 
 /RtAudio
 ```CMake
@@ -548,7 +565,7 @@ cmake 시에 부가적인 파일이 많이 생성되므로 _build_ 폴더를 만
 거기에 RtAudio의 기본 프로그램들이 생성된다
 
 ## 사용<a name = "RtAudio-execution"></a>
-* 장치표시 프로그램 | audioprobe
+* 장치표시 프로그램 | audioprobe    
 ex) $ ./audioprobe
 
 <pre>
@@ -640,7 +657,7 @@ Supported sample rates = 4000 5512 8000 9600 11025 16000 22050 32000 44100 48000
 채널 수, 지원하는 레이트 등을 보여준다  
 
 
-* 녹음 프로그램 | record
+* 녹음 프로그램 | record    
 useage: record N fs <duration> <device> <channelOffset>  
     where N = number of channels,  
     fs = the sample rate,  
@@ -652,12 +669,268 @@ ex)
 ```bash
 $ record 9 48000 60 5
 ```
+실행 폴더에 record.raw로 저장된다
 
-## 맞춤<a name = "RtAudio-custom"></a>
+## 커스텀<a name = "RtAudio-custom"></a>
 
-참고 : https://www.music.mcgill.ca/~gary/rtaudio/recording.html
+RtAudio는 대부분의 환경에서 동작하는 라이브러리를 지향하기 때문에, 특정 환경에서만 사용할 경우  
+쓰지 않는 요소들이 많다. 하지만
+[The RtAudio Home Page](https://www.music.mcgill.ca/~gary/rtaudio/)
+에 따르면 RtAudio.h RtAudio.cpp 만 있으면 되기 때문에 개별적으로 사용하기 
+용이하다. 사이트에 rtaudio/tests에 있는 파일들을 활용하는 방법이 설명되어있기 때문에
+둘러보는 것을 추천한다
+
+이 gitbub 에 있는 RtAudio는
+ubuntu 16.04 환경하의 record와 audioprobe만 build하며  [CMakeLists.txt](#cmake-ex2)  
+record는 경로를 받아서 그 경로에 .wav 형식의 파일을 무한히 녹음하도록 되어있다
 
 ---
 
-# [BLAS](#index)<a name="BLAS"></a>
+# [CBLAS](#index)<a name="CBLAS"></a>
++ OpenBLAS<a name="OpenBLAS"></a>  
+	1. 설치
+	```bash
+	$ sudo apt-get install openblas-base 
+	#/usr/lib/openblas-base/에 .a와 .so만 받는다 
+	    
+	$ git clone https://github.com/xianyi/OpenBLAS.git	
+	#openblas project를 받는다  
+	 ```
+	 apt로 package를 받았을 경우 바로 사용하면된다  
+	 git으로 받았을 경우에는  
+	 make를 하면 CPU에 맞게 빌드해 준다  
+	 또는 make TARGET=(CPU이름) 으로 지정해 줄 수도 있다
+	   지원하는 CPU는 TargetList.txt에 있다  
+	  	
+	 2. 컴파일
+	   + package를 받았을 경우   
+	   -lopenblas  
+	   만 해도 링크가 된다  
+	   + 프로젝트를 받았을 경우
+	    make 했을 때, libopenblas_CPU이름-r0.3.0.dev  .a 와 .so 가 생성된다  
+	    -lopenblas_CPU이름-r0.3.0.dev 해주거나 라이브러리 파일의 이름을 바꿔줘서 옵션으로 받아주면 된다  
+	    같은 이름의 라이브러리가 2개 나오기 때문에 -static 이나 -shared 로 명시를 해줘야 한다  
+	 
+	 3. 사용 
+	   #include "cbals.h"
+	   
+	   
++ <a name="MKL">Intel MKL</a>
+	 1. 설치
+	https://software.seek.intel.com/performance-libraries
+	에서 Submit 하고 파일 받아서  
+	Sudo tar -xzvf 파일명  
+	하면 나오는 install.sh 를 실행  
+	 또는 install_GUI.sh 를 써도 된다
+	
+	2. 환경 변수
+	(설치폴더)/compilers_and_libraries_2018/linux/mkl/bin/mklvars.sh  
+	는 환경 변수를 설정해주는 스크립트	
+	$ source (mkvars경로)/mklvars.sh (arch) 
+	로 적용  
+	(arch) 는 32bit 면 ia32 64bit면 intel64  
+	  스크립트로 export한 환경변수는 터미널이 닫히면 지속되지 않으므로  
+	  ~/.bashrc(터미널을 열때마다 실행 )  이나  
+	  ~/.profile(부팅 후 유저 로그인 시 실행)  에
+	  source (mkvars경로)/mklvars.sh (arch) 를 추가해주면 된다  
+	  
+	3. 컴파일  
+	[예제 파일](http://software.intel.com/sites/default/files/article/171460/mkl-lab-solution.c)       
+	[컴파일 옵션 알아보기](https://software.intel.com/en-us/articles/intel-mkl-link-line-advisor/)   
+	컴파일 옵션 알아보는 사이트에서 자신의 조건에 맞는 컴파일 옵션을 찾는다  
+		예 )
+		+ link line  
+		-Wl,--start-group ${MKLROOT}/lib/intel64/libmkl_intel_ilp64.a ${MKLROOT}/lib/intel64/libmkl_sequential.a ${MKLROOT}/lib/intel64/libmkl_core.a -Wl,--end-group -lpthread -lm -ldl
+		+ compile option  
+		-DMKL_ILP64 -m64 -I${MKLROOT}/include
+		+ 실제 명령  
 
+		```bash 
+		gcc  -DMKL_ILP64 -m64 -I${MKLROOT}/include  mkl-lab-solution.o  -Wl,--start-    group ${MKLROOT}/lib/intel64/libmkl_intel_ilp64.a ${MKLROOT}/lib/intel64/lib    mkl_sequential.a ${MKLROOT}/lib/intel64/libmkl_core.a -Wl,--end-group -lpthr    ead -lm -ldl  -lm
+		```  
+
+		 옵션의 순서가 중요하다. 순서가 다르면 빌드 되지 않는다  
+		[Guide](https://software.intel.com/en-us/articles/intel-math-kernel-library-intel-mkl-2018-getting-started)
+	4. 사용  
+	  #include "mkl.h"
+
+```C++
+#include "cblas.h"
+#include <stdio.h>
+
+int main()
+{
+
+/*
+ *  cblas_?gemm(layout,transA,transB,m,n,k,alpha,A,lda,B,ldb,beta,C,ldc)
+ *
+ *    layout :   i) --->CblasRowMajor
+ *    			   [0][1]  =  {0,1,2,3}
+ *                 [2][3]
+ *
+ *             ii)  |  [0][2] = {0,1,2,3}
+ *                  |  [1][3]
+ *                 \_/ CblasColMajor
+ *
+ *   
+ *   C := alpha * op(A)*op(B) + beta*C
+ *
+ *     op(X) =    i) X      when transX = CblasNoTrans
+ *
+ *     		 	 ii) X**T     ''        = CblasTrans
+ *
+ *     			iii) X**H     ''        = CblasConjTrans
+ *
+ *      m 
+ *
+ * */
+
+	int i,j;
+	
+/*
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ * */	
+	
+	
+	float a1[]={1,1,1,1};
+	float b1[]={1,2,3,4,5,6};
+	float c1[6];
+
+	int m1 = 2;
+	int k1 = 2;
+	int n1 = 3; 
+
+	int lda1=k1;
+	int ldb1=n1;
+	int ldc1=n1;
+
+	int alpha1 = 1;
+	int beta1 = 0;
+
+	cblas_sgemm(CblasRowMajor,CblasNoTrans,CblasNoTrans,m1,n1,k1,alpha1,a1,k1,b1,n1,beta1,c1,n1);
+
+	for(i=0;i< m1; i++)
+	{
+		for(j=0;j<n1; j++)
+			printf("%4.2f ",c1[i*n1 + j]);
+		printf("\n");
+	}
+	printf("\n");
+
+/*
+ * ---->--->--->RowMajor
+ *a2 | 0.1 0.4 |
+ *	 | 0.2 0.3 |  lda = 2 -> CblasTrans->  | 0.1 0.2 0.3 0.4 |  m = 2
+ *   | 0.3 0.2 |                           | 0.4 0.3 0.2 0.1 |  k = 4      
+ *   | 0.4 0.1 |
+ *
+ *
+ *b2 | 10 |   k=4
+ *   | 10 |   n=1
+ *   | 10 |   ldb = 1
+ *   | 10 |
+ *
+ *c2 | -110 |  m=2
+ *   |   90 |  n=1
+ *             ldc=1
+ * */
+
+	double a2[8]={0.1, 0.4, 0.2, 0.3, 0.3, 0.2, 0.4, 0.1};
+	double b2[4]={10,10,10,10};
+	double c2[2]={-100,100};
+	
+	int m2 = 2;
+	int k2 = 4;
+	int n2 = 1;
+
+	int alpha2 = -1;
+	int beta2 = 1;
+
+cblas_dgemm(CblasRowMajor,CblasTrans,CblasNoTrans,m2,n2,k2,alpha2,a2,m2,b2,n2,beta2,c2,n2);
+
+	for(i=0;i< m2; i++)
+	{
+		for(j=0;j<n2; j++)
+			printf("%4.2f ",c2[i*n2 + j]);
+		printf("\n");
+	}
+	printf("\n");
+
+/*
+ *a3
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ * */
+
+	typedef struct fx{float r;float l;}fx;
+
+	fx a3[3]={};
+	fx b3[6]={};
+	fx c3[2]={};
+	
+	int m3   ;
+	int k3   ;
+	int n3   ;
+
+	fx alpha3 ={} ;
+	fx beta3 = {} ;
+
+cblas_cgemm(CblasColMajor,CblasNoTrans,CblasNoTrans,m3,n3,k3,&alpha3,a3,k3,b3,n3,&beta3,c3,n3);
+
+	for(i=0;i< m3; i++)
+	{
+		for(j=0;j<n3; j++)
+			printf("%4.2f ",c2[i*n3 + j]);
+		printf("\n");
+	}
+	printf("\n");
+/*	
+	double a4[] = {};
+	double b4[] = {};
+	double c4[] = {};
+
+	int m4;
+	int k4;
+	int n4;
+
+	double alpha4[] = {};
+	double beta4[] = {};
+
+cblas_zgemm(CblasRowMajor,CblasNoTrans,CblasNoTrans,m4,n4,k4,&alpha4,a4,k4,b4,n4,&beta4,c4,n4);
+
+	for(i=0;i< m4; i++)
+	{
+		for(j=0;j<n4; j++)
+			printf("%2.2f ",c4[i*n4 + j]);
+		printf("\n");
+	}
+	printf("\n");
+*/
+	return 0;
+}
+```
