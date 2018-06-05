@@ -940,7 +940,8 @@ cblas_zgemm(CblasColMajor,CblasTrans,CblasTrans,m4,n4,k4,&alpha4,a4,lda4,b4,ldb4
 ```
 
 # [OpenMP](#index)<a name="OpenMP"></a>
-+ 사용하기
+1. OpenMP
++. 사용하기
 OpenMP는 컴파일러에 포함 
 gcc 컴파일 옵션으로 -fopenmp
 
@@ -968,8 +969,46 @@ hello
 hello
 hello
 ```
++ 구조
+#pragma opm directive-name [clause, ...] { ... }
+	+ 예제 2
+```c++
+#include <omp.h>
+ #define N 1000
+ #define CHUNKSIZE 100
 
-+ OpenBLAS
+ main(int argc, char *argv[]) {
+ int i, chunk;
+ float a[N], b[N], c[N];
+ 
+ /* Some initializations */
+ for (i=0; i < N; i++)
+   a[i] = b[i] = i * 1.0;
+ chunk = CHUNKSIZE;
+ 
+ #pragma omp parallel shared(a,b,c,chunk) private(i)
+   {
+   #pragma omp for schedule(dynamic,chunk) nowait
+   for (i=0; i < N; i++)
+     c[i] = a[i] + b[i];
+   }   /* end of parallel region */
+ }	  
+```
+ 	 1. directive-name  
+	  + parallel 
+	    여러 쓰레드를 통해 수행되는 구역, 쓰레드 team을 만든다 openMP사용에 기반이되는 구조
+	  + for  
+	    바로 뒤에 따라오는 for문을 쓰레드 팀으로 병렬수행한다
+	 2. clause  
+	  + schedule
+	    반복문을 각 쓰레드에게 어느정도 할당할 건지 정하는 절
+	  + shared   
+	    전 쓰레드가 공유하는 변수 지정
+	  + private    	
+	    각 쓰레드가 개인적으로 가질 변수 지정
 
-+ Intel MKL
+
+2. OpenBLAS
+
+3. Intel MKL
 
