@@ -18,7 +18,7 @@ a few manuals for a few things
 * [설치](#RtAudio-setup)
 * [사용](#RtAudio-execution)
 * [커스텀](#RtAudio-custom)
-### 4. [MKL](#MKL)
+### 4. [CBLAS](#CBLAS)
 
 ---
 
@@ -139,6 +139,13 @@ Makefie( 확장자 없음)을 작성한 뒤에 make 를 명령하면 Makefile에
 
 [참고](https://wiki.kldp.org/KoreanDoc/html/GNU-Make/GNU-Make.html#toc2)
 
+기본적인 구성은
+
+목표 : 종속성
+(반드시 TAB)명령어
+
+종속성이 충족되면(되는지 확인하고) 목표를 위한 명령어를 수행한다
+
 ### 예제 1-1
 ```Makefile
 hello : main.o hello.o
@@ -151,6 +158,9 @@ hello.o : hello.h hello.c
 	gcc -c hello.c
 
 ```
+
+이 경우 처음에는 main.o 와 hello.o 가 없기에 hello를 위한 명령은 나중에 수행된다  
+끝까지 종속성이 충족되지 않은 경우에는 수행되지 않는다
 
 위의 예제와 같은 기능을 한다
 
@@ -182,6 +192,9 @@ clean :
 
 
 ```
+
+주석은 # 을 사용한다  
+Makefile 의 앞 부분에는 매크로를 지정해 줄 수 가 있다. 이는 Makefile 작성을 용이 하게 해준다
 
 clean :  
 이 부분은 make clean 을 할때 실행된다
@@ -671,42 +684,40 @@ record는 경로를 받아서 그 경로에 .wav 형식의 파일을 무한히 �
 
 ---
 
-# [BLAS](#index)<a name="MKL"></a>
+# [CBLAS](#index)<a name="CBLAS"></a>
 
-1. 설치  
-https://software.seek.intel.com/performance-libraries
-에서 Submit 하고 파일 받아서
-Sudo tar -xzvf 파일명  
-하면 나오는 install.sh 를 실행
-	1. 적용 단계 #1 : 환경 변수
-		(설치폴더)/compilers_and_libraries_2018/linux/mkl/bin/mklvars.sh
-		는 환경 변수를 설정해주는 스크립트	
-		$ source (mkvars경로)/mklvars.sh (arch) 
-		로 적용
-		(arch) 는 32bit 면 ia32 64bit면 intel64  		
-	2.적용 단계 #2 : 첫 MKL 프로그램
-		   [예제 파일](http://software.intel.com/sites/default/files/article/171460/mkl-lab-solution.c)    
-		   [컴파일 옵션 알아보기](https://software.intel.com/en-us/articles/intel-mkl-link-line-advisor/)  
-		     컴파일 옵션 알아보는 사이트에서 자신의 조건에 맞는 컴파일 옵션을 찾는다
-		     예 )
-		     + link line
-		        -Wl,--start-group ${MKLROOT}/lib/intel64/libmkl_intel_ilp64.a ${MKLROOT}/lib/intel64/libmkl_sequential.a ${MKLROOT}/lib/intel64/libmkl_core.a -Wl,--end-group -lpthread -lm -ldl
-			 + compile option
-			 -DMKL_ILP64 -m64 -I${MKLROOT}/include
-			 + 실제 명령  
-			   
-			   ```bash
-			 gcc  -DMKL_ILP64 -m64 -I${MKLROOT}/include  mkl-lab-solution.o  -Wl,--start-    group ${MKLROOT}/lib/intel64/libmkl_intel_ilp64.a ${MKLROOT}/lib/intel64/lib    mkl_sequential.a ${MKLROOT}/lib/intel64/libmkl_core.a -Wl,--end-group -lpthr    ead -lm -ldl  -lm
-			 ```  
-			 
-			 옵션의 순서가 중요하다. 순서가 다르면 빌드 되지 않을 수도 있다
++ OpenBLAS  
+1. 설치
 
-	
-	
++ Intel MKL
+	1. 설치  
+	https://software.seek.intel.com/performance-libraries
+	에서 Submit 하고 파일 받아서
+	Sudo tar -xzvf 파일명  
+	하면 나오는 install.sh 를 실행
+	2. 환경 변수
+	(설치폴더)/compilers_and_libraries_2018/linux/mkl/bin/mklvars.sh
+	는 환경 변수를 설정해주는 스크립트	
+	$ source (mkvars경로)/mklvars.sh (arch) 
+	로 적용
+	(arch) 는 32bit 면 ia32 64bit면 intel64  		
+	3. 컴파일
+	[예제 파일](http://software.intel.com/sites/default/files/article/171460/mkl-lab-solution.c)    
+	[컴파일 옵션 알아보기](https://software.intel.com/en-us/articles/intel-mkl-link-line-advisor/)  
+	컴파일 옵션 알아보는 사이트에서 자신의 조건에 맞는 컴파일 옵션을 찾는다
+		예 )
+		+ link line
+		-Wl,--start-group ${MKLROOT}/lib/intel64/libmkl_intel_ilp64.a ${MKLROOT}/lib/intel64/libmkl_sequential.a ${MKLROOT}/lib/intel64/libmkl_core.a -Wl,--end-group -lpthread -lm -ldl
+		+ compile option
+		-DMKL_ILP64 -m64 -I${MKLROOT}/include
+		+ 실제 명령  
 
+		```bash 
+		gcc  -DMKL_ILP64 -m64 -I${MKLROOT}/include  mkl-lab-solution.o  -Wl,--start-    group ${MKLROOT}/lib/intel64/libmkl_intel_ilp64.a ${MKLROOT}/lib/intel64/lib    mkl_sequential.a ${MKLROOT}/lib/intel64/libmkl_core.a -Wl,--end-group -lpthr    ead -lm -ldl  -lm
+		```  
 
-
-[Guide](https://software.intel.com/en-us/articles/intel-math-kernel-library-intel-mkl-2018-getting-started)
+		 옵션의 순서가 중요하다. 순서가 다르면 빌드 되지 않는다
+		[Guide](https://software.intel.com/en-us/articles/intel-math-kernel-library-intel-mkl-2018-getting-started)
 
 
 
