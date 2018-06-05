@@ -19,6 +19,8 @@ a few manuals for a few things
 * [사용](#RtAudio-execution)
 * [커스텀](#RtAudio-custom)
 ### 4. [CBLAS](#CBLAS)
+* [OpenBLAS](#OpenBLAS)
+* [MKL](#MKL)
 
 ---
 
@@ -686,10 +688,10 @@ record는 경로를 받아서 그 경로에 .wav 형식의 파일을 무한히 �
 
 # [CBLAS](#index)<a name="CBLAS"></a>
 
-+ OpenBLAS  
-1. 설치
++ OpenBLAS<a name="OpenBLAS"></a>  
+	1. 설치
 
-+ Intel MKL
++ <a name="MKL">Intel MKL</a>
 	1. 설치  
 	https://software.seek.intel.com/performance-libraries
 	에서 Submit 하고 파일 받아서
@@ -700,15 +702,23 @@ record는 경로를 받아서 그 경로에 .wav 형식의 파일을 무한히 �
 	는 환경 변수를 설정해주는 스크립트	
 	$ source (mkvars경로)/mklvars.sh (arch) 
 	로 적용
-	(arch) 는 32bit 면 ia32 64bit면 intel64  		
+	(arch) 는 32bit 면 ia32 64bit면 intel64  
+	  스크립트로 export한 환경변수는 터미널이 닫히면 지속되지 않으므로  
+	  ~/.bashrc(터미널을 열때마다 실행 )  이나  
+	  ~/.profile(부팅 후 유저 로그인 시 실행)  에
+	  source (mkvars경로)/mklvars.sh (arch) 를 추가해주면 된다  
+	  
+	
+	
+	
 	3. 컴파일
 	[예제 파일](http://software.intel.com/sites/default/files/article/171460/mkl-lab-solution.c)    
 	[컴파일 옵션 알아보기](https://software.intel.com/en-us/articles/intel-mkl-link-line-advisor/)  
 	컴파일 옵션 알아보는 사이트에서 자신의 조건에 맞는 컴파일 옵션을 찾는다
 		예 )
-		+ link line
+		+ link line  
 		-Wl,--start-group ${MKLROOT}/lib/intel64/libmkl_intel_ilp64.a ${MKLROOT}/lib/intel64/libmkl_sequential.a ${MKLROOT}/lib/intel64/libmkl_core.a -Wl,--end-group -lpthread -lm -ldl
-		+ compile option
+		+ compile option  
 		-DMKL_ILP64 -m64 -I${MKLROOT}/include
 		+ 실제 명령  
 
@@ -716,7 +726,7 @@ record는 경로를 받아서 그 경로에 .wav 형식의 파일을 무한히 �
 		gcc  -DMKL_ILP64 -m64 -I${MKLROOT}/include  mkl-lab-solution.o  -Wl,--start-    group ${MKLROOT}/lib/intel64/libmkl_intel_ilp64.a ${MKLROOT}/lib/intel64/lib    mkl_sequential.a ${MKLROOT}/lib/intel64/libmkl_core.a -Wl,--end-group -lpthr    ead -lm -ldl  -lm
 		```  
 
-		 옵션의 순서가 중요하다. 순서가 다르면 빌드 되지 않는다
+		 옵션의 순서가 중요하다. 순서가 다르면 빌드 되지 않는다  
 		[Guide](https://software.intel.com/en-us/articles/intel-math-kernel-library-intel-mkl-2018-getting-started)
 
 
