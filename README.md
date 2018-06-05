@@ -71,7 +71,8 @@ gcc -o hello main.o hello.o 	//목적파일들을 엮어서 hello 빌드
 
 gcc 의 기초적인 형태는
 ```bash
-gcc -o 실행파일명 코드(들) (옵션)
+$ gcc -c 코드 (옵션)
+$ gcc -o 실행파일명 목적파일(들) (옵션)	
 ```
 
 또한 특정라이브러를 사용할 경우 
@@ -994,18 +995,19 @@ hello
    }   /* end of parallel region */
  }	  
 ```
- 	 1. directive-name  
-	  + parallel 
-	    여러 쓰레드를 통해 수행되는 구역, 쓰레드 team을 만든다 openMP사용에 기반이되는 구조
-	  + for  
-	    바로 뒤에 따라오는 for문을 쓰레드 팀으로 병렬수행한다
-	 2. clause  
-	  + schedule
-	    반복문을 각 쓰레드에게 어느정도 할당할 건지 정하는 절
-	  + shared   
-	    전 쓰레드가 공유하는 변수 지정
-	  + private    	
-	    각 쓰레드가 개인적으로 가질 변수 지정
+1. directive-name  
+  + parallel 
+    여러 쓰레드를 통해 수행되는 구역, 쓰레드 team을 만든다 openMP사용에 기반이되는 구조
+  + for  
+    바로 뒤에 따라오는 for문을 쓰레드 팀으로 병렬수행한다
+ 2. clause  
+  + schedule
+    반복문을 각 쓰레드에게 어느정도 할당할 건지 정하는 절
+  + shared   
+    전 쓰레드가 공유하는 변수 지정
+  + private    	
+    각 쓰레드가 개인적으로 가질 변수 지정
+  + 
 
 
 2. OpenBLAS
