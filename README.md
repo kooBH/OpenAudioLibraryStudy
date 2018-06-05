@@ -711,7 +711,11 @@ record는 경로를 받아서 그 경로에 .wav 형식의 파일을 무한히 �
 	    make 했을 때, libopenblas_CPU이름-r0.3.0.dev  .a 와 .so 가 생성된다  
 	    -lopenblas_CPU이름-r0.3.0.dev 해주거나 라이브러리 파일의 이름을 바꿔줘서 옵션으로 받아주면 된다  
 	    같은 이름의 라이브러리가 2개 나오기 때문에 -static 이나 -shared 로 명시를 해줘야 한다  
-	 
+	    
+	    또한 Thread를 포함하기 때문에  
+	    -lpthread  
+	    를 해주어야 한다
+	    
 	 3. 사용 
 	   #include "cbals.h"
 	   
