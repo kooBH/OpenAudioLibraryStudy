@@ -82,7 +82,7 @@
 		  #include "mkl.h"
 	```  
 	 
-	 * Windows 
+	 * Windows   
 	https://software.seek.intel.com/performance-libraries  
 	에서 Submit 하고 파일 받아서 설치하면 VS에 통합까지 해준다  
  	  사용할 때는
