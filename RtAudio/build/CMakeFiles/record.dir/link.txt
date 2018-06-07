@@ -1,1 +1,0 @@
-/usr/bin/c++   -O3 -DNDEBUG   CMakeFiles/record.dir/record.cpp.o CMakeFiles/record.dir/RtAudio.cpp.o  -o record /usr/lib/x86_64-linux-gnu/libasound.so -lpthread 

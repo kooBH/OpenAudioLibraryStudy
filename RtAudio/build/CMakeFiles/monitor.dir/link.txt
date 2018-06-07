@@ -1,1 +1,0 @@
-/usr/bin/cc  -O3 -DNDEBUG   CMakeFiles/monitor.dir/monitor.c.o  -o monitor 
