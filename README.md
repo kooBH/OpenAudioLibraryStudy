@@ -91,7 +91,7 @@ gcc -o threading threading.o -pthread
 + Archive | Static library
 
 정적 라이브러리는 object의 결합체이다
-빌드할 때 같이 빌드되기 때문에 코드를 컴파일하고 빌드하는 것과
+링크할 때 통째로 같이 되기 때문에 코드를 빌드하는 것과
 기능상의 차이는 없다. 하지만 여러 코드들을 하나의 .a로 컴파일하면
 되기 때문에 편의상의 이점이 있다
 
@@ -99,7 +99,7 @@ gcc -o threading threading.o -pthread
 gcc -c hello.c
 ar cr libhello.a hello.o (+추가적인 코드)  # libhello.a 가 생성된다
 gcc -o hello main.o -L. -lhello (-static)
-```
+```  
 -L(.a파일 경로)  
 -l(.a 이름, 앞의 lib 과 확장자.a를 뺀 이름만 넣는다)  
 -static : 같은 이름의 .so가 있을 경우 .so를 우선적으로 빌드하기 때문에
@@ -107,8 +107,8 @@ gcc -o hello main.o -L. -lhello (-static)
 
 + Shared Object | Dynamic library
 
-공유 객체, 동적 라이브러리
-실행시에 링크되며, 코드를 수정해야할 경우 .so만 교체하면 되기 때문에 유지보수의 이점이 있다
+공유 객체, 동적 라이브러리  
+실행시에 파일과 별개로 외부의 라이브러리와 링크되며, 코드를 수정해야할 경우 .so만 교체하면 되기 때문에 유지보수의 이점이 있다
 
 ```bash
 gcc -c -fPIC 							#목적파일을 만들때에도 옵션을 줘야한다
@@ -134,6 +134,9 @@ export LD_LIBRARY_PATH+=:(.so의 경로)로 추가해주면 된다
 echo $LD_LIBRARY_PATH
 ```
 로  잘 입력됐는지 확인하자
+
+export 된 환경변수는 종료시에 사라지기 때문에  
+~/.config 에 export 명령을 추가시키면 된다  
 
 
 ## Makefile<a name ="Makefile-Makefile"></a>
@@ -219,7 +222,8 @@ cmake 는 linux환경에서는 Makefile을 Windows환경에서는 비주얼 스�
     $ sudo apt-get install cmake       
 ```
 +  windows 
-
+  https://cmake.org/download/
+  
 
 ## 사용<a name="cmake-execution"><a/>
 
