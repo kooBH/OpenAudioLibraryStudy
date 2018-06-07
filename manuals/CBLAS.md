@@ -5,6 +5,7 @@
 3. [예시](#cblas_ex)
 
 + OpenBLAS<a name="OpenBLAS"></a>  
+	* Linux   
 	1. 설치
 	```bash
 	$ sudo apt-get install openblas-base 
@@ -33,10 +34,13 @@
 	    를 해주어야 한다
 	    
 	 3. 사용 
-	   #include "cbals.h"
-	   
+	   #include "cbals.h"  
+	 
+	 * Windows   
+	   https://github.com/xianyi/OpenBLAS/wiki/How-to-use-OpenBLAS-in-Microsoft-Visual-Studio  
 	   
 + <a name="MKL">Intel MKL</a>
+	* Linux    
 	 1. 설치
 	https://software.seek.intel.com/performance-libraries
 	에서 Submit 하고 파일 받아서  
@@ -73,9 +77,19 @@
 		 옵션의 순서가 중요하다. 순서가 다르면 빌드 되지 않는다  
 		[Guide](https://software.intel.com/en-us/articles/intel-math-kernel-library-intel-mkl-2018-getting-started)
 	4. 사용  
+	  ```C++
 	  #include "mkl.h"
-	  
-	  
+	 ```  
+	 * Windows 
+	https://software.seek.intel.com/performance-libraries  
+	에서 Submit 하고 파일 받아서 설치하면 VS에 통합까지 해준다  
+ 	  사용할 때는
+	```C++
+	  #include "mkl.h"  
+	```    
+ 		 로 헤더를 불러오고
+		 프로젝트 속성 -> 구성 속성 -> Intel Performance Libraries 에서 'Use Intel MKL' 을 설정해주면 된다  
+
 +예시<a name="cblas_ex"></a>
 ```C++
 #include "cblas.h"
