@@ -1,3 +1,0 @@
-/home/ffe/git/manuals/CMAKE/build/CMakeFiles/edit_cache.dir
-/home/ffe/git/manuals/CMAKE/build/CMakeFiles/rebuild_cache.dir
-/home/ffe/git/manuals/CMAKE/build/CMakeFiles/hello.dir
