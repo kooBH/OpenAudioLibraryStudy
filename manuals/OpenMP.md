@@ -1,4 +1,4 @@
-# OpenMP
+# [OpenMP](../README.md)
 
 1. OpenMP  
 + 사용하기
