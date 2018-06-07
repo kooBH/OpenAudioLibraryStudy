@@ -84,11 +84,12 @@
 	https://software.seek.intel.com/performance-libraries  
 	에서 Submit 하고 파일 받아서 설치하면 VS에 통합까지 해준다  
  	  사용할 때는
+	  
 	```C++
 	  #include "mkl.h"  
 	```    
- 		 로 헤더를 불러오고
-		 프로젝트 속성 -> 구성 속성 -> Intel Performance Libraries 에서 'Use Intel MKL' 을 설정해주면 된다  
+ 	로 헤더를 불러오고  
+	프로젝트 속성 -> 구성 속성 -> Intel Performance Libraries 에서 'Use Intel MKL' 을 설정해주면 된다  
 
 +예시<a name="cblas_ex"></a>
 ```C++
