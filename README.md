@@ -1,6 +1,8 @@
 # manuals
 a little manual for a few things
 
+[A](./manulas/a.md)
+
 **INDEX**<a name="index"></a>
 
 ### 1.  [Makefile](#Makefile)
