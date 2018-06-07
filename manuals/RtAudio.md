@@ -147,5 +147,6 @@ RtAudio는 대부분의 환경에서 동작하는 라이브러리를 지향하�
 둘러보는 것을 추천한다
   
 여기에 있는 RtAudio는
-ubuntu 16.04 환경하의 record와 audioprobe만 build하며  [CMakeLists.txt](#cmake-ex2)  
+ubuntu 16.04 환경하의 record와 audioprobe만 build하며   
+[CMakeLists.txt](#cmake-ex2)   
 /RtAudio/record.cpp는 경로를 받아서 그 경로에 .wav 형식의 파일을 무한히 녹음하도록 되어있다
