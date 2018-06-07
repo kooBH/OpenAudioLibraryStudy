@@ -3,7 +3,15 @@
 1. OpenMP  
 + 사용하기
 OpenMP는 컴파일러에 포함 
-gcc 컴파일 옵션으로 -fopenmp
+	* Linux    
+	gcc 컴파일 옵션으로 -fopenmp
+	 * Windows  
+		  Visual Studio 개발 환경에서 하려면
+		  1. 프로젝트의 속성
+		  2. 구성 속성 노드를 확장
+		  3. C/C++ 노드를 확장
+		  4. 언어 속성
+		  5. OpenMP 지원 속성을 수정  => (컴파일 옵션에) /openmp 추가  
 
 + 예제 1
   hello.c
