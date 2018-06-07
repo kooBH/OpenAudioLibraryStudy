@@ -54,12 +54,12 @@ typedef double MY_TYPE;
 void usage( void ) {
   // Error function in case of incorrect command-line
   // argument specifications
-  std::cout << "\nuseage: record N fs <duration> <device> <channelOffset>\n";
-  std::cout << "    where N = number of channels,\n";
-  std::cout << "    fs = the sample rate,\n";
-  std::cout << "    duration = optional time in seconds to record (default = 2.0),\n";
+  std::cout << "\nuseage: record <path> <device> <fs> <channels> <duration>\n";
+  std::cout << "    path  = path output .wav file will be saved,\n";
   std::cout << "    device = optional device to use (default = 0),\n";
-  std::cout << "    and channelOffset = an optional channel offset on the device (default = 0).\n\n";
+  std::cout << "    fs = the sample rate,\n";
+  std::cout << "    channels = channels of input,\n";
+  std::cout << "    duration = optional time in seconds to record (default = 2.0),\n\n";
   exit( 0 );
 }
 
@@ -257,7 +257,7 @@ int main( int argc, char *argv[] )
 	
 	if(argc < 5)
 	{
-		printf("Not enough arguments\n");
+		usage();
 		return -1;
 	}
 	printf("path : %s\n", argv[1]);
