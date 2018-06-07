@@ -1,2 +1,2 @@
 I am A
-[To B](./b.md)
+[To B](b.md)
