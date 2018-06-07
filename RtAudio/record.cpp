@@ -54,7 +54,7 @@ typedef double MY_TYPE;
 void usage( void ) {
   // Error function in case of incorrect command-line
   // argument specifications
-  std::cout << "\nuseage: record <path> <device> <fs> <channels> <duration>\n";
+  std::cout << "\nusage: record <path> <device> <fs> <channels> <duration>\n";
   std::cout << "    path  = path output .wav file will be saved,\n";
   std::cout << "    device = optional device to use (default = 0),\n";
   std::cout << "    fs = the sample rate,\n";
