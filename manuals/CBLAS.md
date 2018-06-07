@@ -71,23 +71,26 @@
 		+ 실제 명령  
 
 		```bash 
-		gcc  -DMKL_ILP64 -m64 -I${MKLROOT}/include  mkl-lab-solution.o  -Wl,--start-    group ${MKLROOT}/lib/intel64/libmkl_intel_ilp64.a ${MKLROOT}/lib/intel64/lib    mkl_sequential.a ${MKLROOT}/lib/intel64/libmkl_core.a -Wl,--end-group -lpthr    ead -lm -ldl  -lm
+				gcc  -DMKL_ILP64 -m64 -I${MKLROOT}/include  mkl-lab-solution.o  -Wl,--start-    group ${MKLROOT}/lib/intel64/libmkl_intel_ilp64.a ${MKLROOT}/lib/intel64/lib    mkl_sequential.a ${MKLROOT}/lib/intel64/libmkl_core.a -Wl,--end-group -lpthr    ead -lm -ldl  -lm
 		```  
 
 		 옵션의 순서가 중요하다. 순서가 다르면 빌드 되지 않는다  
 		[Guide](https://software.intel.com/en-us/articles/intel-math-kernel-library-intel-mkl-2018-getting-started)
 	4. 사용  
-	  ```C++
-	  #include "mkl.h"
-	 ```  
+	
+	```C++
+		  #include "mkl.h"
+	```  
+	 
 	 * Windows 
 	https://software.seek.intel.com/performance-libraries  
 	에서 Submit 하고 파일 받아서 설치하면 VS에 통합까지 해준다  
  	  사용할 때는
 	  
 	```C++
-	  #include "mkl.h"  
+		  #include "mkl.h"  
 	```    
+	
  	로 헤더를 불러오고  
 	프로젝트 속성 -> 구성 속성 -> Intel Performance Libraries 에서 'Use Intel MKL' 을 설정해주면 된다  
 
