@@ -5,7 +5,7 @@
 3. [커스텀](#RtAudio-custom)
 
 ## 설치<a name ="RtAudio-setup"></a>
-
+1. Linux  
 ```bash
 sudo apt-get install libasound2-dev
 sudo apt-get install git-core
@@ -25,6 +25,10 @@ cmake 시에 부가적인 파일이 많이 생성되므로 _build_ 폴더를 만
 다른 이름을 사용해도 무방하다
 폴더를 만든 다음엔 빌드 폴더에서 cmake .. 으로 Makefile을 만들고 make를 하면 tests 폴더가 생성되고
 거기에 RtAudio의 기본 프로그램들이 생성된다
+
+2. Windows  
+윈도우에서는 cmake를 통해 빌드하면된다. 단 RtAudio는 C++11의 기능을 사용하므로 VS2013 이상의 버전을 사용해야한다.  
+(또는 VS2012에 c++11 컴파일 기능을 추가하거나)
 
 ## 사용<a name = "RtAudio-execution"></a>
 * 장치표시 프로그램 | audioprobe    
