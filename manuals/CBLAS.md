@@ -93,6 +93,8 @@
 	
  	로 헤더를 불러오고  
 	프로젝트 속성 -> 구성 속성 -> Intel Performance Libraries 에서 'Use Intel MKL' 을 설정해주면 된다  
+	  
+	참고 : [Compiling and Linking Intel® Math Kernel Library with Microsoft* Visual C++*](https://software.intel.com/en-us/articles/intel-math-kernel-library-intel-mkl-compiling-and-linking-with-microsoft-visual-cc) 
 
 +예시<a name="cblas_ex"></a>
 ```C++
