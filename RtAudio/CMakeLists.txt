@@ -66,21 +66,24 @@ if(UNIX AND NOT APPLE)
 	add_definitions(-D__LINUX_ALSA__)
 #----= if(CMAKE_SYSTEM MATCHES Windows)
 #----also true in win64
-elseif(WIN32) 
-	message (STATUS "Target System is Windows")
-	
+
+elseif(WIN32) 	
 	include_directories(include)
 	list(APPEND LINKLIBS winmm ole32)
+	add_definitions(-D__WINDOWS_DS__)
+	message(STATUS "using Windows WASAPI")
+	list(APPEND LINKLIBS uuid ksuser)
+endif()	
 
-	#----add aditional srcs for windows
-	list(APPEND SOURCES
-		include/asio.cpp
-		include/asiodrivers.cpp
-		include/asiolist.cpp
-		include/iasiothiscallresolver.cpp)
-	add_definitions(-D__WINDOWS_ASIO__)
-
-endif()
+#Windows 7 uses WASAPI
+#	message (STATUS "Target System is Windows")	
+#	list(APPEND LINKLIBS winmm ole32)
+#	list(APPEND SOURCES
+#		include/asio.cpp
+#		include/asiodrivers.cpp
+#		include/asiolist.cpp
+#		include/iasiothiscallresolver.cpp)
+#	add_definitions(-D__WINDOWS_ASIO__)
 
 #----create shared library
 #----Generate the shared library from the sources
@@ -103,6 +106,8 @@ endif()
 message (STATUS ${LINKLIBS})
 #----link external libraries with executable
 #----order is quiet important
+
+cmake_policy(set CMP0042 OLD)
 
 target_link_libraries(record ${LINKLIBS})
 
