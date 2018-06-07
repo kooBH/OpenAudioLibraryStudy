@@ -32,6 +32,9 @@ set(LINKLIBS)
 if(UNIX AND NOT APPLE) 
 	message (STATUS "Target System is UNIX")
 
+
+	add_executable(monitor monitor.c)
+
 	#----find_package(package) : find moudle and define following vars 
 
 	#----FindThreads( = find_package(Threads)) set variables 
@@ -118,4 +121,3 @@ target_link_libraries(record ${LINKLIBS})
 add_executable(audioprobe audioprobe.cpp RtAudio.cpp)
 target_link_libraries(audioprobe ${LINKLIBS})
 
-add_executable(monitor monitor.c)
