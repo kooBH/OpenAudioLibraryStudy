@@ -23,15 +23,27 @@ cmake 는 linux환경에서는 Makefile을 Windows환경에서는 비주얼 스�
 
 ## 사용<a name="cmake-execution"><a/>
 
-1. 빌드할 프로젝트가 있는 폴더에
+1. 빌드할 코드가 있는 폴더에
  CMakeLists.txt 를 만든다.
 
 2.    CmakeLists.txt 를 작성한뒤
-3.    $ cmake 를 해주면 Makefile 이 생성된다.
+3. cmake 를 사용한다  
+	+ Linux  
+	$ cmake 를 해주면 Makefile 이 생성된다.
+	 ※builld 폴더 같은 걸 따로 만들어준 다음  
+	 $ cmake .. 으로 결과물을 따로 보관하는 것이 좋다.
+		     Makefile 을 작성해주는 것이아니라 Makefile 이 추가적으로 cmake가 만든 파일들을 이용하게 하는 것에 가깝디 
 
- ※builld 폴더 같은 걸 따로 만들어준 다음  
- $ cmake .. 으로 결과물을 따로 보관하는 것이 좋다.
-             Makefile 을 작성해주는 것이아니라 Makefile 이 추가적으로 cmake가 만든 파일들을 이용하게 하는 것에 가깝디.
+	+ Windows  
+	  cmd에서 cmake를 해줘도 되지만 GUI를 사용하는 것이 좋다   
+	  ~~ source code 에 CMakeLists.txt 위치  
+	  ~~ the binaries 에 윈도우에서 사용할 프로젝트의 위치  
+	  를 잡아준다  
+
+	  옵션을 추가하려면  Add Entry로 추가하면된다  
+	  그 뒤에, Configure 로 사용할 IDE를 고르고 Generate하면 binaries 경로에 프로젝트 파일이 생성된다  
+	  Configure를 변경하려면, File/Delete Cache 하면 다시 설정할 수 있다  
+ 
 
 
 
