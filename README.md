@@ -1,7 +1,7 @@
 # manuals
 a little manual for a few things
 
-[A](./manulas/a.md)
+[A](./manuals/a.md)
 
 **INDEX**<a name="index"></a>
 
