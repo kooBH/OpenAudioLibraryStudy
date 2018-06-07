@@ -1,6 +1,10 @@
 # manuals
 a little manual for a few things
 
+### Environment
+Linux : ubuntu 16.04 64bit
+Windows : Windows 7 64bit
+
 **INDEX**<a name="index"></a>
 
 ### 1.  [Makefile](./manuals/Makefile.md)
