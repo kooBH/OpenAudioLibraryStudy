@@ -1,8 +1,8 @@
 
 # Makefile
-* [gcc](#Makefile-gcc)
-* [library](#Makefile-library)
-* [Makefile](#Makefile-Makefile)
+1. [gcc](#Makefile-gcc)
+2. [library](#Makefile-library)
+3. [Makefile](#Makefile-Makefile)
 
 
 아래의 코드가 있다고 하자
