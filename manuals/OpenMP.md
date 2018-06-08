@@ -129,7 +129,7 @@ make 옵션으로 USE_OPENMP=1 을 주면된다
  |   | 500X500 dgemm 3000 times   | 500X500 dgemm 20000 times  |
 |---|---|---|
 | Sequential   | 27  | x  |
-| OpenMP   |  8 | 52  |
-| GNU  | 8  | 52  |
-| Intel  | 8  | 52  |
+| -fopenmp   |  8 | 52  |
+| -lgomp  | 8  | 52  |
+| -liomp5  | 8  | 52  |
  
