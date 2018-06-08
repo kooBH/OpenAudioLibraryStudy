@@ -1,6 +1,7 @@
 # [OpenMP](../README.md)<a name = "TOP"></a>
 + [OpenMP](#OpenMP)
 + [MKL](#MKL)
++ [Windows](#Windows)
 
 1. [OpenMP](#TOP)<a name="OpenMP"></a> 
 + 사용하기
@@ -132,3 +133,4 @@ make 옵션으로 USE_OPENMP=1 을 주면된다
 | -lgomp  | 8  | 52  |
 | -liomp5  | 8  | 52  |
  
+3. [Windows](#TOP)<a name = "Windows"></a>
