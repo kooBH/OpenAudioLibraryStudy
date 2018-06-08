@@ -39,6 +39,8 @@
 	 * Windows   
 	   https://github.com/xianyi/OpenBLAS/wiki/How-to-use-OpenBLAS-in-Microsoft-Visual-Studio  
 	   
+---
+## 잘안됨  
 Anaconda Prompt
 conda update -n base conda
 conda config --add channels conda-forge
@@ -60,6 +62,8 @@ CMakeLists.txt
 enable_language(Fortran)
 	---> flang.exe is not able to compile simple test file
 	== LINK : fatal error LNK1104: "msvcrt.lib"파일을 열 수 없습니다
+	   
+---	   
 	   
 + <a name="MKL">[Intel MKL](#TOP)</a>
 	* Linux    
