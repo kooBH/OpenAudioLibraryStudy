@@ -1,6 +1,8 @@
-# [OpenMP](../README.md)
+# [OpenMP](../README.md)<a name = "TOP"></a>
++ [OpenMP](#OpenMP)
++ [MKL](#MKL)
 
-1. OpenMP  
+1. OpenMP<a name="OpenMP"></a> 
 + 사용하기
 OpenMP는 컴파일러에 포함 
 	* Linux    
@@ -120,3 +122,14 @@ make 옵션으로 USE_OPENMP=1 을 주면된다
  
  + 참고
  [tutorial](https://computing.llnl.gov/tutorials/openMP/)
+ 
+ 2. [MKL](#TOP)  
+ MKL에서 OpenMP 를 사용하려면 [Intel® Math Kernel Library Link Line Advisor](https://software.intel.com/en-us/articles/intel-mkl-link-line-advisor) 에서  threading layer를 OpenMP로 하면된다. 컴파일 옵션외에는 추가적으로 코드를 입력할 필요가 없다. gemm함수 내에서 자체적으로 쓰레딩을 한다. OpenMP library도 GNU나 Intel 이나 기능상의 차이는 크게 없다. 아니면 그냥 OpenMP를 컴파일 옵션으로 주고 #pragma omp로 할 수도 있을 것이다. 추가적인 조작을 원한다면 직접 OpenMP 를 사용하는 것이 좋다.
+ 
+ |   | 500X500 dgemm 3000 times   | 500X500 dgemm 20000 times  |
+|---|---|---|
+| Sequential   | 27  | x  |
+| OpenMP   |  8 | 52  |
+| GNU  | 8  | 52  |
+| Intel  | 8  | 52  |
+ 
