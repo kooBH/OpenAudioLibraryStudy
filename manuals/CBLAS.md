@@ -59,6 +59,7 @@ cmake .. -G "Ninja" -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_C_COMPILER=clang-cl -D
 CMakeLists.txt
 enable_language(Fortran)
 	---> flang.exe is not able to compile simple test file
+	== LINK : fatal error LNK1104: "msvcrt.lib"파일을 열 수 없습니다
 	   
 + <a name="MKL">[Intel MKL](#TOP)</a>
 	* Linux    
