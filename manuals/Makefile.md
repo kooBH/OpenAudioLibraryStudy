@@ -1,5 +1,5 @@
 
-# [Makefile](../README.md)
+# [Makefile](../README.md)<a name ="TOP"></a>
 1. [gcc](#Makefile-gcc)
 2. [library](#Makefile-library)
 3. [Makefile](#Makefile-Makefile)
@@ -37,7 +37,7 @@ void hello()
 ```
 
 이 코드들을 빌드하려면
-## gcc<a name="Makefile-gcc"></a>
+## [gcc](#TOP)<a name="Makefile-gcc"></a>
 
 ```bash
 gcc -c main.c					//main.c 를 main.o 로 변환
@@ -63,7 +63,7 @@ gcc -o threading threading.o -pthread
 해야 한다
 
 
-### library <a name="Makefile-library"></a>
+### [library](#TOP) <a name="Makefile-library"></a>
 
 + Archive | Static library
 
@@ -116,7 +116,7 @@ export 된 환경변수는 종료시에 사라지기 때문에
 ~/.config 에 export 명령을 추가시키면 된다  
 
 
-## Makefile<a name ="Makefile-Makefile"></a>
+## [Makefile](#TOP)<a name ="Makefile-Makefile"></a>
 
 Makefile은 gcc를 편리하게 이용하게 해준다
 Makefie( 확장자 없음)을 작성한 뒤에 make 를 명령하면 Makefile에
