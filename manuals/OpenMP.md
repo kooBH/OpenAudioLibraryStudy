@@ -1,7 +1,7 @@
 # [OpenMP](../README.md)<a name = "TOP"></a>
 + [OpenMP](#OpenMP)
 + [MKL](#MKL)
-+ [Windows](#Windows)
++ [OpenBLAS](#OpenBLAS)
 
 1. [OpenMP](#TOP)<a name="OpenMP"></a> 
 + 사용하기
@@ -45,7 +45,7 @@ hello
 hello
 hello
 ```
-+ 구조
++ 구조  
 #pragma opm directive-name [clause, ...] { ... }
 	+ 예제 2
 ```c++
@@ -110,20 +110,12 @@ gat 2 : 0.049899
 	    전 쓰레드가 공유하는 변수 지정   
 	  + private    	  
 	    각 쓰레드가 개인적으로 가질 변수 지정  
-  
-  
-2. OpenBLAS      
-make 옵션으로 USE_OPENMP=1 을 주면된다  
-
-
-3. Intel MKL  
- 컴파일 옵션   
- [Intel® Math Kernel Library Link Line Advisor](https://software.intel.com/en-us/articles/intel-mkl-link-line-advisor)  
- 
- + 참고
+	    
++ 참고
  [tutorial](https://computing.llnl.gov/tutorials/openMP/)  
- 
- 2. [MKL](#TOP)<a name ="MKL"></a>  
+
+2. Intel MKL   
+
  MKL에서 OpenMP 를 사용하려면 [Intel® Math Kernel Library Link Line Advisor](https://software.intel.com/en-us/articles/intel-mkl-link-line-advisor) 에서  threading layer를 OpenMP로 하면된다. 컴파일 옵션외에는 추가적으로 코드를 입력할 필요가 없다. gemm함수 내에서 자체적으로 쓰레딩을 한다. OpenMP library도 GNU나 Intel 이나 기능상의 차이는 크게 없다. 아니면 그냥 OpenMP를 컴파일 옵션으로 주고 #pragma omp로 할 수도 있을 것이다. 추가적인 조작을 원한다면 직접 OpenMP 를 사용하는 것이 좋다.
  
  |   | 500X500 dgemm 3000 times   | 500X500 dgemm 20000 times  |
@@ -134,4 +126,5 @@ make 옵션으로 USE_OPENMP=1 을 주면된다
 | -liomp5  | 8  | 52  |
 | OpenBLAS | x | 77 |
 
-3. [Windows](#TOP)<a name = "Windows"></a>
+3. [OpenBLAS](#TOP)<a name = "OpenBLAS"></a>
+  OpenBLAS 는 기본값으로 사용하게 되어있다. 사용하지 않으려면 별도의 옵션을 줘서 (USE_OPENMP=0) 빌드하면 된다.  
