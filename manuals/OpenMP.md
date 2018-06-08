@@ -116,3 +116,7 @@ make 옵션으로 USE_OPENMP=1 을 주면된다
 
 3. Intel MKL  
  컴파일 옵션 알아보기에 옵션 존재  
+ 
+ 
+ + 참고
+ [tutorial](https://computing.llnl.gov/tutorials/openMP/)
