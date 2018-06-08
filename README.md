@@ -12,3 +12,5 @@ Windows : Windows 7 64bit
 ### 3. [RtAudio](./manuals/RtAudio.md) 
 ### 4. [CBLAS](./manuals/CBLAS.md)
 ### 5. [OpenMP](./manuals/OpenMP.md)
++ [OpenMP](./manuals/OpenMP.md#OpenMP)
++ [MKL](./manuals/OpenMP.md#MKL)
