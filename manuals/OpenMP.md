@@ -132,5 +132,6 @@ make 옵션으로 USE_OPENMP=1 을 주면된다
 | -fopenmp   |  8 | 52  |
 | -lgomp  | 8  | 52  |
 | -liomp5  | 8  | 52  |
- 
+| OpenBLAS | x | 77 |
+
 3. [Windows](#TOP)<a name = "Windows"></a>
