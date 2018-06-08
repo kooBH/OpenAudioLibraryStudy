@@ -98,7 +98,7 @@ gat 2 : 0.049899
 ```
 
 
-1. directive-name    
+ 1. directive-name    
   + parallel   
     여러 쓰레드를 통해 수행되는 구역, 쓰레드 team을 만든다 openMP사용에 기반이되는 구조  
   + for  
@@ -128,7 +128,7 @@ make 옵션으로 USE_OPENMP=1 을 주면된다
  
  |   | 500X500 dgemm 3000 times   | 500X500 dgemm 20000 times  |
 |---|---|---|
-| Sequential   | 27  | x  |
+| Sequential   | 27  | 188  |
 | -fopenmp   |  8 | 52  |
 | -lgomp  | 8  | 52  |
 | -liomp5  | 8  | 52  |
