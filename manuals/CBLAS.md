@@ -33,11 +33,32 @@
 	    -lpthread  
 	    를 해주어야 한다
 	    
-	 3. 사용 
+	 3. 사용   
 	   #include "cbals.h"  
 	 
 	 * Windows   
 	   https://github.com/xianyi/OpenBLAS/wiki/How-to-use-OpenBLAS-in-Microsoft-Visual-Studio  
+	   
+Anaconda Prompt
+conda update -n base conda
+conda config --add channels conda-forge
+conda install -y cmake flang clangdev perl
+conda install -y -c isuruf kitware-ninja
+
+vcvarsall x64
+
+set "LIB=%CONDA_INSTALL_LOCN%\Library\lib;%LIB%"
+set "CPATH=%CONDA_INSTALL_LOCN%\Library\include;%CPATH%
+mkdir build
+cd build
+cmake .. -G "Ninja" -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_C_COMPILER=clang-cl -DCMAKE_Fortran_COMPILER=flang -DBUILD_WITHOUT_LAPACK=no -DNOFORTRAN=0 -DDYNAMIC_ARCH=ON -DCMAKE_BUILD_TYPE=Release
+	   
+--> Error : gfortran 
+			is not a full path and was not found in the PATH
+	   
+CMakeLists.txt
+enable_language(Fortran)
+	---> flang.exe is not able to compile simple test file
 	   
 + <a name="MKL">[Intel MKL](#TOP)</a>
 	* Linux    
