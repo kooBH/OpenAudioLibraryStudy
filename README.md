@@ -8,7 +8,7 @@ Windows : Windows 7 64bit
 **INDEX**<a name="index"></a>
 
 ### 1.  [Makefile](./manuals/Makefile.md)
-+ gcc](./manuals/Makefile.md#Makefile-gcc)
++ [gcc](./manuals/Makefile.md#Makefile-gcc)
 + [library](./manuals/Makefile.md#Makefile-library)
 + [Makefile](./manuals/Makefile.md#Makefile-Makefile)
 ### 2. [cmake](./manuals/cmake.md)
