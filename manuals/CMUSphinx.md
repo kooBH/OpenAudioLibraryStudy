@@ -5,15 +5,19 @@
 ---
 #### [FUNCTION LIST](#CMUSphinx)<a name="CMUSphinx_list"></a>
 
+---
 
 #### [FUNCTION PROTOTYPE](#CMUSphinx)<a name = "CMUSphinx_proto"></a>
 
 ---
 
 #### [LICENSE](#CIGLET)<a name = "CMUSphinx_license"></a>  
+
 https://cmusphinx.github.io/wiki/about/  
 + **BSD-like** license which allows commercial distribution  
 
+
++ fe_noise.h
 
 <pre>
 /* -*- c-basic-offset: 4; indent-tabs-mode: nil -*- */
