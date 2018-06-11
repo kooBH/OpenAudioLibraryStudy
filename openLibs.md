@@ -420,6 +420,35 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 + [funtion list](#HTK_list)
 + [function prototype](#HTK_proto)
 + [license](#HTK_license)
+
+|Header|Discription|
+|---|---|
+|HAdapt.h | Adaptation Library module   |
+|HArc.h | Routines used in HFwdBkwdLat.c,  An alternative kind of lattice format used there   |
+|HAudio.h | Audio Input/Output  |
+|HDic.h| Dictionary Storage  |
+|HEaxctMPE.h |MPE implementation (exact)  |
+|HFB.h | forward Backward Routines module  
+|HFBLat.h | Lattice Forward Backward routines  |
+|HGraf.h | Minimal Graphics Interface   |
+|HLabel.h | Speech Label File Input   |
+|HLM.h | language model handling   |
+|HMap.c | MAP Model Updates   |
+|HMath.h | Math Support  
+|HMem.h | Memory Management Module  |
+|HModel.h | HMM Model Definition Data Type  |
+|HNet.h | Network and Lattice Functions  |
+|HParm.h | Speech Parameter Input/Output   |
+|HRec.h | Viterbi Recognition Engine Library   |
+|HShell.h | Interface to the Shell  |
+|HSigP.h | Signal Processing Routines  |
+|HTrain.h | HMM Training Support Routines  |
+|HUtil.h | HMM utility routines  |
+|HVQ.h | Vector Quantisation  |
+|HWave.h | Speech Waveform File Input|
+
+
+
 --- 
 #### [FUNCTION LIST](#HTK)<a name="HTK_list"></a>
 ---
