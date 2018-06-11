@@ -455,7 +455,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #### [FUNCTION LIST](#HTK)<a name="HTK_list"></a>
 
 + [HMath](#HMath)
-	1. Vector Oriented Routines  
+	1. **Vector Oriented Routines**
 	ZeroShortVec	ZeroIntVec	ZeroVector
 	ZeroDVector
 	CopyShortVec
@@ -472,7 +472,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	ShowIntVec
 	ShowVector
 	ShowDVector
-	2. Matrix Oriented Routines   
+	2. **Matrix Oriented Routines**   
 	ZeroMatrix
 	ZeroDMatrix
 	ZeroTriMat
@@ -489,7 +489,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	ShowMatrix
 	ShowDMatrix
 	ShowTriMat
-	3. Linear Algebra Routines   
+	3. **Linear Algebra Routines**   
 	CovInvert
 	CovDet
 	MatDet(
@@ -498,38 +498,38 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	DMatInvert
 	DMatCofact
 	MatCofact
-	4. Singular Value Decomposition Routines   
+	4. **Singular Value Decomposition Routines**   
 	SVD
 	InvSVD
-	5. Log Arithmetic Routines   
+	5. **Log Arithmetic Routines**   
 	LAdd
 	LSub
 	L2F
-	6. Random Number Routines   
+	6. **Random Number Routines**   
 	RandInit
 	RandomValue
 	GaussDeviate
 
 
 + [HSigP](#HSigP)
-  1. Speech Signal Processing Operations  
+  1. S**peech Signal Processing Operations**  
      ZeroMean
      Ham
      PreEmphasise
-  2. Linear Prediction Coding Operations  
+  2. **Linear Prediction Coding Operations**  
      Wave2LPC
      LPC2RefC
      RefC2LPC
      LPC2Cepstrum
      Cepstrum2LPC
-  3. FFT Based Operations
+  3. **FFT Based Operations**
      FVec2Spectrum
      FFT
      Realft
      SpecModulus
      SpecLogModulus
      SpecPhase
-  4. MFCC Related Operations  
+  4. **FCC Related Operations**  
      Mel
      InitFBank
      Wave2FBank
@@ -537,11 +537,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
      FBank2MelSpec
      MelSpec2FBank
      FBank2C0
-  5.  PLP Related Operations  
+  5.  **PLP Related Operations**  
      InitPLP
      FBank2ASpec
      ASpec2LPCep
-  6.  Feature Level Operations   
+  6.  **Feature Level Operations**   
      WeightCepstrum
      UnWeightCepstrum
      FZeroMean
