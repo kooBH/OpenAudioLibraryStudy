@@ -1,4 +1,4 @@
-#include "cblas.h"
+#include "mkl.h"
 #include <stdio.h>
 
 int main()
@@ -110,7 +110,7 @@ cblas_dgemm(CblasRowMajor,CblasTrans,CblasNoTrans,m2,n2,k2,alpha2,a2,lda2,b2,ldb
 	}
 	printf("\n");
 
-/* ex3
+/* ex3 = ex4
   *
   *a3 | 1-1i  2-2i  3-3i |
   *
@@ -118,45 +118,64 @@ cblas_dgemm(CblasRowMajor,CblasTrans,CblasNoTrans,m2,n2,k2,alpha2,a2,lda2,b2,ldb
   *	  |  2+2i   5+5i |
   *   |  3+3i   6+6i |
   *
+  *c3 | 28+28i  64+64i| 
+  *
+  *
   * */
 
 	typedef struct fx{float r;float i;}fx;
 
 
 
-	fx a3[3]={1,-0,2,-0,3,-0};
-	fx b3[6]={1,0,4,0,2,0,5,0,3,0,6,0};
+	fx a3[3]={1,-1,2,-2,3,-3};
+	fx b3[6]={1,1,2,2,3,3,4,4,5,5,6,6};
 	fx c3[2]={0,0,0,0};
 	
 	int m3 = 1;
 	int k3 = 3;
 	int n3 = 2;
 
-	fx alpha3 ={1,0};
+	fx alpha3 ={1,1};
 	fx beta3 = {0,0};
 
 	int lda3=1;
 	int ldb3=3;
 	int ldc3=1;
+/*
+ *
+ * 
+ *a3 | 1-1i |  ->CblasTransA | 1-1i  2-2i  3-3i |
+ *   | 2-2i |
+ *   | 3-3i |
+ *
+ *b3 |1+1i 2+2i 3+3i|    ->CblasTransB |  1+1i   4+4i |
+ * 	 |4+4i 5+5i 6+6i|                  |  2+2i   5+5i |
+ *                                     |  3+3i   6+6i |
+ *
+ *c3 | 28+28i  64+64i| 
+ **
+ *
+ *
+ * */
 cblas_cgemm(CblasColMajor,CblasNoTrans,CblasNoTrans,m3,n3,k3,&alpha3,a3,lda3,b3,ldb3,&beta3,c3,ldc3);
 
 	for(i=0;i< m3; i++)
 	{
 		for(j=0;j<n3; j++)
-			printf("%4.2f %+4.2fi ",c3[i*n3 + j].r,c3[i*n3].i);
+			printf("%4.2f %+4.2fi ",c3[i*n3 + j].r,c3[i*n3+j].i);
 		printf("\n");
 	}
 	printf("\n");
 	
-	double a4[6] = {1,0,2,-0,3,-0};
-	double b4[12] = {1,0,2,0,3,0,4,0,5,0,6,0};
+	double a4[6] = {1,-1,2,-2,3,-3};
+	double b4[12] = {1,1,4,4,2,2,5,5,3,3,6,6};
 	double c4[4] = {0,0,0,0};
 
 	int m4 = 1;
 	int k4 = 3;
 	int n4 = 2;
 
-	double alpha4[2] = {1,0};
+	double alpha4[2] = {1,1};
 	double beta4[2] = {0,0};
 
 	int lda4 = 3;
