@@ -1,11 +1,11 @@
 
 
 + [summary](#summary)  
-+ [CIGLET](#CIGELT)
++ [CIGLET](#CIGLET)
 
 ---  
 
-##SUMMARY<a name = "summary"></a>  
+## SUMMARY<a name = "summary"></a>  
  
 ### [Ciglet](https://github.com/Sleepwalking/ciglet)
 + lightweight C library for digital signal processing
@@ -37,7 +37,11 @@
 ---  
 
 CIGLET<a name = "CIGLET"></a>
-
++ [funtion list](#ciglet_list)
++ [function prototype](#ciglet_proto)
++ [license](#ciglet_license)
+---
+#### FUNCTION LIST<a name="ciglet_list"></a>
 
 Scalar operations
 
@@ -72,7 +76,7 @@ wavread, wavwrite
 General DSP routines
 
     windows: boxcar, hanning, hamming, mltsine, blackman_harris, nuttall98, blackman
-    Fourier transform: fft, ifft, czt, iczt, idft, dct, fftshift
+    Fourier transform: fft, ifft, czt, iczt, idft, dct, fftshift 
     phase manipulation: wrap, unwrap, phase_diff
     complex number conversion: abscplx, argcplx, polar2real, polar2imag, complete_symm, complete_asymm
     cepstral analysis: rceps, irceps, minphase
@@ -94,6 +98,44 @@ Audio/speech processing routines
 Plotting utilities (Gnuplot interface, unavailable on Windows)
 
 plotopen, plot, imagesc, plotclose
+
+---
+
+#### [function prototype](#CIGLET)<a name = "ciglet_proto"></a>
+
+-DFP_TPYE=float
+
+```c++
+void cig_fft(FP_TYPE* xr, FP_TYPE* xi, FP_TYPE* yr, FP_TYPE* yi,
+  int n, FP_TYPE* buffer, FP_TYPE mode);
+
+static inline void fft(FP_TYPE* xr, FP_TYPE* xi, FP_TYPE* yr, FP_TYPE* yi,
+  int n, FP_TYPE* buffer) {
+  cig_fft(xr, xi, yr, yi, n, buffer, -1.0);
+}
+
+static inline void ifft(FP_TYPE* xr, FP_TYPE* xi, FP_TYPE* yr, FP_TYPE* yi,
+  int n, FP_TYPE* buffer) {
+  cig_fft(xr, xi, yr, yi, n, buffer, 1.0);
+}
+```
+
+---
+
+
+```c++
+FP_TYPE* cig_xcorr(FP_TYPE* x, FP_TYPE* y, int nx, int maxlag);
+
+static inline FP_TYPE* xcorr(FP_TYPE* x, FP_TYPE* y, int nx) {
+  return cig_xcorr(x, y, nx, nx);
+}
+
+```
+
+
+---
+
+#### [LICENSE](#CIGLET)<a name = "ciglet_license"></a>
 
 <pre>
 Copyright (c) 2016-2017, Kanru Hua
