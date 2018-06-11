@@ -3,7 +3,6 @@
 
 1. ### [SUMMARY](#summary)  
 2. ### [CIGLET](./CIGLET.md#CIGLET)
-3. ### [HTK](./HTK.md#HTK)
 4. ### [CMUSphinx](./CMUSphinx.md#CMUSphinx)
 ---  
 
