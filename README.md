@@ -26,3 +26,6 @@ Windows : Windows 7 64bit
 ## 5. [OpenMP](./manuals/OpenMP.md)
 + [OpenMP](./manuals/OpenMP.md#OpenMP)
 + [MKL](./manuals/OpenMP.md#MKL)
+
+## 6. [Open Source Audio Library](./manuals/openAudioLibs.md)
+
