@@ -705,7 +705,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		CloseWaveOutput  
 		WaveFormat  
 		Format2Str  
-		FileFormat Str2Format  
+		FileFormat Str2Format 			
 **HTK Header Routines**   
 		Boolean ReadHTKHeader  
 		WriteHTKHeader  
