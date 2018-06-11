@@ -590,53 +590,52 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	GaussDeviate  
 
 + <a name = "HTK_list_HParm">[HParm](#HTK_list)</a> | [Proto](#HParm)
-
-1. **Initialisation**  
-	InitParm  
-2. **Channel functions** 
-	SetChannel   
-	ResetChannelSession  
-	SetNewConfig    
-	ResetCurCepMean    
-3. **Buffer Input Routines** 
-	OpenBuffer   
-	BufferStatus   
-	ObsInBuffer   
-	StartBuffer   
-	StopBuffer   
-	CloseBuffer   
-	ReadAsBuffer   
-	ReadAsTable   
-GetBufferInfo   
-4. **External Data Source Handling**
-	CreateSrcExt  
-	OpenExtBuffer  
-5. **New Buffer Creation Routines**
-	EmptyBuffer    
-	SaveBuffer  
-	AddToBuffer  
-6. **Observation Handling Routines** 
-	MakeObservation  
-	ExplainObservation  
-	PrintObservation  
-	ZeroStreamWidths  
-	SetStreamWidths  
-	SetParmHMMSet    
-7. **Parameter Kind Conversions**
-	ParmKind2Str  
-	Str2ParmKind  
-	BaseParmKind  
-	HasEnergy  
-	HasDelta  
-	HasNulle   
-	HasAccs   
-	HasThird   
-	HasCompx   
-	HasCrcc   
-	HasZerom   
-	HasZeroc   
-	HasVQ   
-	ValidConversion   
+	1. **Initialisation**  
+		InitParm  
+	2. **Channel functions**   
+		SetChannel   
+		ResetChannelSession  
+		SetNewConfig    
+		ResetCurCepMean    
+	3. **Buffer Input Routines**   
+		OpenBuffer   
+		BufferStatus   
+		ObsInBuffer   
+		StartBuffer   
+		StopBuffer   
+		CloseBuffer   
+		ReadAsBuffer   
+		ReadAsTable   
+		GetBufferInfo   
+	4. **External Data Source Handling**  
+		CreateSrcExt  
+		OpenExtBuffer  
+	5. **New Buffer Creation Routines**  
+		EmptyBuffer    
+		SaveBuffer  
+		AddToBuffer  
+	6. **Observation Handling Routines**   
+		MakeObservation  
+		ExplainObservation  
+		PrintObservation  
+		ZeroStreamWidths  
+		SetStreamWidths  
+		SetParmHMMSet    
+	7. **Parameter Kind Conversions**  
+		ParmKind2Str  
+		Str2ParmKind  
+		BaseParmKind  
+		HasEnergy  
+		HasDelta  
+		HasNulle   
+		HasAccs   
+		HasThird   
+		HasCompx   
+		HasCrcc   
+		HasZerom   
+		HasZeroc   
+		HasVQ   
+		ValidConversion   
 
 + <a name="HTK_list_HSigP">[HSigP](#HTK_list)</a> | [Proto](#HSigP)
   1. **Speech Signal Processing Operations**  
