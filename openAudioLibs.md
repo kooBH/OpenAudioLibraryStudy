@@ -453,9 +453,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 --- 
 #### [FUNCTION LIST](#HTK)<a name="HTK_list"></a>
+1. [HAudio](#HTK_list_HAudio)
+2. [HMath](#HTK_list_HMath)
+3. [HSigP](#HTK_list_HSigP)
 
-+ [HAudio](#HAudio)  
-	OpenAudioInput   
+---
++ <a name="HTK_list_HAudio">[HAudio](#HTK_list)</a> | [Proto](#HAudio)  
+	OpenAudioInput    
 	AttachReplayBuf  
 	StartAudioInput  
 	StopAudioInput  
@@ -478,109 +482,138 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	AudioDevOutput  
 	SamplesToPlay  
  
-+ [HMath](#HMath)
++ <a name= "HTK_list_HMath">[HMath](#HTK_list)</a> | [Proto](#HMath)
 	1. **Vector Oriented Routines**  
-	ZeroShortVec	ZeroIntVec	ZeroVector
-	ZeroDVector
-	CopyShortVec
-	CopyIntVec
-	CopyVector
-	CopyDVector
-	ReadShortVec
-	ReadIntVec
-	ReadVector
-	WriteShortVec
-	WriteIntVec
-	WriteVector
-	ShowShortVec
-	ShowIntVec
-	ShowVector
-	ShowDVector
+	ZeroShortVec	
+	ZeroIntVec	
+	ZeroVector  
+	ZeroDVector  
+	CopyShortVec  
+	CopyIntVec  
+	CopyVector  
+	CopyDVector  
+	ReadShortVec  
+	ReadIntVec  
+	ReadVector  
+	WriteShortVec 
+	WriteIntVec  
+	WriteVector  
+	ShowShortVec  
+	ShowIntVec  
+	ShowVector  
+	ShowDVector  
 	2. **Matrix Oriented Routines**   
-	ZeroMatrix
-	ZeroDMatrix
-	ZeroTriMat
-	CopyMatrix
-	CopyDMatrix
-	CopyTriMat 
-	Mat2DMat
-	DMat2Mat
-	Mat2Tri 
+	ZeroMatrix  
+	ZeroDMatrix 
+	ZeroTriMat  
+	CopyMatrix  
+	CopyDMatrix  
+	CopyTriMat    
+	Mat2DMat  
+	DMat2Mat  
+	Mat2Tri     
 	Tri2Mat 
-	ReadTriMat   
-	WriteMatrix
-	WriteTriMat
-	ShowMatrix
-	ShowDMatrix
-	ShowTriMat
+	ReadTriMat      
+	WriteMatrix  
+	WriteTriMat  
+	ShowMatrix  
+	ShowDMatrix  
+	ShowTriMat  
 	3. **Linear Algebra Routines**   
-	CovInvert
-	CovDet
-	MatDet
-	DMatDet
-	MatInvert
-	DMatInvert
-	DMatCofact
-	MatCofact
+	CovInvert  
+	CovDet  
+	MatDet  
+	DMatDet  
+	MatInvert  
+	DMatInvert  
+	DMatCofact  
+	MatCofact  
 	4. **Singular Value Decomposition Routines**   
-	SVD
-	InvSVD
+	SVD  
+	InvSVD  
 	5. **Log Arithmetic Routines**   
-	LAdd
-	LSub
-	L2F
+	LAdd  
+	LSub  
+	L2F  
 	6. **Random Number Routines**   
-	RandInit
-	RandomValue
-	GaussDeviate
+	RandInit  
+	RandomValue  
+	GaussDeviate  
 
 
-+ [HSigP](#HSigP)
++ <a name="HTK_list_HSigP">[HSigP](#HTK_list)</a> | [Proto](#HSigP)
   1. S**peech Signal Processing Operations**  
-     ZeroMean
-     Ham
-     PreEmphasise
+     ZeroMean  
+     Ham  
+     PreEmphasise  
   2. **Linear Prediction Coding Operations**  
-     Wave2LPC
-     LPC2RefC
-     RefC2LPC
-     LPC2Cepstrum
-     Cepstrum2LPC
+     Wave2LPC  
+     LPC2RefC  
+     RefC2LPC     
+     LPC2Cepstrum  
+     Cepstrum2LPC  
   3. **FFT Based Operations**  
-     FVec2Spectrum
-     FFT
-     Realft
-     SpecModulus
-     SpecLogModulus
-     SpecPhase
+     FVec2Spectrum  
+     FFT  
+     Realft  
+     SpecModulus  
+     SpecLogModulus  
+     SpecPhase  
   4. **FCC Related Operations**  
-     Mel
-     InitFBank
-     Wave2FBank
-     FBank2MFCC
-     FBank2MelSpec
-     MelSpec2FBank
-     FBank2C0
+     Mel  
+     InitFBank  
+     Wave2FBank  
+     FBank2MFCC  
+     FBank2MelSpec  
+     MelSpec2FBank  
+     FBank2C0  
   5.  **PLP Related Operations**  
-     InitPLP
-     FBank2ASpec
-     ASpec2LPCep
+     InitPLP  
+     FBank2ASpec  
+     ASpec2LPCep  
   6.  **Feature Level Operations**   
-     WeightCepstrum
-     UnWeightCepstrum
-     FZeroMean
-     AddRegression
-     AddHeadRegress
-     AddTailRegress
-     NormaliseLogEnergy
+     WeightCepstrum  
+     UnWeightCepstrum  
+     FZeroMean  
+     AddRegression  
+     AddHeadRegress  
+     AddTailRegress  
+     NormaliseLogEnergy  
 
++ <a name = "HTK_list_HWave">[HWave](#HTK_list)</a> | [Proto](#HWave)  
+		InitWave  
+		OpenWaveInput  
+		CloseWaveInput  
+		ZeroMeanWave  
+		FramesInWave  
+		SampsInWaveFrame  
+		GetWave  
+		GetWaveDirect  
+		OpenWaveOutput  
+		PutWaveSample  
+		CloseWaveOutput  
+		WaveFormat  
+		Format2Str  
+		FileFormat Str2Format  
+**HTK Header Routines**   
+		Boolean ReadHTKHeader  
+		WriteHTKHeader  
+		StoreESIGFieldList  
+		RetrieveESIGFieldList  
+		ReadEsignalHeader  
 
 
 
 ---
 #### [FUNCTION PROTOTYPE](#HTK)<a name="HTK_proto"></a>
+1. [HAudio.h](#HAudio)  
+2. [HMath.h](#HMath)  
+3. [HSigP.h](#HSigP)  
+4. [HWave.h](#HWave)
 
-+ [HAudio.h](#HTK_list)<a name="HAudio"></a>
+---
+
++ ### [HAudio.h](#HTK_proto)<a name="HAudio"></a>
 
 ``` C++
 
@@ -737,7 +770,7 @@ int SamplesToPlay(AudioOut a);
 ```
 
 
-+ [HMath.h](#HTK_list)<a name ="HMath"></a>
++ ### [HMath.h](#HTK_proto)<a name ="HMath"></a>
 
 ```C++
 
@@ -956,7 +989,7 @@ float GaussDeviate(float mu, float sigma);
 ```
 
 
-+ [HSigP.h](#HTK_list)<a name="HSigP"></a> 
++ ### [HSigP.h](#HTK_proto)<a name="HSigP"></a> 
 
 ```C++
 /* !HVER!HSigP:   3.4.1 [CUED 12/03/09] */
@@ -1188,6 +1221,148 @@ void NormaliseLogEnergy(float *data, int n, int step, float silFloor, float esca
    in dB.  Escale is used to scale the normalised log energy.
 */
 
+```
++ ### [HWave.h](#HTK_proto)<a name="HWave"></a>
+
+```C++
+typedef struct FieldSpec **HFieldList;
+
+typedef enum {
+        NOHEAD,            /* Headerless File */
+        HAUDIO,            /* Direct Audio Input */
+        HTK,               /* used for both wave and parm files */
+        TIMIT,             /* Prototype TIMIT database */
+        NIST,              /* NIST databases eg RM1,TIMIT */
+        SCRIBE,            /* UK Scribe databases */
+        AIFF,              /* Apple Audio Interchange format */
+        SDES1,             /* Sound Designer I format */
+        SUNAU8,            /* Sun 8 bit MuLaw .au format */
+        OGI,               /* Oregon Institute format (similar to TIMIT) */
+        ESPS,              /* used for both wave and parm files */
+	ESIG,              /* used for both wave and parm files */
+	WAV,               /* Microsoft WAVE format */
+        UNUSED,
+        ALIEN,             /* Unknown */
+        UNDEFF
+} FileFormat;
+
+typedef struct _Wave *Wave;  /* Abstract type representing waveform file */
+
+void InitWave(void);
+/*
+   Initialise module
+*/
+
+Wave OpenWaveInput(MemHeap *x, char *fname, FileFormat fmt, HTime winDur, 
+                   HTime frPeriod, HTime *sampPeriod);
+/*
+   Open the named input file with the given format and return a
+   Wave object. If fmt==UNDEFF then the value of the configuration
+   parameter SOURCEFORMAT is used.  If this is not set, then the format
+   HTK is assumed. Samples are returned in frames of duration winDur.  The 
+   period between successive frames is given by frPeriod.  If the value of 
+   sampPeriod is not 0.0, then it overrides the sample period specified in
+   the file, otherwise the actual value is returned. Returns NULL on error.
+*/
+
+void CloseWaveInput(Wave w);
+/* 
+   Terminate Wave input and free any resources associated with w
+*/
+
+void ZeroMeanWave(Wave w);
+/*
+   Ensure that mean of wave w is zero
+*/
+
+int FramesInWave(Wave w);
+/*
+   Return number of whole frames which are currently
+   available in the given Wave
+*/
+
+int SampsInWaveFrame(Wave w);
+/*
+   Return number of samples in each frame of the given Wave
+*/
+
+void GetWave(Wave w, int nFrames, float *buf);
+/* 
+   Get next nFrames from Wave input buffer and store sequentially in
+   buf as floats.  If a frame overlap has been set then samples will be
+   duplicated in buf.  It is a fatal error to request more frames
+   than exist in the Wave (as determined by FramesInWave.
+*/
+
+short *GetWaveDirect(Wave w, long *nSamples);
+/* 
+   Returns a pointer to the waveform stored in w.
+*/
+
+Wave OpenWaveOutput(MemHeap *x, HTime *sampPeriod, long bufSize);
+/*
+   Initialise a Wave object to store waveform data at the given 
+   sample period, using buffer of bufSize shorts.  
+*/
+
+void PutWaveSample(Wave w, long nSamples, short *buf);
+/*
+   Append given nSamples in buf to wave w.
+*/
+
+ReturnStatus CloseWaveOutput(Wave w, FileFormat fmt, char *fname);
+/* 
+   Output wave w to file fname in given fmt and free any 
+   associated resources.  If fmt==UNDEFF then value of
+   configuration variable TARGETFORMAT is used, if any,
+   otherwise the HTK format is used. If an error then 
+   returns FAIL and does not free any memory. 
+*/
+
+FileFormat WaveFormat(Wave w);
+/* 
+   Return format of given wave
+*/
+
+char *Format2Str(FileFormat format);
+FileFormat Str2Format(char *fmt);
+/*
+   Convert between FileFormat enum type & string.
+*/
+
+/* --------------------- HTK Header Routines --------------------- */
+
+Boolean ReadHTKHeader(FILE *f,long *nSamp,long *sampP,short *sampS,
+                      short *kind, Boolean *bSwap);
+/* 
+   Get header info from HTK file f, return false if apparently not
+   a HTK file.  If byte-swapped bswap returns true.  NB only
+   the user can specify required byte order via NATREADORDER config var 
+   since it is not defined for HTK files)
+*/
+
+void WriteHTKHeader(FILE *f, long nSamp, long sampP, short sampS, 
+		    short kind, Boolean *bSwap);
+/* 
+   Write header info to HTK file f.  
+   Sets bSwap to indicate whether header was byte swapped before writing.
+*/
+
+void StoreESIGFieldList(HFieldList fList);
+/*
+   Store the field list of an ESIG input file 
+*/
+void RetrieveESIGFieldList(HFieldList *fList);
+/*
+   Retrieve the field list of an ESIG input file 
+*/
+
+Boolean ReadEsignalHeader(FILE *f, long *nSamp, long *sampP, short *sampS,
+ 			  short *kind, Boolean *bSwap, long *hdrS,
+ 			  Boolean isPipe);
+/*
+    Get header from Esignal file f; return FALSE in case of failure.
+*/
 
 ```
 
