@@ -4,6 +4,7 @@
 1. ### [SUMMARY](#summary)  
 2. ### [CIGLET](#CIGLET)
 3. ### [HTK](#HTK)
+4. ### [CMUSphinx](#CMUSphinx)
 ---  
 
 ## SUMMARY<a name = "summary"></a>  
@@ -11,10 +12,12 @@
 ### [Ciglet](https://github.com/Sleepwalking/ciglet)
 + lightweight C library for digital signal processing
 + C-written sIGnal codeLETs
++ linux/windows
 + Matlab  to C conversion of frequently used ones 
 
 ### [Hidden Markov Model Toolkit (HTK)](http://htk.eng.cam.ac.uk/)
 + C source form  
++ linux/windows
 + a set of library modules and tools  
 + http://htk.eng.cam.ac.uk/prot-docs/htkbook.pdf  
 
@@ -22,6 +25,9 @@
 ### [CMUSphinx](https://cmusphinx.github.io/)
 + Pocketsphinx — lightweight recognizer library written in C.
 + Sphinxbase — support library required by Pocketsphinx
++ Sphinx4 — adjustable, modifiable recognizer written in Java
++ Sphinxtrain — acoustic model training tools
++ linux/windows
 
 ### [kaldi](https://github.com/kaldi-asr/kaldi)
 + C++
@@ -419,7 +425,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ---
 
 ### [Hidden Markov Model Toolkit (HTK)](#TOP)<a name="HTK"></a>
-+ [funtion list](#HTK_list)
++ [function list](#HTK_list)
 + [function prototype](#HTK_proto)
 + [license](#HTK_license)
 
@@ -676,7 +682,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
      AddTailRegress  
      NormaliseLogEnergy  
 
-
 + <a name = "HTK_list_HVQ">[HVQ](#HTK_list)</a> | [Proto](#HVQ)  
 		InitVQ  
 		CreateVQTab  
@@ -686,10 +691,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		PrintVQTab  
 		VQNodeScore  
 		GetVQ  
-
-
-
-
 
 + <a name = "HTK_list_HWave">[HWave](#HTK_list)</a> | [Proto](#HWave)  
 		InitWave  
@@ -712,8 +713,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		StoreESIGFieldList  
 		RetrieveESIGFieldList  
 		ReadEsignalHeader  
-
-
 
 ---
 #### [FUNCTION PROTOTYPE](#HTK)<a name="HTK_proto"></a>
@@ -2357,4 +2356,65 @@ Boolean ReadEsignalHeader(FILE *f, long *nSamp, long *sampP, short *sampS,
    in general be additional tools or library modules which will not fall under this 
    HTK License Agreement.
 
+</pre>
+
+---
+
+### [CMUSphinx](#TOP)<a name = "CMUSphinx"></a>  
++ [function list](#CMUSphinx_list)  
++ [function prototype](#CMUSphinx_proto)  
++ [license](#CMUSphinx_license)  
+
+Recent CMUSphinx code has noise cancellation featur. In sphinxbase/pocketsphinx/sphinxtrain it’s ‘remove_noise’ option. In sphinx4 it’s Denoise frontend component. So if you are using latest version you should be robust to noise in some degree already. Most modern models are trained with noise cancellation already, if you have your own model you need to retrain it.
+
+
+
+#### [function](#CMUSphinx)<a name="CMUSphinx_list"></a>  
+
+#### [function prototype](#CMUSphinx)<a name="CMUSphinx_proto"></a>   
+
+#### [LICENSE](#CMUSphinx)<a name="CMUSphinx_license"></a>  
+
+https://cmusphinx.github.io/wiki/about/  
+"**BSD-like** license which allows commercial distribution"
+=> 제한 없음  
+  
+라고는 하지만  
+sphinxbase/src/lib/sphinxbase/fe/fe_noise.h 왈  
+
+<pre>  
+/* -*- c-basic-offset: 4; indent-tabs-mode: nil -*- */  
+/* ====================================================================
+ * Copyright (c) 2013 Carnegie Mellon University.  All rights 
+ * reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer. 
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * This work was supported in part by funding from the Defense Advanced 
+ * Research Projects Agency and the National Science Foundation of the 
+ * United States of America, and the CMU Sphinx Speech Consortium.
+ *
+ * THIS SOFTWARE IS PROVIDED BY CARNEGIE MELLON UNIVERSITY ``AS IS'' AND 
+ * ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL CARNEGIE MELLON UNIVERSITY
+ * NOR ITS EMPLOYEES BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
 </pre>
