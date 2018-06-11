@@ -453,10 +453,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 --- 
 #### [FUNCTION LIST](#HTK)<a name="HTK_list"></a>
-1. [HAudio](#HTK_list_HAudio)
-2. [HMath](#HTK_list_HMath)
-3. [HSigP](#HTK_list_HSigP)
-4. [HWave](#HTK_list_HWave)
+1. [HAudio](#HTK_list_HAudio)  
+2. [HMath](#HTK_list_HMath)  
+3. [HSigP](#HTK_list_HSigP)  
+4. [HVQ](#HTK_list_HVQ)  
+5. [HWave](#HTK_list_HWave)  
 
 ---
 + <a name="HTK_list_HAudio">[HAudio](#HTK_list)</a> | [Proto](#HAudio)  
@@ -581,6 +582,21 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
      AddTailRegress  
      NormaliseLogEnergy  
 
+
++ <a name = "HTK_list_HVQ">[HVQ](#HTK_list)</a> | [Proto](#HVQ)  
+InitVQ  
+CreateVQTab  
+CreateVQNode  
+LoadVQTab  
+StoreVQTab  
+PrintVQTab  
+VQNodeScore  
+GetVQ  
+
+
+
+
+
 + <a name = "HTK_list_HWave">[HWave](#HTK_list)</a> | [Proto](#HWave)  
 		InitWave  
 		OpenWaveInput  
@@ -609,8 +625,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #### [FUNCTION PROTOTYPE](#HTK)<a name="HTK_proto"></a>
 1. [HAudio.h](#HAudio)  
 2. [HMath.h](#HMath)  
-3. [HSigP.h](#HSigP)  
-4. [HWave.h](#HWave)
+3. [HSigP.h](#HSigP)
+4. [HVQ.h](#HVQ)
+5. [HWave.h](#HWave)
 
 ---
 
@@ -1223,6 +1240,124 @@ void NormaliseLogEnergy(float *data, int n, int step, float silFloor, float esca
 */
 
 ```
++ ### [HVQ.h](#HTK_proto)<a name="HVQ"></a>
+
+```C++
+/*
+   This module provides a datatype VQTable which is used to represent
+   linear (flat) and binary tree VQ codebooks.  Externally, a VQ Table
+   definition is stored in a file consisting of a header followed by a
+   sequence of entries representing each tree node.  One tree is 
+   built for each stream:
+   
+   header:
+      magic type covkind numNodes numS sw1 sw2 ...
+   node_entry:
+      stream vqidx nodeId leftId rightId mean-vector [invcov matrix|vector]
+      ...
+   where 
+      magic  = usually the original parmkind
+      type   = 0 linTree, 1 binTree
+      covkind   = 5 euclid, 1 inv diag covar, 2 inv full covar
+      numNodes = total number of following node entries
+      numS   = number of streams
+      sw1,sw2 = width of each stream
+      stream = stream number for this entry
+      vqidx  = the vq code for this node
+      nodeId,leftId,rightId = arbitrary but unique integers identifying
+               each node in each tree.  Root id is always 1.
+*/
+
+#ifndef _HVQ_H_
+#define _HVQ_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+typedef enum {
+   linTree,    /* linear flat codebook (right branching tree) */
+   binTree     /* binary tree - every node has 0 or 2 offspring */
+} TreeType;
+
+typedef struct _VQNodeRec *VQNode;
+typedef struct _VQNodeRec{
+   short vqidx;         /* vq index of this node */
+   Vector mean;         /* centre of this node */
+   Covariance cov;      /* null or inverse variance or covariance */
+   float gconst;        /* const part of log prob for INVDIAGC & FULLC */
+   void * aux;          /* available to 'user' */
+   short nid,lid,rid;   /* used for mapping between mem and ext def */
+   VQNode left,right;   /* offspring, only right is used in linTree */
+}VQNodeRec;
+
+typedef struct _VQTabRec *VQTable;
+typedef struct _VQTabRec {
+   char * tabFN;        /* name of this VQ table */
+   short magic;         /* magic num, usually the ParmKind */
+   TreeType type;       /* linear or binary */
+   CovKind ckind;       /* kind of covariance used, if any*/
+   short swidth[SMAX];  /* sw[0]=num streams, sw[i]=width of stream i */
+   short numNodes;      /* total num nodes in all sub trees */
+   VQNode tree[SMAX];   /* 1 tree per stream */
+   VQTable next;        /* used internally for housekeeping */
+}VQTabRec;
+
+void InitVQ(void);
+/*
+   Initialise module
+*/
+
+VQTable CreateVQTab(char *tabFN, short magic, TreeType type,
+                    CovKind ck, short *swidth);
+/*
+   Create an empty VQTable with given attributes.
+*/
+
+VQNode CreateVQNode(short vqidx, short nid, short lid, short rid, 
+                    Vector mean, CovKind ck, Covariance cov);
+/*
+   Create a VQ node with given values
+*/
+
+VQTable LoadVQTab(char *tabFN, short magic);
+/*
+   Create a VQTable in memory and load the entries stored in the
+   given file.  The value of magic must match the corresponding
+   entry in the definition file unless it is zero in which case
+   it is ignored.
+*/
+
+void StoreVQTab(VQTable vqTab, char *tabFN);
+/*
+   Store the given VQTable in the specified definition file tabFN.
+   If tabFN is NULL then the existing tabFN stored in the table is
+   used.
+*/
+
+void PrintVQTab(VQTable vqTab);
+/*
+   Print the given VQTable.
+*/
+
+float VQNodeScore(VQNode n, Vector v, int size, CovKind ck);
+/* 
+   compute score between vector v and VQ node n, smallest score is
+   best.  If ck is NULLC then a euclidean distance is used otherwise
+   -ve log prob is used.
+*/
+
+void GetVQ(VQTable vqTab, int numS, Vector *fv, short *vq);
+/*
+   fv is an array 1..numS of parameter vectors, each is 
+   quantised using vqTab and the resulting indices are stored
+   in vq[1..numS].
+*/
+
+
+```
+
+
 + ### [HWave.h](#HTK_proto)<a name="HWave"></a>
 
 ```C++
