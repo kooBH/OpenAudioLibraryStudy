@@ -2367,6 +2367,8 @@ Boolean ReadEsignalHeader(FILE *f, long *nSamp, long *sampP, short *sampS,
 
 Recent CMUSphinx code has noise cancellation featur. In sphinxbase/pocketsphinx/sphinxtrain it’s ‘remove_noise’ option. In sphinx4 it’s Denoise frontend component. So if you are using latest version you should be robust to noise in some degree already. Most modern models are trained with noise cancellation already, if you have your own model you need to retrain it.
 
+Requirement
+ gcc, automake, autoconf, libtool, bison, swig (at least version 2.0), the Python development package and the pulseaudio development package.
 
 
 #### [function](#CMUSphinx)<a name="CMUSphinx_list"></a>  
