@@ -456,6 +456,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 1. [HAudio](#HTK_list_HAudio)
 2. [HMath](#HTK_list_HMath)
 3. [HSigP](#HTK_list_HSigP)
+4. [HWave](#HTK_list_HWave)
 
 ---
 + <a name="HTK_list_HAudio">[HAudio](#HTK_list)</a> | [Proto](#HAudio)  
