@@ -4,7 +4,8 @@
 + [license](#CMUSphinx_license)
 ---
 
-https://cmusphinx.github.io/doc/pocketsphinx/index.html
+#### [SphinxBase Documnet]( https://cmusphinx.github.io/doc/sphinxbase/)  
+#### [PoketSphinx Document]( https://cmusphinx.github.io/doc/pocketsphinx/index.html)
 
  ### Unix System
 + Dependency :  
@@ -95,7 +96,6 @@ ngram_raw.h
 	+ [fe.h](#fe)
 * sphinxbase/src/
 	+ [fe_internal.h](#fe_internal)
-
 
 + sphinxbase/include/sphinxbase/clapack_lite.h
   sgemm_,sgemv_,ssymm_... parameter 도 gemm parm
