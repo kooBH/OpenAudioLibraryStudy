@@ -86,7 +86,9 @@ w'(F) = F
 w'(Nyq) = Nyq
 
 
-+ ### sphinxbase/src/libsphinxbase/lm
++ ### sphinxbase/src/libsphinxbase/lm  
+'lm' for Langauge Model  
+
 HEADER|Discription
 ---|---
 jsgf_internal.h|
@@ -108,6 +110,10 @@ ngram_raw.h
 * ### sphinxbase/src/libsphinxbase/fe/
 	+ [fe_internal.h](#fe_internal)
 	+ [fe_noise.h](#fe_noise)
+	+ [fe_warp_affine.h](#fe_warp_affine) 
+	+ [fe_warp.h](#fe_Warp)
+	+ [fe_warp_inverse_linear.h](#fe_warp_inverse_linear)
+	+ [fe_warp_piecewise_linear.h](#fe_warp_piecewise_linear)
 
 + sphinxbase/include/sphinxbase/clapack_lite.h
   sgemm_,sgemv_,ssymm_... parameter 도 gemm parm
@@ -195,6 +201,46 @@ fe_free_noisestats
 fe_track_snr  
 fe_vad_hangover
 
+### sphinxbase/src/libsphinxbase/fe/[fe_warp_affine.h](#CMUSphinx)<a name="fe_warp_affine"></a>  
+fe_warp_affine_doc  
+fe_warp_affine_id  
+fe_warp_affine_n_param  
+fe_warp_affine_set_parameters  
+fe_warp_affine_warped_to_unwarped  
+fe_warp_affine_unwarped_to_warped  
+fe_warp_affine_print  
+
+
+### sphinxbase/src/libsphinxbase/fe/[fe_warp.h](#CMUSphinx)<a name="fe_warp"></a>  
+fe_warp_set  
+fe_warp_id  
+fe_warp_doc  
+fe_warp_set_parameters  
+fe_warp_n_param  
+fe_warp_warped_to_unwarped  
+fe_warp_unwarped_to_warped  
+fe_warp_print
+
+### sphinxbase/src/libsphinxbase/fe/[fe_warp_inverse_linear.h](#CMUSphinx)<a name="fe_warp_inverse_linear"></a>  
+fe_warp_inverse_linear_doc  
+fe_warp_inverse_linear_id  
+fe_warp_inverse_linear_n_param  
+fe_warp_inverse_linear_set_parameters  
+fe_warp_inverse_linear_warped_to_unwarped  
+fe_warp_inverse_linear_unwarped_to_warped  
+fe_warp_inverse_linear_print
+
+
+### sphinxbase/src/libsphinxbase/fe/[fe_warp_piecewise_linear.h](#CMUSphinx)<a name="fe_warp_piecewise_linear"></a>  
+fe_warp_piecewise_linear_doc  
+fe_warp_piecewise_linear_id  
+fe_warp_piecewise_linear_n_param  
+fe_warp_piecewise_linear_set_parameters  
+fe_warp_piecewise_linear_warped_to_unwarped  
+fe_warp_piecewise_linear_unwarped_to_warped  
+fe_warp_piecewise_linear_print 
+
+
 ---
 
 ## [FUNCTION PROTOTYPE](#CMUSphinx)<a name = "CMUSphinx_proto"></a>
@@ -205,6 +251,10 @@ fe_vad_hangover
 * sphinxbase/src/libsphinxbase/fe/
 	+ [fe_internal.h](#fe_internal.h)
 	+ [fe_noise.h](#fe_noise.h)
+	+ [fe_warp_affine.h](#fe_warp_affine.h) 
+	+ [fe_warp.h](#fe_Warp.h)
+	+ [fe_warp_inverse_linear.h](#fe_warp_inverse_linear.h)
+	+ [fe_warp_piecewise_linear.h](#fe_warp_piecewise_linear.h)
 
 ### sphinxbase/~/[cmn.h](#CMUSphinx_proto)<a name="cmn.h"></a>
 
@@ -1209,6 +1259,116 @@ void fe_track_snr(fe_t *fe, int32 *in_speech);
 void fe_vad_hangover(fe_t *fe, mfcc_t *feat, int32 is_speech, int32 store_pcm);
 
 ```
+
++ ### sphinxbase/src/libsphinxbase/fe/[fe_warp_affine.h](#CMUSphinx_proto)<a name="fe_warp_affine.h"></a>
+```C++
+const char *
+fe_warp_affine_doc(void);
+
+uint32
+fe_warp_affine_id(void);
+
+uint32
+fe_warp_affine_n_param(void);
+
+void
+fe_warp_affine_set_parameters(char const *param_str, float sampling_rate);
+
+float
+fe_warp_affine_warped_to_unwarped(float nonlinear);
+
+float
+fe_warp_affine_unwarped_to_warped(float linear);
+
+void
+fe_warp_affine_print(const char *label);
+
+```
+
++ ### sphinxbase/src/libsphinxbase/fe/[fe_warp.h](#CMUSphinx_proto)<a name="fe_warp.h"></a>
+
+```C++
+typedef struct {
+    void (*set_parameters)(char const *param_str, float sampling_rate);
+    const char * (*doc)(void);
+    uint32 (*id)(void);
+    uint32 (*n_param)(void);
+    float (*warped_to_unwarped)(float nonlinear);
+    float (*unwarped_to_warped)(float linear);
+    void (*print)(const char *label);
+} fe_warp_conf_t;
+
+int fe_warp_set(melfb_t *mel, const char *id_name);
+
+uint32 fe_warp_id(melfb_t *mel);
+
+const char * fe_warp_doc(melfb_t *mel);
+
+void fe_warp_set_parameters(melfb_t *mel, char const *param_str, float sampling_rate);
+
+uint32 fe_warp_n_param(melfb_t *mel);
+
+float fe_warp_warped_to_unwarped(melfb_t *mel, float nonlinear);
+
+float fe_warp_unwarped_to_warped(melfb_t *mel, float linear);
+
+void fe_warp_print(melfb_t *mel, const char *label);
+
+```
+
++ ### sphinxbase/src/libsphinxbase/fe/[fe_warp_inverse_linear.h](#CMUSphinx_proto)<a name="fe_warp_inverse_linear.h"></a>
+
+```C++c
+const char *
+fe_warp_inverse_linear_doc(void);
+
+uint32
+fe_warp_inverse_linear_id(void);
+
+uint32
+fe_warp_inverse_linear_n_param(void);
+
+void
+fe_warp_inverse_linear_set_parameters(char const *param_str, float sampling_rate);
+
+float
+fe_warp_inverse_linear_warped_to_unwarped(float nonlinear);
+
+float
+fe_warp_inverse_linear_unwarped_to_warped(float linear);
+
+void
+fe_warp_inverse_linear_print(const char *label);
+
+```
+
++ ### sphinxbase/src/libsphinxbase/fe/[fe_warp_piecewise_linear.h](#CMUSphinx_proto)<a name="fe_warp_piecewise_linear.h"></a>
+
+```C++
+const char *
+fe_warp_piecewise_linear_doc(void);
+
+uint32
+fe_warp_piecewise_linear_id(void);
+
+uint32
+fe_warp_piecewise_linear_n_param(void);
+
+void
+fe_warp_piecewise_linear_set_parameters(char const *param_str, float sampling_rate);
+
+float
+fe_warp_piecewise_linear_warped_to_unwarped(float nonlinear);
+
+float
+fe_warp_piecewise_linear_unwarped_to_warped(float linear);
+
+void
+fe_warp_piecewise_linear_print(const char *label);
+
+
+```
+
 
 
 ---
