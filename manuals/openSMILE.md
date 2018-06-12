@@ -216,12 +216,10 @@ PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
 LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
------------------------------------------------------------------------
+----------------------------------------------------------------------- 
 
- 
 About openSMILE:
 ================
-
 openSMILE is a complete and open-source toolkit for audio analysis, 
 processing and classification especially targeted at speech and music applications, 
 e.g. ASR, emotion recognition, or beat tracking and chord detection.
@@ -235,7 +233,6 @@ An open-source version for private use, education, and research
 will always be available, next to commercial versions with
 additional features (such as more interface components) or commercial
 licenses for the basic version.
-
 
 Third-party dependencies:
 =========================
@@ -257,14 +254,11 @@ SEMAINE system.
 Only the older versions (1.0.1) are supported with the SEMAINE 
 system.
 
-
-
 Documentation/Installing/Using:
 ===============================
 
 openSMILE is well documented in the openSMILE book, which can be 
 found in doc/openSMILE_book.pdf.
-
 
 Developers:
 ===========
@@ -275,7 +269,6 @@ and in the openSMILE book.
 Information on how to write and compile run-time linkable plug-ins 
 for openSMILE, see the openSMILE book or take a look at the files 
 in the "plugindev" directory, especially the README file.
-
 
 Getting more help:
 ==================
