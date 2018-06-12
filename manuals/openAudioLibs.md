@@ -45,7 +45,8 @@
 + PortAudio 로 녹음,재생
 + General audio signal processing
 + Extraction of speech-related features
-+ Statistical functionals (feature summaries)
++ Statistical functionals
++ Multi-threading support for parallel feature extraction
 
 ### [BeamformIt](https://github.com/xanguera/BeamformIt)
 + acoustic beamforming tool
