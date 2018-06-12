@@ -107,19 +107,16 @@ ngram_raw.h
 	+ [cmn.h](#cmn)
 	+ [fe.h](#fe)
 	+ [feat.h](#feat)
+	+ [clapack_lite.h](#clapack_lite)
+	
 * ### sphinxbase/src/libsphinxbase/fe/
 	+ [fe_internal.h](#fe_internal)
 	+ [fe_noise.h](#fe_noise)
 	+ [fe_warp_affine.h](#fe_warp_affine) 
-	+ [fe_warp.h](#fe_Warp)
+	+ [fe_warp.h](#fe_warp)
 	+ [fe_warp_inverse_linear.h](#fe_warp_inverse_linear)
 	+ [fe_warp_piecewise_linear.h](#fe_warp_piecewise_linear)
 
-+ sphinxbase/include/sphinxbase/clapack_lite.h
-  sgemm_,sgemv_,ssymm_... parameter 도 gemm parm
-  
-+ sphinxbase/include/sphinxbase/cmn.h
-//brief Apply Cepstral Mean Normaliztion (CMN) to the set of input mfc frames...
 
 ### sphinxbase/include/[fe.h](#CMUSphinx_list)<a name="fe"></a>  
 fe_init_auto    
@@ -173,9 +170,16 @@ feat_retain
 feat_free  
 feat_report
  
-### sphinxbase/src/libsphinxbase/fe/[fe_internal.h](#CMUSphinx)<a name="fe_internal"></a>  
-  
-fe_init_dither(  
+### sphinxbase/include/[clapack_lite.h](#CMUSphinx_list)<a name="clapack_lite"></a>    
+sgemm_  
+sgemv_  
+ssymm_  
+sposv_   
+spotrf_
+ 
+ 
+### sphinxbase/src/libsphinxbase/fe/[fe_internal.h](#CMUSphinx)<a name="fe_internal"></a>   
+fe_init_dither    
 fe_dither  
 fe_read_frame  
 fe_shift_frame  
@@ -248,11 +252,12 @@ fe_warp_piecewise_linear_print
 	+ [cmn.h](#cmn.h)
 	+ [fe.h](#fe.h)
 	+ [feat.h](#feat.h)
+	+ [clapack_lite.h](#clapack_lite.h)
 * sphinxbase/src/libsphinxbase/fe/
 	+ [fe_internal.h](#fe_internal.h)
 	+ [fe_noise.h](#fe_noise.h)
 	+ [fe_warp_affine.h](#fe_warp_affine.h) 
-	+ [fe_warp.h](#fe_Warp.h)
+	+ [fe_warp.h](#fe_warp.h)
 	+ [fe_warp_inverse_linear.h](#fe_warp_inverse_linear.h)
 	+ [fe_warp_piecewise_linear.h](#fe_warp_piecewise_linear.h)
 
@@ -1055,7 +1060,31 @@ void feat_report(feat_t *f /**< In: feat_t */
 
 ```
 
-+ ### sphinxbase/src/libsphinxbase/fe/[fe_inernal.h](#CMUSphinx_proto)<a name="fe_internal.h"></a>
+
+### sphinxbase/~/[clapack_lite.h](#CMUSphinx_proto)<a name="clapack_lite.h"></a>
+```C++
+/* Subroutine */ int sgemm_(char *transa, char *transb, integer *m, integer *
+                            n, integer *k, real *alpha, real *a, integer *lda, real *b, integer *
+                            ldb, real *beta, real *c__, integer *ldc);
+/* Subroutine */ int sgemv_(char *trans, integer *m, integer *n, real *alpha,
+                            real *a, integer *lda, real *x, integer *incx, real *beta, real *y,
+                            integer *incy);
+/* Subroutine */ int ssymm_(char *side, char *uplo, integer *m, integer *n,
+                            real *alpha, real *a, integer *lda, real *b, integer *ldb, real *beta,
+                            real *c__, integer *ldc);
+
+/* Subroutine */ int sposv_(char *uplo, integer *n, integer *nrhs, real *a,
+                            integer *lda, real *b, integer *ldb, integer *info);
+/* Subroutine */ int spotrf_(char *uplo, integer *n, real *a, integer *lda,
+                             integer *info);
+
+#ifdef __cplusplus
+
+
+```
+
+
+### sphinxbase/src/libsphinxbase/fe/[fe_inernal.h](#CMUSphinx_proto)<a name="fe_internal.h"></a>
 
 ```c++
 
