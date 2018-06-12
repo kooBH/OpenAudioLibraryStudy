@@ -17,7 +17,13 @@
 
 https://audeering.com/technology/opensmile/#licensing
 
-Licensing
++ 비영리목적으로 자유롭게 사용가능 (사용, 수정 ,배포, 출간, 시연, 연구)  
++ 영리목적으로 사용시 audEERING에게 license 받아야함  
++ 영리성이 있어도 주된 목적이 아니거나, 연구와 학술을 위한 목적이 더 클 경우, 상용제품의 성능테스트일 경우 사용가능  
++ 수정된 코드를 배포시 수정되었음을 명시  
++ binary 파일 수정, 역공학 금지  
+
+**Licensing**
 
 openSMILE is maintained by audEERING since 2013. Version 2.0 and above are distributed 
 free of charge for research and personal use under the terms of the 
