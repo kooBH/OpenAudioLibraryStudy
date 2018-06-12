@@ -20,8 +20,8 @@
     - Bison is a general-purpose parser generator that converts an annotated context-free grammar into a deterministic LR or generalized LR (GLR) parser employing LALR(1) parser tables. As an experimental feature, Bison can also generate IELR(1) or canonical LR(1) parser tables. Once you are proficient with Bison, you can use it to develop a wide range of language parsers, from those used in simple desk calculators to complex programming languages.   
     6. swig      
     - SWIG is a software development tool that connects programs written in C and C++ with a variety of high-level programming languages.
-    7. python development package  
-    8. pulseaudio development  
+    7. python development package(python-dev)  
+    8. pulseaudio development  (libpulse-dev)
 
 + Respective Configuration Option 
   1. --without (ex)--without-swig-python
