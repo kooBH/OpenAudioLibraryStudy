@@ -42,11 +42,12 @@
 
 ### [openSMILE](https://audeering.com/technology/opensmile/)
 + c++ API
-+ PortAudio 로 녹음,재생
++ using PortAudio
 + General audio signal processing
 + Extraction of speech-related features
 + Statistical functionals
 + Multi-threading support for parallel feature extraction
++ Designed for real-time on-line processing, but also useful for off-line batch 
 
 ### [BeamformIt](https://github.com/xanguera/BeamformIt)
 + acoustic beamforming tool
