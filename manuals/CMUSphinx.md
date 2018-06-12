@@ -10,13 +10,18 @@
  ### Unix System
 + Dependency :  
     1. gcc
-    2. automake
-    3. autoconf
-    4. libtool
-    5. bison
-    6. swig
-    7. python development package
-    8. pulseaudio development
+    2. automake  
+    - Automake is a tool for automatically generating Makefile.in files compliant with the GNU Coding Standards. Automake requires the use of Autoconf. 
+    3. autoconf  
+    - Autoconf is an extensible package of M4 macros that produce shell scripts to automatically configure software source code packages. These scripts can adapt the packages to many kinds of UNIX-like systems without manual user intervention. Autoconf creates a configuration script for a package from a template file that lists the operating system features that the package can use, in the form of M4 macro calls. 
+    4. libtool  
+    - GNU libtool is a generic library support script. Libtool hides the complexity of using shared libraries behind a consistent, portable interface. 
+    5. bison    
+    - Bison is a general-purpose parser generator that converts an annotated context-free grammar into a deterministic LR or generalized LR (GLR) parser employing LALR(1) parser tables. As an experimental feature, Bison can also generate IELR(1) or canonical LR(1) parser tables. Once you are proficient with Bison, you can use it to develop a wide range of language parsers, from those used in simple desk calculators to complex programming languages.   
+    6. swig      
+    - SWIG is a software development tool that connects programs written in C and C++ with a variety of high-level programming languages.
+    7. python development package  
+    8. pulseaudio development  
 
 + Respective Configuration Option 
   1. --without (ex)--without-swig-python
