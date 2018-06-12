@@ -21,8 +21,7 @@ Licensing
 
 openSMILE is maintained by audEERING since 2013. Version 2.0 and above are distributed 
 free of charge for research and personal use under the terms of the 
-[openSMILE research only open-source license]
-(https://www.audeering.com/research-and-open-source/files/openSMILE-open-source-license.txt).
+[openSMILE research only open-source license](https://www.audeering.com/research-and-open-source/files/openSMILE-open-source-license.txt).
 
 For commercial use, we provide individualised, flexible commercial licensing 
 options for any project size and budget. We also offer ready-to-use speech analysis 
