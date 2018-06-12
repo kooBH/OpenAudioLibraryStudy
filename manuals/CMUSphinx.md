@@ -73,7 +73,7 @@ yin.h| brief Implementation of pitch estimation|
 HEADER|Discription|&nbsp;
 ---|---|---
 fe_internal.h ||O
-fe_noise.h | noise removal algorithm,noise removal algorithm,noise removal algorithm,noise removal algorithm|O
+fe_noise.h | noise removal algorithm : Computationally Efficient Speech Enchancement, Power-Normalized Cepstral Coefficients (PNCC) |O
 fe_prespch_buf.h |Buffer that maintains both features and raw audio for the VAD implementation|
 fe_type.h | |
 fe_warp_affine.h | Warp the frequency axis according to an affine function, i.e. : w' = a * w + b|O
