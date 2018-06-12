@@ -22,12 +22,6 @@ https://cmusphinx.github.io/doc/pocketsphinx/index.html
   2. --enable  (ex)--enable-fixed
 
 ---
-
-
-
-
-## [FUNCTION LIST](#CMUSphinx)<a name="CMUSphinx_list"></a>
-
 + ### sphinxbase/include/sphinxbase/
 
 Header|Discription
@@ -93,6 +87,13 @@ ngram_model_internal.h|
 ngram_model_trie.h|
 ngram_raw.h
 
+
+---
+## [FUNCTION LIST](#CMUSphinx)<a name="CMUSphinx_list"></a>
++ [cmn.h](#c,n)
++ [fe_internal.h](#fe_internal)
+
+
 + sphinxbase/include/sphinxbase/clapack_lite.h
   sgemm_,sgemv_,ssymm_... parameter 도 gemm parm
   
@@ -102,7 +103,7 @@ ngram_raw.h
 ### sphinxbase/~/fe.h
 typedef float32/fixed32 mfcc_t
 
-### sphinxbase/~/cmn.h
+### sphinxbase/~/[cmn.h](#CMUSphinx)<a name="cmn"></a>
 <pre>
 cmn_t* cmn_init(int32 veclen);
 void cmn (cmn_t *cmn, mfcc_t **mfc,);
@@ -112,6 +113,28 @@ void cmn_live_set(cmn_t *cmn, mfcc_t const *vec);
 void cmn_live_get(cmn_t *cmn, mfcc_t *vec);
 void cmn_free (cmn_t *cmn);
 </pre>
+ 
+### sphinxbse/src/libsphinxbase/fe/[fe_internal.h](#CMUSphinx)<a name="fe_internal"></a>  
+  
+void fe_init_dither(int32 seed);  
+int32 fe_dither(int16 *buffer, int32 nsamps);  
+int fe_read_frame(fe_t *fe, int16 const *in, int32 len);  
+int fe_shift_frame(fe_t *fe, int16 const *in, int32 len);  
+void fe_write_frame(fe_t *fe, mfcc_t *feat, int32 store_pcm);  
+**Initialization functions**  
+int32 fe_build_melfilters(melfb_t *MEL_FB); 
+int32 fe_compute_melcosine(melfb_t *MEL_FB);  
+void fe_create_hamming(window_t *in, int32 in_len);  
+void fe_create_twiddle(fe_t *fe);   
+    
+fixed32 fe_log_add(fixed32 x, fixed32 y);
+fixed32 fe_log_sub(fixed32 x, fixed32 y);  
+  
+**Miscellaneous processing functions**  
+void fe_spec2cep(fe_t * fe, const powspec_t * mflogspec, mfcc_t * mfcep);  
+void fe_dct2(fe_t *fe, const powspec_t *mflogspec, mfcc_t *mfcep, int htk);  
+void fe_dct3(fe_t *fe, const mfcc_t *mfcep, powspec_t *mflogspec);  
+
 ---
 
 ## [FUNCTION PROTOTYPE](#CMUSphinx)<a name = "CMUSphinx_proto"></a>
