@@ -27,7 +27,7 @@
 
 Header|Discription|&nbsp;
 ---|---|---
-ad.h|brief generic live audio interface for recording and playback|
+ad.h|brief generic live audio interface for recording and playback|O
 agc.h|  Various forms of automatic gain control (AGC)|
 bio.h| Sphinx-3 binary file I/O functions|
 bitarr.h | brief An implementation bit array - memory efficient storage for digit int and float data|
