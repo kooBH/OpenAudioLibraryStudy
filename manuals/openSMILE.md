@@ -1,18 +1,19 @@
 # [openSMILE](./openAudioLibs.md#TOP)<a name="openSMILE"></a>
-+ [funtion list](#openSMILE_list)
-+ [function prototype](#openSMILE_proto)
-+ [license](#openSMILE_license)
++ [CLASS LIST](#openSMILE_list)
++ [CLASS PROTOTYPE](#openSMILE_proto)
++ [LICENSE](#openSMILE_license)
 
 https://audeering.com/technology/opensmile/  
-[Document](https://www.audeering.com/research-and-open-source/files/openSMILE-book-latest.pdf)
+
+#### [Document](https://www.audeering.com/research-and-open-source/files/openSMILE-book-latest.pdf)
 
 ---
 
-#### [FUNCTION LIST](#openSMILE)<a name="openSMILE_list"></a>
+#### [CLASS LIST](#openSMILE)<a name="openSMILE_list"></a>
 
 ---
 
-#### [FUNCTION PROTOTYPE](#openSMILE)<a name = "openSMILE_proto"></a>
+#### [CLASS PROTOTYPE](#openSMILE)<a name = "openSMILE_proto"></a>
 
 ---
 
