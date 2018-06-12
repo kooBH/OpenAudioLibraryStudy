@@ -3,6 +3,9 @@
 + [function prototype](#openSMILE_proto)
 + [license](#openSMILE_license)
 
+https://audeering.com/technology/opensmile/  
+[Document](https://www.audeering.com/research-and-open-source/files/openSMILE-book-latest.pdf)
+
 ---
 
 #### [FUNCTION LIST](#openSMILE)<a name="openSMILE_list"></a>
