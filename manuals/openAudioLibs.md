@@ -4,6 +4,7 @@
 1. ### [SUMMARY](#summary)  
 2. ### [CIGLET](./CIGLET.md#CIGLET)
 4. ### [CMUSphinx](./CMUSphinx.md#CMUSphinx)
+5. ### [openSMILE](./openSMILE.md#openSMILE)
 ---  
 
 ## SUMMARY<a name = "summary"></a>  
