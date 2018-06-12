@@ -90,8 +90,11 @@ ngram_raw.h
 
 ---
 ## [FUNCTION LIST](#CMUSphinx)<a name="CMUSphinx_list"></a>
-+ [cmn.h](#c,n)
-+ [fe_internal.h](#fe_internal)
+* sphinxbase/include/sphinxbase
+	+ [cmn.h](#cmn)
+	+ [fe.h](#fe)
+* sphinxbase/src/
+	+ [fe_internal.h](#fe_internal)
 
 
 + sphinxbase/include/sphinxbase/clapack_lite.h
@@ -100,8 +103,104 @@ ngram_raw.h
 + sphinxbase/include/sphinxbase/cmn.h
 //brief Apply Cepstral Mean Normaliztion (CMN) to the set of input mfc frames...
 
-### sphinxbase/~/fe.h
+### sphinxbase/include/[fe.h](#CMUSphinx_list)<a name="fe"></a>
 typedef float32/fixed32 mfcc_t
+
+SPHINXBASE_EXPORT
+fe_t* fe_init_auto(void);
+
+SPHINXBASE_EXPORT
+arg_t const *fe_get_args(void);
+
+SPHINXBASE_EXPORT
+fe_t *fe_init_auto_r(cmd_ln_t *config);
+
+SPHINXBASE_EXPORT
+const cmd_ln_t *fe_get_config(fe_t *fe);
+
+SPHINXBASE_EXPORT
+void fe_start_stream(fe_t *fe);
+
+SPHINXBASE_EXPORT
+int fe_start_utt(fe_t *fe);
+
+SPHINXBASE_EXPORT
+int fe_get_output_size(fe_t *fe);
+
+SPHINXBASE_EXPORT
+void fe_get_input_size(fe_t *fe, int *out_frame_shift,
+                       int *out_frame_size);
+		       
+SPHINXBASE_EXPORT
+uint8 fe_get_vad_state(fe_t *fe);
+
+SPHINXBASE_EXPORT
+int fe_end_utt(fe_t *fe, mfcc_t *out_cepvector, int32 *out_nframes);
+
+SPHINXBASE_EXPORT
+fe_t *fe_retain(fe_t *fe);
+
+SPHINXBASE_EXPORT
+int fe_free(fe_t *fe);
+
+SPHINXBASE_EXPORT
+int fe_process_frames_ext(fe_t *fe,
+                      int16 const **inout_spch,
+                      size_t *inout_nsamps,
+                      mfcc_t **buf_cep,
+                      int32 *inout_nframes,
+                      int16 *voiced_spch,
+                      int32 *voiced_spch_nsamps,
+                      int32 *out_frameidx);
+
+SPHINXBASE_EXPORT
+int fe_process_frames(fe_t *fe,
+                      int16 const **inout_spch,
+                      size_t *inout_nsamps,
+                      mfcc_t **buf_cep,
+                      int32 *inout_nframes,
+                      int32 *out_frameidx);
+
+SPHINXBASE_EXPORT
+int fe_process_utt(fe_t *fe,  /**< A front end object */
+                   int16 const *spch, /**< The speech samples */
+                   size_t nsamps, /**< number of samples*/
+                   mfcc_t ***cep_block, /**< Output pointer to cepstra */
+                   int32 *nframes /**< Number of frames processed */
+	);
+
+SPHINXBASE_EXPORT
+void fe_free_2d(void *arr);
+
+SPHINXBASE_EXPORT
+int fe_mfcc_to_float(fe_t *fe,
+                     mfcc_t **input,
+                     float32 **output,
+                     int32 nframes);
+
+SPHINXBASE_EXPORT
+int fe_float_to_mfcc(fe_t *fe,
+                     float32 **input,
+                     mfcc_t **output,
+                     int32 nframes);
+
+SPHINXBASE_EXPORT
+int fe_logspec_to_mfcc(fe_t *fe,  /**< A fe structure */
+                       const mfcc_t *fr_spec, /**< One frame of spectrum */
+                       mfcc_t *fr_cep /**< One frame of cepstrum */
+        );
+SPHINXBASE_EXPORT
+int fe_logspec_dct2(fe_t *fe,  /**< A fe structure */
+                    const mfcc_t *fr_spec, /**< One frame of spectrum */
+                    mfcc_t *fr_cep /**< One frame of cepstrum */
+        );
+
+SPHINXBASE_EXPORT
+int fe_mfcc_dct3(fe_t *fe,  /**< A fe structure */
+                 const mfcc_t *fr_cep, /**< One frame of cepstrum */
+                 mfcc_t *fr_spec /**< One frame of spectrum */
+        );
+
 
 ### sphinxbase/~/[cmn.h](#CMUSphinx)<a name="cmn"></a>
 <pre>
@@ -138,8 +237,11 @@ void fe_dct3(fe_t *fe, const mfcc_t *mfcep, powspec_t *mflogspec);
 ---
 
 ## [FUNCTION PROTOTYPE](#CMUSphinx)<a name = "CMUSphinx_proto"></a>
-+ [cmn.h](#cmn.h)
-+ [fe_internal.h](#fe_internal.h)
+* sphinxbase/include/sphinxbase
+	+ [cmn.h](#cmn.h)
+	+ [fe.h](#fe.h)
+* sphinxbase/src
+	+ [fe_internal.h](#fe_internal.h)
 
 ### sphinxbase/~/[cmn.h](#CMUSphinx_proto)<a name="cmn.h"></a>
 
@@ -231,6 +333,349 @@ void cmn_live_get(cmn_t *cmn, mfcc_t *vec);
 /* RAH, free previously allocated memory */
 SPHINXBASE_EXPORT
 void cmn_free (cmn_t *cmn);
+
+```
+### sphinxbase/~/[fe.h](#CMUSphinx_proto)<a name="fe.h"></a>
+```C++
+/**
+ * Structure for the front-end computation.
+ */
+typedef struct fe_s fe_t;
+
+/**
+ * Error codes returned by stuff.
+ */
+enum fe_error_e {
+	FE_SUCCESS = 0,
+	FE_OUTPUT_FILE_SUCCESS  = 0,
+	FE_CONTROL_FILE_ERROR = -1,
+	FE_START_ERROR = -2,
+	FE_UNKNOWN_SINGLE_OR_BATCH = -3,
+	FE_INPUT_FILE_OPEN_ERROR = -4,
+	FE_INPUT_FILE_READ_ERROR = -5,
+	FE_MEM_ALLOC_ERROR = -6,
+	FE_OUTPUT_FILE_WRITE_ERROR = -7,
+	FE_OUTPUT_FILE_OPEN_ERROR = -8,
+	FE_ZERO_ENERGY_ERROR = -9,
+	FE_INVALID_PARAM_ERROR =  -10
+};
+
+/**
+ * Initialize a front-end object from global command-line.
+ *
+ * This is equivalent to calling fe_init_auto_r(cmd_ln_get()).
+ *
+ * @return Newly created front-end object.
+ */
+SPHINXBASE_EXPORT
+fe_t* fe_init_auto(void);
+
+/**
+ * Get the default set of arguments for fe_init_auto_r().
+ *
+ * @return Pointer to an argument structure which can be passed to
+ * cmd_ln_init() in friends to create argument structures for
+ * fe_init_auto_r().
+ */
+SPHINXBASE_EXPORT
+arg_t const *fe_get_args(void);
+
+/**
+ * Initialize a front-end object from a command-line parse.
+ *
+ * @param config Command-line object, as returned by cmd_ln_parse_r()
+ *               or cmd_ln_parse_file().  Ownership of this object is
+ *               claimed by the fe_t, so you must not attempt to free
+ *               it manually.  Use cmd_ln_retain() if you wish to
+ *               reuse it.
+ * @return Newly created front-end object.
+ */
+SPHINXBASE_EXPORT
+fe_t *fe_init_auto_r(cmd_ln_t *config);
+
+/**
+ * Retrieve the command-line object used to initialize this front-end.
+ *
+ * @return command-line object for this front-end.  This pointer is
+ *         retained by the fe_t, so you should not attempt to free it
+ *         manually.
+ */
+SPHINXBASE_EXPORT
+const cmd_ln_t *fe_get_config(fe_t *fe);
+
+/**
+ * Start processing of the stream, resets processed frame counter
+ */
+SPHINXBASE_EXPORT
+void fe_start_stream(fe_t *fe);
+
+/**
+ * Start processing an utterance.
+ * @return 0 for success, <0 for error (see enum fe_error_e)
+ */
+SPHINXBASE_EXPORT
+int fe_start_utt(fe_t *fe);
+
+/**
+ * Get the dimensionality of the output of this front-end object.
+ *
+ * This is guaranteed to be the number of values in one frame of
+ * output from fe_end_utt() and fe_process_frames().  
+ * It is usually the number of MFCC
+ * coefficients, but it might be the number of log-spectrum bins, if
+ * the <tt>-logspec</tt> or <tt>-smoothspec</tt> options to
+ * fe_init_auto() were true.
+ *
+ * @param fe Front-end object
+ * @return Dimensionality of front-end output.
+ */
+SPHINXBASE_EXPORT
+int fe_get_output_size(fe_t *fe);
+
+/**
+ * Get the dimensionality of the input to this front-end object.
+ *
+ * This function retrieves the number of input samples consumed by one
+ * frame of processing.  To obtain one frame of output, you must have
+ * at least <code>*out_frame_size</code> samples.  To obtain <i>N</i>
+ * frames of output, you must have at least <code>(N-1) *
+ * *out_frame_shift + *out_frame_size</code> input samples.
+ *
+ * @param fe Front-end object
+ * @param out_frame_shift Output: Number of samples between each frame start.
+ * @param out_frame_size Output: Number of samples in each frame.
+ */
+SPHINXBASE_EXPORT
+void fe_get_input_size(fe_t *fe, int *out_frame_shift,
+                       int *out_frame_size);
+
+/**
+ * Get vad state for the last processed frame
+ *
+ * @return 1 if speech, 0 if silence
+ */
+SPHINXBASE_EXPORT
+uint8 fe_get_vad_state(fe_t *fe);
+
+/**
+ * Finish processing an utterance.
+ *
+ * This function also collects any remaining samples and calculates a
+ * final cepstral vector.  If there are overflow samples remaining, it
+ * will pad with zeros to make a complete frame.
+ *
+ * @param fe Front-end object.
+ * @param out_cepvector Buffer to hold a residual cepstral vector, or NULL
+ *                      if you wish to ignore it.  Must be large enough
+ * @param out_nframes Number of frames of residual cepstra created
+ *                    (either 0 or 1).
+ * @return 0 for success, <0 for error (see enum fe_error_e)
+ */
+SPHINXBASE_EXPORT
+int fe_end_utt(fe_t *fe, mfcc_t *out_cepvector, int32 *out_nframes);
+
+/**
+ * Retain ownership of a front end object.
+ *
+ * @return pointer to the retained front end.
+ */
+SPHINXBASE_EXPORT
+fe_t *fe_retain(fe_t *fe);
+
+/**
+ * Free the front end. 
+ *
+ * Releases resources associated with the front-end object.
+ *
+ * @return new reference count (0 if freed completely)
+ */
+SPHINXBASE_EXPORT
+int fe_free(fe_t *fe);
+
+/*
+ * Do same as fe_process_frames, but also returns
+ * voiced audio. Output audio is valid till next
+ * fe_process_frames call.
+ *
+ * DO NOT MIX fe_process_frames calls
+ *
+ * @param voiced_spch Output: obtain voiced audio samples here
+ *
+ * @param voiced_spch_nsamps Output: shows voiced_spch length
+ *
+ * @param out_frameidx Output: index of the utterance start
+ */
+SPHINXBASE_EXPORT
+int fe_process_frames_ext(fe_t *fe,
+                      int16 const **inout_spch,
+                      size_t *inout_nsamps,
+                      mfcc_t **buf_cep,
+                      int32 *inout_nframes,
+                      int16 *voiced_spch,
+                      int32 *voiced_spch_nsamps,
+                      int32 *out_frameidx);
+
+/** 
+ * Process a block of samples.
+ *
+ * This function generates up to <code>*inout_nframes</code> of
+ * features, or as many as can be generated from
+ * <code>*inout_nsamps</code> samples.
+ *
+ * On exit, the <code>inout_spch</code>, <code>inout_nsamps</code>,
+ * and <code>inout_nframes</code> parameters are updated to point to
+ * the remaining sample data, the number of remaining samples, and the
+ * number of frames processed, respectively.  This allows you to call
+ * this repeatedly to process a large block of audio in small (say,
+ * 5-frame) chunks:
+ *
+ *  int16 *bigbuf, *p;
+ *  mfcc_t **cepstra;
+ *  int32 nsamps;
+ *  int32 nframes = 5;
+ *
+ *  cepstra = (mfcc_t **)
+ *      ckd_calloc_2d(nframes, fe_get_output_size(fe), sizeof(**cepstra));
+ *  p = bigbuf;
+ *  while (nsamps) {
+ *      nframes = 5;
+ *      fe_process_frames(fe, &p, &nsamps, cepstra, &nframes);
+ *      // Now do something with these frames...
+ *      if (nframes)
+ *          do_some_stuff(cepstra, nframes);
+ *  }
+ *
+ * @param inout_spch Input: Pointer to pointer to speech samples
+ *                   (signed 16-bit linear PCM).
+ *                   Output: Pointer to remaining samples.
+ * @param inout_nsamps Input: Pointer to maximum number of samples to
+ *                     process.
+ *                     Output: Number of samples remaining in input buffer.
+ * @param buf_cep Two-dimensional buffer (allocated with
+ *                ckd_calloc_2d()) which will receive frames of output
+ *                data.  If NULL, no actual processing will be done,
+ *                and the maximum number of output frames which would
+ *                be generated is returned in
+ *                <code>*inout_nframes</code>.
+ * @param inout_nframes Input: Pointer to maximum number of frames to
+ *                      generate.
+ *                      Output: Number of frames actually generated.
+ * @param out_frameidx Index of the first frame returned in a stream
+ *
+ * @return 0 for success, <0 for failure (see enum fe_error_e)
+ */
+SPHINXBASE_EXPORT
+int fe_process_frames(fe_t *fe,
+                      int16 const **inout_spch,
+                      size_t *inout_nsamps,
+                      mfcc_t **buf_cep,
+                      int32 *inout_nframes,
+                      int32 *out_frameidx);
+
+/** 
+ * Process a block of samples, returning as many frames as possible.
+ *
+ * This function processes all the samples in a block of data and
+ * returns a newly allocated block of feature vectors.  This block
+ * needs to be freed with fe_free_2d() after use.
+ *
+ * It is possible for there to be some left-over data which could not
+ * fit in a complete frame.  This data can be processed with
+ * fe_end_utt().
+ *
+ * This function is deprecated in favor of fe_process_frames().
+ *
+ * @return 0 for success, <0 for failure (see enum fe_error_e)
+ */
+SPHINXBASE_EXPORT
+int fe_process_utt(fe_t *fe,  /**< A front end object */
+                   int16 const *spch, /**< The speech samples */
+                   size_t nsamps, /**< number of samples*/
+                   mfcc_t ***cep_block, /**< Output pointer to cepstra */
+                   int32 *nframes /**< Number of frames processed */
+	);
+
+/**
+ * Free the output pointer returned by fe_process_utt().
+ **/
+SPHINXBASE_EXPORT
+void fe_free_2d(void *arr);
+
+/**
+ * Convert a block of mfcc_t to float32 (can be done in-place)
+ **/
+SPHINXBASE_EXPORT
+int fe_mfcc_to_float(fe_t *fe,
+                     mfcc_t **input,
+                     float32 **output,
+                     int32 nframes);
+
+/**
+ * Convert a block of float32 to mfcc_t (can be done in-place)
+ **/
+SPHINXBASE_EXPORT
+int fe_float_to_mfcc(fe_t *fe,
+                     float32 **input,
+                     mfcc_t **output,
+                     int32 nframes);
+
+/**
+ * Process one frame of log spectra into MFCC using discrete cosine
+ * transform.
+ *
+ * This uses a variant of the DCT-II where the first frequency bin is
+ * scaled by 0.5.  Unless somebody misunderstood the DCT-III equations
+ * and thought that's what they were implementing here, this is
+ * ostensibly done to account for the symmetry properties of the
+ * DCT-II versus the DFT - the first coefficient of the input is
+ * assumed to be repeated in the negative frequencies, which is not
+ * the case for the DFT.  (This begs the question, why not just use
+ * the DCT-I, since it has the appropriate symmetry properties...)
+ * Moreover, this is bogus since the mel-frequency bins on which we
+ * are doing the DCT don't extend to the edge of the DFT anyway.
+ *
+ * This also means that the matrix used in computing this DCT can not
+ * be made orthogonal, and thus inverting the transform is difficult.
+ * Therefore if you want to do cepstral smoothing or have some other
+ * reason to invert your MFCCs, use fe_logspec_dct2() and its inverse
+ * fe_logspec_dct3() instead.
+ *
+ * Also, it normalizes by 1/nfilt rather than 2/nfilt, for some reason.
+ **/
+SPHINXBASE_EXPORT
+int fe_logspec_to_mfcc(fe_t *fe,  /**< A fe structure */
+                       const mfcc_t *fr_spec, /**< One frame of spectrum */
+                       mfcc_t *fr_cep /**< One frame of cepstrum */
+        );
+
+/**
+ * Convert log spectra to MFCC using DCT-II.
+ *
+ * This uses the "unitary" form of the DCT-II, i.e. with a scaling
+ * factor of sqrt(2/N) and a "beta" factor of sqrt(1/2) applied to the
+ * cos(0) basis vector (i.e. the one corresponding to the DC
+ * coefficient in the output).
+ **/
+SPHINXBASE_EXPORT
+int fe_logspec_dct2(fe_t *fe,  /**< A fe structure */
+                    const mfcc_t *fr_spec, /**< One frame of spectrum */
+                    mfcc_t *fr_cep /**< One frame of cepstrum */
+        );
+
+/**
+ * Convert MFCC to log spectra using DCT-III.
+ *
+ * This uses the "unitary" form of the DCT-III, i.e. with a scaling
+ * factor of sqrt(2/N) and a "beta" factor of sqrt(1/2) applied to the
+ * cos(0) basis vector (i.e. the one corresponding to the DC
+ * coefficient in the input).
+ **/
+SPHINXBASE_EXPORT
+int fe_mfcc_dct3(fe_t *fe,  /**< A fe structure */
+                 const mfcc_t *fr_cep, /**< One frame of cepstrum */
+                 mfcc_t *fr_spec /**< One frame of spectrum */
+        );
+
 
 ```
 
