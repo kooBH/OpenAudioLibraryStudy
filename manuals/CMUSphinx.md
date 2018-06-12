@@ -25,56 +25,56 @@
 ---
 + ### sphinxbase/include/sphinxbase/
 
-Header|Discription
----|---
-ad.h|brief generic live audio interface for recording and playback
-agc.h|  Various forms of automatic gain control (AGC)
-bio.h| Sphinx-3 binary file I/O functions
-bitarr.h | brief An implementation bit array - memory efficient storage for digit int and float data
-bitvec.h | brief An implementation of bit vectors
-byteorder.h | Byte swapping ordering macros
-case.h |  Upper/lower case conversion routines
-ckd_alloc.h | Memory allocation package
-clapack_lite.h | (GUESS)minimum lapack function
-cmd_ln.h| Command line argument parsing
-cmn.h| Various forms of cepstral mean normalization
-err.h|brief Implementation of logging routines
-f2c.h| Standard Fortran to C header file
-feat.h|  Cepstral features computation
-fe.h| (GUESS) about float-end
-filename.h | File and path name operations
-fixpoint.h| Fixed-point arithmetic macros
-fsg_model.h| Word-level finite state graph
-genrand.h| a portable random generator
-glist.h| Module for maintaining a generic, linear linked-list structure
-hash_table.h| Hash table module
-heap.h| Generic heap structure for inserting in any and popping in sorted order
-jsgf.h| JSGF grammar compiler - Java Speech Grammar Format
-listelem_alloc.h  | brief Fast memory allocator for uniformly sized objects
-logmath.h| brief Fast integer logarithmic addition operations
-matrix.h|Matrix and linear algebra functions - 그냥 연산함 for for for 그리고 NxN만 됨
-mmio.h| brief Memory-mapped I/O wrappers for files
-ngram_model.h| brief N-Gram language models
-pio.h| Packaged I/O routines
-prim_type.h| Primitive types; more machine-independent
-priority_queue.h| Priority queue
-profile.h| For timing and event counting
-sbthread.h| brief Simple portable thread functions
-sphinxbase_export.h| (GUESS)About Shared Object
-strfuncs.h| brief Miscellaneous useful string functions
-yin.h| brief Implementation of pitch estimation
+Header|Discription|&nbsp;
+---|---|---
+ad.h|brief generic live audio interface for recording and playback|
+agc.h|  Various forms of automatic gain control (AGC)|
+bio.h| Sphinx-3 binary file I/O functions|
+bitarr.h | brief An implementation bit array - memory efficient storage for digit int and float data|
+bitvec.h | brief An implementation of bit vectors|
+byteorder.h | Byte swapping ordering macros|
+case.h |  Upper/lower case conversion routines|
+ckd_alloc.h | Memory allocation package|
+clapack_lite.h | (GUESS)minimum lapack function|O
+cmd_ln.h| Command line argument parsing|
+cmn.h| Various forms of cepstral mean normalization|O
+err.h|brief Implementation of logging routines|
+f2c.h| Standard Fortran to C header file|
+feat.h|  Cepstral features computation|O
+fe.h| (GUESS) about float-end|O
+filename.h | File and path name operations|
+fixpoint.h| Fixed-point arithmetic macros|
+fsg_model.h| Word-level finite state graph|
+genrand.h| a portable random generator|
+glist.h| Module for maintaining a generic, linear linked-list structure|
+hash_table.h| Hash table module|
+heap.h| Generic heap structure for inserting in any and popping in sorted order|
+jsgf.h| JSGF grammar compiler - Java Speech Grammar Format|
+listelem_alloc.h  | brief Fast memory allocator for uniformly sized objects|
+logmath.h| brief Fast integer logarithmic addition operations|
+matrix.h|Matrix and linear algebra functions - 그냥 연산함 for for for 그리고 NxN만 됨|
+mmio.h| brief Memory-mapped I/O wrappers for files|
+ngram_model.h| brief N-Gram language models|
+pio.h| Packaged I/O routines|
+prim_type.h| Primitive types; more machine-independent|
+priority_queue.h| Priority queue|
+profile.h| For timing and event counting|
+sbthread.h| brief Simple portable thread functions|
+sphinxbase_export.h| (GUESS)About Shared Object|
+strfuncs.h| brief Miscellaneous useful string functions|
+yin.h| brief Implementation of pitch estimation|
 
 + ### sphinxbase/src/libsphinxbase/fe
-HEADER|Discription
----|---
-fe_internal.h |
-fe_noise.h | noise removal algorithm,noise removal algorithm,noise removal algorithm,noise removal algorithm
-fe_prespch_buf.h |Buffer that maintains both features and raw audio for the VAD implementation
-fe_type.h | 
-fe_warp_affine.h | Warp the frequency axis according to an affine function, i.e. : w' = a * w + b
-fe_warp.h | Allows a caller to choose a warping function
-fe_warp_inverse_linear.h| Warp the frequency axis according to an inverse_linear function, i.e : w' = w / a
-fe_warp_piecewise_linear.h |  [1]
+HEADER|Discription|&nbsp;
+---|---|---
+fe_internal.h ||O
+fe_noise.h | noise removal algorithm,noise removal algorithm,noise removal algorithm,noise removal algorithm|O
+fe_prespch_buf.h |Buffer that maintains both features and raw audio for the VAD implementation|
+fe_type.h | |
+fe_warp_affine.h | Warp the frequency axis according to an affine function, i.e. : w' = a * w + b|O
+fe_warp.h | Allows a caller to choose a warping function|O
+fe_warp_inverse_linear.h| Warp the frequency axis according to an inverse_linear function, i.e : w' = w / a|O
+fe_warp_piecewise_linear.h |  [1]|O
 
 [1]
 Warp the frequency axis according to an piecewise linear function. The function is linear up to a frequency F, where the slope changes so that the Nyquist frequency in the warped axis maps to the Nyquist frequency in the unwarped   
@@ -89,16 +89,16 @@ w'(Nyq) = Nyq
 + ### sphinxbase/src/libsphinxbase/lm  
 'lm' for Langauge Model  
 
-HEADER|Discription
----|---
-jsgf_internal.h|
-jsgf_parse.h
-jsgf_sacnner.h|
-lm_trie.h|
-lm_trie_quant.h|
-ngram_model_internal.h|
-ngram_model_trie.h|
-ngram_raw.h
+HEADER|Discription|&nbsp;
+---|---|---
+jsgf_internal.h||
+jsgf_parse.h||
+jsgf_sacnner.h||
+lm_trie.h||
+lm_trie_quant.h||
+ngram_model_internal.h||
+ngram_model_trie.h||
+ngram_raw.h||
 
 
 ---
