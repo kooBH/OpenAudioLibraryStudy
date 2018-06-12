@@ -108,6 +108,7 @@ ngram_raw.h
 	+ [fe.h](#fe)
 	+ [feat.h](#feat)
 	+ [clapack_lite.h](#clapack_lite)
+	+ [ad.h](#ad)
 	
 * ### sphinxbase/src/libsphinxbase/fe/
 	+ [fe_internal.h](#fe_internal)
@@ -177,6 +178,16 @@ ssymm_
 sposv_   
 spotrf_
  
+ 
+### sphinxbase/include/[ad.h](#CMUSphinx_list)<a name="ad"></a>    
+ad_open_dev  
+ad_open_sps  
+ad_open  
+ad_start_rec  
+ad_stop_rec  
+ad_close  
+ad_read
+
  
 ### sphinxbase/src/libsphinxbase/fe/[fe_internal.h](#CMUSphinx)<a name="fe_internal"></a>   
 fe_init_dither    
@@ -253,6 +264,7 @@ fe_warp_piecewise_linear_print
 	+ [fe.h](#fe.h)
 	+ [feat.h](#feat.h)
 	+ [clapack_lite.h](#clapack_lite.h)
+	+ [ad.h](#ad.h)
 * sphinxbase/src/libsphinxbase/fe/
 	+ [fe_internal.h](#fe_internal.h)
 	+ [fe_noise.h](#fe_noise.h)
@@ -1080,6 +1092,64 @@ void feat_report(feat_t *f /**< In: feat_t */
 
 #ifdef __cplusplus
 
+
+```
+
+
+### sphinxbase/~/[ad.h](#CMUSphinx_proto)<a name="ad.h"></a>
+```C++  
+/**
+ * Open a specific audio device for recording.
+ *
+ * The device is opened in non-blocking mode and placed in idle state.
+ *
+ * @return pointer to read-only ad_rec_t structure if successful, NULL
+ * otherwise.  The return value to be used as the first argument to
+ * other recording functions.
+ */
+SPHINXBASE_EXPORT
+ad_rec_t *ad_open_dev (
+	const char *dev, /**< Device name (platform-specific) */
+	int32 samples_per_sec /**< Samples per second */
+	);
+
+/**
+ * Open the default audio device with a given sampling rate.
+ */
+SPHINXBASE_EXPORT
+ad_rec_t *ad_open_sps (
+		       int32 samples_per_sec /**< Samples per second */
+		       );
+
+
+/**
+ * Open the default audio device.
+ */
+SPHINXBASE_EXPORT
+ad_rec_t *ad_open ( void );
+
+
+/* Start audio recording.  Return value: 0 if successful, <0 otherwise */
+SPHINXBASE_EXPORT
+int32 ad_start_rec (ad_rec_t *);
+
+
+/* Stop audio recording.  Return value: 0 if successful, <0 otherwise */
+SPHINXBASE_EXPORT
+int32 ad_stop_rec (ad_rec_t *);
+
+
+/* Close the recording device.  Return value: 0 if successful, <0 otherwise */
+SPHINXBASE_EXPORT
+int32 ad_close (ad_rec_t *);
+
+/*
+ * Read next block of audio samples while recording; read upto max samples into buf.
+ * Return value: # samples actually read (could be 0 since non-blocking); -1 if not
+ * recording and no more samples remaining to be read from most recent recording.
+ */
+SPHINXBASE_EXPORT
+int32 ad_read (ad_rec_t *, int16 *buf, int32 max);
 
 ```
 
