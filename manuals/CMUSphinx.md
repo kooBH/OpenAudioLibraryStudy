@@ -105,134 +105,59 @@ ngram_raw.h
 
 ### sphinxbase/include/[fe.h](#CMUSphinx_list)<a name="fe"></a>
 typedef float32/fixed32 mfcc_t
-
-SPHINXBASE_EXPORT
-fe_t* fe_init_auto(void);
-
-SPHINXBASE_EXPORT
-arg_t const *fe_get_args(void);
-
-SPHINXBASE_EXPORT
-fe_t *fe_init_auto_r(cmd_ln_t *config);
-
-SPHINXBASE_EXPORT
-const cmd_ln_t *fe_get_config(fe_t *fe);
-
-SPHINXBASE_EXPORT
-void fe_start_stream(fe_t *fe);
-
-SPHINXBASE_EXPORT
-int fe_start_utt(fe_t *fe);
-
-SPHINXBASE_EXPORT
-int fe_get_output_size(fe_t *fe);
-
-SPHINXBASE_EXPORT
-void fe_get_input_size(fe_t *fe, int *out_frame_shift,
-                       int *out_frame_size);
-		       
-SPHINXBASE_EXPORT
-uint8 fe_get_vad_state(fe_t *fe);
-
-SPHINXBASE_EXPORT
-int fe_end_utt(fe_t *fe, mfcc_t *out_cepvector, int32 *out_nframes);
-
-SPHINXBASE_EXPORT
-fe_t *fe_retain(fe_t *fe);
-
-SPHINXBASE_EXPORT
-int fe_free(fe_t *fe);
-
-SPHINXBASE_EXPORT
-int fe_process_frames_ext(fe_t *fe,
-                      int16 const **inout_spch,
-                      size_t *inout_nsamps,
-                      mfcc_t **buf_cep,
-                      int32 *inout_nframes,
-                      int16 *voiced_spch,
-                      int32 *voiced_spch_nsamps,
-                      int32 *out_frameidx);
-
-SPHINXBASE_EXPORT
-int fe_process_frames(fe_t *fe,
-                      int16 const **inout_spch,
-                      size_t *inout_nsamps,
-                      mfcc_t **buf_cep,
-                      int32 *inout_nframes,
-                      int32 *out_frameidx);
-
-SPHINXBASE_EXPORT
-int fe_process_utt(fe_t *fe,  /**< A front end object */
-                   int16 const *spch, /**< The speech samples */
-                   size_t nsamps, /**< number of samples*/
-                   mfcc_t ***cep_block, /**< Output pointer to cepstra */
-                   int32 *nframes /**< Number of frames processed */
-	);
-
-SPHINXBASE_EXPORT
-void fe_free_2d(void *arr);
-
-SPHINXBASE_EXPORT
-int fe_mfcc_to_float(fe_t *fe,
-                     mfcc_t **input,
-                     float32 **output,
-                     int32 nframes);
-
-SPHINXBASE_EXPORT
-int fe_float_to_mfcc(fe_t *fe,
-                     float32 **input,
-                     mfcc_t **output,
-                     int32 nframes);
-
-SPHINXBASE_EXPORT
-int fe_logspec_to_mfcc(fe_t *fe,  /**< A fe structure */
-                       const mfcc_t *fr_spec, /**< One frame of spectrum */
-                       mfcc_t *fr_cep /**< One frame of cepstrum */
-        );
-SPHINXBASE_EXPORT
-int fe_logspec_dct2(fe_t *fe,  /**< A fe structure */
-                    const mfcc_t *fr_spec, /**< One frame of spectrum */
-                    mfcc_t *fr_cep /**< One frame of cepstrum */
-        );
-
-SPHINXBASE_EXPORT
-int fe_mfcc_dct3(fe_t *fe,  /**< A fe structure */
-                 const mfcc_t *fr_cep, /**< One frame of cepstrum */
-                 mfcc_t *fr_spec /**< One frame of spectrum */
-        );
-
+fe_init_auto
+fe_get_args
+fe_init_auto_r  
+fe_get_config  
+fe_start_stream  
+fe_start_utt  
+fe_get_output_size  
+fe_get_input_size  
+fe_get_vad_state  
+fe_end_utt  
+fe_retain  
+fe_free  
+fe_process_frames_ext  
+fe_process_frames  
+fe_process_utt  
+fe_free_2d  
+fe_mfcc_to_float  
+fe_float_to_mfcc  
+fe_logspec_to_mfcc  
+fe_logspec_dct2  
+fe_mfcc_dct3  
 
 ### sphinxbase/~/[cmn.h](#CMUSphinx)<a name="cmn"></a>
 <pre>
-cmn_t* cmn_init(int32 veclen);
-void cmn (cmn_t *cmn, mfcc_t **mfc,);
-void cmn_live(cmn_t *cmn,mfcc_t ,nt32 varnorm,int32 nfr );
-void cmn_live_update(cmn_t *cmn);
-void cmn_live_set(cmn_t *cmn, mfcc_t const *vec);
-void cmn_live_get(cmn_t *cmn, mfcc_t *vec);
-void cmn_free (cmn_t *cmn);
+cmn_init  
+cmn   
+cmn_live  
+cmn_live_update  
+cmn_live_set  
+cmn_live_get  
+cmn_free  
 </pre>
  
 ### sphinxbse/src/libsphinxbase/fe/[fe_internal.h](#CMUSphinx)<a name="fe_internal"></a>  
   
-void fe_init_dither(int32 seed);  
-int32 fe_dither(int16 *buffer, int32 nsamps);  
-int fe_read_frame(fe_t *fe, int16 const *in, int32 len);  
-int fe_shift_frame(fe_t *fe, int16 const *in, int32 len);  
-void fe_write_frame(fe_t *fe, mfcc_t *feat, int32 store_pcm);  
+fe_init_dither(  
+fe_dither  
+fe_read_frame  
+fe_shift_frame  
+ fe_write_frame  
 **Initialization functions**  
-int32 fe_build_melfilters(melfb_t *MEL_FB); 
-int32 fe_compute_melcosine(melfb_t *MEL_FB);  
-void fe_create_hamming(window_t *in, int32 in_len);  
-void fe_create_twiddle(fe_t *fe);   
+fe_build_melfilters  
+fe_compute_melcosine  
+fe_create_hamming  
+fe_create_twiddle  
     
-fixed32 fe_log_add(fixed32 x, fixed32 y);
-fixed32 fe_log_sub(fixed32 x, fixed32 y);  
+fe_log_add  
+fe_log_sub  
   
 **Miscellaneous processing functions**  
-void fe_spec2cep(fe_t * fe, const powspec_t * mflogspec, mfcc_t * mfcep);  
-void fe_dct2(fe_t *fe, const powspec_t *mflogspec, mfcc_t *mfcep, int htk);  
-void fe_dct3(fe_t *fe, const mfcc_t *mfcep, powspec_t *mflogspec);  
+fe_spec2cep   
+fe_dct2   
+fe_dct3   
 
 ---
 
