@@ -23,7 +23,7 @@ List
  string| X| | |
  matrix| 1D |2D | |
  vector| 1D | 1D| |
- complex|struct | | |
+ complex|struct |struct | |
  fft| O | O| |
  stft| O |X | |
  blas| simpe for^3 | X | |
@@ -32,7 +32,7 @@ List
  data I/O|external library using simple iostream | | |
  openMP| O | X | |
  CUDA| X | alpha 3.5 | |
- Detail Info| [SEE](#1) |[SEE](#2) | [SEE](#3)|[SEE])(#4)
+ Detail Info| [SEE](#1) |[SEE](#2) | [SEE](#3)|[SEE](#4)
 
  
 ## SUMMARY<a name = "summary"></a>  
@@ -56,6 +56,20 @@ List
 + a set of library modules and tools  
 + http://htk.eng.cam.ac.uk/prot-docs/htkbook.pdf  
 + HCUDA: [CUDA based math kernel functions](http://htk.eng.cam.ac.uk/pdf/woodland_htk35_uea.pdf)
++ Data Type    
+typedef unsigned long           Ulong;  
+typedef unsigned short          Ushort;  
+typedef signed char         Schar;  
+typedef unsigned char           Uchar;  
+typedef struct {double  real, imag;}    DoubleComplex;  
+typedef struct {float   real, imag;}    FloatComplex;  
+typedef struct {long    real, imag;}    LongComplex;  
+typedef struct {short   real, imag;}    ShortComplex;  
+typedef struct {Schar   real, imag;}    ScharComplex;  
+typedef unsigned char           Bool;  
+typedef unsigned short          Wchar;  e
+
+
 
 ### [CMUSphinx](https://cmusphinx.github.io/)<a name="3"></a>
 + language model
