@@ -4,10 +4,92 @@
 + [LICENSE](#openSMILE_license)
 
 https://audeering.com/technology/opensmile/  
-
 #### [Document](https://www.audeering.com/research-and-open-source/files/openSMILE-book-latest.pdf)
 
+
++ **/src/include/dsp**
+
+Header|Discription|&nbsp;
+---|---|---
+dbA.hpp |applies dbX weighting to fft magnitudes|
+smileResample.hpp|simple preemphasis : x(t) = x(t) -k*x(t-1)|
+specScale.hpp||
+signalGenerator.hpp| Signal source. Generates various noise types and pre-defined signals|
+specResample.hpp|experimental resampling by ideal fourier interpolation and nad limiting this component taks a complex (!) dft spectrum (generated from real values) as input |
+vadV1.hpp| voice activity detection based on LSF and Pitch features + smoothing|
+
++ **/src/include/dspcore**
+
+Header|Discription|&nbsp;
+---|---|---
+acf.hpp| Autocorrelation Function (ACF) |
+fftmagphase.hpp|  |
+fullturnMean.hpp| computes mean of full input |
+turnDetector.hpp| simple silence threshold based turn detector |
+amdf.hpp| Average Magnitude Difference Function (AMDF) |
+fftXg.h|  |
+monoMixdown.hpp| simple mixer, which adds multiple channels (elements) to a single channel (element)  |
+vextorMVN.hpp| This component extends the bases class cVectorTransform and implements mean/variance normalisation |
+contourSmoother.hpp| smooth data contours by moving average filter |
+framer.hpp| dataFramer |
+preemphasis.hpp| simple preemphasis : x(t) = x(t) - k*x(t-1) |
+vectorPreemphasis.hpp| pre-emphasis per frame (simplification, however, this is the way HTK does it... so for compatibility... here you go) (use before window function is applied) |
+deltaRegression.hpp| comoute delta regression using regression formula |
+fullinputMean.hpp| compute mean of full input |
+transformFft.hpp| fast fourier transform using fft4g library, output : complex values of fft or real signal values (for iFFT) |
+windower.hpp| data windower. takes frames from one level, applies windows function, and saves to other level |
+
+
++ **/src/include/functionals**
+
+Header|Discription|&nbsp;
+---|---|---
+functionalCompoent.hpp|a single statistical functional or the like(template class)|
+functionalModulation.hpp|number of segmenst based on delta thresholding|
+functionalRegression.hpp|linear and quadratic regression coefficients|
+functionalCrossings.hpp|zero-crossings, mean-crossings, arithmetic mean|
+functionalMoments.hpp|statistical moments|
+functionalSamples.hpp|rise/fall times, up/down-level times|
+functionalDCT.hpp|number of segments based on delta thresholding |
+functionalOnset.hpp|number of segments based on delta thresholing|
+functionalSegments.hpp|number of segments based on delta thresholding |
+functionalExtremes.hpp|extreme values and ranges|
+functionalPeaks2.hpp|number of peaks and various measures associated with peaks|
+functionals.hpp|passes unsorted row data array AND (if required) sorted row data array to functional processors|
+functionalLpc.hpp|number of segments based on delta thresholding |
+functionalPeaks.hpp|number of peaks and various measures associated with peaks|
+functionalTimes.hpp|rise/fall times, up/down-level times|
+functionalMeans.hpp|various means,arithmetic,geometric, quadratic, etc. also number of non-zero values, etc|
+functionalPercentiles.hpp|percentiles and quadrtiles, and inter-percentile/quartile ranges|
+
++ /src/include/rnn
+
++ /src/include/lld
+
++ /src/include/lldcore
+
++ /src/include/portaudio
+
++ /src/include/smileutil
+
++ /src/include/classifiers
+
++ /src/include/io
+
++ /src/include/iocore
+
++ /src/include/rapidjson
+
++ /src/include/video  : openCV 
+
++ /src/include/core
+
+
+
 ---
+
+
+
 
 #### [CLASS LIST](#openSMILE)<a name="openSMILE_list"></a>
 
