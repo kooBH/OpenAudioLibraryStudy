@@ -144,8 +144,11 @@ functionalPercentiles.hpp|percentiles and quadrtiles, and inter-percentile/quart
 + cDBA
 void computeDBA(FLOAT_DMEM *x, long blocksize, FLOAT_DGEM F0)
 
+
+
 + fftXg  
-  **functions**  
+c로 구현된 함수( fft4g.c 와 fftsg.c 둘다 같은 fftXg.h를 쓰지만 구현하는 함수가 중복. 길이는 fftsg.c가 더 길다)    
+**functions**  
        cdft: Complex Discrete Fourier Transform  
        rdft: Real Discrete Fourier Transform  
        ddct: Discrete Cosine Transform  
