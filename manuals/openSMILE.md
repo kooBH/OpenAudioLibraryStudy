@@ -128,13 +128,13 @@ PortAudio : cross-platform, open-source, audio I/O library
 
 #### [CLASS LIST](#openSMILE)<a name="openSMILE_list"></a>
 
-cVadV1 : cDataProcessor : cSmileComponent
-
++ cVadV1 : cDataProcessor : cSmileComponent
+  int computeFilters (long blocksize, double frameSizeSec, int idxc)
 ---
 
 #### [CLASS PROTOTYPE](#openSMILE)<a name = "openSMILE_proto"></a>
 
-+ cSmileComponent
++ ### cSmileComponent
 
 ```C++
 
