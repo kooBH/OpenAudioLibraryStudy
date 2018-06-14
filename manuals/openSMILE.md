@@ -205,35 +205,21 @@ class DLLEXPORT cSmileComponent {
     void addExternalPointer(const char *name, void * ptr) 
     
     
-    double getDouble(const char*name) 
-    
-    double getDouble_f(char*name) 
-    
-    int getInt(const char*name) 
-    
-    int getInt_f(char*name) 
-    
+    double getDouble(const char*name)     
+    double getDouble_f(char*name)     
+    int getInt(const char*name)     
+    int getInt_f(char*name)     
 
-    const char *getStr(const char*name)
-    
+    const char *getStr(const char*name)    
     const char * getStr_f(char*name) 
-
-    char getChar(const char*name) 
-    
-    const char getChar_f(char*name) 
-    
-    const ConfigValue *getValue(const char*name)
-    
+    char getChar(const char*name)     
+    const char getChar_f(char*name)     
+    const ConfigValue *getValue(const char*name)    
     const ConfigValue * getValue_f(char*name) 
-
-    const ConfigValueArr *getArray(const char*name)
-    
+    const ConfigValueArr *getArray(const char*name)    
     const ConfigValueArr * getArray_f(char*name) 
-
-    int getArraySize(const char*name)
-    
+    int getArraySize(const char*name)    
     int getArraySize_f(char*name) 
-
     int isSet(const char*name) 
     int isSet_f(char*name)
 
