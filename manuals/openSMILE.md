@@ -23,8 +23,8 @@ process 관련 클래스들은 자신의 myTick()함수(sSmileComponent에서 �
 RNN :  Recurrent neural network  
 OpenCV :  Open Source Computer Vision Library  
 RapidJSON : RapidJSON is a JSON parser and generator for C++. It was inspired by RapidXml. Header-only  
-PortAudio : cross-platform, open-source, audio I/O library
-libSVM : A Library for Support Vector Machines
+PortAudio : cross-platform, open-source, audio I/O library  
+libSVM : A Library for Support Vector Machines  
 
 + **/src/include/core**
 
