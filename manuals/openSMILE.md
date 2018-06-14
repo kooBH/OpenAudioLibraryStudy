@@ -6,6 +6,10 @@
 https://audeering.com/technology/opensmile/  
 #### [Document](https://www.audeering.com/research-and-open-source/files/openSMILE-book-latest.pdf)
 
+![alt text](./openSmile_architecture.png "openSmile_architecture")
+
+
+
 대부분의 클래스가 cSmileComponemt 상속  
 대부분의 클래스가 cConfigManager 사용  
 myTick() 함수의 구현에서 프로세스 수행 (전부다는 아님)   
