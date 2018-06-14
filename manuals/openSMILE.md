@@ -6,6 +6,21 @@
 https://audeering.com/technology/opensmile/  
 #### [Document](https://www.audeering.com/research-and-open-source/files/openSMILE-book-latest.pdf)
 
+대부분의 클래스가 cSmileComponemt 상속  
+대부분의 클래스가 cConfigManager 사용  
+myTick() 함수의 구현에서 프로세스 수행 (전부다는 아님)   
+C 스타일의 함수를 클래스 밖에서 구현한 경우도 있음  
+
+중간중간에 TODO나 주석처리된 함수,변수들 많음  
+주석으로 // ...이거 한것?   
+이린거 종종 보임  
+
+
+RNN :  Recurrent neural network  
+OpenCV :  Open Source Computer Vision Library  
+RapidJSON : RapidJSON is a JSON parser and generator for C++. It was inspired by RapidXml. Header-only  
+PortAudio : cross-platform, open-source, audio I/O library
+
 
 + **/src/include/core**
 
@@ -23,11 +38,11 @@ smileTypes.hpp|   |
 versionInfo.hpp|   |
 componentManager.hpp|   |
 dataSelector.hpp|   |
-nullSink
+nullSink||
 svn_version.hpp|   |
 windowProcessor.hpp| filter : (abstarct class only) linear N-th order filter for single value data streams this class processed every elemnet of a frame independently derived classes only need to implement the filter algorithm  |
 configManager.hpp|   |
-dataSing.hpp|   |
+dataSink.hpp|   |
 smileCommon.hpp|   |
 vectorProcessor.hpp| specialised dataProcessor, which takes one frame as input an produces one frame as output     however, each array field is processed individually as a vector      for each field the output dimension can be set in derived components |
 winToVecProcessor.hpp|  reads in windows and outputs vectors (frames)  |
@@ -113,12 +128,6 @@ functionalPercentiles.hpp|percentiles and quadrtiles, and inter-percentile/quart
 + /src/include/video  : openCV 
 
 
-myTick : Real-time processing implement 
-
-RNN :  Recurrent neural network  
-OpenCV :  Open Source Computer Vision Library  
-RapidJSON : RapidJSON is a JSON parser and generator for C++. It was inspired by RapidXml. Header-only  
-PortAudio : cross-platform, open-source, audio I/O library
 
 
 ---
