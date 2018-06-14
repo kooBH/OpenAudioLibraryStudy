@@ -21,17 +21,17 @@ List
 ---|---|---|---|---
  언어|C |C |C |C++
  string| X| | |
- matrix| 1D | | |
- vector| 1D | | |
+ matrix| 1D |2D | |
+ vector| 1D | 1D| |
  complex|struct | | |
- fft| O | | |
- stft| O | | |
- blas| simpe for^3 | | |
+ fft| O | O| |
+ stft| O |X | |
+ blas| simpe for^3 | X | |
  parameter| direct | | |
  visualizaion| customed GNUplot| | |
  data I/O|external library using simple iostream | | |
- openMP| O | | |
- CUDA| X | | |
+ openMP| O | X | |
+ CUDA| X | alpha 3.5 | |
  Detail Info| [SEE](#1) |[SEE](#2) | [SEE](#3)|[SEE])(#4)
 
  
@@ -55,7 +55,7 @@ List
 + linux/windows
 + a set of library modules and tools  
 + http://htk.eng.cam.ac.uk/prot-docs/htkbook.pdf  
-
++ HCUDA: [CUDA based math kernel functions](http://htk.eng.cam.ac.uk/pdf/woodland_htk35_uea.pdf)
 
 ### [CMUSphinx](https://cmusphinx.github.io/)<a name="3"></a>
 + language model
