@@ -32,7 +32,7 @@ List
  data I/O|external library using simple iostream | | |
  openMP| O | | |
  CUDA| X | | |
- Detail Info| [1](#1) |[2](#2) | [3](#3)|[4])(#4)
+ Detail Info| [SEE](#1) |[SEE](#2) | [SEE](#3)|[SEE])(#4)
 
  
 ## SUMMARY<a name = "summary"></a>  
