@@ -1,5 +1,5 @@
 # [openSMILE](./openAudioLibs.md#TOP)<a name="openSMILE"></a>
-+ [CLASS LIST](#openSMILE_list)
++ [LIST](#openSMILE_list)
 + [CLASS PROTOTYPE](#openSMILE_proto)
 + [LICENSE](#openSMILE_license)
 
@@ -57,7 +57,7 @@ fftmagphase.hpp|  |
 fullturnMean.hpp| computes mean of full input |
 turnDetector.hpp| simple silence threshold based turn detector |
 amdf.hpp| Average Magnitude Difference Function (AMDF) |
-fftXg.h|  |
+fftXg.h| Fast Fourier/Cosine/Sine Transform |
 monoMixdown.hpp| simple mixer, which adds multiple channels (elements) to a single channel (element)  |
 vextorMVN.hpp| This component extends the bases class cVectorTransform and implements mean/variance normalisation |
 contourSmoother.hpp| smooth data contours by moving average filter |
@@ -126,10 +126,27 @@ PortAudio : cross-platform, open-source, audio I/O library
 
 
 
-#### [CLASS LIST](#openSMILE)<a name="openSMILE_list"></a>
+#### [LIST](#openSMILE)<a name="openSMILE_list"></a>
 
 + cDBA
 void computeDBA(FLOAT_DMEM *x, long blocksize, FLOAT_DGEM F0)
+
++ fftXg  
+  **functions**  
+       cdft: Complex Discrete Fourier Transform  
+       rdft: Real Discrete Fourier Transform  
+       ddct: Discrete Cosine Transform  
+       ddst: Discrete Sine Transform  
+       dfct: Cosine Transform of RDFT (Real Symmetric DFT)  
+       dfst: Sine Transform of RDFT (Real Anti-symmetric DFT)  
+   **function prototypes**  
+       void cdft(int, int, FLOAT_TYPE_FFT *, int *, FLOAT_TYPE_FFT *);  
+       void rdft(int, int, FLOAT_TYPE_FFT *, int *, FLOAT_TYPE_FFT *);  
+       void ddct(int, int, FLOAT_TYPE_FFT *, int *, FLOAT_TYPE_FFT *);  
+       void ddst(int, int, FLOAT_TYPE_FFT *, int *, FLOAT_TYPE_FFT *);  
+       void dfct(int, FLOAT_TYPE_FFT *, FLOAT_TYPE_FFT *, int *, FLOAT_TYPE_FFT *);  
+       void dfst(int, FLOAT_TYPE_FFT *, FLOAT_TYPE_FFT *, int *, FLOAT_TYPE_FFT *);  
+
 
 + cVadV1 : cDataProcessor : cSmileComponent
   int computeFilters (long blocksize, double frameSizeSec, int idxc)
