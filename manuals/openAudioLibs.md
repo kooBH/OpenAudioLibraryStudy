@@ -51,3 +51,7 @@
 
 ### [BeamformIt](https://github.com/xanguera/BeamformIt)
 + acoustic beamforming tool
+
+### Common Traits
++ Don't use primitive data type. use defined data type throughout all source. for easy modification
++ If import another library, using functions with other name, with more consistency. Rename by inline or other method
