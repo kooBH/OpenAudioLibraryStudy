@@ -24,26 +24,32 @@ List
  matrix| 1D | | |
  vector| | | |
  complex|struct | | |
- fft| void cig_fft(FP_TYPE* xr, FP_TYPE* xi, FP_TYPE* yr, FP_TYPE* yi, int n, FP_TYPE* buffer, FP_TYPE mode) | | |
- stft|void cig_stft_forward(FP_TYPE* x, int nx, int* center, int* nwin, int nfrm, int nfft, char* window, int subt_mean, int optlv,FP_TYPE* norm_factor, FP_TYPE* weight_factor, FP_TYPE** Xmagn, FP_TYPE** Xphse)  | | |
+ fft| O | | |
+ stft| O | | |
  blas| | | |
  parameter| direct | | |
  visualizaion| customed GNUplot| | |
  data I/O|external library using simple iostream | | |
  openMP| O | | |
  CUDA| X | | |
- 
+ Detail Info| [1](#1) |[2](#2) | [3](#3)|[4])(#4)
+
  
 ## SUMMARY<a name = "summary"></a>  
  
-### [Ciglet](https://github.com/Sleepwalking/ciglet)
+### [Ciglet](https://github.com/Sleepwalking/ciglet)<a name="1"></a>
 + lightweight C library for digital signal processing
 + C-written sIGnal codeLETs
 + simple and compact code
 + linux/windows
 + Matlab  to C conversion of frequently used ones 
 
-### [Hidden Markov Model Toolkit (HTK)](http://htk.eng.cam.ac.uk/)
+fft : void cig_fft(FP_TYPE* xr, FP_TYPE* xi, FP_TYPE* yr, FP_TYPE* yi, int n, FP_TYPE* buffer, FP_TYPE mode)  
+stft :void cig_stft_forward(FP_TYPE* x, int nx, int* center, int* nwin, int nfrm, int nfft, char* window, int subt_mean, int optlv,FP_TYPE* norm_factor, FP_TYPE* weight_factor, FP_TYPE** Xmagn, FP_TYPE** Xphse)  
+
+
+
+### [Hidden Markov Model Toolkit (HTK)](http://htk.eng.cam.ac.uk/)<a name="2"></a>
 + C source form
 + well organized code
 + linux/windows
@@ -51,7 +57,7 @@ List
 + http://htk.eng.cam.ac.uk/prot-docs/htkbook.pdf  
 
 
-### [CMUSphinx](https://cmusphinx.github.io/)
+### [CMUSphinx](https://cmusphinx.github.io/)<a name="3"></a>
 + language model
 + not intented to mathmatical problems
 + Pocketsphinx — lightweight recognizer library written in C.
@@ -67,7 +73,7 @@ List
 + include a matrix library that wraps standard BLAS and LAPACK routines
 + licensed under Apache 2.0, which is one of the least restrictive licenses available
 
-### [openSMILE](https://audeering.com/technology/opensmile/)
+### [openSMILE](https://audeering.com/technology/opensmile/)<a name="4"></a>
 + c++ API
 + using PortAudio
 + General audio signal processing
