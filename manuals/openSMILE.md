@@ -85,6 +85,11 @@ functionalPercentiles.hpp|percentiles and quadrtiles, and inter-percentile/quart
 + /src/include/core
 
 
+RNN :  Recurrent neural network  
+OpenCV :  Open Source Computer Vision Library  
+RapidJSON : RapidJSON is a JSON parser and generator for C++. It was inspired by RapidXml. Header-only  
+PortAudio : cross-platform, open-source, audio I/O library
+
 
 ---
 
