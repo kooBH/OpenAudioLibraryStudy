@@ -7,6 +7,36 @@ https://audeering.com/technology/opensmile/
 #### [Document](https://www.audeering.com/research-and-open-source/files/openSMILE-book-latest.pdf)
 
 
++ **/src/include/core**
+
+Header|Discription|&nbsp;
+---|---|---
+commandlineParser.hpp|   |
+dataProcessor.hpp| This is an abstract base class for all components which read data from the data moemory and write new data to the data memory  |
+dataWriter.hpp|   |
+smileLogger.hpp|   |
+vecToWinPorcessor.hpp|   |
+componentList.hpp|   |
+dataReader.hpp|   |
+exceptions.hpp|   |
+smileTypes.hpp|   |
+versionInfo.hpp|   |
+componentManager.hpp|   |
+dataSelector.hpp|   |
+nullSink
+svn_version.hpp|   |
+windowProcessor.hpp|   |
+configManager.hpp|   |
+dataSing.hpp|   |
+smileCommon.hpp|   |
+vectorProcessor.hpp|   |
+winToVecProcessor.hpp|   |
+dataMemory.hpp|   |
+dataSource.hpp|   |
+smileComponenet.hpp|   |
+vectorTransform.hpp|   |
+
+
 + **/src/include/dsp**
 
 Header|Discription|&nbsp;
@@ -15,7 +45,7 @@ dbA.hpp |applies dbX weighting to fft magnitudes|
 smileResample.hpp|simple preemphasis : x(t) = x(t) -k*x(t-1)|
 specScale.hpp||
 signalGenerator.hpp| Signal source. Generates various noise types and pre-defined signals|
-specResample.hpp|experimental resampling by ideal fourier interpolation and nad limiting this component taks a complex (!) dft spectrum (generated from real values) as input |
+specResample.hpp|experimental resampling by ideal fourier interpolation and limiting this component taks a complex (!) dft spectrum (generated from real values) as input |
 vadV1.hpp| voice activity detection based on LSF and Pitch features + smoothing|
 
 + **/src/include/dspcore**
@@ -82,7 +112,7 @@ functionalPercentiles.hpp|percentiles and quadrtiles, and inter-percentile/quart
 
 + /src/include/video  : openCV 
 
-+ /src/include/core
+
 
 
 RNN :  Recurrent neural network  
@@ -98,9 +128,312 @@ PortAudio : cross-platform, open-source, audio I/O library
 
 #### [CLASS LIST](#openSMILE)<a name="openSMILE_list"></a>
 
+cVadV1 : cDataProcessor : cSmileComponent
+
 ---
 
 #### [CLASS PROTOTYPE](#openSMILE)<a name = "openSMILE_proto"></a>
+
++ cSmileComponent
+
+```C++
+
+class DLLEXPORT cSmileComponent {
+  private:
+    int id_;           // component ID in componentManager
+    int EOI_;          // EOI counter, 0 only in first loop, then +1 for every nonEOI/EOI loop pair
+    int EOIcondition_; // flag that indicates end of input
+                      // i.e. if EOI is 1, myTick should show a different behaviour
+                      //  esp. dataReaders should return right padded matrices, in getMatrix , getNextMatrix etc..
+    int EOIlevel_;   // If set to >= 1, the isEOI will report EOI condition true only if EOI_  == EOIlevel_ ;
+    int paused_; // flag that indicates whether processing (the tick loop) has been paused or is active
+    
+    smileMutex  messageMtx_;
+
+    cComponentManager *compman_;  // pointer to component manager this component instance belongs to
+    cSmileComponent *parent_;     // pointer to parent component (for dataReaders, etc.)
+    char *iname_;   // name of component instance
+    char *cfname_;  // name of config instance associated with this component instance
+
+    // variables used for component profiling
+    int doProfile_, printProfile_;
+    double profileCur_, profileSum_; // exec. time of last tick, exec time total
+    struct timeval startTime_;
+    struct timeval endTime_;
+
+    long lastNrun_;   // the number of Nrun in the last tickloop?
+
+  protected:
+    SMILECOMPONENT_STATIC_DECL_PR
+
+    cConfigManager *confman_;  // pointer to configManager
+    const char *cname_;        // name of the component (type)
+    const char *description_;  // component description and usage information
+
+    // component state variables
+    int isRegistered_, isConfigured_, isFinalised_, isReady_;
+    int runMe_;
+
+    int manualConfig_;
+    int override_;
+    
+    static sComponentInfo * makeInfo(cConfigManager *_confman,
+                                     const char *_name, const char *_description,
+                                     cSmileComponent * (*create) (const char *_instname),
+                                     int regAgain=0, int _abstract=0, int _nodmem=0);
+
+    // Gets a pointer to the component instance *name via the component manager.
+    cSmileComponent * getComponentInstance(const char * name);
+
+    // Gets the component instance type of the instance *name as string via the component manager.
+    const char * getComponentInstanceType(const char * name);
+
+    // Create a component instance of given type with instance name "name" in the component manager.
+    cSmileComponent * createComponent(const char *name, const char *component_type);
+    
+    // Gets the number of components ran during the last tick.
+    long getLastNrun()
+
+    // Functions to get config values from the config manager from our config instance.
+    // The _f functions internally free the string *name. Use these in conjunction with myvprint()...
+    // NOTE: Yes, this is ineffective. TODO: smile memory manager, and fixed length text buffer which can be reused (can also grow if needed).
+    void * getExternalPointer(const char *name) 
+    
+    void addExternalPointer(const char *name, void * ptr) 
+    
+    
+    double getDouble(const char*name) 
+    
+    double getDouble_f(char*name) 
+    
+    int getInt(const char*name) 
+    
+    int getInt_f(char*name) 
+    
+
+    const char *getStr(const char*name)
+    
+    const char * getStr_f(char*name) 
+
+    char getChar(const char*name) 
+    
+    const char getChar_f(char*name) 
+    
+    const ConfigValue *getValue(const char*name)
+    
+    const ConfigValue * getValue_f(char*name) 
+
+    const ConfigValueArr *getArray(const char*name)
+    
+    const ConfigValueArr * getArray_f(char*name) 
+
+    int getArraySize(const char*name)
+    
+    int getArraySize_f(char*name) 
+
+    int isSet(const char*name) 
+    int isSet_f(char*name)
+
+    // Returns 1 if we are in an abort state (user requested abort).
+    int isAbort();
+
+    // Function that is called during initialisation. It should be used to fetch config variables
+    // from the config manager and store them in local variables.
+    // Each derived class is responsible for fetching configuration from confman or setting it manually BEFORE configureInstance is called!
+    virtual void fetchConfig()=0;
+
+    // Functions to be implemented by derived classes:
+
+    // Sets the environment (pointers to parent, component manager, config manager).
+    virtual void mySetEnvironment() 
+    
+    // Registers the component instance after creation (by the component Manager).
+    virtual int myRegisterInstance(int *runMe=NULL) 
+
+    // Configures the component instance. Data-memory levels and level parameters such as T are created and set here.
+    virtual int myConfigureInstance() 
+
+    // Finalises the component instance. Data-memory level names (fields and elements) are set here.
+    virtual int myFinaliseInstance() 
+    // Holds the actual implementation of the tick loop code for the derived component.
+    // This function should return 1 if the component did process data, and 0 otherwise.
+    // If all components return 0 (nothng to process), the component manager will switch
+    // to the EOI (end-of-input) state (or advance to the next tick loop iteration).
+    virtual int myTick(long long t) 
+
+    // Called by the component manager when the tick loop is to be paused.
+    // If the component needs to reject the pausing of the tick loop, it should return 0, otherwise always 1!
+    virtual int pauseEvent() 
+
+    // Called by the component manager when the tick loop is to be resumed.
+    virtual void resumeEvent() { }
+
+    // Signals EOI to componentManager (theoretically only useful for dataSource components, however we make it accessible to all smile components)
+    // NOTE: you do not need to do this explicitely.. if all components fail, EOI is assumed, then a new tickLoop is started by the component manager
+    // TODO: is this actually used and/or implemented properly?
+    void signalEOI();
+
+    // Checks if the given component message is of type "msgtype" (string name).
+    int isMessageType(cComponentMessage *msg, const char * msgtype)
+
+    // Functions for component message handling.
+    // Note on data synchronisation for messages: The messages can arrive at any time, if
+    // they are sent from another thread. Thus, a mutex is used to prevent collision when
+    // accessing variables from processComponentMessage and the rest of the component code
+    // (especially myTick). The mutex is automatically locked before processComponentMessage
+    // is called, and unlocked afterwards. In the rest of the code, however, lockMessageMemory()
+    // and unlockMessageMemory() must be used.
+
+    // This function is called by the component manager, if there is a new message for this component.
+    // A derived component must override this to receive and process messages.
+    // Do NOT call lockMessageMemory() in this function! The *msg pointer is always valid.
+    // Return value: 0, message was not processed; != 0, message was processed.
+    // The return value will be passed on to the sender (?).
+    // NOTE: the custData pointer in cComponentMessage (as well as the whole cComponentMessage object)
+    //       is valid ONLY until processComponentMessage() returns!
+    //       Thus, you are advised to copy data to local memory
+    // NOTE2: This function is called directly from the context of another component/thread.
+    //        Do NOT do anything here that is time consuming. It will block the other thread
+    //        or the execution of the tick loop. Esp. don't wait here until your own myTick() is called.
+    //        In signle threaded mode this will never happen!
+    //        Always, only accept the message data and put it into a buffer. Process the buffer in myTick()
+    //        or in a background thread.
+    virtual int processComponentMessage(cComponentMessage *msg) { return 0; }
+    
+    // this function forwards the message to the componentMananger and sets the *sender pointer correctly
+    // Return value: 0, message was not processed; != 0, message was processed.
+    // TODO: return value passing for multiple recepients?
+    int sendComponentMessage(const char *recepient, cComponentMessage *msg);
+
+    // Locks the "message memory" (variables that are accessed by processComponentMessage).
+    // You must call this function prior to accessing variables you are accessing in processComponentMessage().
+    // Do not use this function in processComponentMessage() itself, though!
+    void lockMessageMemory() 
+    // Unlocks the "message memory" (variables that are accessed by processComponentMessage).
+    void unlockMessageMemory() 
+    
+    // Gets the smile time from the component manager (time since start of the system).
+    double getSmileTime();
+
+    // Returns 1 if we are in an end-of-input condition.
+    int isEOI() 
+
+    // Get the EOI counter, i.e. the number of repeated tick loop sequences.
+    int getEOIcounter() 
+
+    // Request stopping of processing in tickLoop of component manager.
+    // Calling this will make openSMILE stop the processing.
+    virtual void abort_processing();
+
+  public:
+    // Statics:
+    // these two must be overridden in a base class:
+    //static sComponentInfo * registerComponent(cConfigManager *_confman);
+    //static cSmileComponent * create(const char *_instname);
+    SMILECOMPONENT_STATIC_DECL
+
+    //method for setting config... a base class may implement it with arbirtrary parameters
+    // values set will override those obtained by fetchConfig if override=1
+    // if override=0, then only those which are not set are updated
+    // void setConfig(..., int override=1);
+    int isManualConfigSet()
+    
+    // Returns whether the tick loop is paused (1) or running (0).
+    int isPaused() 
+
+    // Gets pointer to the associated component manager object,
+    // i.e. the object that created this smile component instance.
+    cComponentManager *getCompMan() 
+
+    // Constructor that creates an instance of this component with instance name "instname".
+    cSmileComponent(const char *instname);
+    
+    // Sets component info after component creation, and calls fetchConfig.
+    //  Pointer to config manager, component name and description
+    virtual void setComponentInfo(cConfigManager *cm, const char *cname, const char *description) 
+        
+    // Sets component manager pointer and the component ID, as used by the component manager.
+    // Called by the creator component (parent) or directly by the component manager.
+    virtual void setComponentEnvironment(cComponentManager *compman, int id, cSmileComponent *parent=NULL);
+    
+    // Sets the name of the associated config instance this component instance is linked to.
+    void setConfigInstanceName(const char *cfname) 
+    
+    // Gets the name of the associated config instance.
+    const char * getConfigInstanceName() 
+    
+    // Performs component specific register operation, e.g. write/read requests with dataMemory..
+    // *runMe return value for component manager : 0, don't call my tick of this component, 1, call myTick
+    int registerInstance(int *runMe=NULL) 
+    
+    int isRegistered() 
+
+    // Performs component configuration (data memory level configuration, creation of readers/writers etc.).
+    int configureInstance() 
+    
+    int isConfigured() 
+
+    // Performs component finalisation (loading of models, opening of files, data memory level names, ...).
+    int finaliseInstance()
+    int isFinalised() 
+
+    // Returns 1, if component has been finalised and is ready for the tick loop. Returns 0 otherwise.
+    int isReady()
+
+    // The tick() function. This is called by the component manager, and internally executes myTick(),
+    int tick(long long t, int EOIcond=0, long _lastNrun=-1) 
+    
+    // Configures profiling (measuring of the time spent in each tick).
+    void setProfiling(int enable=1, int print=0) 
+
+    // Starts time measurement (called at the beginning of the tick).
+    void startProfile(long long t, int EOI);
+
+    // Ends time measurement (called at the end of the tick).
+    void endProfile(long long t, int EOI);
+
+    // Gets the current profiling statistics.
+    // If sum == 1, it returns the accumulated run-time in seconds
+    // (i.e. the time spent in tick() by this component).
+    // If sum == 0, the duration of the last tick() is returned.
+    // NOTE: For multi-threaded code this method of profiling is not exact.
+    //       The tick() function can be interrupted by other threads, but
+    //       time measurement is done via the system timer from start to end of tick().
+    double getProfile(int sum=1) 
+
+    // Gets the component instance name.
+    const char *getInstName() const
+
+    // Gets the component type name.
+    const char *getTypeName() const
+
+    // Sets the EOI counter. Used by the component manager once a new tick loop with EOIcondition=1 starts.
+    // NOTE: it would be possible for the components to manage their own EOI counters, however, like this we ensure sync and better performance.
+    // If derived components create sub-components internally (without tick function - e.g. dataReaders/Writers),
+    // they must override this, in order to properly set the EOI status in the sub-components.
+    virtual int setEOIcounter(int cnt)
+
+    // Sets and unsets the EOIcondition variable. This is called internally from tick() only.
+    // If derived components create sub-components internally (without tick function - e.g. dataReaders/Writers),
+    // they must override this, in order to properly set the EOI status in the sub-components.
+    virtual void setEOI() 
+    
+    virtual void unsetEOI() 
+    virtual void setEOIlevel(int level)
+    virtual int EOIlevelIsMatch()
+    
+    // Called by the component manager. Notifies this component about a tick loop pause.
+    virtual int pause() 
+
+    // Called by the component manager. Notifies this component about a tick loop resume.
+    virtual void resume()
+
+    // This function is called externally by the component manager,
+    //   if another component calls sendComponentMessage.
+    // It receives the message, takes care of memory access synchronisation, and processes the message.
+    int receiveComponentMessage(cComponentMessage *msg) 
+
+```
 
 ---
 
