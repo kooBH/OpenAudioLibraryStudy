@@ -7,6 +7,33 @@
 5. ### [openSMILE](./openSMILE.md#openSMILE)
 ---  
 
+List  
+1. fft, stft, istft 와 함수 형태
+2. string 처리 함수 종류
+3. 언어
+4. Matrix, vector, Scalar 표현, complex 표현
+5. 함수 인자 전달방식
+6. 데이터 시각화 방식. plot or print
+7. 데이터 I/O 어떻게 하는지. 데이터 포맷, 방식
+8. OpenMP 지원 / CUDA 지원?
+
+&nbsp;|Ciglet|HTK|CMUSphinx|openSMILE
+---|---|---|---|---
+ 언어|C |C |C |C++
+ string| X| | |
+ matrix| 1D | | |
+ vector| | | |
+ complex|struct | | |
+ fft| void cig_fft(FP_TYPE* xr, FP_TYPE* xi, FP_TYPE* yr, FP_TYPE* yi, int n, FP_TYPE* buffer, FP_TYPE mode) | | |
+ stft|void cig_stft_forward(FP_TYPE* x, int nx, int* center, int* nwin, int nfrm, int nfft, char* window, int subt_mean, int optlv,FP_TYPE* norm_factor, FP_TYPE* weight_factor, FP_TYPE** Xmagn, FP_TYPE** Xphse)  | | |
+ blas| | | |
+ parameter| direct | | |
+ visualizaion| customed GNUplot| | |
+ data I/O|external library using simple iostream | | |
+ openMP| O | | |
+ CUDA| X | | |
+ 
+ 
 ## SUMMARY<a name = "summary"></a>  
  
 ### [Ciglet](https://github.com/Sleepwalking/ciglet)
