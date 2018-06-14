@@ -15,7 +15,7 @@ commandlineParser.hpp|   |
 dataProcessor.hpp| This is an abstract base class for all components which read data from the data moemory and write new data to the data memory  |
 dataWriter.hpp|   |
 smileLogger.hpp|   |
-vecToWinPorcessor.hpp|   |
+vecToWinPorcessor.hpp| reads in frames, outputs windows  |
 componentList.hpp|   |
 dataReader.hpp|   |
 exceptions.hpp|   |
@@ -25,16 +25,16 @@ componentManager.hpp|   |
 dataSelector.hpp|   |
 nullSink
 svn_version.hpp|   |
-windowProcessor.hpp|   |
+windowProcessor.hpp| filter : (abstarct class only) linear N-th order filter for single value data streams this class processed every elemnet of a frame independently derived classes only need to implement the filter algorithm  |
 configManager.hpp|   |
 dataSing.hpp|   |
 smileCommon.hpp|   |
-vectorProcessor.hpp|   |
-winToVecProcessor.hpp|   |
+vectorProcessor.hpp| specialised dataProcessor, which takes one frame as input an produces one frame as output     however, each array field is processed individually as a vector      for each field the output dimension can be set in derived components |
+winToVecProcessor.hpp|  reads in windows and outputs vectors (frames)  |
 dataMemory.hpp|   |
 dataSource.hpp|   |
 smileComponenet.hpp|   |
-vectorTransform.hpp|   |
+vectorTransform.hpp|  compute gliding mean of input vectors and subtract it from the vectors (used for cepstral mean subtraction (CMS), for example) |
 
 
 + **/src/include/dsp**
@@ -94,7 +94,7 @@ functionalPercentiles.hpp|percentiles and quadrtiles, and inter-percentile/quart
 
 + /src/include/rnn
 
-+ /src/include/lld
++ /src/include/lld : low-level descriptors
 
 + /src/include/lldcore
 
@@ -113,7 +113,7 @@ functionalPercentiles.hpp|percentiles and quadrtiles, and inter-percentile/quart
 + /src/include/video  : openCV 
 
 
-
+myTick : Real-time processing implement 
 
 RNN :  Recurrent neural network  
 OpenCV :  Open Source Computer Vision Library  
@@ -127,6 +127,9 @@ PortAudio : cross-platform, open-source, audio I/O library
 
 
 #### [CLASS LIST](#openSMILE)<a name="openSMILE_list"></a>
+
++ cDBA
+void computeDBA(FLOAT_DMEM *x, long blocksize, FLOAT_DGEM F0)
 
 + cVadV1 : cDataProcessor : cSmileComponent
   int computeFilters (long blocksize, double frameSizeSec, int idxc)
