@@ -10,10 +10,10 @@ https://audeering.com/technology/opensmile/
 
 
 
-대부분의 클래스가 cSmileComponemt 상속  
+대부분의 클래스가 cSmileComponent 상속  
 대부분의 클래스가 cConfigManager 사용  
-myTick() 함수의 구현에서 프로세스 수행 (전부다는 아님)   
-C 스타일의 함수를 클래스 밖에서 구현한 경우도 있음  
+
+process 관련 클래스들은 자신의 myTick()함수(sSmileComponent에서 상속)에서 처리를 수행한다  
 
 중간중간에 TODO나 주석처리된 함수,변수들 많음  
 주석으로 // ...이거 한것?   
