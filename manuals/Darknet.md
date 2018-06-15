@@ -21,7 +21,7 @@ Default : [std](https://github.com/nothings/stb) for image format
 3. Nightmare : Backward neural networks 
 4. rnn  
 ...  
-+주석따윈 달지않음  
+**+ 주석따윈 달지않음**  
 
 
 ```C++
