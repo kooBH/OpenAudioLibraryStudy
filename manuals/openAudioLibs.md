@@ -102,6 +102,8 @@ typedef struct { doublereal r, i; } doublecomplex;
   ```  
   strfuncs.h  
   
+<p>  
+	
 ```C++
 
 #include <stdarg.h>  //stdarg.h is a header in the C standard library of the C programming language that allows functions to accept an indefinite number of arguments
@@ -200,6 +202,9 @@ int32 nextword (char *line, /**< Input: String being searched for next word.
 	);
 
   ```
+  </p>
+  
+  
   + filename.h  
   ```C++
   /**
