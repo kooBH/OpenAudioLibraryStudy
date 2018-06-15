@@ -101,7 +101,8 @@ void load_weights_upto(network *net, char *filename, int start, int cutoff);
 void zero_objectness(layer l);
 void get_region_detections(lay
 ```
-</deatails>
+</details>
+&ndsp;
 
 <details><summary><b>blas.h</b></summary>
 
