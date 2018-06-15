@@ -5,6 +5,13 @@ a little manual for a few things
 Linux : ubuntu 16.04 64bit  
 Windows : Windows 7 64bit
 
+#TODO  
++ KALDI  
++ BeamformIt  
++ more HTK  
++ Additional information 
+
+
 **INDEX**<a name="index"></a>
 
 ### 1.  [Makefile](./manuals/Makefile.md)
