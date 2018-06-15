@@ -39,5 +39,5 @@ Windows : Windows 7 64bit
 ## 7. [Dark Net](./manuals/Darknet.md)
 https://github.com/pjreddie/darknet  
 
-## 8. openMPI
+## 8. [openMPI](./manuals/OpenMPI.md)
 
