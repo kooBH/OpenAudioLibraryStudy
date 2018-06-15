@@ -12,6 +12,8 @@ CUDNN(NVIDIA CUDA® Deep Neural Network library)
 OPENCV  
 OPENMP  
 
+Default : [std](https://github.com/nothings/stb) for image format  
+
 #### [FEAUTRES](#Darknet)<a name="Darknet_features"></a>  
 1. YOLO: Real-Time Object Detection
 2. ImageNet Classification
