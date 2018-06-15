@@ -84,7 +84,7 @@ external library using simple iostream
 + linux/windows
 ---
 
-+ <details><summary>complex</summary>
+<details><summary>complex</summary>
 	
 ```C++
 typedef float real;
@@ -96,7 +96,7 @@ typedef struct { doublereal r, i; } doublecomplex;
 
 + String Modification  :  
 
-+ <details><summary>case.h</summary>
+<details><summary>### case.h</summary>
 	
 ```C++
   void ucase(char *str); //all upercase
@@ -104,6 +104,7 @@ typedef struct { doublereal r, i; } doublecomplex;
   int32 strcmp_nocase(const char *str1, const char *str2); //WIP, case insensitive string compare
   int32 strncmp_nocase(const char *str1, cons char *str2, size_t len); // strcmp_nocase + n
   ```  
+  
  </details>
  
 <details><summary>strfuncs.h</summary>  
@@ -208,8 +209,8 @@ int32 nextword (char *line, /**< Input: String being searched for next word.
   ```
   </details>
   
-  
-  + filename.h  
+<details><summary>filename.h</summary>  
+	
   ```C++
   /**
  * Returns the last part of the path, without modifying anything in memory.
@@ -239,9 +240,13 @@ void strip_fileext(const char *file, char *root);
 SPHINXBASE_EXPORT
 int path_is_absolute(const char *file);
 ```
+</details>
 
-+ fft  
+  
+<details><summary>fft</summary>  
+
 한번만 쓴다고 static으로 fe_sigproc.c에 해둠  
+
 ```C++
 static int
 fe_fft_real(fe_t * fe)
@@ -341,11 +346,10 @@ fe_fft_real(fe_t * fe)
     return m;
 }
 
-
-
-
 ```
-  
+
+</details>
+
  + CUDA  
  [???](https://cmusphinx.github.io/page23/)
 
