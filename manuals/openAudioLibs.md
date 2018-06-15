@@ -4,6 +4,7 @@
 
 1. ### [SUMMARY](#summary)  
 2. ### [CIGLET](#CIGLET)
+3. ### [HTK](#HTK)
 4. ### [CMUSphinx](#CMUSphinx)
 5. ### [openSMILE](#openSMILE)
 ---  
@@ -29,8 +30,8 @@
  blas| O | X | O|
  parameter|  | | |
  Usage | source   |   |  source   |  bin
- Data I/O|.wav only| |mono, little-endian, raw 16-bit signed PCM audio,16k Hz| 
- visualizaion| indirect GNUplot|X | X|
+ Data I/O|.wav | |mono, little-endian, raw 16-bit signed PCM audio,16k Hz| 
+ visualizaion| indirect GNUplot| O| X|
  openMP| O | X | X |
  CUDA| X | alpha 3.5 | [?](https://cmusphinx.github.io/page23/)  |
  Detail| [SEE](#CIGLET) |[SEE](#HTK) | [SEE](#CMUSphinx)|[SEE](#openSMILE)  
@@ -61,6 +62,7 @@ external library using simple iostream
 
 ### [Hidden Markov Model Toolkit (HTK)](#TOP)<a name="HTK"></a>
 + [Link](http://htk.eng.cam.ac.uk/)
++ [MyDocumnet](./HTK.md)
 + C source form
 + well organized code
 + linux/windows
