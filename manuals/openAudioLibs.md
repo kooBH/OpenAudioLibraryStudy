@@ -87,6 +87,9 @@ external library using simple iostream
   int32 strcmp_nocase(const char *str1, const char *str2); //WIP, case insensitive string compare
   int32 strncmp_nocase(const char *str1, cons char *str2, size_t len); // strcmp_nocase + n
   ```
+  
+ + CUDA  
+ [???](https://cmusphinx.github.io/page23/)
 
 
 ### kaldi
