@@ -84,25 +84,29 @@ external library using simple iostream
 + linux/windows
 ---
 
-+ complex  
++ <details><summary>complex</summary>
+	
 ```C++
 typedef float real;
 typedef double doublereal;
 typedef struct { real r, i; } complex;
 typedef struct { doublereal r, i; } doublecomplex;
 ```
+</details>
 
 + String Modification  :  
-  case.h  
-  ```C++
+
++ <details><summary>case.h</summary>
+	
+```C++
   void ucase(char *str); //all upercase
   void lcase(char* str); //all lowercase
   int32 strcmp_nocase(const char *str1, const char *str2); //WIP, case insensitive string compare
   int32 strncmp_nocase(const char *str1, cons char *str2, size_t len); // strcmp_nocase + n
   ```  
-  strfuncs.h  
-  
-<p>  
+ </details>
+ 
+<details><summary>strfuncs.h</summary>  
 	
 ```C++
 
@@ -202,7 +206,7 @@ int32 nextword (char *line, /**< Input: String being searched for next word.
 	);
 
   ```
-  </p>
+  </details>
   
   
   + filename.h  
