@@ -102,7 +102,7 @@ void zero_objectness(layer l);
 void get_region_detections(lay
 ```
 </details>
-&ndsp;
+&nbsp;
 
 <details><summary><b>blas.h</b></summary>
 
@@ -208,7 +208,7 @@ void upsample_gpu(float *in, int w, int h, int c, int batch, int stride, int for
 
 ```
 </details>
-&ndsp;
+&nbsp;
 
 <details><summary><b>gemm.h</b></summary>
 
@@ -243,10 +243,10 @@ void gemm_gpu(int TA, int TB, int M, int N, int K, float ALPHA,
         float *B, int ldb,
         float BETA,
         float *C, int ldc);
-
----
-
+```      
 </details>
+
+&nbsp;
 
 
 
