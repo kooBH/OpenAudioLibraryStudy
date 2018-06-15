@@ -13,7 +13,7 @@
 ---|---|---|---|---
  언어|C |C |C |C++
  string| X| X | O|
- matrix| 1D |2D | sym_2D|
+ matrix| 1D(num),2D(audio) |2D | sym_2D|
  vector| 1D | 1D| 1D |
  complex|struct |struct | struct |
  fft| O | O| O | O
