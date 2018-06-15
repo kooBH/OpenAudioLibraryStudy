@@ -93,10 +93,10 @@ typedef struct { real r, i; } complex;
 typedef struct { doublereal r, i; } doublecomplex;
 ```
 </details>
-
+&nbsp
 + String Modification  :  
 
-<details><summary>### case.h</summary>
+<details><summarycase.h</summary>
 	
 ```C++
   void ucase(char *str); //all upercase
@@ -106,7 +106,7 @@ typedef struct { doublereal r, i; } doublecomplex;
   ```  
   
  </details>
- 
+&nbsp;
 <details><summary>strfuncs.h</summary>  
 	
 ```C++
@@ -208,7 +208,7 @@ int32 nextword (char *line, /**< Input: String being searched for next word.
 
   ```
   </details>
-  
+  &nbsp;
 <details><summary>filename.h</summary>  
 	
   ```C++
@@ -241,7 +241,7 @@ SPHINXBASE_EXPORT
 int path_is_absolute(const char *file);
 ```
 </details>
-
+&nbsp;
   
 <details><summary>fft</summary>  
 
@@ -349,7 +349,7 @@ fe_fft_real(fe_t * fe)
 ```
 
 </details>
-
+&nbsp;
  + CUDA  
  [???](https://cmusphinx.github.io/page23/)
 
