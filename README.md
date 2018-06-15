@@ -29,7 +29,7 @@ Windows : Windows 7 64bit
 
 ## 6. [Open Source Audio Library](./manuals/openAudioLibs.md)
 
-## 7. Dark Net
+## 7. [Dark Net](./manuals/Darknet.md)
 https://github.com/pjreddie/darknet  
 
 ## 8. openMPI
