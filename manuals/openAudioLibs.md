@@ -16,11 +16,11 @@
  matrix| 1D |2D | sym_2D|
  vector| 1D | 1D| 1D |
  complex|struct |struct | struct |
- fft| O | O| O |
+ fft| O | O| O | O
  stft| O |X | X|
  blas| O | HMath | O|
  argumnet| var | var | var | cofig
- Usage | source   | bin  |  source   |  bin
+ Usage | source   | bin  |  source   |  bin | bin
  Data I/O|wav | HWav, HAudio |mono, little-endian, raw 16-bit signed PCM audio,16k Hz| 
  visualizaion| indirect GNUplot|HGraf| X|
  openMP| O | X | X |
