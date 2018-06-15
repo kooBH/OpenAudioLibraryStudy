@@ -24,7 +24,7 @@ List
  matrix| 1D |2D | sym_2D|
  vector| 1D | 1D| 1D |
  complex|struct |struct | struct |
- fft| O | O| mfcc 는 있는데.. |
+ fft| O | O| O |
  stft| O |X | X|
  blas| O | X | O|
  parameter|  | | |
@@ -32,9 +32,8 @@ List
  Data I/O|.wav only| | |
  visualizaion| indirect GNUplot| | |
  openMP| O | X | X |
- CUDA| X | alpha 3.5 | [?](https://cmusphinx.github.io/page23/)
-) |
- Detail| [SEE](#CIGLET) |[SEE](#HTK) | [SEE](#CMUSphinx)|[SEE](#openSMILE)
+ CUDA| X | alpha 3.5 | [?](https://cmusphinx.github.io/page23/)  |
+ Detail| [SEE](#CIGLET) |[SEE](#HTK) | [SEE](#CMUSphinx)|[SEE](#openSMILE)  
 
  
 ## SUMMARY<a name = "summary"></a>  
@@ -231,8 +230,111 @@ SPHINXBASE_EXPORT
 int path_is_absolute(const char *file);
 ```
 
-  
-  
++ fft  
+한번만 쓴다고 static으로 fe_sigproc.c에 해둠  
+```C++
+static int
+fe_fft_real(fe_t * fe)
+{
+    int i, j, k, m, n;
+    frame_t *x, xt;
+
+    x = fe->frame;
+    m = fe->fft_order;
+    n = fe->fft_size;
+
+    /* Bit-reverse the input. */
+    j = 0;
+    for (i = 0; i < n - 1; ++i) {
+        if (i < j) {
+            xt = x[j];
+            x[j] = x[i];
+            x[i] = xt;
+        }
+        k = n / 2;
+        while (k <= j) {
+            j -= k;
+            k /= 2;
+        }
+        j += k;
+    }
+
+    /* Basic butterflies (2-point FFT, real twiddle factors):
+     * x[i]   = x[i] +  1 * x[i+1]
+     * x[i+1] = x[i] + -1 * x[i+1]
+     */
+    for (i = 0; i < n; i += 2) {
+        xt = x[i];
+        x[i] = (xt + x[i + 1]);
+        x[i + 1] = (xt - x[i + 1]);
+    }
+
+    /* The rest of the butterflies, in stages from 1..m */
+    for (k = 1; k < m; ++k) {
+        int n1, n2, n4;
+
+        n4 = k - 1;
+        n2 = k;
+        n1 = k + 1;
+        /* Stride over each (1 << (k+1)) points */
+        for (i = 0; i < n; i += (1 << n1)) {
+            /* Basic butterfly with real twiddle factors:
+             * x[i]          = x[i] +  1 * x[i + (1<<k)]
+             * x[i + (1<<k)] = x[i] + -1 * x[i + (1<<k)]
+             */
+            xt = x[i];
+            x[i] = (xt + x[i + (1 << n2)]);
+            x[i + (1 << n2)] = (xt - x[i + (1 << n2)]);
+
+            /* The other ones with real twiddle factors:
+             * x[i + (1<<k) + (1<<(k-1))]
+             *   = 0 * x[i + (1<<k-1)] + -1 * x[i + (1<<k) + (1<<k-1)]
+             * x[i + (1<<(k-1))]
+             *   = 1 * x[i + (1<<k-1)] +  0 * x[i + (1<<k) + (1<<k-1)]
+             */
+            x[i + (1 << n2) + (1 << n4)] = -x[i + (1 << n2) + (1 << n4)];
+            x[i + (1 << n4)] = x[i + (1 << n4)];
+
+            /* Butterflies with complex twiddle factors.
+             * There are (1<<k-1) of them.
+             */
+            for (j = 1; j < (1 << n4); ++j) {
+                frame_t cc, ss, t1, t2;
+                int i1, i2, i3, i4;
+
+                i1 = i + j;
+                i2 = i + (1 << n2) - j;
+                i3 = i + (1 << n2) + j;
+                i4 = i + (1 << n2) + (1 << n2) - j;
+
+                /*
+                 * cc = real(W[j * n / (1<<(k+1))])
+                 * ss = imag(W[j * n / (1<<(k+1))])
+                 */
+                cc = fe->ccc[j << (m - n1)];
+                ss = fe->sss[j << (m - n1)];
+
+                /* There are some symmetry properties which allow us
+                 * to get away with only four multiplications here. */
+                t1 = COSMUL(x[i3], cc) + COSMUL(x[i4], ss);
+                t2 = COSMUL(x[i3], ss) - COSMUL(x[i4], cc);
+
+                x[i4] = (x[i2] - t2);
+                x[i3] = (-x[i2] - t2);
+                x[i2] = (x[i1] - t1);
+                x[i1] = (x[i1] + t1);
+            }
+        }
+    }
+
+    /* This isn't used, but return it for completeness. */
+    return m;
+}
+
+
+
+
+```
   
  + CUDA  
  [???](https://cmusphinx.github.io/page23/)
