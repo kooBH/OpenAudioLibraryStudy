@@ -28,7 +28,7 @@ List
  stft| O |X | X|
  blas| O | X | O|
  parameter|  | | |
- Usage | source   |   |  bin   |  bin
+ Usage | source   |   |  source   |  bin
  Data I/O|.wav only| | |
  visualizaion| indirect GNUplot| | |
  openMP| O | X | X |
@@ -83,6 +83,15 @@ external library using simple iostream
 + Sphinxtrain — acoustic model training tools
 + linux/windows
 ---
+
++ complex  
+```C++
+typedef float real;
+typedef double doublereal;
+typedef struct { real r, i; } complex;
+typedef struct { doublereal r, i; } doublecomplex;
+```
+
 + String Modification  :  
   case.h  
   ```C++
