@@ -9,15 +9,6 @@
 5. ### [openSMILE](#openSMILE)
 ---  
 
-1. fft, stft, istft 와 함수 형태
-2. string 처리 함수 종류
-3. 언어
-4. Matrix, vector, Scalar 표현, complex 표현
-5. 함수 인자 전달방식
-6. 데이터 시각화 방식. plot or print
-7. 데이터 I/O 어떻게 하는지. 데이터 포맷, 방식
-8. OpenMP 지원 / CUDA 지원?
-
 &nbsp;|Ciglet|HTK|CMUSphinx|openSMILE
 ---|---|---|---|---
  언어|C |C |C |C++
@@ -28,9 +19,9 @@
  fft| O | O| O |
  stft| O |X | X|
  blas| O | X | O|
- parameter|  | | |
- Usage | source   |   |  source   |  bin
- Data I/O|.wav | |mono, little-endian, raw 16-bit signed PCM audio,16k Hz| 
+ argumnet| var | var | var | cofig
+ Usage | source   | bin  |  source   |  bin
+ Data I/O|wav | wav or Direct |mono, little-endian, raw 16-bit signed PCM audio,16k Hz| 
  visualizaion| indirect GNUplot| O| X|
  openMP| O | X | X |
  CUDA| X | alpha 3.5 | [?](https://cmusphinx.github.io/page23/)  |
