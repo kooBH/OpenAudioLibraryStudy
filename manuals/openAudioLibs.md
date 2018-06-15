@@ -37,7 +37,8 @@ List
  
 ## SUMMARY<a name = "summary"></a>  
  
-### [Ciglet](https://github.com/Sleepwalking/ciglet)<a name="1"></a>
+### [Ciglet](./Ciglet.md)<a name="1"></a>
++ [Link](https://github.com/Sleepwalking/ciglet)
 + lightweight C library for digital signal processing
 + C-written sIGnal codeLETs
 + simple and compact code
@@ -49,7 +50,8 @@ List
 
 
 
-### [Hidden Markov Model Toolkit (HTK)](http://htk.eng.cam.ac.uk/)<a name="2"></a>
+### [Hidden Markov Model Toolkit (HTK)](./HTK.md)<a name="2"></a>
++ [Link](http://htk.eng.cam.ac.uk/)
 + C source form
 + well organized code
 + linux/windows
@@ -71,7 +73,8 @@ typedef unsigned short          Wchar;  e
 
 
 
-### [CMUSphinx](https://cmusphinx.github.io/)<a name="3"></a>
+### [CMUSphinx](./CMUSphinx.md)<a name="3"></a>
++ [Link](https://cmusphinx.github.io/)
 + language model
 + not intented to mathmatical problems
 + Pocketsphinx — lightweight recognizer library written in C.
@@ -80,14 +83,16 @@ typedef unsigned short          Wchar;  e
 + Sphinxtrain — acoustic model training tools
 + linux/windows
 
-### [kaldi](https://github.com/kaldi-asr/kaldi)
+### kaldi
++ [Link](https://github.com/kaldi-asr/kaldi)
 + C++
 + http://kaldi-asr.org/doc/
 + compile against the OpenFst toolkit (using it as a library)
 + include a matrix library that wraps standard BLAS and LAPACK routines
 + licensed under Apache 2.0, which is one of the least restrictive licenses available
 
-### [openSMILE](https://audeering.com/technology/opensmile/)<a name="4"></a>
+### [openSMILE](./openSMILE.md)<a name="4"></a>
++ [Link](https://audeering.com/technology/opensmile/)
 + c++ API
 + using PortAudio
 + General audio signal processing
