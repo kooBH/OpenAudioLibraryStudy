@@ -2,7 +2,8 @@
 
 Darknet is an open source neural network framework written in C and CUDA
 ### [CIGLET](./openAudioLibs.md#TOP)<a name = "Darknet"></a>
-+ [features](#Darknet_features)  
++ [features](#Darknet_features)
++ [install](#Darknet_install)
 + [funtion list](#Darknet_list)  
 + [license](#Darknet_license)  
 
@@ -28,6 +29,23 @@ int rows, cols;
  float **vals;
 } matrix;
 ```
+---
+
+#### [INSTALL](#Darknet)<a name = "Darknet_install"></a> 
+
+```bash
+git clone https://github.com/pjreddie/darknet.git 
+cd darknet
+make
+
+usage: ./darknet <function>
+
+wget https://pjreddie.com/media/files/yolov3.weights
+./darknet detect cfg/yolov3.cfg yolov3.weights data/pic_you_want_to_text.jpg
+```
+
+![alt text](./t1.png "t1")  
+![alt text](./t2.png "t2")
 
 ---
 #### [FUNCTION LIST](#Darknet)<a name="Darknet_list"></a>
