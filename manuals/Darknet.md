@@ -5,8 +5,10 @@ Darknet is an open source neural network framework written in C and CUDA
 + [funtion list](#Darknet_list)
 + [license](#Darknet_license)
 
-CUDA  
-openCV  
++ Option
+openMP  
+CUDA    
+openCV    
 
 ```C++
 typedef struct matrix{
