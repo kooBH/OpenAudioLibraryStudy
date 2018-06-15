@@ -27,12 +27,12 @@ List
  fft| O | O| X |
  stft| O |X | X|
  blas| O | X | O|
- parameter| direct | | |
+ parameter|  | | |
  Usage | source   |   |  bin   |  bin
  Data I/O|.wav only| | |
  visualizaion| indirect GNUplot| | |
  openMP| O | X | X |
- CUDA| X | alpha 3.5 | [?]((https://cmusphinx.github.io/page23/)
+ CUDA| X | alpha 3.5 | [?](https://cmusphinx.github.io/page23/)
 ) |
  Detail| [SEE](#CIGLET) |[SEE](#HTK) | [SEE](#CMUSphinx)|[SEE](#openSMILE)
 
@@ -56,6 +56,7 @@ void cig_fft(FP_TYPE* xr, FP_TYPE* xi, FP_TYPE* yr, FP_TYPE* yi, int n, FP_TYPE*
 ```C++
 void cig_stft_forward(FP_TYPE* x, int nx, int* center, int* nwin, int nfrm, int nfft, char* window, int subt_mean, int optlv,FP_TYPE* norm_factor, FP_TYPE* weight_factor, FP_TYPE** Xmagn, FP_TYPE** Xphse)  
 ```
+
 + Data I/O
 external library using simple iostream 
 
@@ -190,6 +191,38 @@ int32 nextword (char *line, /**< Input: String being searched for next word.
 	);
 
   ```
+  + filename.h  
+  ```C++
+  /**
+ * Returns the last part of the path, without modifying anything in memory.
+ */
+SPHINXBASE_EXPORT
+const char *path2basename(const char *path);
+
+/**
+ * Strip off filename from the given path and copy the directory name into dir
+ * Caller must have allocated dir (hint: it's always shorter than path).
+ */
+SPHINXBASE_EXPORT
+void path2dirname(const char *path, char *dir);
+
+
+/**
+ * Strip off the smallest trailing file-extension suffix and copy
+ * the rest into the given root argument.  Caller must have
+ * allocated root.
+ */
+SPHINXBASE_EXPORT
+void strip_fileext(const char *file, char *root);
+
+/**
+ * Test whether a pathname is absolute for the current OS.
+ */
+SPHINXBASE_EXPORT
+int path_is_absolute(const char *file);
+```
+
+  
   
   
  + CUDA  
