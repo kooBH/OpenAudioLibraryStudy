@@ -24,7 +24,7 @@ List
  matrix| 1D |2D | sym_2D|
  vector| 1D | 1D| 1D |
  complex|struct |struct | struct |
- fft| O | O| X |
+ fft| O | O| mfcc 는 있는데.. |
  stft| O |X | X|
  blas| O | X | O|
  parameter|  | | |
