@@ -67,22 +67,6 @@ void cig_stft_forward(FP_TYPE* x, int nx, int* center, int* nwin, int nfrm, int 
 
 ---
 
-+ Data Type    
-```C++
-typedef unsigned long           Ulong;  
-typedef unsigned short          Ushort;  
-typedef signed char         Schar;  
-typedef unsigned char           Uchar;  
-typedef struct {double  real, imag;}    DoubleComplex;  
-typedef struct {float   real, imag;}    FloatComplex;  
-typedef struct {long    real, imag;}    LongComplex;  
-typedef struct {short   real, imag;}    ShortComplex;  
-typedef struct {Schar   real, imag;}    ScharComplex;  
-typedef unsigned char           Bool;  
-typedef unsigned short          Wchar;  e
-```
-
-
 ### [CMUSphinx](#TOP)<a name="CMUSphinx"></a>
 + [Link](https://cmusphinx.github.io/)
 + [MyDocumnet](./CMUSphinx.md)
