@@ -24,9 +24,9 @@ List
  matrix| 1D |2D | |
  vector| 1D | 1D| |
  complex|struct |struct | |
- fft| O | O| |
- stft| O |X | |
- blas| simpe for^3 | X | |
+ fft| O | O| X |
+ stft| O |X | X|
+ blas| O | X | O|
  parameter| direct | | |
  visualizaion| customed GNUplot| | |
  data I/O|external library using simple iostream | | |
@@ -45,10 +45,15 @@ List
 + simple and compact code
 + linux/windows
 + Matlab  to C conversion of frequently used ones 
-
-+ fft : void cig_fft(FP_TYPE* xr, FP_TYPE* xi, FP_TYPE* yr, FP_TYPE* yi, int n, FP_TYPE* buffer, FP_TYPE mode)  
-+ stft : void cig_stft_forward(FP_TYPE* x, int nx, int* center, int* nwin, int nfrm, int nfft, char* window, int subt_mean, int optlv,FP_TYPE* norm_factor, FP_TYPE* weight_factor, FP_TYPE** Xmagn, FP_TYPE** Xphse)  
-
+---
++ fft 
+```C++
+void cig_fft(FP_TYPE* xr, FP_TYPE* xi, FP_TYPE* yr, FP_TYPE* yi, int n, FP_TYPE* buffer, FP_TYPE mode)  
+```
++ stft 
+```C++
+void cig_stft_forward(FP_TYPE* x, int nx, int* center, int* nwin, int nfrm, int nfft, char* window, int subt_mean, int optlv,FP_TYPE* norm_factor, FP_TYPE* weight_factor, FP_TYPE** Xmagn, FP_TYPE** Xphse)  
+```
 
 
 ### [Hidden Markov Model Toolkit (HTK)](#TOP)<a name="HTK"></a>
@@ -59,7 +64,11 @@ List
 + a set of library modules and tools  
 + http://htk.eng.cam.ac.uk/prot-docs/htkbook.pdf  
 + HCUDA: [CUDA based math kernel functions](http://htk.eng.cam.ac.uk/pdf/woodland_htk35_uea.pdf)
+
+---
+
 + Data Type    
+```C++
 typedef unsigned long           Ulong;  
 typedef unsigned short          Ushort;  
 typedef signed char         Schar;  
@@ -71,7 +80,7 @@ typedef struct {short   real, imag;}    ShortComplex;
 typedef struct {Schar   real, imag;}    ScharComplex;  
 typedef unsigned char           Bool;  
 typedef unsigned short          Wchar;  e
-
+```
 
 
 ### [CMUSphinx](#TOP)<a name="CMUSphinx"></a>
@@ -84,7 +93,7 @@ typedef unsigned short          Wchar;  e
 + Sphinx4 — adjustable, modifiable recognizer written in Java
 + Sphinxtrain — acoustic model training tools
 + linux/windows
-
+---
 ### kaldi
 + [Link](https://github.com/kaldi-asr/kaldi)
 + C++
