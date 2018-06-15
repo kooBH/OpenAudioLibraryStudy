@@ -82,23 +82,26 @@ external library using simple iostream
 + Sphinxtrain — acoustic model training tools
 + linux/windows
 ---
-+ String Modification  :
-  case.h
++ String Modification  :  
+  case.h  
   ```C++
   void ucase(char *str); //all upercase
   void lcase(char* str); //all lowercase
   int32 strcmp_nocase(const char *str1, const char *str2); //WIP, case insensitive string compare
   int32 strncmp_nocase(const char *str1, cons char *str2, size_t len); // strcmp_nocase + n
-  ```
-  strfuncs.h
+  ```  
+  strfuncs.h  
   
 ```C++
+
+#include <stdarg.h>  //stdarg.h is a header in the C standard library of the C programming language that allows functions to accept an indefinite number of arguments
+
 /**
  * Concatenate a NULL-terminated argument list of strings, returning a
  * newly allocated string.
  **/
 SPHINXBASE_EXPORT
-char *string_join(const char *base, ...);
+char *string_join(const char *base, ...);  //variadic functions(strarg.h) : can have infinity number of arguments ( ... )
 
 /**
  * Which end of a string to operate on for string_trim().
