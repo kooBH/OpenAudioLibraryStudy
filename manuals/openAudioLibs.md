@@ -29,8 +29,8 @@
  blas| O | X | O|
  parameter|  | | |
  Usage | source   |   |  source   |  bin
- Data I/O|.wav only| | |
- visualizaion| indirect GNUplot| | |
+ Data I/O|.wav only| |mono, little-endian, raw 16-bit signed PCM audio,16k Hz| 
+ visualizaion| indirect GNUplot|X | X|
  openMP| O | X | X |
  CUDA| X | alpha 3.5 | [?](https://cmusphinx.github.io/page23/)  |
  Detail| [SEE](#CIGLET) |[SEE](#HTK) | [SEE](#CMUSphinx)|[SEE](#openSMILE)  
@@ -94,7 +94,7 @@ typedef struct { doublereal r, i; } doublecomplex;
 </details>
 &nbsp
 
-+ String Modification
++ ### String Modification
 
 <details><summary>case.h</summary>
 	
@@ -348,6 +348,7 @@ fe_fft_real(fe_t * fe)
 
 </details>
 &nbsp;
+
  + CUDA  
  [???](https://cmusphinx.github.io/page23/)
 
