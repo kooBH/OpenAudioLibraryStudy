@@ -20,18 +20,18 @@ List
 &nbsp;|Ciglet|HTK|CMUSphinx|openSMILE
 ---|---|---|---|---
  언어|C |C |C |C++
- string| X| | |
+ string| X|  | O|
  matrix| 1D |2D | |
  vector| 1D | 1D| |
- complex|struct |struct | |
+ complex|struct |struct | X |
  fft| O | O| X |
  stft| O |X | X|
  blas| O | X | O|
  parameter| direct | | |
- visualizaion| customed GNUplot| | |
- data I/O|external library using simple iostream | | |
+ visualizaion| indirect GNUplot| | |
+ data I/O|.wav only| | |
  openMP| O | X | |
- CUDA| X | alpha 3.5 | |
+ CUDA| X | alpha 3.5 | ? |
  Detail| [SEE](#CIGLET) |[SEE](#HTK) | [SEE](#CMUSphinx)|[SEE](#openSMILE)
 
  
@@ -54,7 +54,8 @@ void cig_fft(FP_TYPE* xr, FP_TYPE* xi, FP_TYPE* yr, FP_TYPE* yi, int n, FP_TYPE*
 ```C++
 void cig_stft_forward(FP_TYPE* x, int nx, int* center, int* nwin, int nfrm, int nfft, char* window, int subt_mean, int optlv,FP_TYPE* norm_factor, FP_TYPE* weight_factor, FP_TYPE** Xmagn, FP_TYPE** Xphse)  
 ```
-
++ Data I/O
+external library using simple iostream 
 
 ### [Hidden Markov Model Toolkit (HTK)](#TOP)<a name="HTK"></a>
 + [Link](http://htk.eng.cam.ac.uk/)
@@ -78,6 +79,16 @@ void cig_stft_forward(FP_TYPE* x, int nx, int* center, int* nwin, int nfrm, int 
 + Sphinxtrain — acoustic model training tools
 + linux/windows
 ---
++ String Modification  :
+  case.h
+  ```C++
+  void ucase(char *str); //all upercase
+  void lcase(char* str); //all lowercase
+  int32 strcmp_nocase(const char *str1, const char *str2); //WIP, case insensitive string compare
+  int32 strncmp_nocase(const char *str1, cons char *str2, size_t len); // strcmp_nocase + n
+  ```
+
+
 ### kaldi
 + [Link](https://github.com/kaldi-asr/kaldi)
 + C++
