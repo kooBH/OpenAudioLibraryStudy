@@ -41,7 +41,7 @@ make
 usage: ./darknet <function>
 
 wget https://pjreddie.com/media/files/yolov3.weights  # Trained DATA
-./darknet detect cfg/yolov3.cfg yolov3.weights data/pic_you_want_to_text.jpg
+./darknet detect cfg/yolov3.cfg yolov3.weights data/pic_you_want_to_tet.jpg
 ```
 
 ![alt text](./t1.png "t1")  
