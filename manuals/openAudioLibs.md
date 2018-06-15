@@ -8,7 +8,6 @@
 5. ### [openSMILE](#openSMILE)
 ---  
 
-List  
 1. fft, stft, istft 와 함수 형태
 2. string 처리 함수 종류
 3. 언어
@@ -94,9 +93,10 @@ typedef struct { doublereal r, i; } doublecomplex;
 ```
 </details>
 &nbsp
-+ String Modification  :  
 
-<details><summarycase.h</summary>
++ String Modification
+
+<details><summary>case.h</summary>
 	
 ```C++
   void ucase(char *str); //all upercase
@@ -106,7 +106,6 @@ typedef struct { doublereal r, i; } doublecomplex;
   ```  
   
  </details>
-&nbsp;
 <details><summary>strfuncs.h</summary>  
 	
 ```C++
@@ -208,7 +207,6 @@ int32 nextword (char *line, /**< Input: String being searched for next word.
 
   ```
   </details>
-  &nbsp;
 <details><summary>filename.h</summary>  
 	
   ```C++
@@ -243,7 +241,7 @@ int path_is_absolute(const char *file);
 </details>
 &nbsp;
   
-<details><summary>fft</summary>  
+<details><summary><b>fft</b></summary>  
 
 한번만 쓴다고 static으로 fe_sigproc.c에 해둠  
 
