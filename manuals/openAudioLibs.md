@@ -32,7 +32,7 @@
  
 ### [CIGLET](#TOP)<a name="CIGLET"></a>
 + [Link](https://github.com/Sleepwalking/ciglet)
-+ [MyDocumnet](./Ciglet.md)
++ [MyDocumnet](./CIGLET.md)
 + lightweight C library for digital signal processing
 + C-written sIGnal codeLETs
 + simple and compact code
