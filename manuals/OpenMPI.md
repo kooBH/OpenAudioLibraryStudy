@@ -1,4 +1,4 @@
-# Open source Message Passing Interface<a name = "TOP"></a>
+# [Open source Message Passing Interface](../)<a name = "TOP"></a>
 
 OpenMPI 는 분산형 시스템에서 사용되는 병렬연산 API 이다.  
  -> 통상적인 상황에서는 용도가 없다  
