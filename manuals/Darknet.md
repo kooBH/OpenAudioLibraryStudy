@@ -2,8 +2,9 @@
 
 Darknet is an open source neural network framework written in C and CUDA
 ### [CIGLET](./openAudioLibs.md#TOP)<a name = "Darknet"></a>
-+ [funtion list](#Darknet_list)
-+ [license](#Darknet_license)
++ [features](#Darknet_features)  
++ [funtion list](#Darknet_list)  
++ [license](#Darknet_license)  
 
 + Option(modify Makefile)    
 GPU  
@@ -11,6 +12,12 @@ CUDNN(NVIDIA CUDA® Deep Neural Network library)
 OPENCV  
 OPENMP  
 
+#### [FEAUTRES](#Darknet)<a name="Darknet_features"></a>  
+1. YOLO: Real-Time Object Detection
+2. ImageNet Classification
+3. Nightmare : Backward neural networks 
+4. rnn  
+...
 
 
 ```C++
