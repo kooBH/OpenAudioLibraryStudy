@@ -36,32 +36,10 @@
 	 3. 사용   
 	   #include "cbals.h"  
 	 
+	 &nbsp;  
 	 * Windows   
 	   https://github.com/xianyi/OpenBLAS/wiki/How-to-use-OpenBLAS-in-Microsoft-Visual-Studio  
 	   
----
-## 잘안됨  
-Anaconda Prompt
-conda update -n base conda
-conda config --add channels conda-forge
-conda install -y cmake flang clangdev perl
-conda install -y -c isuruf kitware-ninja
-
-vcvarsall x64
-
-set "LIB=%CONDA_INSTALL_LOCN%\Library\lib;%LIB%"
-set "CPATH=%CONDA_INSTALL_LOCN%\Library\include;%CPATH%
-mkdir build
-cd build
-cmake .. -G "Ninja" -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_C_COMPILER=clang-cl -DCMAKE_Fortran_COMPILER=flang -DBUILD_WITHOUT_LAPACK=no -DNOFORTRAN=0 -DDYNAMIC_ARCH=ON -DCMAKE_BUILD_TYPE=Release
-	   
---> Error : gfortran 
-			is not a full path and was not found in the PATH
-	   
-CMakeLists.txt
-enable_language(Fortran)
-	---> flang.exe is not able to compile simple test file
-	== LINK : fatal error LNK1104: "msvcrt.lib"파일을 열 수 없습니다
 	   
 ---	   
 	   
@@ -107,7 +85,7 @@ enable_language(Fortran)
 	```C++
 		  #include "mkl.h"
 	```  
-	 
+	 	 
 	 * Windows   
 	https://software.seek.intel.com/performance-libraries  
 	에서 Submit 하고 파일 받아서 설치하면 VS에 통합까지 해준다  
