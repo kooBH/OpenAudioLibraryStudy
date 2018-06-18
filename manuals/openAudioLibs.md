@@ -7,6 +7,7 @@
 3. ### [HTK](#HTK)
 4. ### [CMUSphinx](#CMUSphinx)
 5. ### [openSMILE](#openSMILE)
+6. ### [Kaldi](#Kaldi)
 ---  
 
 &nbsp;|Ciglet|HTK|CMUSphinx|openSMILE
@@ -346,8 +347,9 @@ fe_fft_real(fe_t * fe)
  [???](https://cmusphinx.github.io/page23/)
 
 
-# kaldi
+# [Kaldi](#TOP)<a name = "Kaldi"></a
 + [Link](https://github.com/kaldi-asr/kaldi)
++ [MyDocument](./Kaldi.md)
 + C++
 + http://kaldi-asr.org/doc/
 + compile against the OpenFst toolkit (using it as a library)
