@@ -26,6 +26,7 @@
  visualizaion| indirect GNUplot|HGraf| X|  | X
  openMP| O | X | X |   | X
  CUDA| X | HCUDA(alpha 3.5) | X |   | O
+ Detail |[SEE](./CIGLET.md) | [SEE](./HTK.md)|[SEE](./CMUSphinx.md)| [SEE](./openSMILE.md)| [SEE](./Kaldi.md)
 
  
 ## SUMMARY<a name = "summary"></a>  
