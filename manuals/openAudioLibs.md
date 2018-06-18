@@ -42,7 +42,6 @@
 
 ---
 
-
 # [Hidden Markov Model Toolkit (HTK)](#TOP)<a name="HTK"></a>
 + [Link](http://htk.eng.cam.ac.uk/)
 + [MyDocumnet](./HTK.md)
@@ -51,7 +50,6 @@
 + linux/windows
 + a set of library modules and tools  
 + http://htk.eng.cam.ac.uk/prot-docs/htkbook.pdf  
-
 + HCUDA: [CUDA based math kernel functions](http://htk.eng.cam.ac.uk/pdf/woodland_htk35_uea.pdf)
 
 ---
