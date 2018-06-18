@@ -17,15 +17,15 @@
  matrix| 1D(num),2D(audio) |2D | sym_2D|   |1D
  vector| 1D | 1D| 1D |   | 1D
  complex|struct |struct | struct |   | 2_Vars(\_re,\_im) 
- fft| O | O| O | O|  O |
- stft| O |X | X|   |
- blas| O | HMath | O| O  |
- argumnet| var | var | var | cofig   |
+ fft| O | O| O | O|  O 
+ stft| O |X | X|   | X
+ blas| O | HMath | O|   | O
+ argumnet| var | var | var | cofig   | var
  Usage | source   | bin  |  source   |  bin | bin   |
- Data I/O|wav | HWav, HAudio |mono, little-endian, raw 16-bit signed PCM audio,16k Hz|  generic  |
+ Data I/O|wav | HWav, HAudio |mono, little-endian, raw 16-bit signed PCM audio,16k Hz|     | generic
  visualizaion| indirect GNUplot|HGraf| X|   |
- openMP| O | X | X |   |
- CUDA| X | HCUDA(alpha 3.5) | X |   |
+ openMP| O | X | X |   | X
+ CUDA| X | HCUDA(alpha 3.5) | X |   | O
 
  
 ## SUMMARY<a name = "summary"></a>  
