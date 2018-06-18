@@ -371,3 +371,4 @@ fe_fft_real(fe_t * fe)
 ## Common Traits
 + Don't use primitive data type. use defined data type throughout all source. for easy modification
 + If import another library, using functions with other name, with more consistency. Rename by inline or other method
++ In terms of nameing, there is tendency. C : snake_case, C++ : camelCase. in C++ lib, procedural function and variables about it uses snake_case. But it is up to oneself  
