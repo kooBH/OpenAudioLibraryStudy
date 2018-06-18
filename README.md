@@ -11,7 +11,7 @@ Windows : Windows 7 64bit
 + [redmine](https://www.redmine.org/)
 + Additional information 
 
-**INDEX**<a name="index"></a>
+## INDEX<a name="index"></a>
 
 ### 1.  [Makefile](./manuals/Makefile.md)
 + [gcc](./manuals/Makefile.md#Makefile-gcc)
