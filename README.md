@@ -32,8 +32,12 @@ Windows : Windows 7 64bit
 ## 5. [OpenMP](./manuals/OpenMP.md)
 + [OpenMP](./manuals/OpenMP.md#OpenMP)
 + [MKL](./manuals/OpenMP.md#MKL)
-
 ## 6. [Open Source Audio Library](./manuals/openAudioLibs.md)
++ [CIGLET](./manuals/CIGLET.md)
++ [HTK](./manuals/HTK.md)
++ [CMUSphinx](./manuals/CMUSphinx.md)
++ [openSMILE](./manuals/openSMILE.md)
++ [Kaldi](./manuals/Kaldi.md)
 
 ## 7. [Dark Net](./manuals/Darknet.md)
 https://github.com/pjreddie/darknet  
