@@ -1256,6 +1256,14 @@ void AddOuterProductPlusMinus<double>(double alpha,
   
 ---
 
+## [Threading](#TOP)<a name="Kaldi_threading"></a>
+
+Q. multi-core?  
+
+<details><summary>kaldi-thread.h</summary>
+
+```C++
+
 // util/kaldi-thread.h
 
 // Copyright 2012  Johns Hopkins University (Author: Daniel Povey)
@@ -1540,8 +1548,9 @@ class TaskSequencer {
 } // namespace kaldi
 
 #endif  // KALDI_THREAD_KALDI_THREAD_H_
+```
 
-
+</details>
 
 ---
 
