@@ -5,12 +5,12 @@ a little manual for a few things
 Linux : ubuntu 16.04 64bit  
 Windows : Windows 7 64bit
 
-#TODO  
-+ KALDI  
+# TODO  till 6/29
++ ~~Kaldi~~
 + BeamformIt  
-+ more HTK  
++ more about c based libraries    
++ [redmine](https://www.redmine.org/)
 + Additional information 
-
 
 **INDEX**<a name="index"></a>
 
