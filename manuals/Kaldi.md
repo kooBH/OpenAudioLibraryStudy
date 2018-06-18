@@ -12,6 +12,7 @@
 
 #### [LICENSE](#CIGLET)<a name = "ciglet_license"></a>
 
+Apache License 2.0
 
 <pre>
 
