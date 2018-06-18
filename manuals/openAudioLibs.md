@@ -39,18 +39,9 @@
 + simple and compact code
 + linux/windows
 + Matlab  to C conversion of frequently used ones 
----
-+ fft 
-```C++
-void cig_fft(FP_TYPE* xr, FP_TYPE* xi, FP_TYPE* yr, FP_TYPE* yi, int n, FP_TYPE* buffer, FP_TYPE mode)  
-```
-+ stft 
-```C++
-void cig_stft_forward(FP_TYPE* x, int nx, int* center, int* nwin, int nfrm, int nfft, char* window, int subt_mean, int optlv,FP_TYPE* norm_factor, FP_TYPE* weight_factor, FP_TYPE** Xmagn, FP_TYPE** Xphse)  
-```
 
-+ Data I/O
-external library using simple iostream 
+---
+
 
 # [Hidden Markov Model Toolkit (HTK)](#TOP)<a name="HTK"></a>
 + [Link](http://htk.eng.cam.ac.uk/)
@@ -60,7 +51,7 @@ external library using simple iostream
 + linux/windows
 + a set of library modules and tools  
 + http://htk.eng.cam.ac.uk/prot-docs/htkbook.pdf  
----
+
 + HCUDA: [CUDA based math kernel functions](http://htk.eng.cam.ac.uk/pdf/woodland_htk35_uea.pdf)
 
 ---
