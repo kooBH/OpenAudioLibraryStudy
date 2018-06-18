@@ -2,6 +2,7 @@
 
 + [Data Type](#Kaldi_data_type)
 + [BLAS](#Kaldi_BLAS)
++ [Feature](#Kaldi_feature)
 + [FFT](#Kaldi_FFT)
 + [Data I/O](#Kaldi_IO)
 + [Threading](#Kaldi_threading)
@@ -60,6 +61,25 @@ The Kaldi matrix library is mostly a C++ wrapper for standard BLAS and LAPACK li
 +    Intel's **MKL**, which provides both BLAS and LAPACK
 +    **OpenBLAS**, which provides BLAS and LAPACK
 
+
+## [src/feat](#TOP)<a name = "Kaldi_feature"></a>
+
+<pre>
+feature-common.h
+feature-common-inl.h
+feature-fbank.h
+feature-functions.h
+feature-mfcc.h
+feature-plp.h
+feature-spectrogram.h
+feature-window.h
+mel-computations.h
+online-feature.h
+pitch-functions.h
+resample.h
+signal.h
+wave-reader.h
+</pre>
 
 
 ## [Kaldi FFT](#TOP)<a name = "Kaldi_FFT"></a>
