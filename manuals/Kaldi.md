@@ -8,14 +8,17 @@
 
 ---
 
-+ OpenFst  
++ [OpenFst](http://www.openfst.org/twiki/bin/view/FST/WebHome)  
   we compile against this and use it heavily.
-+ IRSTLM  
+    * OpenFst is a library for constructing, combining, optimizing, and searching weighted **finite-state transducers** (FSTs).  
+    * Used for speech recognition  
++ [IRSTLM](http://hlt-mt.fbk.eu/technologies/irstlm)
 this a language modeling toolkit. Some of the example scripts require it but it is not tightly integrated with Kaldi; we can convert any Arpa format language model to an FST.
+    * **The IRST Language Modeling** (IRSTLM) Toolkit features algorithms and data structures suitable to estimate, store, and access very large n-gram language models.
     *    The IRSTLM build process requires automake, aclocal, and libtoolize (the corresponding packages are automake and libtool).  
     *    Note: some of the example scripts now use SRILM; we make it easy to install that, although you still have to register online to download it.  
-+ SRILM  
-ome of the example scripts use this. It's generally a better and more complete language modeling toolkit than IRSTLM; the only drawback is the license, which is not free for commercial use. You have to enter your name on the download page to download it, so the installation script requires some human interaction.
++ [SRILM](https://www.sri.com/engage/products-solutions/sri-language-modeling-toolkit)  
+some of the example scripts use this. It's generally a better and more complete language modeling toolkit than IRSTLM; the only drawback is the license, which is not free for commercial use. You have to enter your name on the download page to download it, so the installation script requires some human interaction.
 + sph2pipe  
 this is for converting sph format files into other formats such as wav. It's needed for the example scripts that use LDC data.
 +    sclite  
