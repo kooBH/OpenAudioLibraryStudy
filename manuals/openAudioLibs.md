@@ -30,7 +30,7 @@
  
 ## SUMMARY<a name = "summary"></a>  
  
-### [CIGLET](#TOP)<a name="CIGLET"></a>
+# [CIGLET](#TOP)<a name="CIGLET"></a>
 + [Link](https://github.com/Sleepwalking/ciglet)
 + [MyDocumnet](./CIGLET.md)
 + lightweight C library for digital signal processing
@@ -51,7 +51,7 @@ void cig_stft_forward(FP_TYPE* x, int nx, int* center, int* nwin, int nfrm, int 
 + Data I/O
 external library using simple iostream 
 
-### [Hidden Markov Model Toolkit (HTK)](#TOP)<a name="HTK"></a>
+# [Hidden Markov Model Toolkit (HTK)](#TOP)<a name="HTK"></a>
 + [Link](http://htk.eng.cam.ac.uk/)
 + [MyDocumnet](./HTK.md)
 + C source form
@@ -64,7 +64,7 @@ external library using simple iostream
 
 ---
 
-### [CMUSphinx](#TOP)<a name="CMUSphinx"></a>
+# [CMUSphinx](#TOP)<a name="CMUSphinx"></a>
 + [Link](https://cmusphinx.github.io/)
 + [MyDocumnet](./CMUSphinx.md)
 + language model
@@ -346,7 +346,7 @@ fe_fft_real(fe_t * fe)
  [???](https://cmusphinx.github.io/page23/)
 
 
-### kaldi
+# kaldi
 + [Link](https://github.com/kaldi-asr/kaldi)
 + C++
 + http://kaldi-asr.org/doc/
@@ -354,7 +354,7 @@ fe_fft_real(fe_t * fe)
 + include a matrix library that wraps standard BLAS and LAPACK routines
 + licensed under Apache 2.0, which is one of the least restrictive licenses available
 
-### [openSMILE](#TOP)<a name="openSMILE"></a>
+# [openSMILE](#TOP)<a name="openSMILE"></a>
 + [Link](https://audeering.com/technology/opensmile/)
 + [MyDocumnet](./openSMILE.md)
 + c++ API
@@ -365,9 +365,9 @@ fe_fft_real(fe_t * fe)
 + Multi-threading support for parallel feature extraction
 + Designed for real-time on-line processing, but also useful for off-line batch 
 
-### [BeamformIt](https://github.com/xanguera/BeamformIt)
+# [BeamformIt](https://github.com/xanguera/BeamformIt)
 + acoustic beamforming tool
 
-### Common Traits
+## Common Traits
 + Don't use primitive data type. use defined data type throughout all source. for easy modification
 + If import another library, using functions with other name, with more consistency. Rename by inline or other method
