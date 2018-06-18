@@ -19,7 +19,7 @@
  complex|struct |struct | struct |   | 2_Vars(\_re,\_im) 
  fft| O | O| O | O|  O 
  MFCC| O |O | O| O | O
- blas| O | HMath | O|   | O
+ blas| O | HMath | O|   | external
  argumet| var | var | var | cofig   | var
  Usage | source   | bin  |  source   |  bin | bin   |
  Data I/O|wav | HWav, HAudio |mono, little-endian, raw 16-bit signed PCM audio,16k Hz|     |IOstream : bin or txt / wav
