@@ -4,6 +4,7 @@
 + [BLAS](#Kaldi_BLAS)
 + [FFT](#Kaldi_FFT)
 + [Data I/O](#Kaldi_IO)
++ [Threading](#Kaldi_threading)
 + [license](#Kaldi_license)
 
 ---
