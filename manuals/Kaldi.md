@@ -3,6 +3,7 @@
 + [Data Type](#Kaldi_data_type)
 + [BLAS](#Kaldi_BLAS)
 + [FFT](#Kaldi_FFT)
++ [Data I/O](#Kaldi_I/O)
 + [license](#Kaldi_license)
 
 ---
@@ -39,7 +40,7 @@ Multiple matrix types which inherit **MatrixBase**  (Vector, likewise)
 + Complex  
 float, float e.g ) 
 ```C++
-Real exp1N_re, exp1N_im; //typename Real 
+Real exp1N_re, exp1N_im; //template typename Real 
 ```
 
 ## [Kaldi BLAS](#TOP)<a name = "Kaldi_BLAS"></a>
@@ -1239,6 +1240,11 @@ void AddOuterProductPlusMinus<double>(double alpha,
 </details>
 
 
+## [Data I/O](#TOP)< a name = "Kaldi_I/O")</a>
++ modified C++ std I/O stream  
++ bin or text (by header '\0')   
+  * bin : read few header info, and read whole data together  
+  * text : general std I/O  
 
 
 ---
