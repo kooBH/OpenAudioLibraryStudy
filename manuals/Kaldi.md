@@ -33,7 +33,7 @@ comment
 The Kaldi matrix library is mostly a C++ wrapper for standard BLAS and LAPACK linear algebra routines. With lots of #define s.  
 
 Matrix defined in /matirx/kaldi-matrix.h    
-Matrixs with types inherit **MatrixBase** 
+Matrixs with types inherit **MatrixBase**  (Vector also likewise)  
 
 
 ### Kaldi supports
