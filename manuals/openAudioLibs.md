@@ -22,8 +22,8 @@
  blas| O | HMath | O|   | O
  argumnet| var | var | var | cofig   | var
  Usage | source   | bin  |  source   |  bin | bin   |
- Data I/O|wav | HWav, HAudio |mono, little-endian, raw 16-bit signed PCM audio,16k Hz|     |IOstream, bin or txt
- visualizaion| indirect GNUplot|HGraf| X| X |
+ Data I/O|wav | HWav, HAudio |mono, little-endian, raw 16-bit signed PCM audio,16k Hz|     |IOstream : bin or txt
+ visualizaion| indirect GNUplot|HGraf| X|  | X
  openMP| O | X | X |   | X
  CUDA| X | HCUDA(alpha 3.5) | X |   | O
 
