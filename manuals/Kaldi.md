@@ -1251,7 +1251,7 @@ void AddOuterProductPlusMinus<double>(double alpha,
 
 + modified C++ std I/O stream  
 + bin or text (by header '\0')   
-  * bin : read few header info, and read whole data together  
+  * bin : read a few header info, and read rest of data together  
   * text : general std I/O  
 
 
