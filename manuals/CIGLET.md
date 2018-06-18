@@ -1,8 +1,24 @@
 ### [CIGLET](./openAudioLibs.md#TOP)<a name = "CIGLET"></a>
++ [fft](#ciglet_fft)
 + [funtion list](#ciglet_list)
 + [function prototype](#ciglet_proto)
 + [license](#ciglet_license)
+
 ---
+
+#### [fft](#TOP)<a name = "ciglet_fft"></a>
+
++ fft 
+```C++
+void cig_fft(FP_TYPE* xr, FP_TYPE* xi, FP_TYPE* yr, FP_TYPE* yi, int n, FP_TYPE* buffer, FP_TYPE mode)  
+```
++ stft 
+```C++
+void cig_stft_forward(FP_TYPE* x, int nx, int* center, int* nwin, int nfrm, int nfft, char* window, int subt_mean, int optlv,FP_TYPE* norm_factor, FP_TYPE* weight_factor, FP_TYPE** Xmagn, FP_TYPE** Xphse)  
+```
+
+---
+
 #### [FUNCTION LIST](#CIGLET)<a name="ciglet_list"></a>
 
 + Scalar operations
