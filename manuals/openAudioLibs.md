@@ -13,10 +13,10 @@
 &nbsp;|Ciglet|HTK|CMUSphinx|openSMILE|Kaldi
 ---|---|---|---|---|---
  언어|C |C |C |C++ | C++
- string| X| X | O|    |
- matrix| 1D(num),2D(audio) |2D | sym_2D|   |
- vector| 1D | 1D| 1D |   |
- complex|struct |struct | struct |   |
+ string| X| X | O|    | X 
+ matrix| 1D(num),2D(audio) |2D | sym_2D|   |1D
+ vector| 1D | 1D| 1D |   | 1D
+ complex|struct |struct | struct |   | 2_Vars(\_re,\_im) 
  fft| O | O| O | O|  O |
  stft| O |X | X|   |
  blas| O | HMath | O| O  |
@@ -26,7 +26,6 @@
  visualizaion| indirect GNUplot|HGraf| X|   |
  openMP| O | X | X |   |
  CUDA| X | HCUDA(alpha 3.5) | X |   |
- Detail| [SEE](#CIGLET) |[SEE](#HTK) | [SEE](#CMUSphinx)|[SEE](#openSMILE)     |
 
  
 ## SUMMARY<a name = "summary"></a>  
