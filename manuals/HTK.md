@@ -2,6 +2,9 @@
 ### [Hidden Markov Model Toolkit (HTK)](./openAudioLibs.md#TOP)<a name="HTK"></a>
 + [license](#HTK_license)
 
+# [Doc](https://docs.google.com/document/d/1Cf3h-VxbtghQKCgsBGp98bKYaY3NLvxGdXstDqQZ7a0/edit?usp=sharing)
+
+
 #### [LICENSE](#HTK)<a name="HTK_license"></a>
 
 + Licensee의 목적을 위해 사용,수정하는 것은 grant
