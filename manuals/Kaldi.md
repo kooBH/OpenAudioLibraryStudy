@@ -35,7 +35,7 @@ comment
 
 + Matrix / Vector  
 defined in /matirx/kaldi-matrix.h    
-Matrixs with types inherit **MatrixBase**  (Vector also likewise)  
+Multiple matrix types which inherit **MatrixBase**  (Vector, likewise)  
 + Complex  
 float, float e.g ) 
 ```C++
