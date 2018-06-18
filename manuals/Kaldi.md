@@ -18,7 +18,7 @@ this a language modeling toolkit. Some of the example scripts require it but it 
     *    The IRSTLM build process requires automake, aclocal, and libtoolize (the corresponding packages are automake and libtool).  
     *    Note: some of the example scripts now use SRILM; we make it easy to install that, although you still have to register online to download it.  
 + [SRILM](https://www.sri.com/engage/products-solutions/sri-language-modeling-toolkit)  
-some of the example scripts use this. It's generally a better and more complete **language modeling toolkit** than IRSTLM; the only drawback is the _license, which is not free for commercial use. You have to enter your name on the download page to download it, so the installation script requires some human interaction.
+some of the example scripts use this. It's generally a better and more complete **language modeling toolkit** than IRSTLM; the only drawback is the _license_, which is not free for commercial use. You have to enter your name on the download page to download it, so the installation script requires some human interaction.
 + sph2pipe  
 this is for converting sph format files into other formats such as wav. It's needed for the example scripts that use LDC data.
 +    sclite  
