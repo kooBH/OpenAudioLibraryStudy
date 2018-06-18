@@ -24,7 +24,7 @@
  Data I/O|wav | HWav, HAudio |mono, little-endian, raw 16-bit signed PCM audio,16k Hz| 
  visualizaion| indirect GNUplot|HGraf| X|
  openMP| O | X | X |
- CUDA| X | HCUDA(alpha 3.5) | [?](https://cmusphinx.github.io/page23/)  |
+ CUDA| X | HCUDA(alpha 3.5) | X |
  Detail| [SEE](#CIGLET) |[SEE](#HTK) | [SEE](#CMUSphinx)|[SEE](#openSMILE)  
 
  
