@@ -12,7 +12,7 @@
   we compile against this and use it heavily.
     * OpenFst is a library for constructing, combining, optimizing, and searching weighted **finite-state transducers** (FSTs).  
     * Used for speech recognition  
-+ [IRSTLM](http://hlt-mt.fbk.eu/technologies/irstlm)
++ [IRSTLM](http://hlt-mt.fbk.eu/technologies/irstlm)  
 this a language modeling toolkit. Some of the example scripts require it but it is not tightly integrated with Kaldi; we can convert any Arpa format language model to an FST.
     * **The IRST Language Modeling** (IRSTLM) Toolkit features algorithms and data structures suitable to estimate, store, and access very large n-gram language models.
     *    The IRSTLM build process requires automake, aclocal, and libtoolize (the corresponding packages are automake and libtool).  
