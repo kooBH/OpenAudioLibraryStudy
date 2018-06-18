@@ -1259,7 +1259,7 @@ void AddOuterProductPlusMinus<double>(double alpha,
 
 ## [Threading](#TOP)<a name="Kaldi_threading"></a>
 
-Q. multi-core?  
+쓰레드를 사용할 수 있게 클래스는 있지만, Kaldi에서 다루는 함수들은 병렬처리에 적합하지 않다. 몇몇 함수에 대해 병렬처리 할 수 있도록 개발하고 있다고하지만 시간이 걸릴 것이다([림크](https://github.com/kaldi-asr/kaldi/issues/2156)). 외부적으로 사용하는 BLAS나 자체적으로 개발하였을 때, 병렬처리가 가능하다고 판단되는 부분은 쓰레딩 할 수 있을 듯     
 
 <details><summary>kaldi-thread.h</summary>
 
