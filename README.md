@@ -6,7 +6,6 @@ Linux : ubuntu 16.04 64bit
 Windows : Windows 7 64bit
 
 # TODO  till 6/29
-+ ~~Kaldi~~
 + BeamformIt  
 + more about c based libraries    
 + [redmine](https://www.redmine.org/)
