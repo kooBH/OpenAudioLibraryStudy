@@ -1,6 +1,9 @@
 ### [Kaldi](./openAudioLibs.md#TOP)<a name = "Kaldi"></a>
 
-+ [license](#ciglet_license)
++ [Data Type](#Kaldi_data_type)
++ [BLAS](#Kaldi_BLAS)
++ [FFT](#Kaldi_FFT)
++ [license](#Kaldi_license)
 
 ---
 
@@ -28,13 +31,20 @@ comment
  + 사용 및 수정의 용이성과 명확성을 위해 bin 파일의 수가 많고 코드도 많이 분할되어있다  
  
 
-## Kaldi Matrix
+## [Kaldi_data_type](#TOP)<a name = "Kaldi_data_type"></a>
+
++ Matrix / Vector  
+defined in /matirx/kaldi-matrix.h    
+Matrixs with types inherit **MatrixBase**  (Vector also likewise)  
++ Complex  
+float, float e.g ) 
+```C++
+Real exp1N_re, exp1N_im; //typename Real 
+```
+
+## [Kaldi BLAS](#TOP)<a name = "Kaldi_BLAS"></a>
 
 The Kaldi matrix library is mostly a C++ wrapper for standard BLAS and LAPACK linear algebra routines. With lots of #define s.  
-
-Matrix defined in /matirx/kaldi-matrix.h    
-Matrixs with types inherit **MatrixBase**  (Vector also likewise)  
-
 
 ### Kaldi supports
 +    **ATLAS**(Automatically Tuned Linear Algebra Software), which is an implementation of BLAS plus a subset of LAPACK (with a different interface)
@@ -43,7 +53,7 @@ Matrixs with types inherit **MatrixBase**  (Vector also likewise)
 
 
 
-## Kaldi FFT
+## [Kaldi FFT](#TOP)<a name = "Kaldi_FFT"></a>
 
 + SplitRadixComplexFft(SRFFT)  
   * only works for power of 2
