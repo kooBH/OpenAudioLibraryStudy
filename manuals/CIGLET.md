@@ -1,5 +1,6 @@
 ### [CIGLET](./openAudioLibs.md#TOP)<a name = "CIGLET"></a>
 + [fft](#ciglet_fft)
++ [Data I/O](#ciglet_dataIO)
 + [funtion list](#ciglet_list)
 + [function prototype](#ciglet_proto)
 + [license](#ciglet_license)
@@ -16,6 +17,11 @@ void cig_fft(FP_TYPE* xr, FP_TYPE* xi, FP_TYPE* yr, FP_TYPE* yi, int n, FP_TYPE*
 ```C++
 void cig_stft_forward(FP_TYPE* x, int nx, int* center, int* nwin, int nfrm, int nfft, char* window, int subt_mean, int optlv,FP_TYPE* norm_factor, FP_TYPE* weight_factor, FP_TYPE** Xmagn, FP_TYPE** Xphse)  
 ```
+
+
+#### [Data I/O](#TOP)<a name = "ciglet_dataIO"></a>
+external library using simple iostream  
+only wav format supports  
 
 ---
 
@@ -83,7 +89,10 @@ void cig_stft_forward(FP_TYPE* x, int nx, int* center, int* nwin, int nfrm, int 
 
 #### [FUNCTION PROTOTYPE](#CIGLET)<a name = "ciglet_proto"></a>
 
--DFP_TPYE=float
+-DFP_TPYE=float   
+으로 데이터 형식 지정  
+
+<details><summary>ciglet.h</summary>
 
 ```c++
 void cig_fft(FP_TYPE* xr, FP_TYPE* xi, FP_TYPE* yr, FP_TYPE* yi,
@@ -358,8 +367,10 @@ static inline FP_TYPE* lfmodel_period(lfmodel model, int fs, int n) {
   return cig_lfmodel_period(model, fs, n);
 }
 
+
 ```
 
+</details>
 
 ---
 
