@@ -8,6 +8,8 @@
 
 ---
 
+### Software packages installed by Kaldi
+
 + [OpenFst](http://www.openfst.org/twiki/bin/view/FST/WebHome)  
   we compile against this and use it heavily.
     * OpenFst is a library for constructing, combining, optimizing, and searching weighted **finite-state transducers** (FSTs).  
