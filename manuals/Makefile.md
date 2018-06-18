@@ -112,9 +112,9 @@ echo $LD_LIBRARY_PATH
 ```
 로  잘 입력됐는지 확인하자
 
-export 된 환경변수는 종료시에 사라지기 때문에  
-~/.config 에 export 명령을 추가시키면 된다  
-
+export 된 환경변수는 종료시에 사라지기 때문에   
+~/.bashrc(터미널을 열때마다 실행 ) 이나  
+~/.profile(부팅 후 유저 로그인 시 실행) 에 export 명령을 추가시키면 된다  
 
 ## [Makefile](#TOP)<a name ="Makefile-Makefile"></a>
 
