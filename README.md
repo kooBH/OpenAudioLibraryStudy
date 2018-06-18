@@ -9,6 +9,7 @@ Windows : Windows 7 64bit
 + BeamformIt  
 + more about c based libraries    
 + [redmine](https://www.redmine.org/)
+cf)http://reogride.tistory.com/entry/Redmine%EB%A5%BC-bitnami%EC%9D%98-%EA%B0%80%EC%83%81%EC%9D%B4%EB%AF%B8%EC%A7%80%EB%A1%9C-%EC%8B%A4%ED%96%89%ED%95%B4%EB%B3%B4%EA%B8%B0
 + Additional information 
 
 ## INDEX<a name="index"></a>
