@@ -3,7 +3,7 @@
 + [Data Type](#Kaldi_data_type)
 + [BLAS](#Kaldi_BLAS)
 + [FFT](#Kaldi_FFT)
-+ [Data I/O](#Kaldi_I/O)
++ [Data I/O](#Kaldi_IO)
 + [license](#Kaldi_license)
 
 ---
@@ -1240,7 +1240,8 @@ void AddOuterProductPlusMinus<double>(double alpha,
 </details>
 
 
-## [Data I/O](#TOP)< a name = "Kaldi_I/O")</a>
+## [Data IO](#TOP)< a name = "Kaldi_IO"></a>
+
 + modified C++ std I/O stream  
 + bin or text (by header '\0')   
   * bin : read few header info, and read whole data together  
