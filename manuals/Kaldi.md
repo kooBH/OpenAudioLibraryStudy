@@ -32,6 +32,13 @@ comment
 
 The Kaldi matrix library is mostly a C++ wrapper for standard BLAS and LAPACK linear algebra routines. With lots of #define s.  
 
+### Kaldi supports
++    **ATLAS**, which is an implementation of BLAS plus a subset of LAPACK (with a different interface)
++    Intel's **MKL**, which provides both BLAS and LAPACK
++    **OpenBLAS**, which provides BLAS and LAPACK
+
+
+
 ## Kaldi FFT
 
 + SplitRadixComplexFft(SRFFT)  
