@@ -20,7 +20,7 @@
  fft| O | O| O | O|  O 
  MFCC| O |O | O| O | O
  blas| O | HMath | O|   | O
- argumnet| var | var | var | cofig   | var
+ argumet| var | var | var | cofig   | var
  Usage | source   | bin  |  source   |  bin | bin   |
  Data I/O|wav | HWav, HAudio |mono, little-endian, raw 16-bit signed PCM audio,16k Hz|     |IOstream : bin or txt
  visualizaion| indirect GNUplot|HGraf| X|  | X
