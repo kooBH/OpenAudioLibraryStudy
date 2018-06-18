@@ -1240,7 +1240,7 @@ void AddOuterProductPlusMinus<double>(double alpha,
 </details>
 
 
-## [Data IO](#TOP)< a name = "Kaldi_IO"></a>
+## [Data IO](#TOP)<a name = "Kaldi_IO"></a>
 
 + modified C++ std I/O stream  
 + bin or text (by header '\0')   
