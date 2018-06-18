@@ -18,7 +18,7 @@
  vector| 1D | 1D| 1D |   | 1D
  complex|struct |struct | struct |   | 2_Vars(\_re,\_im) 
  fft| O | O| O | O|  O 
- stft| O |X | X|   | X
+ MFCC| O |O | O|   | O
  blas| O | HMath | O|   | O
  argumnet| var | var | var | cofig   | var
  Usage | source   | bin  |  source   |  bin | bin   |
