@@ -22,6 +22,7 @@ the linear algebra library (we download the headers). This is useful only on sys
 +    OpenBLAS  
 this is an alernative to ATLAS or CLAPACK. The scripts don't use it by default but we provide installation scripts so you can install it if you want to compare it against ATLAS (it's more actively maintained than ATLAS).
 
+comment
 ---
 
  + 사용 및 수정의 용이성과 명확성을 위해 bin 파일의 수가 많고 코드도 많이 분할되어있다  
@@ -454,11 +455,11 @@ template class SplitRadixRealFft<double>;
 } // end namespace kaldi
 ```
    
-</deatils>
+</details>
 
-
+&nbsp;  
+&nbsp;  
 + ComplexFft
-
 <details><summary>matrix-funtions.cc</summary>
 
 ```C++
@@ -1224,8 +1225,7 @@ void AddOuterProductPlusMinus<double>(double alpha,
 
 #### [LICENSE](#CIGLET)<a name = "ciglet_license"></a>
 
-Apache License 2.0
-
+<details><summary>Apache License 2.0</summary>
 <pre>
 
 Update to legal notice, made Feb 2012, modified Sep 2013.  We would like to
@@ -1593,5 +1593,7 @@ Other Source Material
 limitations under the License.
 
 </pre>
+
+</details>
 
 ---
