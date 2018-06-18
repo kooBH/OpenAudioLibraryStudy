@@ -38,8 +38,8 @@
 	 
 	 &nbsp;  
 	 * Windows   
-	  ### [Binary Pacakage](https://sourceforge.net/projects/openblas/files/v0.2.14/)  
-	  ### [Manual Compile](https://github.com/xianyi/OpenBLAS/wiki/How-to-use-OpenBLAS-in-Microsoft-Visual-Studio)   
+	   [Binary Pacakage](https://sourceforge.net/projects/openblas/files/v0.2.14/)  
+	   [Manual Compile Guide](https://github.com/xianyi/OpenBLAS/wiki/How-to-use-OpenBLAS-in-Microsoft-Visual-Studio)   
 	   
 	   
 ---	   
