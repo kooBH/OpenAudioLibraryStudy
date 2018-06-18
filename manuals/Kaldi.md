@@ -42,6 +42,8 @@ float, float e.g )
 ```C++
 Real exp1N_re, exp1N_im; //template typename Real 
 ```
+  
+Most of Data are STL compatible, but not guaranteed  
 
 ## [Kaldi BLAS](#TOP)<a name = "Kaldi_BLAS"></a>
 
