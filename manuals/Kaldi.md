@@ -32,6 +32,10 @@ comment
 
 The Kaldi matrix library is mostly a C++ wrapper for standard BLAS and LAPACK linear algebra routines. With lots of #define s.  
 
+Matrix defined in /matirx/kaldi-matrix.h    
+Matrixs with types inherit **MatrixBase** 
+
+
 ### Kaldi supports
 +    **ATLAS**(Automatically Tuned Linear Algebra Software), which is an implementation of BLAS plus a subset of LAPACK (with a different interface)
 +    Intel's **MKL**, which provides both BLAS and LAPACK
