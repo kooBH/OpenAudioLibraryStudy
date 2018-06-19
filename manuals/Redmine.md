@@ -65,5 +65,7 @@ Bitnami has automated the ability to package, deploy and maintain applications, 
   http://matoker.com/30183738344
   
   libapache2-mod-passenger
-
+ ruby-dev
+ 
+ https://community.bitnami.com/t/redmine-how-could-i-change-the-localhost-8080-to-public-url-example-com/23362/18
   
