@@ -13,22 +13,33 @@
 
 &nbsp;|Ciglet|HTK|CMUSphinx|openSMILE|Kaldi | BeamformIt
 ---|---|---|---|---|---|---
- 언어|C |C |C |C++ | C++   |  
- string| X| X | O|    | X    | 
- matrix| 1D(num),2D(audio) |2D | sym_2D|   |1D    | 
- vector| 1D | 1D| 1D |   | 1D   | 
- complex|struct |struct | struct |   | 2_Vars(\_re,\_im)    |  
- fft| O | O| O | O|  O    | 
- MFCC| O |O | O| O | O   | 
- blas| O | HMath | O|   | external   | 
- argumet| var | var | var | cofig   | var   | 
- Usage | source   | bin  |  source   |  bin | bin   |   | 
- Data I/O|wav | HWav, HAudio |mono, little-endian, raw 16-bit signed PCM audio,16k Hz|     |IOstream : bin or txt / wav   | 
- visualizaion| indirect GNUplot|HGraf| X|  | X   | 
- openMP| O | X | X |   | X   | 
- CUDA| X | HCUDA(alpha 3.5) | X |   | CUDA matrix   | 
+ 언어|C |C |C |C++ | C++   |  C++
+ string| X| X | O|    | X    |  x
+ matrix| 1D(num),2D(audio) |2D | sym_2D|   |1D    |  X
+ vector| 1D | 1D| 1D |   | 1D   |  X
+ complex|struct |struct | struct |   | 2_Vars(\_re,\_im)    |   1D[[1]](#1)
+ fft| O | O| O | O|  O    |  external
+ MFCC| O |O | O| O | O   |  X
+ blas| O | HMath | O|   | external   |  X
+ argumet| var | var | var | cofig   | var   | config
+ Usage | source   | bin  |  source   |  bin | bin   |  bin  
+ Data I/O|wav | HWav, HAudio |mono, little-endian, raw 16-bit signed PCM audio,16k Hz|     |IOstream : bin or txt / wav   |  wav
+ visualizaion| indirect GNUplot|HGraf| X|  | X   |  X
+ openMP| O | X | X |   | X   |  X
+ CUDA| X | HCUDA(alpha 3.5) | X |   | CUDA matrix   |  X
  Detail |[SEE](./CIGLET.md) | [SEE](./HTK.md)|[SEE](./CMUSphinx.md)| [SEE](./openSMILE.md)| [SEE](./Kaldi.md)   |  [SEE](./Beamformit.md)
 
+
+argument 에 config 으로 하는 애들은 주요 변수들을 외부 파일에 저장해두고 사용  
+Usage 에 bin 으로 사용하는 라이브러리들은 parsing 기능 포함    
+
+ [1]<a name ="1"></a>
+ FFTReal.hpp ...  
+<pre> 
+  f [0...length(x)/2] = real values
+  f [length(x)/2+1...length(x)-1] = negative imaginary values of
+</pre>
+ 
  
 ## SUMMARY<a name = "summary"></a>  
  
@@ -78,6 +89,8 @@
 + include a matrix library that wraps standard BLAS and LAPACK routines
 + licensed under Apache 2.0, which is one of the least restrictive licenses available
 
+---
+
 # [openSMILE](#TOP)<a name="openSMILE"></a>
 + [Link](https://audeering.com/technology/opensmile/)
 + [MyDocumnet](./openSMILE.md)
@@ -89,10 +102,16 @@
 + Multi-threading support for parallel feature extraction
 + Designed for real-time on-line processing, but also useful for off-line batch 
 
+---
+
 # [BeamformIt](https://github.com/xanguera/BeamformIt)<a name = "Beamformit"></a>
-+ [Link](https://github.com/xanguera/BeamformIt)
++ [Link](http://www.xavieranguera.com/beamformit/)
 + [MyDocument](./BeamformIt.md)
++ No Windows supports, but seems possible with minor modification.
 + acoustic beamforming tool
+
+
+---
 
 ## Common Traits
 + Don't use primitive data type. use defined data type throughout all source. for easy modification
