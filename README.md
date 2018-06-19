@@ -45,3 +45,5 @@ https://github.com/pjreddie/darknet
 
 ## 8. [openMPI](./manuals/OpenMPI.md)
 
+## 9. [Redmine](./manuals/Redmine.md)
+
