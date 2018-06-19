@@ -9,11 +9,16 @@
 [Redmine Guidle](https://www.redmine.org/projects/redmine/wiki/Guide)  
     
 # TODO
-웹 
-github와의 실시간 연동  
+dcoker 로 redmine  
+docker 설치는 함
 
 
 ## [설치](#TOP)<a name = "install"></a>
+
++ [Docker](https://www.docker.com/)  
+설치  : http://pseg.or.kr/pseg/infoinstall/6067  
+
+
 
 [The Bitnami Redmine Stack](https://bitnami.com/stack/redmine)   
 Bitnami 는 다른 패키지를 많이 사용하는 어플리케이션을 이용할때, 한번에 패키지를 설치하거나 패키지가 설치된 가상머신을 사용할 수 있게한다. 어플리케이션 마다 다른 구성의 Bitnami를 지원한다   
