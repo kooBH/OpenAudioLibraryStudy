@@ -15,11 +15,11 @@ Bitnami has automated the ability to package, deploy and maintain applications, 
 
 ## [설치](#TOP)<a name = "install"></a>
 
-[The Bitnami Redmine Stack](https://bitnami.com/stack/redmine) 
+[The Bitnami Redmine Stack](https://bitnami.com/stack/redmine)   
 Bitnami 는 다른 패키지를 많이 사용하는 어플리케이션을 이용할때, 한번에 패키지를 설치하거나 패키지가 설치된 가상머신을 사용할 수 있게한다. 어플리케이션 마다 다른 구성의 Bitnami를 지원한다   
 
 1. 자신에 OS에 맞는 인스톨러를 받는다. 자신의 OS에 직접 설치할 수도 있고, 가상 머신을 사용할 수도 있다.
-+ Ubuntu  
++ Ubuntu 인스톨러   
   1. 추가적으로 설치할 구성요소  
   2. 설치 경로
   3. 레드마인 계정
