@@ -2,13 +2,15 @@
 1. [설치](#install)
 2. [접속](#enter)
 3. [git 연동](#git)
+4. [웹](#web)
 
 [Redmine](https://www.redmine.org/) is a flexible project management web application. Written using the Ruby on Rails framework, it is cross-platform and cross-database.    
 
 [Redmine Guidle](https://www.redmine.org/projects/redmine/wiki/Guide)  
     
 # TODO
-
+웹 
+github와의 실시간 연동  
 
 
 ## [설치](#TOP)<a name = "install"></a>
@@ -58,5 +60,10 @@ Bitnami has automated the ability to package, deploy and maintain applications, 
   
   ### Issue : Redmine 의 repo는 local git과 연동되어있다. github와의 sync를 위해 주기적으로 update를 하거나 pull하거나 우선순위를 정해서 처리하는걸 생각해 봐야함
   
+  ## [WEB](#TOP)<a name = "web"></a> 
+  
+  http://matoker.com/30183738344
+  
+  libapache2-mod-passenger
 
   
