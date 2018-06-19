@@ -10,23 +10,23 @@
 6. ### [Kaldi](#Kaldi)
 ---  
 
-&nbsp;|Ciglet|HTK|CMUSphinx|openSMILE|Kaldi
----|---|---|---|---|---
- 언어|C |C |C |C++ | C++
- string| X| X | O|    | X 
- matrix| 1D(num),2D(audio) |2D | sym_2D|   |1D
- vector| 1D | 1D| 1D |   | 1D
- complex|struct |struct | struct |   | 2_Vars(\_re,\_im) 
- fft| O | O| O | O|  O 
- MFCC| O |O | O| O | O
- blas| O | HMath | O|   | external
- argumet| var | var | var | cofig   | var
- Usage | source   | bin  |  source   |  bin | bin   |
- Data I/O|wav | HWav, HAudio |mono, little-endian, raw 16-bit signed PCM audio,16k Hz|     |IOstream : bin or txt / wav
- visualizaion| indirect GNUplot|HGraf| X|  | X
- openMP| O | X | X |   | X
- CUDA| X | HCUDA(alpha 3.5) | X |   | CUDA matrix
- Detail |[SEE](./CIGLET.md) | [SEE](./HTK.md)|[SEE](./CMUSphinx.md)| [SEE](./openSMILE.md)| [SEE](./Kaldi.md)
+&nbsp;|Ciglet|HTK|CMUSphinx|openSMILE|Kaldi | Beamformit
+---|---|---|---|---|---|---
+ 언어|C |C |C |C++ | C++   |  
+ string| X| X | O|    | X    | 
+ matrix| 1D(num),2D(audio) |2D | sym_2D|   |1D    | 
+ vector| 1D | 1D| 1D |   | 1D   | 
+ complex|struct |struct | struct |   | 2_Vars(\_re,\_im)    |  
+ fft| O | O| O | O|  O    | 
+ MFCC| O |O | O| O | O   | 
+ blas| O | HMath | O|   | external   | 
+ argumet| var | var | var | cofig   | var   | 
+ Usage | source   | bin  |  source   |  bin | bin   |   | 
+ Data I/O|wav | HWav, HAudio |mono, little-endian, raw 16-bit signed PCM audio,16k Hz|     |IOstream : bin or txt / wav   | 
+ visualizaion| indirect GNUplot|HGraf| X|  | X   | 
+ openMP| O | X | X |   | X   | 
+ CUDA| X | HCUDA(alpha 3.5) | X |   | CUDA matrix   | 
+ Detail |[SEE](./CIGLET.md) | [SEE](./HTK.md)|[SEE](./CMUSphinx.md)| [SEE](./openSMILE.md)| [SEE](./Kaldi.md)   |  [SEE](./Beamformit.md)
 
  
 ## SUMMARY<a name = "summary"></a>  
