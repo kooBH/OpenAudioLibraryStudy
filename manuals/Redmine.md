@@ -7,18 +7,16 @@
 
 [Redmine Guidle](https://www.redmine.org/projects/redmine/wiki/Guide)  
     
-bitnami 를 이용한 편한 설치  
-http://www.redmine.or.kr/projects/community/wiki/Linux
+# TODO
 
-[bitnami](https://bitnami.com/)     
-Bitnami has automated the ability to package, deploy and maintain applications, lowering the barrier to adoption for anyone to deploy and maintain a full spectrum of server applications, development stacks and infrastructure applications in virtually any format. 
+
 
 ## [설치](#TOP)<a name = "install"></a>
 
 [The Bitnami Redmine Stack](https://bitnami.com/stack/redmine)   
 Bitnami 는 다른 패키지를 많이 사용하는 어플리케이션을 이용할때, 한번에 패키지를 설치하거나 패키지가 설치된 가상머신을 사용할 수 있게한다. 어플리케이션 마다 다른 구성의 Bitnami를 지원한다   
 
-1. 자신에 OS에 맞는 인스톨러를 받는다. 자신의 OS에 직접 설치할 수도 있고, 가상 머신을 사용할 수도 있다.
+자신에 OS에 맞는 인스톨러를 받는다. 자신의 OS에 직접 설치할 수도 있고, 가상 머신을 사용할 수도 있다.  
 + Ubuntu 인스톨러   
   1. 추가적으로 설치할 구성요소  
   2. 설치 경로
@@ -30,7 +28,16 @@ Bitnami 는 다른 패키지를 많이 사용하는 어플리케이션을 이용
   4. 언어  
   5. 이메일로 Notification 가능? 
   6. Redmine을 클라우드에서 구동(유료)
+  7. 완료  
+ 
   
+bitnami 를 이용한 편한 설치  
+http://www.redmine.or.kr/projects/community/wiki/Linux
+
+[bitnami](https://bitnami.com/)     
+Bitnami has automated the ability to package, deploy and maintain applications, lowering the barrier to adoption for anyone to deploy and maintain a full spectrum of server applications, development stacks and infrastructure applications in virtually any format. 
+
+
   ## [접속](#TOP)<a name = "enter"></a>
   
   설치 폴더에서 manager-linux-x64.run을 실행  
@@ -45,6 +52,11 @@ Bitnami 는 다른 패키지를 많이 사용하는 어플리케이션을 이용
   + Main repository : option (default yes)
   + Identifier
   + Path to repository : e.g /home/ffe/git/OpenAudioLibraryStudy/.git
+  
+  하면은 project에 Repository 항목이 생긴다  
+  처음 열때는 이전 commit기록을 다 불러오기 때문에 시간이 좀 걸린다  
+  
+  ### Issue : Redmine 의 repo는 local git과 연동되어있다. github와의 sync를 위해 주기적으로 update를 하거나 pull하거나 우선순위를 정해서 처리하는걸 생각해 봐야함
   
 
   
