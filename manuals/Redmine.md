@@ -1,14 +1,87 @@
 # [Redmine](../README.md)<a name = "TOP"></a>
 1. [설치](#install)
-2. [접속](#enter)
-3. [git 연동](#git)
-4. [웹](#web)
+2. [테마](#theme)
+3. [플러그인](#plugin)
+
 
 [Redmine](https://www.redmine.org/) is a flexible project management web application. Written using the Ruby on Rails framework, it is cross-platform and cross-database.    
 
 [Redmine Guidle](https://www.redmine.org/projects/redmine/wiki/Guide)  
     
     
+    
+## [설치](#TOP)<a name = "install">
+
++ Docker 설치  
+https://www.docker.com/community-edition  
+
+또는  
+ 
+http://pseg.or.kr/pseg/infoinstall/6067  
+
+이제 Docker에 redmine 을 설치힌다 
+
+```bash
+$ docker pull sameersbn/redmine
+
+$ wget https://raw.githubusercontent.com/sameersbn/docker-redmine/master/docker-compose.yml
+
+$ docker-compose -f docker-compose.yml up
+
+```
+
+거의 기본값으로 설치되기 때문에 추가적으로 수정하고자 한다면  
+https://hub.docker.com/r/sameersbn/redmine/
+을 참고하여  .yml 파일을 수정하여 사용하면 된다  
+
++ 서버컴퓨터의 IP:10083 으로 접속가능 (ex : http://163.239.192.242:10083  )   
++ 호스트 OS의 /srv/docker/폴더는 docker 이미지에 마운트되어있다. 폴더를 공유함      
+
+## [테마](#TOP)<a name ="theme"></a>
+
+redmine폴더/public/themes 에 폴더를 만들어서 테마를 받아 넣으면 (git clone 등으로)   
+버전이 맞다면 Admin -> Setting -> Display -> Theme 에 추가적인 옵션이 생긴다    
+
+ex) https://github.com/tdvsdv/redmine_alex_skin.git
+
+
+## [플러그인](#TOP)<a name = "plugin"></a>
+
+
+redmine폴더/plugins/ 에 plugin 폴더를 넣는다
+
+```bash
+redmine폴더 $ bundle install
+redmine폴더 $ rake redmine:plugins:migrate RAILS_ENV=production
+```
+
+하고 서버를 재시작하면 적용이 된다
+
+#### ex 
+
+```bash
+$ docker cp ~/다운로드/플러그인.zip docker_redmine_1:/home/redmine/redmine/plugins/
+$ docker exec -it docker_redmine_1 bash
+docker:redmine$ cd ${REDMINE_ROOT}
+docker:redmine$ unzip plugins/플러그인.zip -d plugins/
+docker:redmine$ bundle install
+docker:redmine$ rake redmine:plugins:migrate RAILS_ENV=production
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 <details><summary>XXX</summary>
     
@@ -17,7 +90,7 @@ dcoker 로 redmine
 docker 설치는 함
 
 
-## [설치](#TOP)<a name = "install"></a>
+## [설치](#TOP)
 
 + [Docker](https://www.docker.com/)  
 설치  : http://pseg.or.kr/pseg/infoinstall/6067  
