@@ -8,6 +8,10 @@
 
 [Redmine Guidle](https://www.redmine.org/projects/redmine/wiki/Guide)  
     
+    
+    
+<details><summary>XXX</summary>
+    
 # TODO
 dcoker 로 redmine  
 docker 설치는 함
@@ -151,3 +155,5 @@ Bitnami 로 하면 원래의 redmine 구조가 아닌 bitnami의 구조로 설�
  
  https://community.bitnami.com/t/redmine-how-could-i-change-the-localhost-8080-to-public-url-example-com/23362/18
   
+  
+  </details>
