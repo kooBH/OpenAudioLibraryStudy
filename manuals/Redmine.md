@@ -18,6 +18,68 @@ docker 설치는 함
 + [Docker](https://www.docker.com/)  
 설치  : http://pseg.or.kr/pseg/infoinstall/6067  
 
+레드마인 : https://hub.docker.com/_/redmine/
+
+도커 활용 : http://raccoonyy.github.io/docker-usages-for-dev-environment-setup/  
+
+도커 버전 문서 :https://docs.docker.com/compose/compose-file/compose-versioning/#version-2
+
+
+``` bash
+
+$ sudo docker run -d --name redmine_mysql -e MYSQL_ROOT_PASSWORD=qwer1234 -e MYSQL_DATABASE=redmine_db mysql
+
+$ sudo docker run -d --name some-redmine --link redmine_mysql:mysql redmine
+
+$ curl -L https://github.com/docker/compose/releases/download/1.21.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+
+$  sudo chmod +x /usr/local/bin/docker-compose 
+
+$ sudo apt-get install docker-compose -- 이전 버전 설치함
+
+
+
+$ vim docker-compose.yml
+```
+<details><summary>docker-compose.yml</summary>
+    
+```
+version: '3.1'
+
+services:
+
+    redmine:
+        image: redmine
+        restart : always
+        container_name: redmine
+        ports:
+            - 8080:3000
+        environment:
+            REDMINE_DB_MYSQL: db
+            REDMINE_DB_PASSWORD: qwer1234
+
+    db:
+            #image: mysql # error | mbind : operation not permmited 
+            image: mysql:5.7
+            restart: always
+            ports:
+                - 3306:3306
+            environment:
+                MYSQL_ROOT_PASSWORD: qwer1234
+                MYSQL_DATABASE: redmine
+
+```    
+</details>
+
+
+
+``` bash
+$ sudo docker-compose -f docer-compose.yml up
+
+```
+
+초기 관리자 계정 : Login : admin  |  Password : admin  
+
 
 
 [The Bitnami Redmine Stack](https://bitnami.com/stack/redmine)   
@@ -43,6 +105,8 @@ http://www.redmine.or.kr/projects/community/wiki/Linux
 
 [bitnami](https://bitnami.com/)     
 Bitnami has automated the ability to package, deploy and maintain applications, lowering the barrier to adoption for anyone to deploy and maintain a full spectrum of server applications, development stacks and infrastructure applications in virtually any format. 
+
+Bitnami 로 하면 원래의 redmine 구조가 아닌 bitnami의 구조로 설치가 되며, 설정또한 원래의 설정퍼일과 bitnami에서 관리하는 설정파일이 따로 있어서 일이 많다  
 
 
   ## [접속](#TOP)<a name = "enter"></a>
