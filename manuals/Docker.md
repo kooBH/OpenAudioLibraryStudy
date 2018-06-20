@@ -1,6 +1,6 @@
 
 
-## 한방 설치
+## 쉬운 설치
 
 https://hub.docker.com/r/sameersbn/redmine/
 
