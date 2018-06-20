@@ -77,10 +77,23 @@ services:
 $ sudo docker-compose -f docer-compose.yml up
 
 ```
-
+초기 주소 : http://localhost:8080
 초기 관리자 계정 : Login : admin  |  Password : admin  
 
 
+sudo docker run -it redmine bash
+
+https://www.redmineup.com/pages/help/installation/installing-redmine-on-ubuntu-16-04
+
+https://www.redmineup.com/pages/help/installation/installing-redmine-on-ubuntu-16-04#Setting-a-secure-connection-HTTPS-in-nginx
+
+```bash
+subversion imagemagick libmagickwand-dev libcurl4-openssl-dev curl
+
+# gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
+# curl -L https://get.rvm.io | bash -s stable --ruby=2.2.6
+
+```
 
 [The Bitnami Redmine Stack](https://bitnami.com/stack/redmine)   
 Bitnami 는 다른 패키지를 많이 사용하는 어플리케이션을 이용할때, 한번에 패키지를 설치하거나 패키지가 설치된 가상머신을 사용할 수 있게한다. 어플리케이션 마다 다른 구성의 Bitnami를 지원한다   
