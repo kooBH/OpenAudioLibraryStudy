@@ -109,17 +109,18 @@ $ crontab -e
 + 양식
 minute hour day month weekday command
 
-    minute : 0 – 59
-    hour : 0 – 23
-    day : 1 – 31
-    month : 1 – 12
-    weekday : 0 – 6 (0 : 일요일)
-    command : 수행하려는 작업 명령어
-
+<pre>
+minute : 0 – 59
+hour : 0 – 23
+day : 1 – 31
+month : 1 – 12
+weekday : 0 – 6 (0 : 일요일)
+command : 수행하려는 명령어
+</pre>
 
 + \* : 모든 값 
 + , : 복수      
-+ - : 범위   
++ \- : 범위   
 + / : 단위
 
 
