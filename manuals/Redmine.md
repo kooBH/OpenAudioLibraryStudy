@@ -47,6 +47,11 @@ ex) https://github.com/tdvsdv/redmine_alex_skin.git
 
 ## [플러그인](#TOP)<a name = "plugin"></a>
 
+### 필요
+```bash
+$ sudo apt-get install bundle
+$ get install rake 
+```
 
 redmine폴더/plugins/ 에 plugin 폴더를 넣는다
 
@@ -91,8 +96,10 @@ Report last commit for files and directories
 </pre>
 
 
+https://github.com/phlegx/redmine_gitlab_hook
 
 
+163.239.192.242/gitlab_hook?key={163.239.192.242/gitlab_hook?key=7t69XsuTlPLjyIQ3pzyh&project_id=repo}&project_id=repo
 
 
 
