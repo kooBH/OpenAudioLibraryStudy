@@ -95,13 +95,49 @@ Path encoding  - 인코딩 종류  Default: UTF-8
 Report last commit for files and directories 
 </pre>
 
+하면 저장소에서 볼 수가 있다  
 
-https://github.com/phlegx/redmine_gitlab_hook
+### cron으로 주기적으로 pull하기  
+```bash
+$ crontab -e
+````
+
+를 하면 예약작업을 관리할 수 있다.
+
++ 양식
+minute hour day month weekday command
+
+    minute : 0 – 59
+    hour : 0 – 23
+    day : 1 – 31
+    month : 1 – 12
+    weekday : 0 – 6 (0 : 일요일)
+    command : 수행하려는 작업 명령어
+
+10 10 * * * bash B.sh : 매일 10시 10분마다 B.sh 실행  
+ 
+* * * * * bash A.sh  : 1분마다 A.sh 실행  
+
+redmine과 연동한 git저장소를 업데이트하는 스크립트를 일정주기별로 실행하게 등록하면 된다  
 
 
-163.239.192.242/gitlab_hook?key={163.239.192.242/gitlab_hook?key=7t69XsuTlPLjyIQ3pzyh&project_id=repo}&project_id=repo
+### 연동 플러그인   https://github.com/phlegx/redmine_gitlab_hook
 
 
+```bash
+
+/redmine/plugins% git clone https://github.com/phlegx/redmine_gitlab_hook.git
+cd ..
+bundle install
+rake redmine:plugins:migrate RAILS_ENV=production
+```  
+gitlab - setting - integrations    
+http://163.239.192.242:10083/redmine_gitlab_hook?key=7t69XsuTlPLjyIQ3pzyh&project_id=sync&repository_name=sync  
+->  
+internal error 
+
+# ISSUE
+다른 URL로 같은 request를 하는것은 되는 것으로 보아, redmine에 접근을 못하는것 같다. 어디서 걸리는지 확인해야함
 
 
 
