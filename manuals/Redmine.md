@@ -102,7 +102,7 @@ Report last commit for files and directories
 $ crontab -e
 ````
 
-를 하면 예약작업을 관리할 수 있다.
+예약작업관리 파일이 열린다  
 
 + 양식
 minute hour day month weekday command
