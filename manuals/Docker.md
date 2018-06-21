@@ -1,4 +1,4 @@
-# Docker<a name="TOP"></a> 
+# [Docker](../README.md)<a name="TOP"></a> 
 1. [컨테이너 백업](#backup)
 2. [docker-compose](#compose)
 
@@ -43,7 +43,7 @@ docker 설정들을 저장해서 사용을 도와준다
 ```bash
 $ sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 $ sudo chmod +x /usr/local/bin/docker-compose
-````
+```
 
 
 https://docs.docker.com/compose/  
