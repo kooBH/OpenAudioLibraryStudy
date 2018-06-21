@@ -116,10 +116,21 @@ minute hour day month weekday command
     weekday : 0 – 6 (0 : 일요일)
     command : 수행하려는 작업 명령어
 
-10 10 * * * bash B.sh : 매일 10시 10분마다 B.sh 실행  
- 
-* * * * * bash A.sh  : 1분마다 A.sh 실행  
 
++ \* : 모든 값 
++ , : 복수      
++ - : 범위   
++ / : 단위
+
+
+ex)
+```
+10 10 * * * bash B.sh : 매일 10시 10분마다 B.sh 실행   
+* * * * * bash A.sh  : 1분마다 A.sh 실행  
+0 0 * * * cd ~/temp && rm * : 매일 0시 0분마다 temp 폴더의 모든 파일 제거  
+30/ * * * 0,6 cd ~/script $$ bash C.sh : 토요일 일요일에는 30분마다 C.sh 실행
+
+```
 redmine과 연동한 git저장소를 업데이트하는 스크립트를 일정주기별로 실행하게 등록하면 된다  
 
 
