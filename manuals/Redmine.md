@@ -4,13 +4,15 @@
 3. [플러그인](#plugin)
 4. [gitlab 연동](#gitlab)
 
-[Redmine](https://www.redmine.org/) is a flexible project management web application. Written using the Ruby on Rails framework, it is cross-platform and cross-database.    
+[Redmine](https://www.redmine.org/) : a flexible project management web application. Written using the Ruby on Rails framework, it is cross-platform and cross-database.    
 
 [Redmine Guidle](https://www.redmine.org/projects/redmine/wiki/Guide)  
     
     
     
 ## [설치](#TOP)<a name = "install">
+
+여기서는 Docker위에 redmine을 올릴것이다 
 
 + Docker 설치  
 https://www.docker.com/community-edition  
