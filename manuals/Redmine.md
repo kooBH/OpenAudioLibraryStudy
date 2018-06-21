@@ -22,7 +22,7 @@ http://pseg.or.kr/pseg/infoinstall/6067
 이제 Docker에 redmine 을 설치힌다 
 
 ```bash
-$ docker pull sameersbn/redmine
+$ docker pull sameersbn/redmine    # 오리지날 버전이 아님, 인기 많은 개인의 버전
 
 $ wget https://raw.githubusercontent.com/sameersbn/docker-redmine/master/docker-compose.yml
 
