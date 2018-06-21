@@ -81,10 +81,12 @@ Project를 생성하고
 Setting -> repositories  
 
 생성 양식  
-SCM  - 저장소를 받아올 서버종류 우리는 Git을 사용, 옵션별로 양식이 다르다  
 
 <pre>
-Main repository - 프로젝트의 저장소 탭을 열었을 때 보여주는 저장소인가?
+
+SCM  - 저장소를 받아올 서버종류 우리는 Git을 사용, 옵션별로 양식이 다르다  
+
+Main repository - 프로젝트의 메인 저장소인가
 
 Identifier - 프로젝트에서 보여질 이름 
 Length between 1 and 255 characters. Only lower case letters (a-z), numbers, dashes and underscores are allowed.
