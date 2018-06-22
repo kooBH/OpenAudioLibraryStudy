@@ -3,6 +3,13 @@
 1. [gcc](#Makefile-gcc)
 2. [library](#Makefile-library)
 3. [Makefile](#Makefile-Makefile)
+	+ basic
+	+ macro
+	+ library
+	+ directories
+	+ wildcard
+	+ sub-makefile
+	
 
 
 아래의 코드가 있다고 하자
@@ -131,55 +138,133 @@ Makefie( 확장자 없음)을 작성한 뒤에 make 를 명령하면 Makefile에
 
 종속성이 충족되면(되는지 확인하고) 목표를 위한 명령어를 수행한다
 
-### 예제 1-1
-```Makefile
-hello : main.o hello.o
-	gcc -o hello main.o hello.o 
+### [ex](#TOP)<a name ="basic"></a>
 
-main.o : hello.h main.c
+<details><summary>Makefile/1_basic</summary>
+
+```Makefile
+#기본 타겟(가장 위에 있기 때문에) hello :  조건은 hello 와 main이 충족되어야한다
+#조건이 맞다면 gcc -o <실행파일> <목적파일1> <목적파일2> 을 한다
+exec : hello main
+	gcc -o hello main.o  hello.o 
+
+#main.o 를 만든다. main.c 가 있어야한다
+main : main.c
 	gcc -c main.c
 
-hello.o : hello.h hello.c
+#hello.o 를 만든다. hello.h 와 hello.c가 있어야한다
+hello : hello.h hello.c
 	gcc -c hello.c
 
+#clean 타겟, make clean시 호출된다. 사용된 목적파일을 지운다
+clean :
+rm *.o	
 ```
 
-이 경우 처음에는 main.o 와 hello.o 가 없기에 hello를 위한 명령은 나중에 수행된다  
-끝까지 종속성이 충족되지 않은 경우에는 수행되지 않는다
+</details>
 
-위의 예제와 같은 기능을 하는 예제
+### [ex](#TOP)<a name ="macro"></a>
 
-### 예제 1-2
+<details><summary>Makefile/2_macro</summary>
 
 ```Makefile
+#미리 지정된 매크로 'CC' : .c 파일의 컴파일러 
+CC=gcc
+#OBJ 매크로 지정
+OBJS = main.o hello.o
 
-#define customized suffixes
-.SUFFIXES : .c .o
 
-#Macro for objects
-OBJ =  main.o hello.o 
+#매크로 호출은 $(매크로명)
+#
+#$@ 현재 타겟
+#$^ 현재 타겟의 종속항목
+hello : $(OBJS)
+	$(CC) -o $@ $^	
+#각 OBJS 에 대해 .o 파일을 만드는  명령은 없지만
+#make 에 그정도의 기능은 내장되어있다
 
-#output file
-TARGET = hello 
 
-#make method
-CC = gcc
-
-#flag for g++ #use CFLAGS for gcc
-CCFLAGS = -c 
-
-$(TARGET) : $(OBJ)
-	$(CC) -o $(TARGET) $(OBJ)
-
-#remove used object files
-clean :
-	rm -rf $(OBJ) $(TARGET) core
-
+clean : 
+	rm *.o
 
 ```
 
-주석은 # 을 사용한다  
-Makefile 의 앞 부분에는 매크로를 지정해 줄 수 가 있다. 이는 Makefile 작성을 용이 하게 해준다
+</details>
 
-clean :  
-이 부분은 make clean 을 할때 실행된다
+### [ex](#TOP)<a name ="library"></a>
+
+다음과 같은 파일 3개가 있을 때  
+
+<details><summary>main.c</summary>
+	
+```C++
+#include "my_lib.h"
+#include <math.h>
+#include <stdio.h>
+
+int main()
+{
+	printf("1 + 2 = %d\n",add(1,2));
+	printf("2.2^10 = %lf\n",pow(2.2,10));
+	return 0;
+}
+```
+</details>
+
+<details><summary>my_lib.h</summary>
+	
+```C++
+int add(int,int);
+```
+</details>
+
+<details><summary>my_lib.c</summary>
+	
+```C++
+int add(int x,int y)
+{
+return x+y;
+}
+```
+</details>
+
+라이브러리를 만들어서 활용하고 싶다면
+
+<details><summary>Makefile/3_library</summary>
+
+```Makefile
+CC=gcc
+OBJS = main
+#라이브러리로 만들 파일
+#.c 와 .h 둘 다 사용할 것이기에 my_lib을 매크로로 해서
+# $(LIBS).c  $(LIBS).h 로 사용
+LIBS = my_lib
+
+# <math.h> 를 사용하기 위한 옵션
+FLAG = -lm
+
+TARGET=hello
+
+#라이브러리 사용 방식을 받을 매크로
+#make 시 
+#make LIB_OPTION=<옵션> 으로 해야한다
+LIB_OPTION=
+
+
+# 빌드는는
+# make static : 정적
+# make shared : 동적
+# 으로 먼저 라이브러리를 생성하고 해야한다
+
+default:
+#옵션으로 SHARED 를 받았을 때
+ifeq ($(LIB_OPTION), SHARED)
+	@echo "SHARED"	
+	$(CC) -c $(OBJS).c
+	$(CC) -o $(TARGET) $(OBJS).o -L. -l$(LIBS)
+	@echo "You need to export PATH to library"
+
+```
+
+</details>
+
