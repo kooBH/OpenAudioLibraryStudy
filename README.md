@@ -6,7 +6,7 @@ Linux : ubuntu 16.04 64bit
 Windows : Windows 7 64bit
 
 # TODO  till 6/29  
-+ polishing for presentation  
++ CUDA
 
 
 ## INDEX<a name="index"></a>
