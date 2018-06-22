@@ -2,11 +2,16 @@
 # [Makefile](../README.md)<a name ="TOP"></a>
 1. [gcc](#Makefile-gcc)
 2. [library](#Makefile-library)
-3. [Makefile](#Makefile-Makefile)
+3. [Makefile by examples](#Makefile-Makefile)
 	+ [basic](#basic)
 	+ [macro](#macro)
 	+ [library](#library)
 	+ [directory](#directory)
+	+ [wildcard](#wildcard)
+	+ ----WIP---
+	+ [sub-makefile](#sub-makefile)
+	+ [suffix](#suffix)
+	+ [overall](#overall)
 	
 
 
