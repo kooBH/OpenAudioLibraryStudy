@@ -32,9 +32,10 @@ cmake 시에 부가적인 파일이 많이 생성되므로 _build_ 폴더를 만
 
 ## [사용](#TOP)<a name = "RtAudio-execution"></a>
 * 장치표시 프로그램 | audioprobe    
-ex) $ ./audioprobe
 
-<pre>
+
+<details><summary>ex) $ ./audioprobe</summary>
+
 RtAudio Version 5.0.0
 
 Compiled APIs:
@@ -117,7 +118,7 @@ Natively supported data formats:
   32-bit int
   32-bit float
 Supported sample rates = 4000 5512 8000 9600 11025 16000 22050 32000 44100 48000 88200 96000 176400 192000 
-</pre>
+</details>
 
 장치 번호는 위에서 부터 0번이다 
 채널 수, 지원하는 레이트 등을 보여준다  
