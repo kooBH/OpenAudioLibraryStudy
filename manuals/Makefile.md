@@ -236,6 +236,7 @@ return x+y;
 <details><summary>Makefile/3_library</summary>
 
 ```Makefile
+#hello.o는 라이브러리로 사용
 CC=gcc
 OBJS = main
 #라이브러리로 만들 파일
@@ -266,6 +267,35 @@ ifeq ($(LIB_OPTION), SHARED)
 	$(CC) -c $(OBJS).c
 	$(CC) -o $(TARGET) $(OBJS).o -L. -l$(LIBS)
 	@echo "You need to export PATH to library"
+	@echo "ex) export /PATH/TO/LIBRARY.so"
+	@echo "or send libeary to /usr/lib"
+else
+#옵션으로 STATIC 을 받았을 때
+ifeq ($(LIB_OPTION), STATIC)
+	@echo "STATIC"	
+	$(CC) -c $(OBJS).c
+	$(CC) -o $(TARGET) $(OBJS).o -L. -l$(LIBS)  
+#옵션이 없거나 잘못 되었을 때
+else
+	@echo "USAGE"
+	@echo "make LIB_OPTION=<OPTION>"
+	@echo "<OPTION> : SHARED | STATIC"
+endif
+endif
+
+#정적 라이브러리 생성
+static : $(LIBS).c $(LIBS).h
+	$(CC) -c $(LIBS).c
+	ar cr lib$(LIBS).a $(LIBS).o
+
+#동적 라이브러리 생성
+shared : $(LIBS).c $(LIBS).h
+	$(CC) -c -fPIC $(LIBS).c
+	$(CC) -shared -fPIC -o lib$(LIBS).so $(LIBS).o 
+	
+
+clean : 
+rm *.o
 
 ```
 
