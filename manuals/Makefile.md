@@ -270,7 +270,20 @@ ifeq ($(LIB_OPTION), SHARED)
 
 + src/hello.c
 + include/hello.h
-+ maic.c
+<details><summary>maic.c</summary>
+
+```C++
+#include "include/hello.h"
+
+int main()
+{
+	hello();
+	return 0;
+}	
+	
+```	
+</details>
+
 
 이렇게 파일의 티렉토리가 다를 경우에
 
