@@ -3,12 +3,10 @@
 1. [gcc](#Makefile-gcc)
 2. [library](#Makefile-library)
 3. [Makefile](#Makefile-Makefile)
-	+ basic
-	+ macro
-	+ library
-	+ directories
-	+ wildcard
-	+ sub-makefile
+	+ [basic](#basic)
+	+ [macro](#macro)
+	+ [library](#library)
+	+ [directory](#directory)
 	
 
 
@@ -138,7 +136,7 @@ Makefie( 확장자 없음)을 작성한 뒤에 make 를 명령하면 Makefile에
 
 종속성이 충족되면(되는지 확인하고) 목표를 위한 명령어를 수행한다
 
-### [ex](#TOP)<a name ="basic"></a>
+### [basic](#TOP)<a name ="basic"></a>
 
 <details><summary>Makefile/1_basic</summary>
 
@@ -163,7 +161,7 @@ rm *.o
 
 </details>
 
-### [ex](#TOP)<a name ="macro"></a>
+### [macro](#TOP)<a name ="macro"></a>
 
 <details><summary>Makefile/2_macro</summary>
 
@@ -191,7 +189,7 @@ clean :
 
 </details>
 
-### [ex](#TOP)<a name ="library"></a>
+### [library](#TOP)<a name ="library"></a>
 
 다음과 같은 파일 3개가 있을 때  
 
@@ -267,4 +265,35 @@ ifeq ($(LIB_OPTION), SHARED)
 ```
 
 </details>
+
+### [directory](#TOP)<a name ="directory"></a>
+
++ src/hello.c
++ include/hello.h
++ maic.c
+
+이렇게 파일의 티렉토리가 다를 경우에
+
+<details><summary>Makefile/4_directory</summary>
+
+```Makefile
+CC=gcc
+SRC =hello
+
+#헤더 폴더를 받는 매크로
+# -I<경로>  를 하면 해당 경로에서 헤더를 찾는다
+DIR=-Iinclude
+
+hello : $(SRC).o main.o
+	$(CC) -o $@ $^	
+
+#src/ 폴더에있는 파일들을 컴파일한다
+$(SRC).o :  
+	$(CC)  $(DIR) -c src/$(SRC).c
+
+clean : 
+rm *.o
+```
+</details>
+
 
