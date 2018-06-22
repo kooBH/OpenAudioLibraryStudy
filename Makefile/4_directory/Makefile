@@ -1,6 +1,4 @@
-#미리 지정된 매크로 'CC' : .c 파일의 컴파일러 
 CC=gcc
-
 
 SRC =hello
 
