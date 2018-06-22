@@ -36,6 +36,7 @@ cmake 시에 부가적인 파일이 많이 생성되므로 _build_ 폴더를 만
 
 <details><summary>ex) $ ./audioprobe</summary>
 
+```
 RtAudio Version 5.0.0
 
 Compiled APIs:
@@ -118,6 +119,7 @@ Natively supported data formats:
   32-bit int
   32-bit float
 Supported sample rates = 4000 5512 8000 9600 11025 16000 22050 32000 44100 48000 88200 96000 176400 192000 
+```
 </details>
 
 장치 번호는 위에서 부터 0번이다 
