@@ -5,9 +5,7 @@ a little manual for a few things
 Linux : ubuntu 16.04 64bit  
 Windows : Windows 7 64bit
 
-# TODO  till 6/29
-+ redmine automatic repository refreshment
-+ redmine link private git repository    
+# TODO  till 6/29  
 + polishing for presentation  
 
 
