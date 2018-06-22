@@ -143,9 +143,9 @@ $ record 9 48000 60 5
 ## [커스텀](#TOP)<a name = "RtAudio-custom"></a>
 
 RtAudio는 대부분의 환경에서 동작하는 라이브러리를 지향하기 때문에, 특정 환경에서만 사용할 경우  
-쓰지 않는 요소들이 많다. 그런데  
+쓰지 않는 요소들이 많다. 하지만  
 [The RtAudio Home Page](https://www.music.mcgill.ca/~gary/rtaudio/)  
-에 따르면 RtAudio.h RtAudio.cpp 만 있으면 되기 때문에 개별적으로 사용하기 
+RtAudio.h RtAudio.cpp 만 있으면 되기 때문에 개별적으로 사용하기 
 용이하다. 또한 사이트에 rtaudio/tests에 있는 파일들을 활용하는 방법이 설명되어있기 때문에
 둘러보는 것을 추천한다
   
