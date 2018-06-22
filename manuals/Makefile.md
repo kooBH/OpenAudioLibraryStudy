@@ -168,6 +168,8 @@ rm *.o
 
 ### [macro](#TOP)<a name ="macro"></a>
 
+Makefile 은 macro를 이용해 불필요한 작업을 줄일 수 있다  
+
 <details><summary>Makefile/2_macro</summary>
 
 ```Makefile
@@ -319,7 +321,6 @@ int main()
 ```	
 </details>
 
-
 이렇게 파일의 티렉토리가 다를 경우에
 
 <details><summary>Makefile/4_directory</summary>
@@ -341,7 +342,49 @@ $(SRC).o :
 
 clean : 
 rm *.o
+
 ```
 </details>
 
+### [wildcard](#TOP)<a name ="wildcard"></a>
 
+<details><summary>Makefile/5_wildcard</summary>
+	
+```Makefile
+
+```
+
+</details>
+
+
+### [sub-makefile](#TOP)<a name ="sub-makefile"></a>
+
+<details><summary>Makefile/6_sub-makefile</summary>
+	
+```Makefile
+
+```
+
+</details>
+
+
+### [suffix](#TOP)<a name ="suffix"></a>
+
+<details><summary>Makefile/7_suffix</summary>
+	
+```Makefile
+
+```
+
+</details>
+
+
+### [overall](#TOP)<a name ="overall"></a>
+
+<details><summary>Makefile/8_overall</summary>
+	
+```Makefile
+
+```
+
+</details>
