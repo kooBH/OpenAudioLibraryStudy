@@ -1,11 +1,12 @@
-# 자주 안써서 계속 까먹는 코드
-+ time.h
-  * 날짜
-  * 스탑워치
+# 자주 안써서 계속 까먹는 코드<a name = "TOP"></a>
++ [time.h](#time)
+  * [날짜](#date)
+  * [스탑워치](#stopwatch)
 
-## time.h
+## [time.h](#TOP)<a name ="time"><.a>
 
-### 날짜
+### [날짜](#TOP)<a name = "date">
+	
 ```C++
 #include <stdio.h>
 #include <time.h>
@@ -36,7 +37,8 @@ tm_wday	|int|	days since Sunday	|0-6
 tm_yday	|int|	days since January 1|	0-365
 tm_isdst	|int	|Daylight Saving Time flag	
 
-### millisecond stopwatch
+
+### [millisecond stopwatch](#TOP)<a name ="stopwatch"></a>
 
 ```C++
 stopwatch(0)
