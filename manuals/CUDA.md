@@ -16,8 +16,8 @@ nvidia-smi <- GPU 사용량
 + SM은 SP(streaming processor)로 되어있으며 하나의 SP는 4개의 쓰레드를 수행할 수 있다
 + 코어수보다 쓰레드가 많으면 스위치하는 것이 아니라 대기를 시키기 때문에 쓰레드가 넘쳐도 무방
 + 쓰레드가 적으면 쉬는 코어가 생기기 떄문에 문제
-+ 하나의 device는 하나의 grid 수행, grid는 module 로 moudle은 thread로 구성
-+ grid와 moudle 은 dim3로 3차원으로 이루어져 있으나 아직은 z=1로 고정
++ 하나의 device는 하나의 grid 수행, grid는 block 으로 moudle은 thread로 구성
++ grid와 block 은 dim3로 3차원으로 이루어져 있으나 아직은 z=1로 고정
 
 
 
