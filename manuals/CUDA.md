@@ -1,5 +1,6 @@
 
 # CUDA<a name ="TOP"></a> 
+#### 1. [knowledge](#knowledge)
 #### 1. [extention](#extention)
 #### 2. [function](#function)
   + memory
@@ -10,8 +11,17 @@
 nvcc --version <- CUDA compiler version check  
 nvidia-smi <- GPU 사용량 
 
+## 1. [knowledge](#TOP)<a name = "knowledge"></a>
++ GPU 는 SM(streaming multi-processor) + a 
++ SM은 SP(streaming processor)로 되어있으며 하나의 SP는 4개의 쓰레드를 수행할 수 있다
++ 코어수보다 쓰레드가 많으면 스위치하는 것이 아니라 대기를 시키기 때문에 쓰레드가 넘쳐도 무방
++ 쓰레드가 적으면 쉬는 코어가 생기기 떄문에 문제
++ 하나의 device는 하나의 grid 수행, grid는 module 로 moudle은 thread로 구성
++ grid와 moudle 은 dim3로 3차원으로 이루어져 있으나 아직은 z=1로 고정
 
-## 1. [extention](#TOP)<a name = "extention"></a>
+
+
+## 2. [extention](#TOP)<a name = "extention"></a>
 
 ### Function
 + 리턴은 void 
@@ -29,7 +39,7 @@ nvidia-smi <- GPU 사용량
   
 ### Variable
 
-## 2. [function](#TOP)<a name="function"></a>
+## 3. [function](#TOP)<a name="function"></a>
 
 ### Memory
 
@@ -72,7 +82,7 @@ cudaFree(대상포인터)
 cudaFree(device_pointer)
 ```
 
-## [EXAMPLE](#TOP)<a name ="example"></a>
+## 4. [EXAMPLE](#TOP)<a name ="example"></a>
 
 ### matrix multiplication<a name ="matmul"></a>
 
