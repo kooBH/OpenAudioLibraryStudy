@@ -38,5 +38,7 @@ https://github.com/pjreddie/darknet
 
 ## 10. [Docker](./manuals/Docker.md)
 
+## 11. [CUDA](./manuals/CUDA.md)
+
 ## 11. [참고](./manuals/ref.md)
 
