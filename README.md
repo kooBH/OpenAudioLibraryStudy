@@ -42,5 +42,5 @@ https://github.com/pjreddie/darknet
 
 ## 11. [CUDA](./manuals/CUDA.md)
 
-## 11. [참고](./manuals/ref.md)
+## 11. [자주 안써서 까먹지만 종종 쓰는 코드](./manuals/ref.md)
 
