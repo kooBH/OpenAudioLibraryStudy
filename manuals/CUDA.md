@@ -137,7 +137,7 @@ int main()
 	}
 	
 
-	printf("Multiply symmetric matrix (%dX%d ) * (%dX%d)\n",width,width,width,width);
+	printf("Multiply matrix (%dX%d ) * (%dX%d)\n",width,width,width,width);
 
 	printf("c_mul\n");
 	stopwatch(0);	
