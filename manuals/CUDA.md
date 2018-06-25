@@ -39,11 +39,11 @@ cudaMalloc( (void**)&device_pointer,sizeof(int)*array_size);
 
 cudaMemcpy(대상, 원본 , 크기 , 종류 )
 
-종류 : 
-cudaMemcpyHostToHost 	Host -> Host  
-cudaMemcpyHostToDevice 	Host -> Device  
-cudaMemcpyDeviceToHost 	Device -> Host  
-cudaMemcpyDeviceToDevice 	Device -> Device   
+종류 :   
++ cudaMemcpyHostToHost 	   : Host -> Host  
++ cudaMemcpyHostToDevice   :	Host -> Device  
++ cudaMemcpyDeviceToHost   :	Device -> Host  
++ cudaMemcpyDeviceToDevice :	Device -> Device   
 
 ```C++
 int host_array[10] = {1,2,3,4,5,6,7,8,9,10};
