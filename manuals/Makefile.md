@@ -11,7 +11,6 @@
 	+ ----WIP---
 	+ [sub-makefile](#sub-makefile)
 	+ [suffix](#suffix)
-	+ [overall](#overall)
 	
 
 
@@ -398,6 +397,11 @@ rm *.o
 
 ### [sub-makefile](#TOP)<a name ="sub-makefile"></a>
 
+
+include 를 사용하면 
+Makefile 이 다른 Makefile 을 실행시키도록 할 수 있다  
+
+
 <details><summary>Makefile/6_sub-makefile</summary>
 	
 ```Makefile
@@ -409,18 +413,11 @@ rm *.o
 
 ### [suffix](#TOP)<a name ="suffix"></a>
 
+make 는 기본적으로 확장자들에 대해 기본 규칙을 가지고있다.
+
+.SUFFIX = 를 사용하면 그 규칙을 설정할 수 있다  
+
 <details><summary>Makefile/7_suffix</summary>
-	
-```Makefile
-
-```
-
-</details>
-
-
-### [overall](#TOP)<a name ="overall"></a>
-
-<details><summary>Makefile/8_overall</summary>
 	
 ```Makefile
 
