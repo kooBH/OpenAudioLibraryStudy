@@ -326,6 +326,19 @@ void c_mul(int *A,int *B, int *C, int w)
 
 </details>
 
+결과
+
+```bash
+Multiply matrix (1024X1024 ) * (1024X1024)
+c_mul
+elapsed time :  6581 ms
+omp_mul
+elased time : 3365.798956  ms
+cuda_mul
+elapsed time :  3 ms
+
+```
+
 
 
 
