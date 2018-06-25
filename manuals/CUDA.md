@@ -2,6 +2,7 @@
 # CUDA<a name ="TOP"></a> 
 1. [extention](#extention)
 2. [function](#function)
+  + memory
 
 nvcc --version <- CUDA compiler version check  
 nvidia-smi <- GPU 사용량 
