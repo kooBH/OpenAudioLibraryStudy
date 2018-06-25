@@ -69,6 +69,11 @@ $ gcc -o 실행파일명 목적파일(들) (옵션)
 ```bash
 gcc -o threading threading.o -pthread
 ```
+<math.h>를 사용할 경우  
+```bash
+gcc -o using_math code.o -lm
+```
+
 해야 한다
 
 
