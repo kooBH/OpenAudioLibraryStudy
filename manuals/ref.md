@@ -3,7 +3,7 @@
   * [날짜](#date)
   * [스탑워치](#stopwatch)
 
-## [time.h](#TOP)<a name ="time"><.a>
+## [time.h](#TOP)<a name ="time"></a>
 
 ### [날짜](#TOP)<a name = "date">
 	
