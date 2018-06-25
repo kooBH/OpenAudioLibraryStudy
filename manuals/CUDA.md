@@ -18,7 +18,15 @@ nvidia-smi <- GPU 사용량
 + 쓰레드가 적으면 쉬는 코어가 생기기 떄문에 문제
 + 하나의 device는 하나의 grid 수행, grid는 block 으로 moudle은 thread로 구성
 + grid와 block 은 dim3로 3차원으로 이루어져 있으나 아직은 z=1로 고정
-
++ 연산식을 길게 풀어쓰는 것보다 짧게 여러개 만드는 것이 레지스터를 적게써서 코드 효율이 높아진다
+```
+sum = a1*b1 + a2*b2 + a3*b3 +a4*b4
+보다는
+sum  = a1*b1 
+sum += a2*b2 
+sum += a3*b3 
+sum += a4*b4
+```
 
 
 ## 2. [extention](#TOP)<a name = "extention"></a>
