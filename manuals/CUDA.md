@@ -1,9 +1,9 @@
 
 # CUDA<a name ="TOP"></a> 
-1. [extention](#extention)
-2. [function](#function)
+#### 1. [extention](#extention)
+#### 2. [function](#function)
   + memory
-3. [example](#example)
+#### 3. [example](#example)
   + [matrix multiplication](#matmul)
   
 
