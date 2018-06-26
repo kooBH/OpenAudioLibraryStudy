@@ -46,30 +46,87 @@ extern __shared__ float host_delcared[]; //동적할당,
 #include <stdlib.h>
 #include <time.h>
 
-#define ITER 1000000
-#define BLOCK 512
-#define THREAD 64 
+
+
+#define ITER 1
+#define BLOCK 1
+#define THREAD 512 
+
 
 void stopwatch(int);
-__global__ void manymanyglobal();
-__global__ void manymanyshared();
+__global__ void manymanyLocal();
+__global__ void manymanyGlobal(int*,int* );
+__global__ void manymanyShared();
 
 int main()
 {
-	printf("iter : %d * %d\nBLOCK : %d\nTHREAD : %d\n",ITER,ITER,BLOCK,THREAD);
+
+	stopwatch(0);
+	printf("Local : ");
+	manymanyLocal<<<BLOCK,THREAD>>>();
+	stopwatch(1);
 	
-	printf("manymany global\n");
+	int *a;
+	int *b;
+		
+	cudaMalloc((void**)&a,sizeof(int)*THREAD  );
+	cudaMalloc((void**)&b,sizeof(int)*THREAD);
+
+
 	stopwatch(0);
-	manymanyglobal<<<BLOCK,THREAD>>>();
+	printf("Global : ");
+	manymanyGlobal<<<BLOCK,THREAD>>>(a,b);
 	stopwatch(1);
 
-	printf("manymany shared\n");
+	cudaFree(a);
+	cudaFree(b);
+	
 	stopwatch(0);
-	manymanyshared<<<BLOCK,THREAD>>>();
+	printf("Shared : ");
+	manymanyShared<<<BLOCK,THREAD>>>();
 	stopwatch(1);
 
-	return 0;
 }
+
+
+__global__ void manymanyLocal()
+{
+	int a[THREAD];
+	int b[THREAD];
+
+
+		a[threadIdx.x]=0;	
+		b[threadIdx.x]=0;
+
+	for(int i =0;i<ITER;i++)
+			a[threadIdx.x] = b[threadIdx.y];
+}
+
+__global__ void manymanyGlobal(int* a,int* b)
+{
+	
+		a[threadIdx.x]=0;
+		b[threadIdx.x]=0;
+
+	for(int i =0;i<ITER;i++)
+		a[threadIdx.x] = b[threadIdx.y];
+		
+}
+
+__global__ void manymanyShared()
+{
+	__shared__ int a[THREAD];
+	__shared__ int b[THREAD];
+	
+	
+		a[threadIdx.x]=0;
+		b[threadIdx.x]=0;
+
+	for(int i =0;i<ITER;i++)
+			a[threadIdx.x] = b[threadIdx.y];
+
+}
+
 
 void stopwatch(int flag)
 {
@@ -89,8 +146,9 @@ void stopwatch(int flag)
 	{		
 		if(-1 == clock_gettime(CLOCK_MONOTONIC,&endTS))
 			printf("Failed to call clock_gettime\n");
-		diff = NANOS * (endTS.tv_sec - startTS.tv_sec) + (endTS.tv_nsec - startTS.tv_nsec);		
-		printf("elapsed time : % lld ms\n",diff/1000000);
+		diff = NANOS * (endTS.tv_sec - startTS.tv_sec) + (endTS.tv_nsec - startTS.tv_nsec);
+		
+		printf("elapsed time : % lld micros\n",diff/1000);
 	}
 	else
 	{
@@ -98,47 +156,18 @@ void stopwatch(int flag)
 	}
 
 }
-__global__ void manymanyglobal()
-{
-	double a = 111.111;
-	double b = 111.111;
-	double c = 0;
 
-	for(int i=0;i<ITER;i++)
-		for(int j=0;j<ITER;j++)
-			{
-			c += a * b;
-		    c -= a * b;	
-			}
-}
-__global__ void manymanyshared()
-{
-	__shared__ double a; 
-	__shared__ double b;
-	__shared__ double c;
-	a= 111.111;
-	b= 111.111;
-	c= 0;
-	for(int i=0;i<ITER;i++)
-		for(int j=0;j<ITER;j++)
-			{
-			c += a * b;
-		    c -= a * b;	
-			}
-}
+
 
 ```
 
 </details>
 
 ```
-iter : 1000000 * 1000000
-BLOCK : 512
-THREAD : 64
-manymany global
-elapsed time :  201 ms
-manymany shared
-elapsed time :  0 ms
+Local : elapsed time :  198306 micros
+Global : elapsed time :  13 micros
+Shared : elapsed time :  8 micros
+
 ```
 
 
