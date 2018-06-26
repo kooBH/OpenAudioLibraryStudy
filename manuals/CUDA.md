@@ -54,24 +54,16 @@ extern __shared__ float host_delcared[]; //동적할당,
 
 
 void stopwatch(int);
-__global__ void manymanyLocal();
 __global__ void manymanyGlobal(int*,int* );
 __global__ void manymanyShared();
 
 int main()
 {
-
-	stopwatch(0);
-	printf("Local : ");
-	manymanyLocal<<<BLOCK,THREAD>>>();
-	stopwatch(1);
-	
 	int *a;
 	int *b;
 		
-	cudaMalloc((void**)&a,sizeof(int)*THREAD  );
+	cudaMalloc((void**)&a,sizeof(int)*THREAD);
 	cudaMalloc((void**)&b,sizeof(int)*THREAD);
-
 
 	stopwatch(0);
 	printf("Global : ");
@@ -87,21 +79,6 @@ int main()
 	stopwatch(1);
 
 }
-
-
-__global__ void manymanyLocal()
-{
-	int a[THREAD];
-	int b[THREAD];
-
-
-		a[threadIdx.x]=0;	
-		b[threadIdx.x]=0;
-
-	for(int i =0;i<ITER;i++)
-			a[threadIdx.x] = b[threadIdx.y];
-}
-
 __global__ void manymanyGlobal(int* a,int* b)
 {
 	
@@ -164,7 +141,6 @@ void stopwatch(int flag)
 </details>
 
 ```
-Local : elapsed time :  198306 micros
 Global : elapsed time :  13 micros
 Shared : elapsed time :  8 micros
 
