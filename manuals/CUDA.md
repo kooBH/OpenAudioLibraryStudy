@@ -1,6 +1,7 @@
 
 # CUDA<a name ="TOP"></a> 
 #### 1. [knowledge](#knowledge)
+#### 2. [shared memory](#shared)
 #### 1. [extention](#extention)
 #### 2. [function](#function)
   + memory
@@ -11,7 +12,7 @@
 nvcc --version <- CUDA compiler version check  
 nvidia-smi <- GPU 사용량 
 
-## 1. [knowledge](#TOP)<a name = "knowledge"></a>
+## [knowledge](#TOP)<a name = "knowledge"></a>
 + GPU 는 SM(streaming multi-processor) + a 
 + SM은 SP(streaming processor)로 되어있으며 하나의 SP는 4개의 쓰레드를 수행할 수 있다
 + 코어수보다 쓰레드가 많으면 스위치하는 것이 아니라 대기를 시키기 때문에 쓰레드가 넘쳐도 무방
@@ -28,8 +29,117 @@ sum += a3*b3
 sum += a4*b4
 ```
 
+## [SHARED MEMORY](#TOP)<a name = "shared"></a>
+공유 메모리는 같은 블록내의 쓰레드끼리만 공유하는 메모리로 **캐시와 동등한 속도**로 사용할 수 있다
 
-## 2. [extention](#TOP)<a name = "extention"></a>
+```C++
+__shared__ type name; //으로 정의하며 초기화는 할 수 없다
+```
+
+<details></summary>3_sharedMemory.cu</summary>
+
+```C++
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define ITER 1000000
+#define BLOCK 512
+#define THREAD 64 
+
+void stopwatch(int);
+__global__ void manymanyglobal();
+__global__ void manymanyshared();
+
+int main()
+{
+	printf("iter : %d * %d\nBLOCK : %d\nTHREAD : %d\n",ITER,ITER,BLOCK,THREAD);
+	
+	printf("manymany global\n");
+	stopwatch(0);
+	manymanyglobal<<<BLOCK,THREAD>>>();
+	stopwatch(1);
+
+	printf("manymany shared\n");
+	stopwatch(0);
+	manymanyshared<<<BLOCK,THREAD>>>();
+	stopwatch(1);
+
+	return 0;
+}
+
+void stopwatch(int flag)
+{
+	const long long NANOS = 1000000000LL;
+	static struct timespec startTS,endTS;
+	static long long diff = 0;
+	
+	//start
+	if(flag == 0)
+	{
+		diff = 0;
+		if(-1 == clock_gettime(CLOCK_MONOTONIC,&startTS))
+			printf("Failed to call clock_gettime\n");
+	}
+	//end
+	else if(flag == 1)
+	{		
+		if(-1 == clock_gettime(CLOCK_MONOTONIC,&endTS))
+			printf("Failed to call clock_gettime\n");
+		diff = NANOS * (endTS.tv_sec - startTS.tv_sec) + (endTS.tv_nsec - startTS.tv_nsec);		
+		printf("elapsed time : % lld ms\n",diff/1000000);
+	}
+	else
+	{
+		printf("wrong flag | 0 : start, 1 : end\n");
+	}
+
+}
+__global__ void manymanyglobal()
+{
+	double a = 111.111;
+	double b = 111.111;
+	double c = 0;
+
+	for(int i=0;i<ITER;i++)
+		for(int j=0;j<ITER;j++)
+			{
+			c += a * b;
+		    c -= a * b;	
+			}
+}
+__global__ void manymanyshared()
+{
+	__shared__ double a; 
+	__shared__ double b;
+	__shared__ double c;
+	a= 111.111;
+	b= 111.111;
+	c= 0;
+	for(int i=0;i<ITER;i++)
+		for(int j=0;j<ITER;j++)
+			{
+			c += a * b;
+		    c -= a * b;	
+			}
+}
+
+```
+
+</details>
+
+```
+iter : 1000000 * 1000000
+BLOCK : 512
+THREAD : 64
+manymany global
+elapsed time :  201 ms
+manymany shared
+elapsed time :  0 ms
+```
+
+
+## [extention](#TOP)<a name = "extention"></a>
 
 ### Function
 + 리턴은 void 
@@ -47,7 +157,7 @@ sum += a4*b4
   
 ### Variable
 
-## 3. [function](#TOP)<a name="function"></a>
+## [function](#TOP)<a name="function"></a>
 
 ### Memory
 
@@ -90,7 +200,7 @@ cudaFree(대상포인터)
 cudaFree(device_pointer)
 ```
 
-## 4. [EXAMPLE](#TOP)<a name ="example"></a>
+## [EXAMPLE](#TOP)<a name ="example"></a>
 
 ### matrix multiplication<a name ="matmul"></a>
 
