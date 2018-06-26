@@ -2,6 +2,7 @@
 + [time.h](#time)
   * [날짜](#date)
   * [스탑워치](#stopwatch)
++ [하위폴더에서 파일찾아서 경로 받기](#tree)
 
 ## [time.h](#TOP)<a name ="time"></a>
 
@@ -76,4 +77,10 @@ void stopwatch(int flag)
 
 }
  
+```
+
+## [하위폴더에서 파일찾아서 경로 받기](#TOP)<a name ="tree"></a>
+
+```bash
+tree - ifpugDs | grep <filename>
 ```
