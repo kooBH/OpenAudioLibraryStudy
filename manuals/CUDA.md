@@ -30,10 +30,13 @@ sum += a4*b4
 ```
 
 ## [SHARED MEMORY](#TOP)<a name = "shared"></a>
-공유 메모리는 같은 블록내의 쓰레드끼리만 공유하는 메모리로 **캐시와 동등한 속도**로 사용할 수 있다
+공유 메모리는 같은 블록내의 쓰레드끼리만 공유하는 메모리로 **캐시와 동등한 속도**로 사용할 수 있다  
+하지만 크기가 작기 - 16KB 정도- 때문에 큰 자료의 연산을 위해선 분할이 필요하다  
 
 ```C++
-__shared__ type name; //으로 정의하며 초기화는 할 수 없다
+__shared__ int ARRAY[512];  //정적할당 : 커널 함수에서 해야하며, 초기화는 할 수 없다.
+
+extern __shared__ float host_delcared[]; //동적할당,
 ```
 
 <details></summary>3_sharedMemory.cu</summary>
