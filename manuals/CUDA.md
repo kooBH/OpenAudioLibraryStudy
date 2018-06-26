@@ -18,7 +18,7 @@ nvidia-smi <- GPU 사용량
 + 코어수보다 쓰레드가 많으면 스위치하는 것이 아니라 대기를 시키기 때문에 쓰레드가 넘쳐도 무방
 + 쓰레드가 적으면 쉬는 코어가 생기기 떄문에 문제
 + 하나의 device는 하나의 grid 수행, grid는 block 으로 moudle은 thread로 구성
-+ grid와 block 은 dim3로 3차원으로 이루어져 있으나 아직은 z=1로 고정
++ grid와 block 은 dim3로 3차원으로 이루어져 있다, 좌표별로 1024,1024,64 까지 가능하다 [참고](https://devtalk.nvidia.com/default/topic/978550/cuda-programming-and-performance/maximum-number-of-threads-on-thread-block/)
 + 연산식을 길게 풀어쓰는 것보다 짧게 여러개 만드는 것이 레지스터를 적게써서 코드 효율이 높아진다
 ```
 sum = a1*b1 + a2*b2 + a3*b3 +a4*b4
