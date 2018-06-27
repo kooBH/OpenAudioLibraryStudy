@@ -7,8 +7,9 @@ Windows : Windows 7 64bit
 
 # TODO  till 6/29  
 + CUDA
+  * STREAM
+  * CUBLAS-BATCHED_GEMM
 + additional Makefile
-+ Docker..?
 
 
 ## INDEX<a name="index"></a>
