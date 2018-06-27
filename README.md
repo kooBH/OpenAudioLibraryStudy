@@ -13,7 +13,7 @@ Windows : Windows 7 64bit
 
 ## INDEX<a name="index"></a>
 
-### 1.  [Makefile](./manuals/Makefile.md)
+### 1.[Makefile](./manuals/Makefile.md)
 + [gcc](./manuals/Makefile.md#Makefile-gcc)
 + [library](./manuals/Makefile.md#Makefile-library)
 + [Makefile](./manuals/Makefile.md#Makefile-Makefile)
@@ -30,17 +30,11 @@ Windows : Windows 7 64bit
 + [CMUSphinx](./manuals/CMUSphinx.md)
 + [openSMILE](./manuals/openSMILE.md)
 + [Kaldi](./manuals/Kaldi.md)
-
 ## 7. [Dark Net](./manuals/Darknet.md)
 https://github.com/pjreddie/darknet  
-
 ## 8. [openMPI](./manuals/OpenMPI.md)
-
 ## 9. [Redmine](./manuals/Redmine.md)
-
 ## 10. [Docker](./manuals/Docker.md)
-
 ## 11. [CUDA](./manuals/CUDA.md)
-
-## 11. [자주 안써서 까먹지만 종종 쓰는 코드](./manuals/ref.md)
+## 12. [자주 안써서 까먹지만 종종 쓰는 코드](./manuals/ref.md)
 
