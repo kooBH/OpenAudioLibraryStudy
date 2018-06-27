@@ -3,7 +3,7 @@
 #### 1. [knowledge](#knowledge)
 #### 2. [extention](#extention)
 #### 3. [function](#function)
-#### 4. [syncronise](#sync)
+#### 4. [synchronise](#sync)
 #### 5. [shared memory](#shared)
 #### 6. [cublas](#blas)
 #### 7. stream
@@ -119,11 +119,11 @@ cudaFree(대상포인터)
 cudaFree(device_pointer)
 ```
 
-### [syncronise](#sync)
+### [synchronise](#sync)
 
 ---
 
-## [syncronise](#TOP)<a name ="sync"></a>
+## [synchronise](#TOP)<a name ="sync"></a>
 커널 함수는 CPU 관점에서는 [비동기](https://stackoverflow.com/questions/8473617/are-cuda-kernel-calls-synchronous-or-asynchronous)적이다 
 적이다 
 GPU 관점에서는 한 커널 함수의 쓰레드들이 다 돌아야 다음 커널 함수를 호출하지만, 호스트에서는 아랑곳하지 않고 그냥 진행한다
