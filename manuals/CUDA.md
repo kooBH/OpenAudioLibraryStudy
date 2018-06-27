@@ -3,12 +3,12 @@
 #### 1. [knowledge](#knowledge)
 #### 2. [extention](#extention)
 #### 3. [function](#function)
-  + memory
 #### 4. [syncronise](#sync)
 #### 5. [shared memory](#shared)
 #### 6. [cublas](#blas)
-#### 7. [fft](#fft)
-#### 8. [example](#example)
+#### 7. stream
+#### 8. [fft](#fft)
+#### 9. [example](#example)
   + [matrix multiplication](#matmul)
   
 ---
