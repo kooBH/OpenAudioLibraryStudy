@@ -79,13 +79,13 @@ void stopwatch(int flag)
 		switch(unit)		
 		{
 			case nano :
-				printf("elapsed time : % lld micros\n",diff);
+				printf("elapsed time : % lld nano sec\n",diff);
 			break;
 			case micro :
-				printf("elapsed time : % lld micros\n",diff/1000);
+				printf("elapsed time : % lld micro sec\n",diff/1000);
 			break;
 			case sec :
-				printf("elapsed time : % lld micros\n",diff/1000000000);
+				printf("elapsed time : % lld sec\n",diff/1000000000);
 			break;
 			default :
 				printf("elapsed time : % lld milli sec\n",diff/100000);
