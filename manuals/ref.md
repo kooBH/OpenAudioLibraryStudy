@@ -42,9 +42,9 @@ tm_isdst	|int	|Daylight Saving Time flag
 ### [millisecond stopwatch](#TOP)<a name ="stopwatch"></a>
 
 ```C++
-stopwatch(0)
-   작업 
-stopwatch(1)
+stopwatch(0);
+   //작업 
+stopwatch(1);
 ```
 
 ```C++
