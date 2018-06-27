@@ -500,7 +500,7 @@ cudaFree(device_pointer)
 
 [CUBLAS DOCUMENT](https://docs.nvidia.com/cuda/cublas/index.html)
 
-+ #include "cubals.h"
++ #include "cubals_v2.h"
 + 링크 옵션 : nvcc - lcublas
 
 + cublasCreate(cublasHandle_t*) & cublasDestory(cubalsHandle_t)  
