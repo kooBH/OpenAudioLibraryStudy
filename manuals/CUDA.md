@@ -503,11 +503,22 @@ cudaFree(device_pointer)
 + #include "cubals.h"
 + 링크 옵션 : nvcc - lcublas
 
-+ 
++ cublasCreate(cublasHandle_t*) & cublasDestory(cubalsHandle_t)  
+cublasHandle_t 는 cublas context를 가지는 포인터    
+cublasCreate()로 초기화하고    
+cublasDestroy()로 해제해야한다  
+
+```C++
+cublasHandle_t handle;
+cublasCreate(&handle); 
+
+<cublas 사용 >
+
+cublasDestory(handle);
+```
 
 + cublasSetVector(num, sizeof(type), X, incX , Y ,incY)
 	기본적으로는  
-
 	cublasSetVector(num,sizeof(type),X,1,Y,1)
 	는
 	cudaMemcpy(Y,X,num * sizeof(type),cudaMemcpyHostToDevice) 
@@ -531,7 +542,9 @@ cudaFree(device_pointer)
 + cublasGetVector(num, sizeof(type), X, incX , Y ,incY)
 cublasSetVector의 반대, cudaMemcpyDeviceToHost라 보면된다  
 
-+ cublas<T>gemm(cudaHandle,cublasOperation_t,cublasOperation_t, m,n,k,alpha, A ,   )
++ cublas<T>gemm()  
+
+여타 BLAS와 같은 구조  
 
 #### cublasOperation_t 
 
@@ -540,6 +553,51 @@ Value |	Meaning
 CUBLAS_OP_N | the non-transpose operation is selected
 CUBLAS_OP_T | the transpose operation is selected
 CUBLAS_OP_C | the conjugate transpose operation is selected
+
+<details><summary>cublas<t>gemm()</summary>
+
+cublasStatus_t cublasSgemm(cublasHandle_t handle,
+                           cublasOperation_t transa, cublasOperation_t transb,
+                           int m, int n, int k,
+                           const float           *alpha,
+                           const float           *A, int lda,
+                           const float           *B, int ldb,
+                           const float           *beta,
+                           float           *C, int ldc)
+cublasStatus_t cublasDgemm(cublasHandle_t handle,
+                           cublasOperation_t transa, cublasOperation_t transb,
+                           int m, int n, int k,
+                           const double          *alpha,
+                           const double          *A, int lda,
+                           const double          *B, int ldb,
+                           const double          *beta,
+                           double          *C, int ldc)
+cublasStatus_t cublasCgemm(cublasHandle_t handle,
+                           cublasOperation_t transa, cublasOperation_t transb,
+                           int m, int n, int k,
+                           const cuComplex       *alpha,
+                           const cuComplex       *A, int lda,
+                           const cuComplex       *B, int ldb,
+                           const cuComplex       *beta,
+                           cuComplex       *C, int ldc)
+cublasStatus_t cublasZgemm(cublasHandle_t handle,
+                           cublasOperation_t transa, cublasOperation_t transb,
+                           int m, int n, int k,
+                           const cuDoubleComplex *alpha,
+                           const cuDoubleComplex *A, int lda,
+                           const cuDoubleComplex *B, int ldb,
+                           const cuDoubleComplex *beta,
+                           cuDoubleComplex *C, int ldc)
+cublasStatus_t cublasHgemm(cublasHandle_t handle,
+                           cublasOperation_t transa, cublasOperation_t transb,
+                           int m, int n, int k,
+                           const __half *alpha,
+                           const __half *A, int lda,
+                           const __half *B, int ldb,
+                           const __half *beta,
+                           __half *C, int ldc)
+
+</details>
 
 #### CUDA 4.0 부터 cublas.h 에서 cublas_v2.h 바뀌었다    
 <details><summary>5_cubals_legacy.cu</summary>
@@ -852,10 +910,13 @@ void stopwatch(int flag)
 
 </details>
 
+
 ```
 (1024 X 1024)  * (1024 X 1024)
-cubals dgemm : elapsed time :  49 microsec
-cuda matrix multiplication elapsed time :  679 microsec
+cubals dgemm : elapsed time :  24 microsec
+BOCK 256,256
+THREAD 512,512
+cuda matrix multiplication elapsed time :  4 microsec
 
 ```
 
