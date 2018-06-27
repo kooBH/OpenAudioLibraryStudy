@@ -559,7 +559,7 @@ CUBLAS_STATUS_LICENSE_ERROR |The functionnality requested requires some license 
 + cublasGetVector(num, sizeof(type), X, incX , Y ,incY)
 cublasSetVector의 반대, cudaMemcpyDeviceToHost라 보면된다  
 
-+ cublas<T>gemm()  
+### cublas\<T\>gemm()  
 다른 BLAS와 비슷하나   
 **column major**만 가능하다
 
