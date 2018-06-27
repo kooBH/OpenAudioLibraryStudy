@@ -850,9 +850,7 @@ int main()
 	cudaFree(dev_C);
 
 	return 0;
-
 }
-
 
 __global__ void cuda_mul(MAT_TYPE* A,MAT_TYPE* B,MAT_TYPE* C,int w)
 {
@@ -875,9 +873,6 @@ __global__ void cuda_mul(MAT_TYPE* A,MAT_TYPE* B,MAT_TYPE* C,int w)
 
 	C[tid]= v;
 }
-
-
-
 
 void stopwatch(int flag)
 {
@@ -905,9 +900,7 @@ void stopwatch(int flag)
 	{
 		printf("wrong flag | 0 : start, 1 : end\n");
 	}
-
 }
-
 
 ```
 
@@ -924,6 +917,10 @@ cuda matrix multiplication elapsed time :  4 microsec
 ```
 
 ## [FFT](#TOP)<a name = "fft"></a>
+[Document](https://docs.nvidia.com/cuda/cufft/index.html#introduction)
+
+
+
 
 ## [EXAMPLE](#TOP)<a name ="example"></a>
 
