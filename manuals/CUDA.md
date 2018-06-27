@@ -503,7 +503,8 @@ cudaFree(device_pointer)
 + #include "cubals_v2.h"
 + 링크 옵션 : nvcc - lcublas
 
-+ cublasCreate(cublasHandle_t*) & cublasDestory(cubalsHandle_t)  
+### 초기화
+cublasCreate(cublasHandle_t*) & cublasDestory(cubalsHandle_t)  
 cublasHandle_t 는 cublas context를 가지는 포인터    
 cublasCreate()로 초기화하고    
 cublasDestroy()로 해제해야한다  
@@ -516,6 +517,22 @@ cublasCreate(&handle);
 
 cublasDestory(handle);
 ```
+### 리턴값
+모든 cublas 함수는 cublasStatus_t을 반환한다 
+
+Value | Meaning
+--- | ---
+CUBLAS_STATUS_SUCCESS| 성공
+CUBLAS_STATUS_NOT_INITIALIZED |초기화 되지 않음, cublasCreate()를 먼저 해줘야한다
+CUBLAS_STATUS_ALLOC_FAILED | 할당 실패, cudaMalloc()이 제대로 되지 않았다. 메모리 해제 요망
+CUBLAS_STATUS_INVALID_VALUE |함수에 유효한 인자가 전달되지 않았다. 인자의 타입을 확인 요망
+CUBLAS_STATUS_ARCH_MISMATCH | 현재 장치에선 지원해지 않는 기능사용, 보통 double precision에서 발생
+CUBLAS_STATUS_MAPPING_ERROR |GPU메모리 접근실패. texture 메모리 해제 요망
+CUBLAS_STATUS_EXECUTION_FAILED |커널 함수 호출 실패. 드라이버 버전이나 라이브러리 확인 요망
+CUBLAS_STATUS_INTERNAL_ERROR | 내부 cublas 실패. 드라이버 버전이나 하드웨어 또는 할당해제된 변수에 접근하지는 확인 바람
+CUBLAS_STATUS_NOT_SUPPORTED |지원하지 않음
+CUBLAS_STATUS_LICENSE_ERROR |The functionnality requested requires some license and an error was detected when trying to check the current licensing. This error can happen if the license is not present or is expired or if the environment variable NVIDIA_LICENSE_FILE is not set properly. 
+
 
 + cublasSetVector(num, sizeof(type), X, incX , Y ,incY)
 	기본적으로는  
@@ -543,11 +560,10 @@ cublasDestory(handle);
 cublasSetVector의 반대, cudaMemcpyDeviceToHost라 보면된다  
 
 + cublas<T>gemm()  
-
-여타 BLAS와 같은 구조  
+다른 BLAS와 비슷하나   
+**column major**만 가능하다
 
 #### cublasOperation_t 
-
 Value |	Meaning
 --- | ---
 CUBLAS_OP_N | the non-transpose operation is selected
