@@ -498,48 +498,54 @@ cudaFree(device_pointer)
 
 ## [CUBLAS](#TOP)<a name = "blas"></a>
 
+[CUBLAS DOCUMENT](https://docs.nvidia.com/cuda/cublas/index.html)
+
 + #include "cubals.h"
 + 링크 옵션 : nvcc - lcublas
 
-+ cublasInit();
-
-+ cublasAlloc( 단위 수, 단위크기 , 대상 )
-
 + cublasSetVector(num, sizeof(type), X, incX , Y ,incY)
+	기본적으로는  
 
-기본적으로는  
+	cublasSetVector(num,sizeof(type),X,1,Y,1)
+	는
+	cudaMemcpy(Y,X,num * sizeof(type),cudaMemcpyHostToDevice) 
+	와 같다
 
-cublasSetVector(num,sizeof(type),X,1,Y,1)
-는
-cudaMemcpy(Y,X,num * sizeof(type),cudaMemcpyHostToDevice) 
-와 같다
+	하지만
+	길이가 n 인 배열 X와  
+	m by n 행렬 Y 가 있을 때  
 
-하지만
-길이가 n 인 배열 X와  
-m by n 행렬 Y 가 있을 때  
+	```c++
+	cublasSetVector(num, sizeof(type), X, 1 , Y ,n)
+	```
+	는 X를 Y의 1 번째 **열**에 넣는다  
+	즉  
 
-```c++
-cublasSetVector(num, sizeof(type), X, 1 , Y ,n)
-```
-는 X를 Y의 1 번째 **열**에 넣는다  
-즉  
-
-```C++
-for(int i=0;i<num;i++)
-	Y[incY * i ] = X[incX * i]
-```
-이런 느낌으로 넣는다는 것  
-
-
-+ cubalsGetVector()
+	```C++
+	for(int i=0;i<num;i++)
+		Y[incY * i ] = X[incX * i]
+	```
+	이런 느낌으로 넣는다는 것  
++ cublasGetVector(num, sizeof(type), X, incX , Y ,incY)
+cublasSetVector의 반대, cudaMemcpyDeviceToHost라 보면된다  
 
 + cublas<T>gemm(transA,transB, m,n,k,alpha, A ,   )
 
-+ cublasFree(포인터);
-
-+ cublasShutdown();
-
+아래 코드는 cublas legacy libarary로 작성한 코드이다   
+CUDA 4.0 부터 기존의 cublas.h 에서 cublas_v2.h 바뀌었다    
 <details><summary>5_cubals.cu</summary>
+	
++ cublasInit();
+현재 host에 할당된 CPU 리소스를 cublas가 사용가능하게 할당하는 함수    
+cublas 사용 전에 호출되어야한다  
++ cublasShutdown();
+cublasInit()으로 할당된 GPU 리소스를 해제하는 함수  
+cublas 사용 후에 호출되어야한다    
++ cublasAlloc( num, sizeof(type) , (void**)&target )
+cudaMalloc의 wrapper 함수이기 떄문에 cudaMalloc((void**)&target, num * sizeof(type)) 기능상 차이가 없다  
+섞어써도 무방  
++ cublasFree(target)
+	
 	
 ```C++
 
@@ -682,6 +688,16 @@ void stopwatch(int flag)
 	}
 
 }
+
+```
+
+</details>
+
+cublas.h 에서 cublas_v2.h 로 변경한 코드  
+
+<details><summary>5_cubals_v2.cu</summary>
+
+```C++
 
 ```
 
