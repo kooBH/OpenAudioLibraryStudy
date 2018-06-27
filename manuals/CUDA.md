@@ -554,6 +554,7 @@ CUBLAS_OP_N | the non-transpose operation is selected
 CUBLAS_OP_T | the transpose operation is selected
 CUBLAS_OP_C | the conjugate transpose operation is selected
 
+#### 함수원형
 <details><summary>cublas<t>gemm()</summary>
 
 ```
