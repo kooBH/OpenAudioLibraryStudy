@@ -13,13 +13,12 @@ nvcc --version <- CUDA compiler version check
 nvidia-smi <- GPU 사용량 
 
 ## [knowledge](#TOP)<a name = "knowledge"></a>
-+ GPU 는 SM(streaming multi-processor) + a 
-+ SM은 SP(streaming processor)로 되어있으며 하나의 SP는 4개의 쓰레드를 수행할 수 있다
++ 커널 함수는 CPU 관점에서는 [비동기](https://stackoverflow.com/questions/8473617/are-cuda-kernel-calls-synchronous-or-asynchronous)적이다 
 + 코어수보다 쓰레드가 많으면 스위치하는 것이 아니라 대기를 시키기 때문에 쓰레드가 넘쳐도 무방
 + 쓰레드가 적으면 쉬는 코어가 생기기 떄문에 문제
 + 하나의 device는 하나의 grid 수행, grid는 block 으로 moudle은 thread로 구성
 + grid와 block 은 dim3로 3차원으로 이루어져 있다, 좌표별로 1024,1024,64 까지 가능하다 [참고](https://devtalk.nvidia.com/default/topic/978550/cuda-programming-and-performance/maximum-number-of-threads-on-thread-block/)
-+ 연산식을 길게 풀어쓰는 것보다 짧게 여러개 만드는 것이 레지스터를 적게써서 코드 효율이 높아진다
++ 연산식을 길게 풀어쓰는 것보다 짧게 여러개 만드는 것이 레지스터를 적게써서 코드 효율이 높아진다 (레지스터를 초과하면 로컬 메모리를 사용한다
 ```
 sum = a1*b1 + a2*b2 + a3*b3 +a4*b4
 보다는
@@ -28,10 +27,14 @@ sum += a2*b2
 sum += a3*b3 
 sum += a4*b4
 ```
++ GPU 는 SM(streaming multi-processor) + a 
++ SM은 SP(streaming processor)로 되어있으며 하나의 SP는 4개의 쓰레드를 수행할 수 있다
+
 
 ## [SHARED MEMORY](#TOP)<a name = "shared"></a>
 공유 메모리는 같은 블록내의 쓰레드끼리만 공유하는 메모리로 **캐시와 동등한 속도**로 사용할 수 있다  
 하지만 크기가 작기 - 16KB 정도- 때문에 큰 자료의 연산을 위해선 분할이 필요하다  
+또한  
 
 ```C++
 __shared__ int ARRAY[512];  //정적할당 : 커널 함수에서 해야하며, 초기화는 할 수 없다.
