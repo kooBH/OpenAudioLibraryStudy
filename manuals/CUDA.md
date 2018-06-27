@@ -445,6 +445,8 @@ elapsed time :  3291 micros
   
 ### Variable
 
++ [\_\_shared\_\_](#shared)
+
 ## [function](#TOP)<a name="function"></a>
 
 ### Memory
@@ -487,6 +489,8 @@ cudaFree(대상포인터)
 ```C++
 cudaFree(device_pointer)
 ```
+
+### [sync](#sync)
 
 ## [EXAMPLE](#TOP)<a name ="example"></a>
 
