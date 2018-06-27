@@ -11,7 +11,16 @@
 #### 8. [example](#example)
   + [matrix multiplication](#matmul)
   
+---
+nvcc 로 컴파일
+파일확장자는 .cu 헤더는 편한대로
 
+```bash
+$ ls
+source.cu
+$ nvcc -c source.cu
+$ nvcc -o a.out source.o
+```
 nvcc --version <- CUDA compiler version check  
 nvidia-smi <- GPU 사용량 
 
