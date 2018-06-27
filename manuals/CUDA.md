@@ -1,12 +1,14 @@
 
 # CUDA<a name ="TOP"></a> 
 #### 1. [knowledge](#knowledge)
-#### 1. [syncronise](#sync)
-#### 2. [shared memory](#shared)
-#### 1. [extention](#extention)
-#### 2. [function](#function)
+#### 2. [syncronise](#sync)
+#### 3. [shared memory](#shared)
+#### 4. [extention](#extention)
+#### 5. [function](#function)
   + memory
-#### 3. [example](#example)
+#### 6. [cublas](#blas)
+#### 7. [fft](#fft)
+#### 8. [example](#example)
   + [matrix multiplication](#matmul)
   
 
