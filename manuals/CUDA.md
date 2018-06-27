@@ -556,6 +556,7 @@ CUBLAS_OP_C | the conjugate transpose operation is selected
 
 <details><summary>cublas<t>gemm()</summary>
 
+```
 cublasStatus_t cublasSgemm(cublasHandle_t handle,
                            cublasOperation_t transa, cublasOperation_t transb,
                            int m, int n, int k,
@@ -597,6 +598,7 @@ cublasStatus_t cublasHgemm(cublasHandle_t handle,
                            const __half *beta,
                            __half *C, int ldc)
 
+```
 </details>
 
 #### CUDA 4.0 부터 cublas.h 에서 cublas_v2.h 바뀌었다    
