@@ -554,7 +554,7 @@ CUBLAS_OP_N | the non-transpose operation is selected
 CUBLAS_OP_T | the transpose operation is selected
 CUBLAS_OP_C | the conjugate transpose operation is selected
 
-#### 함수원형
+#### 함수원형과 사용
 <details><summary>cublas<t>gemm()</summary>
 
 ```
@@ -598,6 +598,34 @@ cublasStatus_t cublasHgemm(cublasHandle_t handle,
                            const __half *B, int ldb,
                            const __half *beta,
                            __half *C, int ldc)
+
+/*
+ *  cbulas_?gemm(handler,transA,transB,m,n,k,alpha,A,lda,B,ldb,beta,C,ldc)
+ *
+ *
+ *   
+ *   C := alpha * op(A)*op(B) + beta*C
+ *
+ *     op(X) =    i) X      when transX = CblasNoTrans
+ *
+ *     		 	 ii) X**T     ''        = CblasTrans
+ *
+ *     			iii) X**H     ''        = CblasConjTrans
+ *
+ *      m  = the number of rows of op(A)
+ *      n  = the number of columns of op(B) and C 
+ *      k  = the number of columns of op(A) and rows of op(B)
+ *
+ *
+ *      lda : the first dimension of A
+ *      ldb : 			''			 B
+ *      ldc :			''			 C
+ *
+ * 		-the first dimension : the number of columns when CblasRowMajor
+ *							   		''       rows    when CblasColMajor
+ *
+ * */
+
 
 ```
 </details>
