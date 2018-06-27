@@ -490,7 +490,7 @@ cudaFree(대상포인터)
 cudaFree(device_pointer)
 ```
 
-### [sync](#sync)
+### [syncronise](#sync)
 
 ## [EXAMPLE](#TOP)<a name ="example"></a>
 
