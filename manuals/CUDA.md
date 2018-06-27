@@ -33,6 +33,7 @@ sum += a4*b4
 + GPU 는 SM(streaming multi-processor) + a 
 + SM은 SP(streaming processor)로 되어있으며 하나의 SP는 4개의 쓰레드를 수행할 수 있다
 
+---
 
 ## [extention](#TOP)<a name = "extention"></a>
 
@@ -63,6 +64,8 @@ kernel_func<<<16,64>>>(some_device_array);
 ### Variable
 
 + [\_\_shared\_\_](#shared)
+
+---
 
 ## [function](#TOP)<a name="function"></a>
 
@@ -109,6 +112,8 @@ cudaFree(device_pointer)
 
 ### [syncronise](#sync)
 
+---
+
 ## [syncronise](#TOP)<a name ="sync"></a>
 커널 함수는 CPU 관점에서는 [비동기](https://stackoverflow.com/questions/8473617/are-cuda-kernel-calls-synchronous-or-asynchronous)적이다 
 적이다 
@@ -135,6 +140,7 @@ __syncthreads();
 
 또는 **cudaMemcpy**를 사용할 때도 기다린다
 
+---
 
 ## [SHARED MEMORY](#TOP)<a name = "shared"></a>
 공유 메모리는 같은 블록내의 쓰레드끼리만 공유하는 메모리로 **캐시와 동등한 속도**로 사용할 수 있다  
@@ -506,7 +512,7 @@ elapsed time :  3291 micros
 큰 차이는 아니지만 빠르긴하다 
 공유메모리를 제대로 활용할면 GPU별로 맞춰서 변수를 설정해야한다  
 
-
+---
 
 ## [CUBLAS](#TOP)<a name = "blas"></a>
 
@@ -971,12 +977,13 @@ THREAD 512,512
 cuda matrix multiplication elapsed time :  4 microsec
 
 ```
+---
 
 ## [FFT](#TOP)<a name = "fft"></a>
 [Document](https://docs.nvidia.com/cuda/cufft/index.html#introduction)
 
 
-
+---
 
 ## [EXAMPLE](#TOP)<a name ="example"></a>
 
