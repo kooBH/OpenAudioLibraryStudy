@@ -498,6 +498,46 @@ cudaFree(device_pointer)
 
 ## [CUBLAS](#TOP)<a name = "blas"></a>
 
++ #include "cubals.h"
++ 링크 옵션 : nvcc - lcublas
+
++ cublasInit();
+
++ cublasAlloc( 단위 수, 단위크기 , 대상 )
+
++ cublasSetVector(num, sizeof(type), X, incX , Y ,incY)
+
+기본적으로는  
+
+cublasSetVector(num,sizeof(type),X,1,Y,1)
+는
+cudaMemcpy(Y,X,num * sizeof(type),cudaMemcpyHostToDevice) 
+와 같다
+
+하지만
+길이가 n 인 배열 X와  
+m by n 행렬 Y 가 있을 때  
+
+```c++
+cublasSetVector(num, sizeof(type), X, 1 , Y ,n)
+```
+는 X를 Y의 1 번째 **열**에 넣는다  
+즉  
+
+```C++
+for(int i=0;i<num;i++)
+	Y[incY * i ] = X[incX * i]
+```
+이런 느낌으로 넣는다는 것  
+
+
++ cubalsGetVector()
+
++ cublas<T>gemm(transA,transB, m,n,k,alpha, A ,   )
+
++ cublasFree(포인터);
+
++ cublasShutdown();
 
 <details><summary>5_cubals.cu</summary>
 	
