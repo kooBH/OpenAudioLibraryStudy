@@ -34,6 +34,26 @@ sum += a4*b4
 ## [syncronise](#TOP)<a name ="sync"></a>
 커널 함수는 CPU 관점에서는 [비동기](https://stackoverflow.com/questions/8473617/are-cuda-kernel-calls-synchronous-or-asynchronous)적이다 
 적이다 
+GPU 관점에서는 한 커널 함수의 쓰레드들이 다 돌아야 다음 커널 함수를 호출하지만, 호스트에서는 아랑곳하지 않고 그냥 진행한다
+
+```C++
+호스트함수 A();
+Kernel함수B <<<>>>();
+호스트함수 C();
+return 
+```
+
+이렇게 했을 때, 실행시 콘솔에서는 A,C 가 호출되어서 바로 return 이 될 것같지만, GPU 에서는 B가 돌고있기 때문에 GPU에서의 작업이 끝나야 return이 된다
+
+```C++
+
+//HOST 에서 (CPU관점) kernel 함수들을 동기화 시키려면
+cudaThreadSynchronize()
+
+//DEVICE 에서 (GPU관점) 자기자신 kernel 함수의 쓰레드들끼리 동기화 시키려면
+__syncthreads();
+
+```
 
 
 ## [SHARED MEMORY](#TOP)<a name = "shared"></a>
@@ -48,7 +68,7 @@ extern __shared__ float host_delcared[]; //동적할당,
 kernel함수<<<그리드,블록, 여기에 shared메모리들의 크기를 넣으면된다(같은 자리부터 할당하기때문에)>>>(인자);
 ```
 
-<details></summary>3_sharedMemory.cu</summary>
+<details><summary>3_sharedMemory.cu</summary>
 
 ```C++
 #include <stdio.h>
