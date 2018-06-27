@@ -50,12 +50,18 @@ stopwatch(1);
 ```C++
 void stopwatch(int flag)
 {
-	int unit = 1000000; //1000 이면 micro, 1 이면 nano
+	enum clock_unit{nano = 0, micro , milli, sec} unit;
 	
 	const long long NANOS = 1000000000LL;
 	static struct timespec startTS,endTS;
 	static long long diff = 0;
-	
+
+	/*
+		여기서 단위 조정
+		nano, micro, milli, sec
+	*/
+	unit = micro;
+
 	//start
 	if(flag == 0)
 	{
@@ -69,8 +75,23 @@ void stopwatch(int flag)
 		if(-1 == clock_gettime(CLOCK_MONOTONIC,&endTS))
 			printf("Failed to call clock_gettime\n");
 		diff = NANOS * (endTS.tv_sec - startTS.tv_sec) + (endTS.tv_nsec - startTS.tv_nsec);
-		
-		printf("elapsed time : % lld ms\n",diff/unit);
+
+		switch(unit)		
+		{
+			case nano :
+				printf("elapsed time : % lld micros\n",diff);
+			break;
+			case micro :
+				printf("elapsed time : % lld micros\n",diff/1000);
+			break;
+			case sec :
+				printf("elapsed time : % lld micros\n",diff/1000000000);
+			break;
+			default :
+				printf("elapsed time : % lld milli sec\n",diff/100000);
+			break;	
+
+		}
 	}
 	else
 	{
@@ -78,6 +99,7 @@ void stopwatch(int flag)
 	}
 
 }
+
  
 ```
 
