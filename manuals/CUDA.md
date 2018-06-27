@@ -55,6 +55,8 @@ __syncthreads();
 
 ```
 
+또는 **cudaMemcpy**를 사용할 때도 기다린다
+
 
 ## [SHARED MEMORY](#TOP)<a name = "shared"></a>
 공유 메모리는 같은 블록내의 쓰레드끼리만 공유하는 메모리로 **캐시와 동등한 속도**로 사용할 수 있다  
