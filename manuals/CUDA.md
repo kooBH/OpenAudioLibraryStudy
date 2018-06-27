@@ -503,6 +503,8 @@ cudaFree(device_pointer)
 + #include "cubals.h"
 + 링크 옵션 : nvcc - lcublas
 
++ 
+
 + cublasSetVector(num, sizeof(type), X, incX , Y ,incY)
 	기본적으로는  
 
@@ -529,11 +531,18 @@ cudaFree(device_pointer)
 + cublasGetVector(num, sizeof(type), X, incX , Y ,incY)
 cublasSetVector의 반대, cudaMemcpyDeviceToHost라 보면된다  
 
-+ cublas<T>gemm(transA,transB, m,n,k,alpha, A ,   )
++ cublas<T>gemm(cudaHandle,cublasOperation_t,cublasOperation_t, m,n,k,alpha, A ,   )
 
-아래 코드는 cublas legacy libarary로 작성한 코드이다   
-CUDA 4.0 부터 기존의 cublas.h 에서 cublas_v2.h 바뀌었다    
-<details><summary>5_cubals.cu</summary>
+#### cublasOperation_t 
+
+Value |	Meaning
+--- | ---
+CUBLAS_OP_N | the non-transpose operation is selected
+CUBLAS_OP_T | the transpose operation is selected
+CUBLAS_OP_C | the conjugate transpose operation is selected
+
+#### CUDA 4.0 부터 cublas.h 에서 cublas_v2.h 바뀌었다    
+<details><summary>5_cubals_legacy.cu</summary>
 	
 + cublasInit();
 현재 host에 할당된 CPU 리소스를 cublas가 사용가능하게 할당하는 함수    
