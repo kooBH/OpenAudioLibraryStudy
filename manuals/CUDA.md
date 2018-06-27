@@ -742,7 +742,7 @@ int main()
 	
 	printf("(1024 X 1024)  * (1024 X 1024)\n");
 	
-	printf("cubals dgemm : ");	
+	printf("cublas dgemm : ");	
 	stopwatch(0);
 	cublasDgemm('n','n',N,N,N,alpha,dev_A,N,dev_B,N,beta,dev_C,N);
 	stopwatch(1);
@@ -897,7 +897,7 @@ int main()
 
 	printf("(1024 X 1024)  * (1024 X 1024)\n");
 	
-	printf("cubals dgemm : ");	
+	printf("cublas dgemm : ");	
 	stopwatch(0);
 	cublasDgemm(handle,CUBLAS_OP_N,CUBLAS_OP_N,N,N,N,&alpha,dev_A,N,dev_B,N,&beta,dev_C,N);
 	stopwatch(1);
@@ -980,7 +980,7 @@ void stopwatch(int flag)
 
 ```
 (1024 X 1024)  * (1024 X 1024)
-cubals dgemm : elapsed time :  24 microsec
+cublas dgemm : elapsed time :  24 microsec
 BOCK 256,256
 THREAD 512,512
 cuda matrix multiplication elapsed time :  4 microsec
