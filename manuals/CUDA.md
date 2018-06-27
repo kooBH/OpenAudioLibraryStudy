@@ -44,11 +44,21 @@ sum += a4*b4
   * host(CPU)에서 호출
   * \_\_global\_\_ functuon<<<number of block, thread per block >>>(args)    
   * 재귀 불가능
+
+```C++
+__global__ void kernel_func (int a*){<...>}
+
+int main(){
+<...>
+kernel_func<<<16,64>>>(some_device_array);
+<...>
+```  
 + \_\_device\_\_
   * device에서 실행
   * device에서 호출
 + \_\_host\_\_
   * 기본값 : host 실행, host 호출 
+  * 보통 함수 쓰듯이 시용
   
 ### Variable
 
