@@ -1,6 +1,7 @@
 
 # CUDA<a name ="TOP"></a> 
 #### 1. [knowledge](#knowledge)
+#### 1. [syncronise](#sync)
 #### 2. [shared memory](#shared)
 #### 1. [extention](#extention)
 #### 2. [function](#function)
@@ -30,6 +31,10 @@ sum += a4*b4
 + GPU 는 SM(streaming multi-processor) + a 
 + SM은 SP(streaming processor)로 되어있으며 하나의 SP는 4개의 쓰레드를 수행할 수 있다
 
+## [syncronise](#TOP)<a name ="sync"></a>
+커널 함수는 CPU 관점에서는 [비동기](https://stackoverflow.com/questions/8473617/are-cuda-kernel-calls-synchronous-or-asynchronous)적이다 
+적이다 
+
 
 ## [SHARED MEMORY](#TOP)<a name = "shared"></a>
 공유 메모리는 같은 블록내의 쓰레드끼리만 공유하는 메모리로 **캐시와 동등한 속도**로 사용할 수 있다  
@@ -39,7 +44,8 @@ sum += a4*b4
 ```C++
 __shared__ int ARRAY[512];  //정적할당 : 커널 함수에서 해야하며, 초기화는 할 수 없다.
 
-extern __shared__ float host_delcared[]; //동적할당,
+extern __shared__ float host_delcared[]; //동적할당, 
+kernel함수<<<그리드,블록, 여기에 shared메모리들의 크기를 넣으면된다(같은 자리부터 할당하기때문에)>>>(인자);
 ```
 
 <details></summary>3_sharedMemory.cu</summary>
@@ -50,27 +56,47 @@ extern __shared__ float host_delcared[]; //동적할당,
 #include <time.h>
 
 
-
-#define ITER 1
+#define ITER 40000
+#define SIZE 500
 #define BLOCK 1
-#define THREAD 512 
+#define THREAD 64
 
 
 void stopwatch(int);
+__global__ void manymanyLocal();
 __global__ void manymanyGlobal(int*,int* );
 __global__ void manymanyShared();
 
 int main()
 {
+
+	printf("SIZE : %d\nBLOCK : %d\nTHREAD : %d\nITER : %d\n",SIZE,BLOCK,THREAD,ITER);
+/*
+	커널 함수는 비동기 함수라서 쓰레드만 돌려놓고 호스트는 그래도 진행한다  
+	cudaTHreadSynchronize() 는 이전에 생성된 쓰레드들이 끝날때 까지 기다린다  
+*/
+/*
+	stopwatch(0);
+	printf("Local : ");
+	for(int i=0; i< ITER;i++)
+	{	
+	manymanyLocal<<<BLOCK,THREAD>>>();
+	cudaThreadSynchronize();
+	}	
+	stopwatch(1);
+*/
+
 	int *a;
 	int *b;
 		
-	cudaMalloc((void**)&a,sizeof(int)*THREAD);
-	cudaMalloc((void**)&b,sizeof(int)*THREAD);
+	cudaMalloc((void**)&a,sizeof(int)*SIZE );
+	cudaMalloc((void**)&b,sizeof(int)*SIZE);
+
 
 	stopwatch(0);
 	printf("Global : ");
 	manymanyGlobal<<<BLOCK,THREAD>>>(a,b);
+	cudaThreadSynchronize();
 	stopwatch(1);
 
 	cudaFree(a);
@@ -79,31 +105,53 @@ int main()
 	stopwatch(0);
 	printf("Shared : ");
 	manymanyShared<<<BLOCK,THREAD>>>();
+	cudaThreadSynchronize();
 	stopwatch(1);
 
+
+
 }
+
+__global__ void manymanyLocal()
+{
+	int a[SIZE];
+	int b[SIZE];
+
+for(int j=0; j < ITER; j++)
+	for(int i=threadIdx.x;i<SIZE;i+=THREAD)
+	{
+		a[i]=0;
+		b[i]=0;
+	}
+ 
+}
+
+
+
 __global__ void manymanyGlobal(int* a,int* b)
 {
 	
-		a[threadIdx.x]=0;
-		b[threadIdx.x]=0;
-
-	for(int i =0;i<ITER;i++)
-		a[threadIdx.x] = b[threadIdx.y];
-		
+for(int j=0; j < ITER; j++)
+	for(int i=threadIdx.x;i<SIZE;i+=THREAD)
+	{
+		a[i]=0;
+		b[i]=0;
+	}	
 }
 
 __global__ void manymanyShared()
 {
-	__shared__ int a[THREAD];
-	__shared__ int b[THREAD];
-	
-	
-		a[threadIdx.x]=0;
-		b[threadIdx.x]=0;
+	__shared__ int a[SIZE];
+	__shared__ int b[SIZE];
 
-	for(int i =0;i<ITER;i++)
-			a[threadIdx.x] = b[threadIdx.y];
+	__syncthreads();	
+		
+for(int j=0; j < ITER; j++)
+	for(int i=threadIdx.x;i<SIZE;i+=THREAD)
+	{
+		a[i]=0;
+		b[i]=0;
+	}	
 
 }
 
@@ -136,16 +184,26 @@ void stopwatch(int flag)
 	}
 
 }
-
-
-
 ```
 
 </details>
 
 ```
-Global : elapsed time :  13 micros
-Shared : elapsed time :  8 micros
+SIZE : 500
+BLOCK : 1
+THREAD : 1
+ITER : 40000
+Global : elapsed time :  275768 micros
+Shared : elapsed time :  212388 micros
+```
+```
+SIZE : 500
+BLOCK : 1
+THREAD : 64
+ITER : 40000
+Global : elapsed time :  14307 micros
+Shared : elapsed time :  11950 micros
+
 
 ```
 
