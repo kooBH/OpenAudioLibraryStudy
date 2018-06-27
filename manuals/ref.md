@@ -50,6 +50,8 @@ stopwatch(1);
 ```C++
 void stopwatch(int flag)
 {
+	int unit = 1000000; //1000 이면 micro, 1 이면 nano
+	
 	const long long NANOS = 1000000000LL;
 	static struct timespec startTS,endTS;
 	static long long diff = 0;
@@ -68,7 +70,7 @@ void stopwatch(int flag)
 			printf("Failed to call clock_gettime\n");
 		diff = NANOS * (endTS.tv_sec - startTS.tv_sec) + (endTS.tv_nsec - startTS.tv_nsec);
 		
-		printf("elapsed time : % lld ms\n",diff/1000000);
+		printf("elapsed time : % lld ms\n",diff/unit);
 	}
 	else
 	{
