@@ -2,16 +2,16 @@
 
 Value | Meaning
 --- | ---
-CUBLAS_STATUS_SUCCESS| 성공
-CUBLAS_STATUS_NOT_INITIALIZED |초기화 되지 않음, cublasCreate()를 먼저 해줘야한다
-CUBLAS_STATUS_ALLOC_FAILED | 할당 실패, cudaMalloc()이 제대로 되지 않았다. 메모리 해제 요망
-CUBLAS_STATUS_INVALID_VALUE |함수에 유효한 인자가 전달되지 않았다. 인자의 타입을 확인 요망
-CUBLAS_STATUS_ARCH_MISMATCH | 현재 장치에선 지원해지 않는 기능사용, 보통 double precision에서 발생
-CUBLAS_STATUS_MAPPING_ERROR |GPU메모리 접근실패. texture 메모리 해제 요망
-CUBLAS_STATUS_EXECUTION_FAILED |커널 함수 호출 실패. 드라이버 버전이나 라이브러리 확인 요망
-CUBLAS_STATUS_INTERNAL_ERROR | 내부 cublas 실패. 드라이버 버전이나 하드웨어 또는 할당해제된 변수에 접근하지는 확인 바람
-CUBLAS_STATUS_NOT_SUPPORTED |지원하지 않음
-CUBLAS_STATUS_LICENSE_ERROR |The functionnality requested requires some license and an error was detected when trying to check the current licensing. This error can happen if the license is not present or is expired or if the environment variable NVIDIA_LICENSE_FILE is not set properly. 
+0 = CUBLAS_STATUS_SUCCESS| 성공
+1 = CUBLAS_STATUS_NOT_INITIALIZED|초기화 되지 않음, cublasCreate()를 먼저 해줘야한다
+3 = CUBLAS_STATUS_ALLOC_FAILED| 할당 실패, cudaMalloc()이 제대로 되지 않았다. 메모리 해제 요망
+7 = CUBLAS_STATUS_INVALID_VALUE|함수에 유효한 인자가 전달되지 않았다. 인자의 타입을 확인 요망
+8 = CUBLAS_STATUS_ARCH_MISMATCH | 현재 장치에선 지원해지 않는 기능사용, 보통 double precision에서 발생
+11 = CUBLAS_STATUS_MAPPING_ERROR |GPU메모리 접근실패. texture 메모리 해제 요망
+13 = CUBLAS_STATUS_EXECUTION_FAILED |커널 함수 호출 실패. 드라이버 버전이나 라이브러리 확인 요망
+14 = CUBLAS_STATUS_INTERNAL_ERROR | 내부 cublas 실패. 드라이버 버전이나 하드웨어 또는 할당해제된 변수에 접근하지는 확인 바람
+15 = CUBLAS_STATUS_NOT_SUPPORTED |지원하지 않음
+16 = CUBLAS_STATUS_LICENSE_ERROR |The functionnality requested requires some license and an error was detected when trying to check the current licensing. This error can happen if the license is not present or is expired or if the environment variable NVIDIA_LICENSE_FILE is not set properly. 
 
 # cudaError_t
 
