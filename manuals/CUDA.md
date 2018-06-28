@@ -5,8 +5,8 @@
 #### 3. [function](#function)
 #### 4. [synchronise](#sync)
 #### 5. [shared memory](#shared)
-#### 6. [cublas](#blas)
-#### 7. [stream](#stream)
+#### 6. [stream](#stream)
+#### 7. [cublas](#blas)
 #### 8. [fft](#fft)
 #### 9. [example](#example)
   + [matrix multiplication](#matmul)
@@ -523,6 +523,307 @@ elapsed time :  3291 micros
 
 ---
 
+## [STREAM](#TOP)<a name="stream"></a>
+
+일반적으로 serial 하게 작업을 수행하면 Data를 다 넣고 연산을 수행하게된다.  하지만 Stream을 나눠서 수행하게되면, Data IO와 Process는 동시에 수행할 수 있기 때문에 병렬 작업이 가능하다.   
+&nbsp;  
+하지만 스트림 생성과 제거의 오버헤드가 있기 때문에, 자료의 양이 많아야 하며, IO와 Process의 비율도 생각해야한다  
+
+![alt text](./CudaStream_2.png "CudaStream")
+
+```C++
+cudaStream_t 스트림
+/*
+스트림
+*/
+
+cudaMallocHost((void**)&포인터,  크기)
+/*
+비동기적으로 호스트메모리를 사용하려면 cudaMallocHost()로 할당해야한다 
+CudaMalloc과 사용법은 같지만, 디바이스 메모리가 아닌 호스트 메모리를 할당한다
+*/
+
+cudaStreamCreate(&(cudaStream_t 스트림))
+/*
+스트림을 생성한다
+*/
+
+cudaMemcpyAsync(dest,src,size,op,cudaStream_t 스트림)
+/*
+cudaMemcpy에 cudaStream_t 인자가 추가되었다
+비동기적으로 Memcpy를 수행한다 스트림별로 수행한다.
+*/
+
+kernel_func<<<block,thread,shared memory, cudaStream_t 스트림>>>(args...);
+/*
+커널 함수 호출시 <<< >>>의 4번째 인자에 스트림을 넣어주면 해당 스트림에서 비동기적으로 수행한다 
+*/
+
+cudaStreamSynchronize(cudaStream_t 스트림);
+/*
+스트림의 작업이 다 끝날때 까지 기다린다
+*/
+
+cudaStreamDestroy(cudaStream_t 스트림)
+/*
+생성된 스트림을 제거한다
+*/
+
+```
+
+### 예시
+
+&nbsp;  
+<details><summary>6_stream.cu</summary>
+
+```C++
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define NUM_STREAM 20
+#define NUM_BLOCK 1
+#define NUM_THREAD 512
+
+#define NUM_DATA 2000000
+#define TYPE_DATA double
+
+#define CHECK 0
+
+void stopwatch(int);
+void pp(int);
+
+
+//a 에서  b 로 l 만큼
+__global__ void data_trans(TYPE_DATA* a,TYPE_DATA* b,int l);
+
+int main()
+{
+	cudaStream_t stream_array[NUM_STREAM];
+
+	TYPE_DATA* host_a,*host_b;
+	TYPE_DATA* dev_a ,*dev_b;
+
+	
+	cudaMallocHost((void**)&host_a,sizeof(TYPE_DATA)*NUM_DATA);
+	cudaMallocHost((void**)&host_b,sizeof(TYPE_DATA)*NUM_DATA);
+
+	cudaMalloc((void**)&dev_a,sizeof(TYPE_DATA)* NUM_DATA );
+	cudaMalloc((void**)&dev_b,sizeof(TYPE_DATA)* NUM_DATA );
+
+	printf("number of stream : %d\nnumber of data : %d\nnumber of block : %d\nnumber of thread : %d\n",NUM_STREAM,NUM_DATA,NUM_BLOCK,NUM_THREAD);
+
+	srand(time(NULL));
+
+	for(int i=0;i<NUM_DATA;i++)
+		{
+			host_a[i] = rand()/(TYPE_DATA)RAND_MAX;
+		}
+
+	printf("Creating Stream[%d]   : ",NUM_STREAM);
+	stopwatch(0);
+	for(int i=0;i<NUM_STREAM; i++)
+		cudaStreamCreate(&(stream_array[i]));
+	stopwatch(1);
+
+
+	int offset[NUM_STREAM];
+	for(int i=0;i<NUM_STREAM;i++)
+{
+	offset[i] = i * NUM_DATA/NUM_STREAM;
+
+#if CHECK
+	printf("offset[%d] : %d\n",i,offset[i]);
+#endif
+}
+	/************************Streaming**********************************/
+
+
+	printf("Reading & Processing with    Stream : ");
+	stopwatch(0);
+	//READ
+	for(int i=0;i<NUM_STREAM;i++)
+	{
+		cudaMemcpyAsync(dev_a+offset[i],host_a+offset[i],sizeof(TYPE_DATA)*NUM_DATA/NUM_STREAM,cudaMemcpyHostToDevice,stream_array[i]);
+	}
+	//TRANS
+	for(int j=0;j<NUM_STREAM;j++)
+	{
+		data_trans<<<NUM_BLOCK,NUM_THREAD,0,stream_array[j]>>>(dev_a,dev_b,NUM_DATA/NUM_STREAM);
+	}
+	//GET
+	for(int i=0;i<NUM_STREAM;i++)
+	{
+		cudaMemcpyAsync(host_b+offset[i],dev_b+offset[i],sizeof(TYPE_DATA)*NUM_DATA/NUM_STREAM,cudaMemcpyDeviceToHost,stream_array[i]);
+	}
+	
+	for(int i=0; i<NUM_STREAM;i++)
+		cudaStreamSynchronize(stream_array[i]);
+
+	stopwatch(1);
+
+#if CHECK
+	printf("CHECK 0-10, %d-%d\n",NUM_DATA-10,NUM_DATA-1);
+	for(int i=0;i<10;i++)
+		printf("%.4lf ",host_b[i]);
+	printf("\n");
+	for(int i=NUM_DATA-10;i<NUM_DATA;i++)
+		printf("%.4lf ",host_b[i]);
+	printf("\n");
+#endif	
+	
+	cudaThreadSynchronize();
+
+/************************No Streaming**************************************/
+
+	printf("Reading & Processing without Stream : ");	
+	stopwatch(0);
+
+	cudaMemcpy(dev_a,host_a,sizeof(TYPE_DATA)*NUM_DATA,cudaMemcpyHostToDevice);
+
+	data_trans<<<NUM_BLOCK,NUM_THREAD>>>(dev_a,dev_b,NUM_DATA);
+
+	cudaMemcpy(host_b,dev_b,sizeof(TYPE_DATA)*NUM_DATA,cudaMemcpyDeviceToHost);
+	
+	stopwatch(1);
+
+#if CHECK
+	printf("CHECK 0-10, %d-%d\n",NUM_DATA-10,NUM_DATA-1);
+	for(int i=0;i<10;i++)
+		printf("%.4lf ",host_b[i]);
+	printf("\n");
+	for(int i=NUM_DATA-10;i<NUM_DATA;i++)
+		printf("%.4lf ",host_b[i]);
+	printf("\n");
+	
+#endif
+
+
+
+	printf("Destroying Stream[%d] : ",NUM_STREAM);
+	stopwatch(0);
+	for(int i=0;i<NUM_STREAM; i++)
+		cudaStreamDestroy(stream_array[i] );
+	stopwatch(1);
+
+
+	cudaFree(dev_a);
+	cudaFree(dev_b);
+	cudaFree(host_a);
+	cudaFree(host_b);
+
+	return 0;
+}
+
+__global__ void data_trans(TYPE_DATA* a,TYPE_DATA* b,int l)
+{
+	for(int i=threadIdx.x;i<l;i+=NUM_THREAD)
+		b[i]=a[i];
+
+}
+
+void pp(int num)
+{
+	printf("%d\n",num);
+}
+
+
+void stopwatch(int flag)
+{
+	enum clock_unit{nano = 0, micro , milli, sec} unit;
+	
+	const long long NANOS = 1000000000LL;
+	static struct timespec startTS,endTS;
+	static long long diff = 0;
+
+	/*
+		여기서 단위 조정
+		nano, micro, milli, sec
+	*/
+	unit = micro;
+
+	//start
+	if(flag == 0)
+	{
+		diff = 0;
+		if(-1 == clock_gettime(CLOCK_MONOTONIC,&startTS))
+			printf("Failed to call clock_gettime\n");
+	}
+	//end
+	else if(flag == 1)
+	{		
+		if(-1 == clock_gettime(CLOCK_MONOTONIC,&endTS))
+			printf("Failed to call clock_gettime\n");
+		diff = NANOS * (endTS.tv_sec - startTS.tv_sec) + (endTS.tv_nsec - startTS.tv_nsec);
+
+		switch(unit)		
+		{
+			case nano :
+				printf("elapsed time : % lld micros\n",diff);
+			break;
+			case micro :
+				printf("elapsed time : % lld micros\n",diff/1000);
+			break;
+			case sec :
+				printf("elapsed time : % lld micros\n",diff/1000000000);
+			break;
+			default :
+				printf("elapsed time : % lld milli sec\n",diff/100000);
+			break;	
+
+		}
+	}
+	else
+	{
+		printf("wrong flag | 0 : start, 1 : end\n");
+	}
+
+}
+
+
+```
+
+</details>
+&nbsp;  
+<details><summary>결과 비교</summary>
+
+```
+number of stream : 10
+number of data : 2000000
+number of block : 1
+number of thread : 512
+Creating Stream[10]   : elapsed time :  604 micros
+Reading & Processing with    Stream : elapsed time :  3501 micros
+Reading & Processing without Stream : elapsed time :  4196 micros
+Destroying Stream[10] : elapsed time :  16 micros
+
+number of stream : 15
+Creating Stream[15]   : elapsed time :  645 micros
+Reading & Processing with    Stream : elapsed time :  3371 micros 
+Reading & Processing without Stream : elapsed time :  4186 micros
+Destroying Stream[15] : elapsed time :  22 micros
+
+Creating Stream[20]   : elapsed time :  652 micros
+Reading & Processing with    Stream : elapsed time :  3510 micros
+Reading & Processing without Stream : elapsed time :  4197 micros
+Destroying Stream[20] : elapsed time :  27 micros
+
+number of stream : 15
+number of data : 8000000
+number of block : 1
+number of thread : 512
+Creating Stream[15]   : elapsed time :  581 micros
+Reading & Processing with    Stream : elapsed time :  11797 micros
+Reading & Processing without Stream : elapsed time :  16619 micros
+Destroying Stream[15] : elapsed time :  19 micros
+
+```
+</details>
+
+---
+
+
 ## [CUBLAS](#TOP)<a name = "blas"></a>
 
 [CUBLAS DOCUMENT](https://docs.nvidia.com/cuda/cublas/index.html)
@@ -986,305 +1287,6 @@ THREAD 512,512
 cuda matrix multiplication elapsed time :  4 microsec
 
 ```
----
-
-## [STREAM](#TOP)<a name="stream"></a>
-
-일반적으로 serial 하게 작업을 수행하면 Data를 다 넣고 연산을 수행하게된다.  하지만 Stream을 나눠서 수행하게되면, Data IO와 Process는 동시에 수행할 수 있기 때문에 병렬 작업이 가능하다.   
-&nbsp;  
-하지만 스트림 생성과 제거의 오버헤드가 있기 때문에, 자료의 양이 많아야 하며, IO와 Process의 비율도 생각해야한다  
-
-![alt text](./CudaStream_2.png "CudaStream")
-
-```C++
-cudaStream_t 스트림
-/*
-스트림
-*/
-
-cudaMallocHost((void**)&포인터,  크기)
-/*
-비동기적으로 호스트메모리를 사용하려면 cudaMallocHost()로 할당해야한다 
-CudaMalloc과 사용법은 같지만, 디바이스 메모리가 아닌 호스트 메모리를 할당한다
-*/
-
-cudaStreamCreate(&(cudaStream_t 스트림))
-/*
-스트림을 생성한다
-*/
-
-cudaMemcpyAsync(dest,src,size,op,cudaStream_t 스트림)
-/*
-cudaMemcpy에 cudaStream_t 인자가 추가되었다
-비동기적으로 Memcpy를 수행한다 스트림별로 수행한다.
-*/
-
-kernel_func<<<block,thread,shared memory, cudaStream_t 스트림>>>(args...);
-/*
-커널 함수 호출시 <<< >>>의 4번째 인자에 스트림을 넣어주면 해당 스트림에서 비동기적으로 수행한다 
-*/
-
-cudaStreamSynchronize(cudaStream_t 스트림);
-/*
-스트림의 작업이 다 끝날때 까지 기다린다
-*/
-
-cudaStreamDestroy(cudaStream_t 스트림)
-/*
-생성된 스트림을 제거한다
-*/
-
-```
-
-### 예시
-
-&nbsp;  
-<details><summary>6_stream.cu</summary>
-
-```C++
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-
-#define NUM_STREAM 20
-#define NUM_BLOCK 1
-#define NUM_THREAD 512
-
-#define NUM_DATA 2000000
-#define TYPE_DATA double
-
-#define CHECK 0
-
-void stopwatch(int);
-void pp(int);
-
-
-//a 에서  b 로 l 만큼
-__global__ void data_trans(TYPE_DATA* a,TYPE_DATA* b,int l);
-
-int main()
-{
-	cudaStream_t stream_array[NUM_STREAM];
-
-	TYPE_DATA* host_a,*host_b;
-	TYPE_DATA* dev_a ,*dev_b;
-
-	
-	cudaMallocHost((void**)&host_a,sizeof(TYPE_DATA)*NUM_DATA);
-	cudaMallocHost((void**)&host_b,sizeof(TYPE_DATA)*NUM_DATA);
-
-	cudaMalloc((void**)&dev_a,sizeof(TYPE_DATA)* NUM_DATA );
-	cudaMalloc((void**)&dev_b,sizeof(TYPE_DATA)* NUM_DATA );
-
-	printf("number of stream : %d\nnumber of data : %d\nnumber of block : %d\nnumber of thread : %d\n",NUM_STREAM,NUM_DATA,NUM_BLOCK,NUM_THREAD);
-
-	srand(time(NULL));
-
-	for(int i=0;i<NUM_DATA;i++)
-		{
-			host_a[i] = rand()/(TYPE_DATA)RAND_MAX;
-		}
-
-	printf("Creating Stream[%d]   : ",NUM_STREAM);
-	stopwatch(0);
-	for(int i=0;i<NUM_STREAM; i++)
-		cudaStreamCreate(&(stream_array[i]));
-	stopwatch(1);
-
-
-	int offset[NUM_STREAM];
-	for(int i=0;i<NUM_STREAM;i++)
-{
-	offset[i] = i * NUM_DATA/NUM_STREAM;
-
-#if CHECK
-	printf("offset[%d] : %d\n",i,offset[i]);
-#endif
-}
-	/************************Streaming**********************************/
-
-
-	printf("Reading & Processing with    Stream : ");
-	stopwatch(0);
-	//READ
-	for(int i=0;i<NUM_STREAM;i++)
-	{
-		cudaMemcpyAsync(dev_a+offset[i],host_a+offset[i],sizeof(TYPE_DATA)*NUM_DATA/NUM_STREAM,cudaMemcpyHostToDevice,stream_array[i]);
-	}
-	//TRANS
-	for(int j=0;j<NUM_STREAM;j++)
-	{
-		data_trans<<<NUM_BLOCK,NUM_THREAD,0,stream_array[j]>>>(dev_a,dev_b,NUM_DATA/NUM_STREAM);
-	}
-	//GET
-	for(int i=0;i<NUM_STREAM;i++)
-	{
-		cudaMemcpyAsync(host_b+offset[i],dev_b+offset[i],sizeof(TYPE_DATA)*NUM_DATA/NUM_STREAM,cudaMemcpyDeviceToHost,stream_array[i]);
-	}
-	
-	for(int i=0; i<NUM_STREAM;i++)
-		cudaStreamSynchronize(stream_array[i]);
-
-	stopwatch(1);
-
-#if CHECK
-	printf("CHECK 0-10, %d-%d\n",NUM_DATA-10,NUM_DATA-1);
-	for(int i=0;i<10;i++)
-		printf("%.4lf ",host_b[i]);
-	printf("\n");
-	for(int i=NUM_DATA-10;i<NUM_DATA;i++)
-		printf("%.4lf ",host_b[i]);
-	printf("\n");
-#endif	
-	
-	cudaThreadSynchronize();
-
-/************************No Streaming**************************************/
-
-	printf("Reading & Processing without Stream : ");	
-	stopwatch(0);
-
-	cudaMemcpy(dev_a,host_a,sizeof(TYPE_DATA)*NUM_DATA,cudaMemcpyHostToDevice);
-
-	data_trans<<<NUM_BLOCK,NUM_THREAD>>>(dev_a,dev_b,NUM_DATA);
-
-	cudaMemcpy(host_b,dev_b,sizeof(TYPE_DATA)*NUM_DATA,cudaMemcpyDeviceToHost);
-	
-	stopwatch(1);
-
-#if CHECK
-	printf("CHECK 0-10, %d-%d\n",NUM_DATA-10,NUM_DATA-1);
-	for(int i=0;i<10;i++)
-		printf("%.4lf ",host_b[i]);
-	printf("\n");
-	for(int i=NUM_DATA-10;i<NUM_DATA;i++)
-		printf("%.4lf ",host_b[i]);
-	printf("\n");
-	
-#endif
-
-
-
-	printf("Destroying Stream[%d] : ",NUM_STREAM);
-	stopwatch(0);
-	for(int i=0;i<NUM_STREAM; i++)
-		cudaStreamDestroy(stream_array[i] );
-	stopwatch(1);
-
-
-	cudaFree(dev_a);
-	cudaFree(dev_b);
-	cudaFree(host_a);
-	cudaFree(host_b);
-
-	return 0;
-}
-
-__global__ void data_trans(TYPE_DATA* a,TYPE_DATA* b,int l)
-{
-	for(int i=threadIdx.x;i<l;i+=NUM_THREAD)
-		b[i]=a[i];
-
-}
-
-void pp(int num)
-{
-	printf("%d\n",num);
-}
-
-
-void stopwatch(int flag)
-{
-	enum clock_unit{nano = 0, micro , milli, sec} unit;
-	
-	const long long NANOS = 1000000000LL;
-	static struct timespec startTS,endTS;
-	static long long diff = 0;
-
-	/*
-		여기서 단위 조정
-		nano, micro, milli, sec
-	*/
-	unit = micro;
-
-	//start
-	if(flag == 0)
-	{
-		diff = 0;
-		if(-1 == clock_gettime(CLOCK_MONOTONIC,&startTS))
-			printf("Failed to call clock_gettime\n");
-	}
-	//end
-	else if(flag == 1)
-	{		
-		if(-1 == clock_gettime(CLOCK_MONOTONIC,&endTS))
-			printf("Failed to call clock_gettime\n");
-		diff = NANOS * (endTS.tv_sec - startTS.tv_sec) + (endTS.tv_nsec - startTS.tv_nsec);
-
-		switch(unit)		
-		{
-			case nano :
-				printf("elapsed time : % lld micros\n",diff);
-			break;
-			case micro :
-				printf("elapsed time : % lld micros\n",diff/1000);
-			break;
-			case sec :
-				printf("elapsed time : % lld micros\n",diff/1000000000);
-			break;
-			default :
-				printf("elapsed time : % lld milli sec\n",diff/100000);
-			break;	
-
-		}
-	}
-	else
-	{
-		printf("wrong flag | 0 : start, 1 : end\n");
-	}
-
-}
-
-
-```
-
-</details>
-&nbsp;  
-<details><summary>결과 비교</summary>
-
-```
-number of stream : 10
-number of data : 2000000
-number of block : 1
-number of thread : 512
-Creating Stream[10]   : elapsed time :  604 micros
-Reading & Processing with    Stream : elapsed time :  3501 micros
-Reading & Processing without Stream : elapsed time :  4196 micros
-Destroying Stream[10] : elapsed time :  16 micros
-
-number of stream : 15
-Creating Stream[15]   : elapsed time :  645 micros
-Reading & Processing with    Stream : elapsed time :  3371 micros 
-Reading & Processing without Stream : elapsed time :  4186 micros
-Destroying Stream[15] : elapsed time :  22 micros
-
-Creating Stream[20]   : elapsed time :  652 micros
-Reading & Processing with    Stream : elapsed time :  3510 micros
-Reading & Processing without Stream : elapsed time :  4197 micros
-Destroying Stream[20] : elapsed time :  27 micros
-
-number of stream : 15
-number of data : 8000000
-number of block : 1
-number of thread : 512
-Creating Stream[15]   : elapsed time :  581 micros
-Reading & Processing with    Stream : elapsed time :  11797 micros
-Reading & Processing without Stream : elapsed time :  16619 micros
-Destroying Stream[15] : elapsed time :  19 micros
-
-```
-</details>
 
 ---
 
