@@ -1288,6 +1288,13 @@ cuda matrix multiplication elapsed time :  4 microsec
 
 ```
 
+#### gemmBatch & gemm with Stream
+
+The device function being invoked (usually via cudaLaunchKernel()) was not previously configured via the cudaConfigureCall() function. 
+
+cudaErrorIllegalAddress = 77
+    The device encountered a load or store instruction on an invalid memory address. This leaves the process in an inconsistent state and any further CUDA work will return the same error. To continue using CUDA, the process must be terminated and relaunched. 
+
 ---
 
 ## [FFT](#TOP)<a name = "fft"></a>
