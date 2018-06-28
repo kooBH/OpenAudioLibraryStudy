@@ -1,0 +1,3 @@
+/home/ffe/git/OpenAudioLibraryStudy/RtAudio_scratch/build/CMakeFiles/edit_cache.dir
+/home/ffe/git/OpenAudioLibraryStudy/RtAudio_scratch/build/CMakeFiles/rebuild_cache.dir
+/home/ffe/git/OpenAudioLibraryStudy/RtAudio_scratch/build/CMakeFiles/rtaudio.dir
