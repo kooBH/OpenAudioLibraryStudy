@@ -994,7 +994,7 @@ cuda matrix multiplication elapsed time :  4 microsec
 &nbsp;  
 하지만 스트림 생성과 제거의 오버헤드가 있기 때문에, 자료의 양이 많아야 하며, IO와 Process의 비율도 생각해야한다  
 
-![alt text](./CudaStream.png "CudaStream")
+![alt text](./CudaStream_2.png "CudaStream")
 
 ```C++
 cudaStream_t 스트림
