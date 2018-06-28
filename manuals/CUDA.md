@@ -1036,6 +1036,9 @@ cudaStreamDestroy(cudaStream_t 스트림)
 
 ```
 
+### 예시
+
+&nbsp;  
 <details><summary>6_stream.cu</summary>
 
 ```C++
@@ -1247,7 +1250,7 @@ void stopwatch(int flag)
 ```
 
 </details>
-
+&nbsp;  
 <details><summary>결과 비교</summary>
 
 ```
