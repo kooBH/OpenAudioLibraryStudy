@@ -1888,6 +1888,12 @@ GEMMs :  132 micro sec
 BATCHED GEMM :  90 micro sec
 STREAM :  152 micro sec
 
+MATRIX_NUM : 100
+MATRIX_SIZE : (500)X(500)
+GEMMs :  218199 micro sec
+BATCHED GEMM :  176977 micro sec
+STREAM :  157057 micro sec
+
 MATRIX_NUM : 10
 MATRIX_SIZE : (1000)X(1000)
 GEMMs :  153022 micro sec
@@ -1905,7 +1911,6 @@ MATRIX_SIZE : (5000)X(5000)
 GEMMs :  13155520 micro sec
 BATCHED GEMM :  13146888 micro sec
 STREAM :  12906191 micro sec
-
 
 ```
 
