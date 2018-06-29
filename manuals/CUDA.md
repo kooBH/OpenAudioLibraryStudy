@@ -10,6 +10,7 @@
 #### 8. [fft](#fft)
 #### 9. [example](#example)
   + [matrix multiplication](#matmul)
+  + [Gemm batchedGemm StreamedGemm](#7)
   
 ---
 nvcc 로 컴파일
@@ -1550,6 +1551,7 @@ void c_mul(int *A,int *B, int *C, int w)
 결과
 
 ```bash
+
 Multiply matrix (1024X1024 ) * (1024X1024)
 c_mul
 elapsed time :  6581 ms
@@ -1560,6 +1562,344 @@ elapsed time :  3 ms
 
 ```
 
+### [Gemm batchedGemm StreamedGemm](#TOP)<a name="7"></a>
+
+<details><summary>7_batchedCublas.cu</summary>
+
+```C++
+#include "cublas_v2.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define CHECK 0
+#define RESULT 0
+
+#define DATA_TYPE double
+#define MATRIX_NUM 10
+#define MATRIX_SIZE 10
+void stopwatch(int);
+void pp(int p)
+{printf("------------ %d-------------\n",p);}
+
+void mat_out(DATA_TYPE*);
+
+int main()
+{
+	printf("MATRIX_NUM : %d\nMATRIX_SIZE : (%d)X(%d)\n",MATRIX_NUM,MATRIX_SIZE,MATRIX_SIZE);
+
+	//host matrix array
+	DATA_TYPE *h_a,*h_b,*h_c;
+	//device matrix array
+	DATA_TYPE *d_a,*d_b,*d_c;
+	
+	//blas parameters
+	DATA_TYPE alpha=1,beta=0;
+	int m,n,k,lda,ldb,ldc;
+	cublasOperation_t transa,transb;
+	
+	long long stridea,strideb,stridec;
+
+	//matrix sizes
+	long long s2;
+	long long s3;
+//	cublasHandle_t handle;
+	
+	int offset[MATRIX_NUM];
+
+	cublasHandle_t handle;
+
+	cublasHandle_t handle_s[MATRIX_NUM];
+	cudaStream_t stream[MATRIX_NUM];
+
+	//디버그
+	cublasStatus_t cublas_stat;
+	cudaError_t cuda_stat;
+
+/************************Initialization******************************************/	
+
+	m=MATRIX_SIZE,n=MATRIX_SIZE,k=MATRIX_SIZE,lda=MATRIX_SIZE,ldb=MATRIX_SIZE,ldc=MATRIX_SIZE;
+	s2 = MATRIX_SIZE * MATRIX_SIZE;
+	s3 = MATRIX_SIZE * MATRIX_SIZE * MATRIX_NUM;	
+
+	transa = CUBLAS_OP_N;
+	transb = CUBLAS_OP_N;	
+
+	stridea = s2;
+	strideb = s2;
+	stridec = s2;
+	
+	cuda_stat = cudaMallocHost((void**)&h_a,sizeof(DATA_TYPE) *s3);
+
+#if CHECK
+	printf("cudaMallocHost : %d\n",cuda_stat);
+#endif	
+	cuda_stat=	cudaMallocHost((void**)&h_b,sizeof(DATA_TYPE) *s3);
+#if CHECK
+	printf("cudaMallocHost : %d\n",cuda_stat);
+#endif
+	cuda_stat=	cudaMallocHost((void**)&h_c,sizeof(DATA_TYPE) *s3);
+
+	cudaMalloc((void**)&d_a,sizeof(DATA_TYPE)*s3);
+	cudaMalloc((void**)&d_b,sizeof(DATA_TYPE)*s3);
+	cudaMalloc((void**)&d_c,sizeof(DATA_TYPE)*s3);
+
+
+	srand(time(NULL));
+
+	for(long long j=0;j<s3;j++)h_a[j]=rand()/(DATA_TYPE)RAND_MAX;
+    for(long long j=0;j<s3;j++)h_b[j]=rand()/(DATA_TYPE)RAND_MAX;
+	for(long long j=0;j<s3;j++)h_c[j]=0;
+
+	cublasCreate(&handle);
+
+
+	for(int i=0;i<MATRIX_NUM;i++)
+		cublasCreate(&(handle_s[i]));
+	for(int i=0;i<MATRIX_NUM;i++)
+		cudaStreamCreate(&(stream[i]));
+	for(int i=0;i<MATRIX_NUM;i++)
+		cublasSetStream(handle_s[i],stream[i]);
+
+
+
+/****************** GEMM  한번 ********************/
+/*
+	printf("a GEMM : \n");
+	stopwatch(0);
+
+	cudaMemcpy(d_a,h_a,sizeof(DATA_TYPE)*s2,cudaMemcpyHostToDevice);
+	cudaMemcpy(d_b,h_b,sizeof(DATA_TYPE)*s2,cudaMemcpyHostToDevice);
+
+	cublasDgemm(handle,transa,transb,m,n,k,&alpha,d_a,lda,d_b,ldb,&beta,d_c,ldc);	
+	
+	cudaMemcpy(h_c,d_c,sizeof(DATA_TYPE)*s2,cudaMemcpyDeviceToHost);
+
+	stopwatch(1);
+
+
+*/
+/******************그냥 GEMM  ********************/
+	
+	printf("GEMMs : ");
+	stopwatch(0);
+
+	cudaMemcpy(d_a,h_a,sizeof(DATA_TYPE)*s3,cudaMemcpyHostToDevice);
+	cudaMemcpy(d_b,h_b,sizeof(DATA_TYPE)*s3,cudaMemcpyHostToDevice);
+
+	for(int i=0;i<MATRIX_NUM;i++)
+		offset[i] = i * s2;
+
+	for(int i=0;i<MATRIX_NUM;i++)
+{
+	cublas_stat =	cublasDgemm(handle,transa,transb,m,n,k,&alpha,&d_a[offset[i]],lda,&d_b[offset[i]],ldb,&beta,&d_c[offset[i]],ldc);	
+
+#if CHECK
+	printf("DGEMM[%d] : %d\n",offset[i],cublas_stat);
+#endif
+
+}	
+		cudaMemcpy(h_c,d_c,sizeof(DATA_TYPE)*s3,cudaMemcpyDeviceToHost);
+
+	stopwatch(1);
+#if RESULT
+	mat_out(h_c);
+#endif
+
+	for(int i=0;i<MATRIX_NUM;i++)
+		for(int j=0;j<MATRIX_SIZE;j++)
+			for(int k=0;k<MATRIX_SIZE;k++)
+				h_c[i*s2 + j*MATRIX_SIZE + k] = 0 ;
+
+
+
+/******************BATCHED STRIDE GEMM  ********************/
+
+	printf("BATCHED GEMM : ");
+	stopwatch(0);
+
+	cudaMemcpy(d_a,h_a,sizeof(DATA_TYPE)*s3,cudaMemcpyHostToDevice);
+	cudaMemcpy(d_b,h_b,sizeof(DATA_TYPE)*s3,cudaMemcpyHostToDevice);
+
+cublas_stat=	cublasDgemmStridedBatched(handle,transa,transb,m,n,k,&alpha,d_a,lda,stridea,d_b,ldb,strideb,&beta,d_c,ldc,stridec,MATRIX_NUM);	
+#if CHECK	
+	printf("Dgemm Strided Bached : %d\n",cublas_stat);
+#endif
+	cudaMemcpy(h_c,d_c,sizeof(DATA_TYPE)*s3,cudaMemcpyDeviceToHost);
+
+	stopwatch(1);
+#if RESULT
+	mat_out(h_c);
+#endif
+
+	for(int i=0;i<MATRIX_NUM;i++)
+		for(int j=0;j<MATRIX_SIZE;j++)
+			for(int k=0;k<MATRIX_SIZE;k++)
+				h_c[i*s2 + j*MATRIX_SIZE + k] = 0 ;
+
+
+/******************STREAMED GEMM  ********************/
+	cudaDeviceSynchronize();
+
+	
+	printf("STREAM : ");
+	stopwatch(0);
+
+
+	for(int i=0;i<MATRIX_NUM;i++)
+{	 cuda_stat = cudaMemcpyAsync(&d_a[offset[i]],&h_a[offset[i]],sizeof(DATA_TYPE)*s2,cudaMemcpyHostToDevice,stream[i]);
+
+#if CHECK
+	printf("cudaMemcpyAsync[%d] : %d\n",i,cuda_stat);
+#endif
+}	
+	for(int i=0;i<MATRIX_NUM;i++)
+		cudaMemcpyAsync(&d_b[offset[i]],&h_b[offset[i]],sizeof(DATA_TYPE)*s2,cudaMemcpyHostToDevice,stream[i]);
+
+	for(int i=0;i<MATRIX_NUM;i++)
+{		cublas_stat =	cublasDgemm(handle_s[i],transa,transb,m,n,k,&alpha,&d_a[offset[i]],lda,&d_b[offset[i]],ldb,&beta,&d_c[offset[i]],ldc);	
+	
+#if CHECK
+	printf("cublasDgemm : %d\n",cublas_stat);
+
+#endif
+}
+
+	
+	for(int i=0;i<MATRIX_NUM;i++)
+		cudaMemcpyAsync(&h_c[offset[i]],&d_c[offset[i]],sizeof(DATA_TYPE)*s2,cudaMemcpyDeviceToHost,stream[i]);
+
+	for(int i=0;i<MATRIX_NUM;i++)
+		cudaStreamSynchronize(stream[i]);
+	stopwatch(1);
+
+
+#if RESULT
+	mat_out(h_c);
+#endif
+
+
+/***********DeAllocation**********************/
+	
+	cudaFree(h_a);
+	cudaFree(h_b);
+	cudaFree(h_c);
+	cudaFree(d_a);
+	cudaFree(d_b);
+	cudaFree(d_c);
+
+	cublasDestroy(handle);
+
+	
+	for(int i=0;i<MATRIX_NUM;i++)
+		cublasDestroy(handle_s[i]);
+	for(int i=0;i<MATRIX_NUM;i++)
+		cudaStreamDestroy(stream[i]);		
+
+	return 0;
+}
+
+void stopwatch(int flag)
+{
+	enum clock_unit{nano = 0, micro , milli, sec} unit;
+	
+	const long long NANOS = 1000000000LL;
+	static struct timespec startTS,endTS;
+	static long long diff = 0;
+
+	/*
+		여기서 단위 조정
+		nano, micro, milli, sec
+	*/
+	unit = micro;
+
+	//start
+	if(flag == 0)
+	{
+		diff = 0;
+		if(-1 == clock_gettime(CLOCK_MONOTONIC,&startTS))
+			printf("Failed to call clock_gettime\n");
+	}
+	//end
+	else if(flag == 1)
+	{		
+		if(-1 == clock_gettime(CLOCK_MONOTONIC,&endTS))
+			printf("Failed to call clock_gettime\n");
+		diff = NANOS * (endTS.tv_sec - startTS.tv_sec) + (endTS.tv_nsec - startTS.tv_nsec);
+
+		switch(unit)		
+		{
+			case nano :
+				printf("% lld nano sec\n",diff);
+			break;
+			case micro :
+				printf("% lld micro sec\n",diff/1000);
+			break;
+			case sec :
+				printf("% lld sec\n",diff/1000000000);
+			break;
+			default :
+				printf("% lld milli sec\n",diff/100000);
+			break;	
+
+		}
+	}
+	else
+	{
+		printf("wrong flag | 0 : start, 1 : end\n");
+	}
+
+}
+
+
+void mat_out(DATA_TYPE*a)
+{
+	for(int i=0;i<MATRIX_NUM;i++)
+	{
+		printf("--- %d ---\n",i);
+		
+		for(int j=0;j<MATRIX_SIZE;j++)
+		{
+			for(int k=0;k<MATRIX_SIZE;k++)
+			{
+				printf("%.3lf ",a[i*MATRIX_SIZE*MATRIX_SIZE + j*MATRIX_SIZE + k]);
+			}
+			printf("\n");
+		}
+	}
+}
+
+```
+
+</details>
+
+```
+MATRIX_NUM : 10
+MATRIX_SIZE : (10)X(10)
+GEMMs :  132 micro sec
+BATCHED GEMM :  90 micro sec
+STREAM :  152 micro sec
+
+MATRIX_NUM : 10
+MATRIX_SIZE : (1000)X(1000)
+GEMMs :  153022 micro sec
+BATCHED GEMM :  130539 micro sec
+STREAM :  113286 micro sec
+
+MATRIX_NUM : 100
+MATRIX_SIZE : (1000)X(1000)
+GEMMs :  1340405 micro sec
+BATCHED GEMM :  1217660 micro sec
+STREAM :  1100716 micro sec
+
+MATRIX_NUM : 10
+MATRIX_SIZE : (5000)X(5000)
+GEMMs :  13155520 micro sec
+BATCHED GEMM :  13146888 micro sec
+STREAM :  12906191 micro sec
+
+
+```
 
 
 
