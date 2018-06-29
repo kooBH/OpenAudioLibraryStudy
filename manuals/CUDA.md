@@ -3,7 +3,7 @@
 #### 1. [BASE](#knowledge)
 #### 2. [SYNCHRONIZE](#sync)
 #### 3. [SHARED MEMORY](#shared)
-#### 4. [ATOMIC-WIP](#atomic)
+#### 4. [ATOMIC](#atomic)
 #### 5. [STREAM](#stream)
 #### 6. [CUBLAS](#blas)
 #### 7. [FFT-WIP](#fft)
