@@ -1,14 +1,13 @@
 
 # CUDA<a name ="TOP"></a> 
-#### 1. [knowledge](#knowledge)
-#### 2. [extention](#extention)
-#### 3. [function](#function)
-#### 4. [synchronise](#sync)
-#### 5. [shared memory](#shared)
-#### 6. [stream](#stream)
-#### 7. [cublas](#blas)
-#### 8. [fft](#fft)
-#### 9. [example](#example)
+#### 1. [BASE](#knowledge)
+#### 2. [SYNCHRONIZE](#sync)
+#### 3. [SHARED MEMORY](#shared)
+#### 4. ATOMIC-WIP
+#### 5. [STREAM](#stream)
+#### 6. [CUBLAS](#blas)
+#### 7. [FFT-WIP](#fft)
+#### 8. [EXAMPLE](#example)
   + [matrix multiplication](#matmul)
   + [Gemm batchedGemm StreamedGemm](#7)
   
