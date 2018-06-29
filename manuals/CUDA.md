@@ -1306,7 +1306,7 @@ cudaErrorIllegalAddress = 77
 
 ## [EXAMPLE](#TOP)<a name ="example"></a>
 
-### matrix multiplication<a name ="matmul"></a>
+### [matrix multiplication](#TOP)<a name ="matmul"></a>
 
 비교를 위해 openMP사용  
 + 컴파일 옵션 : -Xcompiler -fopenmp
@@ -1563,6 +1563,11 @@ elapsed time :  3 ms
 ```
 
 ### [Gemm batchedGemm StreamedGemm](#TOP)<a name="7"></a>
+
+MATRIX_SIZE x MATRIX_SZIE 행렬이 MATRIX_NUM 만큼있을때, 행렬곱을 하는 코드  
+1. dgemm을 MATRIX_NUM만큼  
+2. dgemmStridedBatched로 한번에  
+3. 스트림을 써서 입출력과 연산을 병렬적으로 dgemm을 MATRIX_NUM만큼  
 
 <details><summary>7_batchedCublas.cu</summary>
 
@@ -1872,6 +1877,9 @@ void mat_out(DATA_TYPE*a)
 ```
 
 </details>
+
+&nbsp;  
+#### 결과
 
 ```
 MATRIX_NUM : 10
