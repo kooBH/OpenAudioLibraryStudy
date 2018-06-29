@@ -3,7 +3,7 @@
 #### 1. [BASE](#knowledge)
 #### 2. [SYNCHRONIZE](#sync)
 #### 3. [SHARED MEMORY](#shared)
-#### 4. ATOMIC-WIP
+#### 4. [ATOMIC-WIP](#atomic)
 #### 5. [STREAM](#stream)
 #### 6. [CUBLAS](#blas)
 #### 7. [FFT-WIP](#fft)
@@ -522,6 +522,208 @@ elapsed time :  3291 micros
 공유메모리를 제대로 활용할면 GPU별로 맞춰서 변수를 설정해야한다  
 
 ---
+
+## [ATOMIC](#TOP)<a name = "atomic"></a>
+
+여러 커널 함수들이 같은 글로벌 변수를 사용하면, 경쟁상태가 되어 제대로된 연산을 할 수없으며 느리기까지하다.    
+Atomic 함수를 사용하면 한번에 하나의 쓰레드만 해당 변수를 사용하기 때문에 안전하며, 빠르기까지하다.   
+또한 Block 단위로 공유하는 shared memory를 사용하면 더 좋은 성능을 낼 수 있다
+
+[FUNCTION LIST](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#atomic-functions)
+
+### 예시 
+
+<details><summary>8_atomic.cu</summary>
+
+```C++
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#define BLOCK 30000
+#define THREAD 1000
+
+#define CHECK 1
+
+void stopwatch(int);
+
+//그냥 글로벌 메모리 사용
+__global__ void count( int* cnt)
+{
+	(*cnt)++; 
+}
+//Atomic 함수 사용
+__global__ void atomic_count( int* cnt)
+{
+	//Atomic 함수, 더하는 대상을 포인터로 지정해야한다
+	//한번에 하나의 쓰레드만 작업한다
+	atomicAdd(cnt,1);
+}
+//Atonic 함수와 Shared Memory 사용
+__global__ void atomic_with_shared_count( int* cnt)
+{
+	__shared__ int s_cnt;
+	
+	//하나의 쓰레드만 초기화 시켜주면 된다
+	if(threadIdx.x==0)
+		s_cnt = 0;
+	//블록단위 동기화
+	__syncthreads();
+
+		atomicAdd(&s_cnt,1);
+	//블록단위 동기화
+	__syncthreads();
+	
+	//하나의 쓰레드만 글로벌 변수에 더해주면 된다
+	if(threadIdx.x==0)
+		atomicAdd(cnt,s_cnt);
+
+}
+int main()
+{
+	int * host_cnt;
+	int * dev_cnt;
+	
+	dim3 Dg(BLOCK,1,1);
+	dim3 Db(THREAD,1,1);
+
+
+	printf("BLOCK : %d\nTHREAD : %d\n",BLOCK,THREAD);
+
+	host_cnt= (int*)malloc(sizeof(int));
+	cudaMalloc((void**)&dev_cnt,sizeof(int));
+
+
+	printf("Just cnt++ : ");
+	stopwatch(0);
+	cudaMemcpy(dev_cnt, host_cnt,sizeof(int), cudaMemcpyHostToDevice);	
+	count<<<Dg,Db >>>(dev_cnt);
+	cudaMemcpy(host_cnt,dev_cnt,sizeof(int),cudaMemcpyDeviceToHost);
+	stopwatch(1);
+#if CHECK
+	printf("cnt : %d\n",*host_cnt);
+#endif
+	(*host_cnt)=0;
+	
+	printf("AtomicAdd : ");
+	stopwatch(0);
+	cudaMemcpy(dev_cnt, host_cnt,sizeof(int), cudaMemcpyHostToDevice);	
+	atomic_count<<<Dg,Db >>>(dev_cnt);
+	cudaMemcpy(host_cnt,dev_cnt,sizeof(int),cudaMemcpyDeviceToHost);
+	stopwatch(1);
+#if CHECK
+	printf("cnt : %d\n",*host_cnt);
+#endif
+	(*host_cnt)=0;
+
+	printf("AtomicAdd with Shared Memory : ");
+	stopwatch(0);
+	cudaMemcpy(dev_cnt, host_cnt,sizeof(int), cudaMemcpyHostToDevice);	
+	atomic_with_shared_count<<<Dg,Db >>>(dev_cnt);
+	cudaMemcpy(host_cnt,dev_cnt,sizeof(int),cudaMemcpyDeviceToHost);
+	stopwatch(1);
+#if CHECK
+	printf("cnt : %d\n",*host_cnt);
+#endif
+
+	cudaFree(dev_cnt);
+	free(host_cnt);
+	
+	return 0;
+}
+
+
+void stopwatch(int flag)
+{
+	enum clock_unit{nano = 0, micro , milli, sec} unit;
+	
+	const long long NANOS = 1000000000LL;
+	static struct timespec startTS,endTS;
+	static long long diff = 0;
+
+	/*
+		여기서 단위 조정
+		nano, micro, milli, sec
+	*/
+	unit = micro;
+
+	//start
+	if(flag == 0)
+	{
+		diff = 0;
+		if(-1 == clock_gettime(CLOCK_MONOTONIC,&startTS))
+			printf("Failed to call clock_gettime\n");
+	}
+	//end
+	else if(flag == 1)
+	{		
+		if(-1 == clock_gettime(CLOCK_MONOTONIC,&endTS))
+			printf("Failed to call clock_gettime\n");
+		diff = NANOS * (endTS.tv_sec - startTS.tv_sec) + (endTS.tv_nsec - startTS.tv_nsec);
+
+		switch(unit)		
+		{
+			case nano :
+				printf("% lld nano sec\n",diff);
+			break;
+			case micro :
+				printf("%lld micro sec\n",diff/1000);
+			break;
+			case sec :
+				printf("% lld sec\n",diff/1000000000);
+			break;
+			default :
+				printf("% lld milli sec\n",diff/100000);
+			break;	
+
+		}
+	}
+	else
+	{
+		printf("wrong flag | 0 : start, 1 : end\n");
+	}
+
+}
+
+```
+</details>
+
+&nbsp;  
+#### 결과
+
+```
+BLOCK : 300
+THREAD : 100
+Just cnt++ : 48 micro sec
+cnt : 2
+AtomicAdd : 20 micro sec
+cnt : 30000
+AtomicAdd with Shared Memory : 21 micro sec
+cnt : 30000
+
+BLOCK : 3000
+THREAD : 1000
+Just cnt++ : 1329 micro sec
+cnt : 89
+AtomicAdd : 141 micro sec
+cnt : 3000000
+AtomicAdd with Shared Memory : 69 micro sec
+cnt : 3000000
+
+BLOCK : 30000
+THREAD : 1000
+Just cnt++ : 13924 micro sec
+cnt : 844
+AtomicAdd : 1113 micro sec
+cnt : 30000000
+AtomicAdd with Shared Memory : 421 micro sec
+cnt : 30000000
+
+
+```
+
+
+---
+
 
 ## [STREAM](#TOP)<a name="stream"></a>
 
