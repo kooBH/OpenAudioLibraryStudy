@@ -72,7 +72,7 @@ set(SOURCES src1.c src2.c src3.c)
 ```CMake
 add_executable(hello hello.c)
 #			or  
-add_executable(programm SOURCES)  
+add_executable(programm ${SOURCES})  
 ```
 
 파일명에 해당하는 실행파일을 뒤의 인자로 들어가는 코드를로 빌드하게 한다  
