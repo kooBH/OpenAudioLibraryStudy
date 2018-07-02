@@ -2,11 +2,11 @@
 # [CMAKE](../README.md)<a name = "TOP"></a>
 1. [설치](#cmake-setup)
 2. [사용](#cmake-execution)
-3. [CMakeLists.txt 작성](#cmake-cmakelists)
+3. [기초](#cmake-cmakelists)
 	1. [예제 1](#cmake-ex1)
 	2. [예제 2](#cmake-ex2)
-
-
+4. [option](#option)
+5. [message](#message)
 
 cmake 는 linux환경에서는 Makefile을 Windows환경에서는 비주얼 스튜디오 프로젝트를 만든다.
 
@@ -366,3 +366,31 @@ BUILD_SHARED_LIBS
 
 단. global data value는 따로 처리해야한다.   
 참고 :  https://blog.kitware.com/create-dlls-on-windows-without-declspec-using-new-cmake-export-all-feature/
+
+---
+
+## [옵션](#TOP)<a name="option"></a>
+
+```CMake
+option(<option_variable> "help string describing option" [initial value])
+
+CMAKE_DEPENDENT_OPTION(USE_FOO "Use Foo" ON "USE_BAR;NOT USE_ZOT" OFF)
+
+```
+## [MESSAGE](#TOP)<a name = "message"></a>
+
+```CMake
+message( <keyword> "message" )
+
+message(STATUS "SOURCE : " ${SOURCE})
+message(FATAL_ERROR "ERROR... ABORT")
+```
+
+keyword | discrpiton
+---|---
+  (none)         | 중요 정보
+  STATUS         | 사건 정보
+  WARNING        | 경고, 계속 진행 
+  AUTHOR_WARNING | 경고(개발자), 계속진행
+  SEND_ERROR     | 에러, 계속 진행하지만 생성하지는 않음
+  FATAL_ERROR    | 에러, 모든 프로세스 중단
