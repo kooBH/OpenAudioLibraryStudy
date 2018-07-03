@@ -144,6 +144,7 @@ cudaThreadSynchronize()
 
 //DEVICE 에서 (GPU관점) 자기자신 kernel 함수의 쓰레드들끼리 동기화 시키려면
 __syncthreads();
+//단 블록단위 동기화이기 때문에 블록끼리는 안된다
 
 ```
 
