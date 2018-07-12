@@ -124,7 +124,8 @@ gat 2 : 0.049899
 | -fopenmp   |  8 | 52  |
 | -lgomp  | 8  | 52  |
 | -liomp5  | 8  | 52  |
-| OpenBLAS | x | 77 |
+| OpenBLAS(코어수 조절안함) | x | 77 |
 
 3. [OpenBLAS](#TOP)<a name = "OpenBLAS"></a>  
   OpenBLAS 는 기본값으로 사용하게 되어있다. 사용하지 않으려면 별도의 옵션을 줘서 (USE_OPENMP=0) 빌드하면 된다.  
+  사용하는 코어수를 make시 지정해야한다
