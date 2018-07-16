@@ -41,12 +41,12 @@ tm_isdst	|int	|Daylight Saving Time flag
 
 ### [millisecond stopwatch](#TOP)<a name ="stopwatch"></a>
 
-**주의** Visual Studio 에서는 안됨 
+**주의** Visual Studio 에서는 안됨 CLOCK_MONOTONIC 이 없다.
 
-일반적인 time_t 를 사용한 스탑워치는 cpu clock 을 기준으로 헤아리기 때문에  
+일반적인 clock() 를 사용한 스탑워치는 cpu clock 을 기준으로 헤아리기 때문에  
 openMP 같은 다중 쓰레딩을 사용했을 때, 시간측정이 잘 되지 않는다 
 
-
+윈도우의 경우에는 [참고](https://stackoverflow.com/questions/5404277/porting-clock-gettime-to-windows)
 
 ```C++
 stopwatch(0);
