@@ -112,6 +112,8 @@ void stopwatch(int flag)
 </details>
 
 윈도우의 경우 마이크로 초 까지는 되나, 나노초 까지는 지원하지 않는 거 같다.(장확하게 나노초를 해주는 방법을 아직 못 찾음)
+[참고 링크](https://stackoverflow.com/questions/5404277/porting-clock-gettime-to-windows)
+
 
 <details><summary>stopwatch_for_windows</summary>
 
