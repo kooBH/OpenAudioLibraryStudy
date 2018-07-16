@@ -41,7 +41,12 @@ tm_isdst	|int	|Daylight Saving Time flag
 
 ### [millisecond stopwatch](#TOP)<a name ="stopwatch"></a>
 
-**주의** Visual Studio 2013 에는 struct timespec이 없음. 수정 패치를 받거나 2015이상 버전을 사용해야함
+**주의** Visual Studio 에서는 안됨 
+
+일반적인 time_t 를 사용한 스탑워치는 cpu clock 을 기준으로 헤아리기 때문에  
+openMP 같은 다중 쓰레딩을 사용했을 때, 시간측정이 잘 되지 않는다 
+
+
 
 ```C++
 stopwatch(0);
