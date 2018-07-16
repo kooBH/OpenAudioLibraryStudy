@@ -46,7 +46,7 @@ hello
 hello
 ```
 + 구조  
-#pragma opm directive-name [clause, ...] { ... }
+#pragma omp directive-name [clause, ...] { ... }
 	+ 예제 2
 ```c++
 #include <omp.h>
