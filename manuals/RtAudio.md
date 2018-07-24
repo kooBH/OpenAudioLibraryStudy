@@ -9,6 +9,7 @@
 ```bash
 sudo apt-get install libasound2-dev
 sudo apt-get install git-core
+sudo apt-get install cmake
 git clone https://github.com/thestk/rtaudio.git\
 ```
 libasound2-dev 는 ubuntu 의 기본사운드 API인 ALSA의 dev lib이며 빌드에 필수적이다
