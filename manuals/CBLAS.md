@@ -8,7 +8,7 @@
 	* Linux   
 	1. 설치
 	```bash
-	$ sudo apt-get install openblas-base 
+	$ sudo apt-get install libopenblas-base 
 	#/usr/lib/openblas-base/에 .a와 .so만 받는다 
 	    
 	$ git clone https://github.com/xianyi/OpenBLAS.git	
