@@ -5,15 +5,22 @@
 3. [예시](#cblas_ex)
 
 + OpenBLAS<a name="OpenBLAS"></a>  
-	* Linux   
-	1. 설치
-	```bash
-	$ sudo apt-get install libopenblas-base 
+    * Linux   
+        1. 설치
+	
+	
++ Note
+    + ubuntu package의 openblas에는 최신버전이 아닙니다.
+    + ClbasConjNoTrans 가 없습니다. 다른 것들도 없는 것이 있을 수 있습니다.
+	
+
+	```$ sudo apt-get install libopenblas-base ```  
 	#/usr/lib/openblas-base/에 .a와 .so만 받는다 
 	    
-	$ git clone https://github.com/xianyi/OpenBLAS.git	
-	#openblas project를 받는다  
-	 ```
+	```$ git clone https://github.com/xianyi/OpenBLAS.git```	  
+	#openblas project를 받는다 
+
+	
 	 apt로 package를 받았을 경우 바로 사용하면된다  
 	 git으로 받았을 경우에는  
 	 make를 하면 CPU에 맞게 빌드해 준다  
